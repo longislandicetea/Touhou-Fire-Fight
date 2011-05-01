@@ -7,6 +7,8 @@ class GameObjectContainer;
 class GameObject
 {
 public:
+	friend class GameObjectContainer;
+	
 	virtual void Draw() = 0;
 	virtual void Update() {}
 	virtual ~GameObject() {}
@@ -30,11 +32,11 @@ public:
 	void SetAlpha(float alpha);
 	void RemoveFromParent();
 	GameObjectContainer* GetParent();
-	void SetParent(GameObject* obj);
 	GameObject* GetRoot();
 
 protected:
 	GameObject() {}
+	void SetParent(GameObjectContainer* obj);
 	
 private:
 	float mAlpha;
