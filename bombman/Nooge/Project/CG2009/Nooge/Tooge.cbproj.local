@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2010/08/30 18:15:47.421.cbproj,C:\Users\Neo\Documents\RAD Studio\Projects\Project1.cbproj=C:\Users\Neo\Documents\RAD Studio\Projects\Tooge.cbproj</Transaction>
+    <Transaction>2010/08/30 18:16:36.103.cbproj,C:\Users\Neo\Documents\RAD Studio\Projects\Tooge.cbproj=C:\MyWork\CrossCompiler\Nooge\Project\CG2009\Nooge\Nooge.cbproj</Transaction>
+    <Transaction>2010/08/30 18:18:01.726.cbproj,C:\MyWork\CrossCompiler\Nooge\Project\CG2009\Nooge\Nooge.cbproj=C:\MyWork\CrossCompiler\Nooge\Project\CG2009\Nooge\Tooge.cbproj</Transaction>
+  </Transactions>
+</BorlandProject>

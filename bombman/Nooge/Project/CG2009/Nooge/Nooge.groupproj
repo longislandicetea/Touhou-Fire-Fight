@@ -1,0 +1,60 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{835CE336-6509-43C0-AC7F-916D2F974B14}</ProjectGuid>
+		</PropertyGroup>
+		<ItemGroup>
+			<Projects Include="Noobi\Noobi.cbproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="Mooge\Mooge.cbproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="Tooge\Tooge.cbproj">
+				<Dependencies>Noobi\Noobi.cbproj;Mooge\Mooge.cbproj</Dependencies>
+			</Projects>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Default.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Default.Personality/>
+			</BorlandProject>
+		</ProjectExtensions>
+		<Target Name="Noobi">
+			<MSBuild Projects="Noobi\Noobi.cbproj"/>
+		</Target>
+		<Target Name="Noobi:Clean">
+			<MSBuild Targets="Clean" Projects="Noobi\Noobi.cbproj"/>
+		</Target>
+		<Target Name="Noobi:Make">
+			<MSBuild Targets="Make" Projects="Noobi\Noobi.cbproj"/>
+		</Target>
+		<Target Name="Mooge">
+			<MSBuild Projects="Mooge\Mooge.cbproj"/>
+		</Target>
+		<Target Name="Mooge:Clean">
+			<MSBuild Targets="Clean" Projects="Mooge\Mooge.cbproj"/>
+		</Target>
+		<Target Name="Mooge:Make">
+			<MSBuild Targets="Make" Projects="Mooge\Mooge.cbproj"/>
+		</Target>
+		<Target DependsOnTargets="Noobi;Mooge" Name="Tooge">
+			<MSBuild Projects="Tooge\Tooge.cbproj"/>
+		</Target>
+		<Target DependsOnTargets="Noobi:Clean;Mooge:Clean" Name="Tooge:Clean">
+			<MSBuild Targets="Clean" Projects="Tooge\Tooge.cbproj"/>
+		</Target>
+		<Target DependsOnTargets="Noobi:Make;Mooge:Make" Name="Tooge:Make">
+			<MSBuild Targets="Make" Projects="Tooge\Tooge.cbproj"/>
+		</Target>
+		<Target Name="Build">
+			<CallTarget Targets="Noobi;Mooge;Tooge"/>
+		</Target>
+		<Target Name="Clean">
+			<CallTarget Targets="Noobi:Clean;Mooge:Clean;Tooge:Clean"/>
+		</Target>
+		<Target Name="Make">
+			<CallTarget Targets="Noobi:Make;Mooge:Make;Tooge:Make"/>
+		</Target>
+		<Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+	</Project>
