@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="VLD">
+      <UniqueIdentifier>{c2f5fe62-2f02-472a-9f0f-542362d268ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VLD\include">
+      <UniqueIdentifier>{3a032fa6-a530-436d-8108-62aff22ab227}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="jpeg">
+      <UniqueIdentifier>{bb1bc573-6b5f-45e3-962a-71296b88cbaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="jpeg\include">
+      <UniqueIdentifier>{adfe0822-c9dd-4b4e-9292-635636fade06}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\..\Source\Uoobi\VLD\include\vld.h">
+      <Filter>VLD\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Source\Uoobi\VLD\include\vld_def.h">
+      <Filter>VLD\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Source\Uoobi\jpeg\include\jconfig.h">
+      <Filter>jpeg\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Source\Uoobi\jpeg\include\jdct.h">
+      <Filter>jpeg\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Source\Uoobi\jpeg\include\jerror.h">
+      <Filter>jpeg\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Source\Uoobi\jpeg\include\jinclude.h">
+      <Filter>jpeg\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Source\Uoobi\jpeg\include\jmemsys.h">
+      <Filter>jpeg\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Source\Uoobi\jpeg\include\jmorecfg.h">
+      <Filter>jpeg\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Source\Uoobi\jpeg\include\jpegint.h">
+      <Filter>jpeg\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Source\Uoobi\jpeg\include\jpeglib.h">
+      <Filter>jpeg\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Source\Uoobi\jpeg\include\jversion.h">
+      <Filter>jpeg\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Source\Uoobi\jpeg\include\transupp.h">
+      <Filter>jpeg\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Source\Uoobi\jpeg\include\cderror.h">
+      <Filter>jpeg\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Source\Uoobi\jpeg\include\cdjpeg.h">
+      <Filter>jpeg\include</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

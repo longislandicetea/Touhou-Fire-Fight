@@ -1,0 +1,13 @@
+<Project setup for VS2010>
+[Noobi]:
+	- Project -> ptions: Conditional defines add [STRICT] define. 
+	This'll make "Button.cpp" "return CallWindowProc(static_cast<WNDPROC>(OriginWndProc), hWnd, nMsg, wParam, lParam);" compiled.
+	
+[Tooge]:
+	- Project -> Options: Include path add "..\..\..\..\Source\Noobi".
+	- Add "Noobi.lib" to project (Additional Dependencies). (which's [Noobi]'s output)
+	- Add "WinFrame.res" to project (Additional Dependencies). (which's [Noobi]'s intermedium output)
+	This is a tricky step, but it'll make your caption's icon work.
+	- Add "Mooge.lib" to project (Additional Dependencies). (which's [Mooge]'s output)
+	
+== EOF ==

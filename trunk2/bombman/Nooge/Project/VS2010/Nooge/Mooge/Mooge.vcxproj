@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Source\Mooge\Core\Auxiliary.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Mooge\Core\Console.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Mooge\Core\Core.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Mooge\Core\MoogeUtility.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Mooge\Mooge.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Mooge\Objects\2DText.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Mooge\Objects\3DText.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Mooge\Objects\Camera.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Mooge\Objects\Line.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Mooge\ResourceManager\CameraManager.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Mooge\ResourceManager\PrimitiveManager.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Mooge\ResourceManager\TextManager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Source\Mooge\Core\Auxiliary.h" />
+    <ClInclude Include="..\..\..\..\Source\Mooge\Core\Console.h" />
+    <ClInclude Include="..\..\..\..\Source\Mooge\Core\Core.h" />
+    <ClInclude Include="..\..\..\..\Source\Mooge\Core\MoogeType.h" />
+    <ClInclude Include="..\..\..\..\Source\Mooge\Core\MoogeUtility.h" />
+    <ClInclude Include="..\..\..\..\Source\Mooge\Mooge.h" />
+    <ClInclude Include="..\..\..\..\Source\Mooge\Objects\2DText.h" />
+    <ClInclude Include="..\..\..\..\Source\Mooge\Objects\3DText.h" />
+    <ClInclude Include="..\..\..\..\Source\Mooge\Objects\Camera.h" />
+    <ClInclude Include="..\..\..\..\Source\Mooge\Objects\GameObject.h" />
+    <ClInclude Include="..\..\..\..\Source\Mooge\Objects\GameObjectContainer.h" />
+    <ClInclude Include="..\..\..\..\Source\Mooge\Objects\Line.h" />
+    <ClInclude Include="..\..\..\..\Source\Mooge\ResourceManager\CameraManager.h" />
+    <ClInclude Include="..\..\..\..\Source\Mooge\ResourceManager\PrimitiveManager.h" />
+    <ClInclude Include="..\..\..\..\Source\Mooge\ResourceManager\TextManager.h" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{CC4CC23D-AC08-43C7-A4F0-B47BD132243D}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Mooge</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;_USE_MATH_DEFINES;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../../../Source/Mooge/Core;../../../../Source/Mooge/ResourceManager;../../../../Source/Mooge/Objects;../../../../Source/Uoobi/DevIL/include/IL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;_USE_MATH_DEFINES;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../../../Source/Mooge/Core;../../../../Source/Mooge/ResourceManager;../../../../Source/Mooge/Objects;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

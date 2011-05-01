@@ -1,0 +1,4 @@
+Mooge - OpenGL rendering engine.
+Noobi - Newbie Winapi GUI Lib.
+Uoobi - Other utilties Libs.
+Tooge - Test project.

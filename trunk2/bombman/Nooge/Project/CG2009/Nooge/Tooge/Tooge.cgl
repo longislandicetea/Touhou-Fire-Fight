@@ -1,0 +1,19 @@
+Functions called:
+ fflush (4 times)
+ delete (37 times)
+ free (19 times)
+ _lsetlocale (6 times)
+ new (46 times)
+ calloc (9 times)
+ strlen (99 times)
+ realloc (1 times)
+ strdup (5 times)
+ malloc (4 times)
+ memcpy (15 times)
+Resource types used:
+ object (46 allocs, 45 max)
+ memory block (19 allocs, 11 max)
+Modules used:
+ 00400000 09/13/2010 13:11:52
+ C:\MyWork\CrossCompiler\Nooge\Project\CG2009\Nooge\Tooge\.\Tooge.exe
+==========================================
