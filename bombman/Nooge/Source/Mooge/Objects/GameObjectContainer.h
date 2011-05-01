@@ -4,6 +4,8 @@
 #include "GameObject.h"
 #include <vector>
 
+typedef std::vector<GameObject*> ChildrenContainer;
+
 class GameObjectContainer : public GameObject
 {
 public:
@@ -19,8 +21,7 @@ public:
 	virtual void Draw();
 	virtual void Update();
 private:
-	std::vector<GameObject*> mChildren;
-	int mNumOfChild;
+	ChildrenContainer mChildren;
 };
 
 #endif
