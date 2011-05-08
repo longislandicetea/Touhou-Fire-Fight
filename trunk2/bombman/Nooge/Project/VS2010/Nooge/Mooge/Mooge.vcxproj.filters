@@ -54,6 +54,9 @@
     <ClCompile Include="..\..\..\..\Source\Mooge\Objects\GameObjectContainer.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\Mooge\Objects\Stage.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Source\Mooge\Objects\2DText.h">

@@ -22,6 +22,7 @@
     <ClCompile Include="..\..\..\..\Source\Mooge\Objects\GameObject.cpp" />
     <ClCompile Include="..\..\..\..\Source\Mooge\Objects\GameObjectContainer.cpp" />
     <ClCompile Include="..\..\..\..\Source\Mooge\Objects\Line.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Mooge\Objects\Stage.cpp" />
     <ClCompile Include="..\..\..\..\Source\Mooge\ResourceManager\CameraManager.cpp" />
     <ClCompile Include="..\..\..\..\Source\Mooge\ResourceManager\PrimitiveManager.cpp" />
     <ClCompile Include="..\..\..\..\Source\Mooge\ResourceManager\TextManager.cpp" />

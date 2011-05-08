@@ -52,9 +52,18 @@ int GameObjectContainer::NumOfChild()
 void GameObjectContainer::Draw()
 {
 	ChildrenContainer::const_iterator it = mChildren.begin();
+	float alpha = this->GetAlpha();
 	for(;it!=mChildren.end();++it)
 	{
-		(*it)->Draw();
+		float childAlpha = (*it)->GetAlpha();
+		if(childAlpha != 0.0)
+		{
+			glPushMatrix();
+			(*it)->Draw();
+			childAlpha *= alpha;
+			(*it)->SetAlpha(childAlpha);
+			glPopMatrix();
+		}
 	}
 }
 
