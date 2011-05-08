@@ -4,6 +4,8 @@
 class Stage: public GameObjectContainer
 {
 public:
+	virtual void Draw();
+	virtual void Update();
 
 private:
 
