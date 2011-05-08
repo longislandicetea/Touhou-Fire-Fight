@@ -19,6 +19,8 @@
     <ClCompile Include="..\..\..\..\Source\Mooge\Objects\2DText.cpp" />
     <ClCompile Include="..\..\..\..\Source\Mooge\Objects\3DText.cpp" />
     <ClCompile Include="..\..\..\..\Source\Mooge\Objects\Camera.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Mooge\Objects\GameObject.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Mooge\Objects\GameObjectContainer.cpp" />
     <ClCompile Include="..\..\..\..\Source\Mooge\Objects\Line.cpp" />
     <ClCompile Include="..\..\..\..\Source\Mooge\ResourceManager\CameraManager.cpp" />
     <ClCompile Include="..\..\..\..\Source\Mooge\ResourceManager\PrimitiveManager.cpp" />
@@ -30,6 +32,7 @@
     <ClInclude Include="..\..\..\..\Source\Mooge\Core\Core.h" />
     <ClInclude Include="..\..\..\..\Source\Mooge\Core\MoogeType.h" />
     <ClInclude Include="..\..\..\..\Source\Mooge\Core\MoogeUtility.h" />
+    <ClInclude Include="..\..\..\..\Source\Mooge\Core\Ref.h" />
     <ClInclude Include="..\..\..\..\Source\Mooge\Mooge.h" />
     <ClInclude Include="..\..\..\..\Source\Mooge\Objects\2DText.h" />
     <ClInclude Include="..\..\..\..\Source\Mooge\Objects\3DText.h" />
@@ -37,6 +40,7 @@
     <ClInclude Include="..\..\..\..\Source\Mooge\Objects\GameObject.h" />
     <ClInclude Include="..\..\..\..\Source\Mooge\Objects\GameObjectContainer.h" />
     <ClInclude Include="..\..\..\..\Source\Mooge\Objects\Line.h" />
+    <ClInclude Include="..\..\..\..\Source\Mooge\Objects\Stage.h" />
     <ClInclude Include="..\..\..\..\Source\Mooge\ResourceManager\CameraManager.h" />
     <ClInclude Include="..\..\..\..\Source\Mooge\ResourceManager\PrimitiveManager.h" />
     <ClInclude Include="..\..\..\..\Source\Mooge\ResourceManager\TextManager.h" />
@@ -68,7 +72,12 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PrecompiledHeader>

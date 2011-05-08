@@ -25,7 +25,7 @@ CAppTwo::CAppTwo(): CThread(true), mMouseCaptured(false),
 		mMoveSpeed[i] = 0.0;
 	}
 
-	mRenderForm = new CRenderForm();
+ 	mRenderForm = new CRenderForm();
 	mMooge = new CMooge();
 
 	//Listening all event here.
