@@ -2,12 +2,12 @@
 #include <algorithm>
 #include <functional>
 
-void GameObjectContainer::AddChild( GameObject *child )
+void GameObjectContainer::AddChild( Ref<GameObject> child )
 {
 	AddChildAt(child,mChildren.size());
 }
 
-void GameObjectContainer::AddChildAt( GameObject *child, int idx )
+void GameObjectContainer::AddChildAt( Ref<GameObject> child, int idx )
 {
 	//pay attention to the order! remove->set->add
 	child->RemoveFromParent();
@@ -16,7 +16,7 @@ void GameObjectContainer::AddChildAt( GameObject *child, int idx )
 	mChildren.insert(it+idx,child);
 }
 
-void GameObjectContainer::RemoveChild( GameObject *child )
+void GameObjectContainer::RemoveChild( Ref<GameObject> child )
 {
 	ChildrenContainer::const_iterator it;
 	it = std::find(mChildren.begin(),mChildren.end(),child);
@@ -28,9 +28,20 @@ void GameObjectContainer::RemoveChild( GameObject *child )
 }
 
 
-GameObject* GameObjectContainer::GetChild( int idx )
+Ref<GameObject> GameObjectContainer::GetChild( int idx )
 {
 	return mChildren[idx];
+}
+
+Ref<GameObject> GameObjectContainer::GetChild(GameObject *obj) {
+	//Ref<xxx> : mChildren[i]
+	//xxx : *mChildren[i]
+	//xxx* : &*mChildren[i]
+	for (size_t i = 0; i < mChildren.size(); ++i) {
+		if (&*mChildren[i] == obj)
+			return mChildren[i];
+	}
+	throw std::logic_error("cannot find this object");
 }
 
 int GameObjectContainer::NumOfChild()
@@ -58,9 +69,9 @@ void GameObjectContainer::Update()
 
 GameObjectContainer::~GameObjectContainer()
 {
-	ChildrenContainer::const_iterator it = mChildren.begin();
+	/*ChildrenContainer::const_iterator it = mChildren.begin();
 	for(;it!=mChildren.end();++it)
 	{
 		delete *it;
-	}
+	}*/
 }
