@@ -60,6 +60,9 @@
     <ClCompile Include="..\..\..\..\Source\Mooge\Objects\Texture.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\Mooge\Core\InputSystem.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Source\Mooge\Objects\2DText.h">
@@ -115,6 +118,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\Source\Mooge\Objects\Texture.h">
       <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\Mooge\Core\InputSystem.h">
+      <Filter>Core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
