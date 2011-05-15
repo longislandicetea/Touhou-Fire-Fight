@@ -5,11 +5,12 @@
 #include "Core.h"
 #include "Console.h"
 #include "Auxiliary.h"
+#include "Stage.h"
 #include <gl/GL.h>
 #include <gl/GLU.h>
 
 //Default constructor.
-CMooge::CMooge(): Core(NULL), Console(NULL), Primitives(NULL), Cameras(NULL), Text(NULL)
+CMooge::CMooge(): Core(NULL), Console(NULL), Primitives(NULL), Cameras(NULL), Text(NULL), CurrentStage(NULL)
 {
 	Core = new CCore();
 	Primitives = new CPrimitiveManager();
@@ -65,7 +66,7 @@ void CMooge::Render()
 			Auiliary->DrawFPS(Core->GetFontList());
 	}
 
-	glColor3f(1.0, 1.0, 1.0);
+	/*glColor3f(1.0, 1.0, 1.0);
 	glBegin(GL_POLYGON);
 	glVertex3f(10.0, 0.0, 0.0);
 	glVertex3f(0.0, 10.0, 0.0);
@@ -73,7 +74,11 @@ void CMooge::Render()
 	glVertex3f(10.0, 10.0, 10.0);
 
 
-	glEnd();
+	glEnd();*/
+
+	if (!CurrentStage.IsNull()) {
+		CurrentStage->Draw();
+	}
 
 	SwapBuffers(Core->mhDC);
 
@@ -82,4 +87,11 @@ void CMooge::Render()
 	//Calculate FPS.
 	Auiliary->CalcFPS();
 	Sleep(0);
+}
+
+void CMooge::Update(float dt)
+{
+	if (!CurrentStage.IsNull()) {
+		CurrentStage->Update(dt);
+	}
 }

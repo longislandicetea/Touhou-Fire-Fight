@@ -8,7 +8,7 @@ float GameObject::GetX()
 
 float GameObject::GetY()
 {
-	return mY;
+	return mY;	
 }
 
 float GameObject::GetZ()
@@ -43,8 +43,9 @@ void GameObject::SetAlpha( float alpha )
 
 void GameObject::RemoveFromParent()
 {
-	mParent->RemoveChild(
-		mParent->GetChild(this));
+	if (mParent)
+		mParent->RemoveChild(
+			mParent->GetChild(this));
 }
 
 GameObjectContainer* GameObject::GetParent()
@@ -64,3 +65,53 @@ GameObject* GameObject::GetRoot()
 		tmp = tmp->mParent;
 	return tmp;
 }
+
+float GameObject::GetAlpha()
+{
+	return mAlpha;
+}
+
+GameObject::GameObject()
+{
+	mAlpha = 1.0f;
+	mX = mY = mZ = 0.0f;
+	mScale = 1.0f;
+	mRotateX = mRotateY = mRotateZ = 0.0f;
+	mParent = NULL;
+}
+
+void GameObject::SetScale( float scale )
+{
+	mScale = scale;
+}
+
+void GameObject::SetX( float x )
+{
+	mX = x;
+}
+
+void GameObject::SetY( float y )
+{
+	mY = y;
+}
+
+void GameObject::SetZ( float z )
+{
+	mZ = z;
+}
+
+void GameObject::SetRotateX( float rotateX )
+{
+	mRotateX = rotateX;
+}
+
+void GameObject::SetRotateY( float rotateY )
+{
+	mRotateY = rotateY;
+}
+
+void GameObject::SetRotateZ( float rotateZ )
+{
+	mRotateZ = rotateZ;
+}
+
