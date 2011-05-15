@@ -91,7 +91,8 @@ void CMooge::Render()
 
 void CMooge::Update(float dt)
 {
-	if (!CurrentStage.IsNull()) {
+	if (!CurrentStage.IsNull()) 
+	{
 		CurrentStage->Update(dt);
 	}
 }
