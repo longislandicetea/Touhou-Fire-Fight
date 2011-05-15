@@ -1,6 +1,9 @@
 #include "GameObjectContainer.h"
 #include <algorithm>
 #include <functional>
+#include <windows.h>
+#include <gl/GL.h>
+#include <gl/GLU.h>
 
 void GameObjectContainer::AddChild( Ref<GameObject> child )
 {
@@ -55,24 +58,36 @@ void GameObjectContainer::Draw()
 	float alpha = this->GetAlpha();
 	for(;it!=mChildren.end();++it)
 	{
-		float childAlpha = (*it)->GetAlpha();
+		Ref<GameObject> obj = *it;
+		float childAlpha = obj->GetAlpha();
 		if(childAlpha != 0.0)
 		{
 			glPushMatrix();
-			(*it)->Draw();
+			//scale
+			glScalef(obj->GetScale(), obj->GetScale(), obj->GetScale());
+			
+			//pos
+			glTranslatef(obj->GetX(), obj->GetY(), obj->GetZ());
+
+			//rotate
+			glRotatef(obj->GetRotateX(), 1.0, 0.0, 0.0);
+			glRotatef(obj->GetRotateY(), 0.0, 1.0, 0.0);
+			glRotatef(obj->GetRotateZ(), 0.0, 0.0, 1.0);
+
+			obj->Draw();
 			childAlpha *= alpha;
-			(*it)->SetAlpha(childAlpha);
+			obj->SetAlpha(childAlpha);
 			glPopMatrix();
 		}
 	}
 }
 
-void GameObjectContainer::Update()
+void GameObjectContainer::Update(float dt)
 {
 	ChildrenContainer::const_iterator it = mChildren.begin();
 	for(;it!=mChildren.end();++it)
 	{
-		(*it)->Update();
+		(*it)->Update(dt);
 	}
 }
 

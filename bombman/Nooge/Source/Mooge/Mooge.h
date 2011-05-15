@@ -1,6 +1,8 @@
 #ifndef MoogeH
 #define MoogeH
 
+#include "Ref.h"
+
 //Forward declare of engine component class.
 class CCore;
 class CPrimitiveManager;
@@ -8,6 +10,7 @@ class CCameraManager;
 class CTextManager;
 class CConsole;
 class CAuxiliary;
+class Stage;
 
 //Engine primary interface class.
 class CMooge
@@ -21,6 +24,9 @@ class CMooge
 
 		//Render.
 		void Render();
+
+		//Update
+		void Update(float dt);
 
 	public:
 		//Component managers here.
@@ -42,6 +48,8 @@ class CMooge
 
 		//Build in functionality.
 		CAuxiliary* Auiliary;
+
+		Ref<Stage>	CurrentStage;
 };
 
 #endif

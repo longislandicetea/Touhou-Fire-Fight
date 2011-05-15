@@ -10,7 +10,7 @@ public:
 	friend class GameObjectContainer;
 	
 	virtual void Draw() = 0;
-	virtual void Update() {}
+	virtual void Update(float dt) {}
 	virtual ~GameObject() {}
 	
 	float GetX();
@@ -35,7 +35,7 @@ public:
 	GameObject* GetRoot();
 
 protected:
-	GameObject() {}
+	GameObject();
 	void SetParent(GameObjectContainer* obj);
 	
 private:
@@ -44,7 +44,6 @@ private:
 	float mScale;
 	float mRotateX, mRotateY, mRotateZ;
 	GameObjectContainer *mParent;
-	//Stage *stage;
 };
 
 #endif

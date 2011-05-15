@@ -2,4 +2,5 @@
 
 void Stage::Draw()
 {
+	GameObjectContainer::Draw();
 }

@@ -16,13 +16,13 @@ public:
 	void				RemoveChild(Ref<GameObject> child);
 
 	Ref<GameObject>     GetChild(int idx);
-	Ref<GameObject>	 GetChild(GameObject *obj);
+	Ref<GameObject>		GetChild(GameObject *obj);
 
 	int					NumOfChild();
 
 	//override
 	virtual void Draw();
-	virtual void Update();
+	virtual void Update(float dt);
 private:
 	ChildrenContainer mChildren;
 };
