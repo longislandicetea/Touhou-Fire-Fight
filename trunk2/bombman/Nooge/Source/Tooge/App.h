@@ -36,4 +36,3 @@ private:
 	clock_t mLeastTime;
 
 };
-

@@ -76,6 +76,7 @@
     <ClCompile Include="..\..\..\..\Source\Tooge\App.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\AppOne.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\AppTwo.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Tooge\Character.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\Cube.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\DebugForm.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\Main.cpp" />
@@ -86,6 +87,7 @@
     <ClInclude Include="..\..\..\..\Source\Tooge\App.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\AppOne.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\AppTwo.h" />
+    <ClInclude Include="..\..\..\..\Source\Tooge\Character.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\Cube.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\DebugForm.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\RenderForm.h" />

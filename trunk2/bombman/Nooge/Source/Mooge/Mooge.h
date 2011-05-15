@@ -48,7 +48,7 @@ class CMooge
 
 		//Build in functionality.
 		CAuxiliary* Auiliary;
-
+			
 		Ref<Stage>	CurrentStage;
 };
 
