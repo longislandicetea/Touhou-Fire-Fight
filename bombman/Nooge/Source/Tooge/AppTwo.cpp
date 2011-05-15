@@ -10,8 +10,10 @@
 #include "2DText.h"
 #include "TextManager.h"
 #include "Console.h"
+#include "Stage.h"
+#include "Cube.h"
 
-#include "jpeglib.h"
+#include "jpeglib.h"	
 
 CAppTwo::CAppTwo(): CThread(true), mMouseCaptured(false),
 	mRotBase(static_cast<float>(0.05)), mRotAcc(static_cast<float>(0.001)), mRenderForm(NULL), mMooge(NULL), mMainCamera(NULL)
@@ -193,6 +195,32 @@ void CAppTwo::SetupEngine()
 
 	//Add Engine object here.
 	//...
+	Ref<Stage> stage(new Stage);
+	Ref<GameObject> cube(new Cube());
+	Ref<GameObject> cube2(new Cube());
+	Ref<GameObject> cube3(new Cube());
+	Ref<GameObject> cube4(new Cube());
+
+	Ref<GameObject> containter(new GameObjectContainer());
+	mMooge->CurrentStage = stage;
+	stage->AddChild(containter);
+	cube->SetScale(10);
+	cube->SetX(3);
+
+	cube2->SetScale(10);
+	cube2->SetX(-3);
+
+	cube3->SetScale(10);
+	cube3->SetZ(3);
+
+	cube4->SetScale(10);
+	cube4->SetZ(-3);
+
+	((GameObjectContainer*)(&*containter))->AddChild(cube);
+	((GameObjectContainer*)(&*containter))->AddChild(cube2);
+	((GameObjectContainer*)(&*containter))->AddChild(cube3);
+	((GameObjectContainer*)(&*containter))->AddChild(cube4);
+	containter->SetRotateY(45);
 
 	//Create a timer that fires 30 times a second
 	SetTimer(mRenderForm->gethWnd(), 33, 1, NULL);
@@ -209,6 +237,7 @@ void CAppTwo::Execute()
 	//Thread start.
 	while(!this->mTerminated)
 	{
+		mMooge->Update(1/60.0f);
 		mMooge->Render();
 		Sleep(1);
 	}
