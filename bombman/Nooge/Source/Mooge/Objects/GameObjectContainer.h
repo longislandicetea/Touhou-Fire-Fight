@@ -27,4 +27,7 @@ private:
 	ChildrenContainer mChildren;
 };
 
+class Sprite : public GameObjectContainer {
+};
+
 #endif
