@@ -7,6 +7,7 @@
 #include "TestForm.h"
 #include "AppOne.h"
 #include "AppTwo.h"
+#include "App.h"
 
 //#include <vld.h>
 
@@ -24,22 +25,10 @@
 
 int WINAPI _tWinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow )
 {
-	//******************** [Testing Field] **********************
-
-	//***********************************************************
-
-	//Brutal test it!
-	//for (int i = 0 ; i < 1000000 ; i ++)
-	{
-		//****************** [User Implementation] ******************
-		// Add your Form class here.
-		// Recommand: "new" your form class with an object pointer instead of declare an object.
-		// You have to design the form class yourself.
-		//***********************************************************
-
-		//CTestForm* mTest = new CTestForm("TestForm", "TestForm", 30, 60, 150, 220);
+	    //CTestForm* mTest = new CTestForm("TestForm", "TestForm", 30, 60, 150, 220);
 		//CAppOne* AppOne = new CAppOne();
-		CAppTwo* AppTwo = new CAppTwo();
+		//CAppTwo* AppTwo = new CAppTwo();
+		App* app = new App();
 		//***********************************************************
 
 		//[Dont Modify This]: This start our grand windows msg loop.
@@ -48,17 +37,16 @@ int WINAPI _tWinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdL
 		//****************** [User Implementation] ******************
 		// Delete your form class here or you'll get some memory leak.
 		//***********************************************************
-
-		//delete mTest;
+			
+		//delete mTest;	
 		//delete AppOne;
-		delete AppTwo;
+		delete app;
 		//***********************************************************
 
 		//[Dont Modify This]: This delete CWinManager EVIL singleton Instance.
 		CWinManager::GetInstance()->DeleteInstance();
 		//[Dont Modify This]: This delete CThreadManager EVIL singleton Instance.
 		CThreadManager::GetInstance()->DeleteInstance();
-	}
 
 	return (0);
 }

@@ -1,6 +1,7 @@
 #ifndef RefH
 #define RefH
 
+#pragma warning(disable: 4355)
 #include <iostream>
     // Referenced-linked smart pointer.
     template <class T>
