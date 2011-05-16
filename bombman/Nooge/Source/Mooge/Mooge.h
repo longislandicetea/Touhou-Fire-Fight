@@ -50,6 +50,7 @@ class CMooge
 		CAuxiliary* Auiliary;
 			
 		Ref<Stage>	CurrentStage;
+		Stage* currentStage;
 };
 
 #endif
