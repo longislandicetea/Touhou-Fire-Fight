@@ -10,6 +10,9 @@
     <Filter Include="Core">
       <UniqueIdentifier>{281c3e32-b6d9-4ab1-88a3-aedeee41c261}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TinyXml">
+      <UniqueIdentifier>{8edbe61e-27b2-499c-8f40-2b11d7b76b76}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Source\Mooge\Objects\2DText.cpp">
@@ -62,6 +65,18 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\Source\Mooge\Core\InputSystem.cpp">
       <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\Mooge\TinyXml\tinystr.cpp">
+      <Filter>TinyXml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\Mooge\TinyXml\tinyxml.cpp">
+      <Filter>TinyXml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\Mooge\TinyXml\tinyxmlerror.cpp">
+      <Filter>TinyXml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\Mooge\TinyXml\tinyxmlparser.cpp">
+      <Filter>TinyXml</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -121,6 +136,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\Source\Mooge\Core\InputSystem.h">
       <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\Mooge\TinyXml\tinystr.h">
+      <Filter>TinyXml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\Mooge\TinyXml\tinyxml.h">
+      <Filter>TinyXml</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

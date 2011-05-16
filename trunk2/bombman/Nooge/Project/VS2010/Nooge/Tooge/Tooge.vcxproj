@@ -46,7 +46,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\..\Source\Noobi;..\..\..\..\Source\Mooge;..\..\..\..\Source\Mooge\Core;..\..\..\..\Source\Mooge\ResourceManager;..\..\..\..\Source\Mooge\Objects;..\..\..\..\Source\Uoobi\VLD\include;..\..\..\..\Source\Uoobi\jpeg\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\Source\Noobi;..\..\..\..\Source\Mooge;..\..\..\..\Source\Mooge\Core;..\..\..\..\Source\Mooge\TinyXml;..\..\..\..\Source\Mooge\ResourceManager;..\..\..\..\Source\Mooge\Objects;..\..\..\..\Source\Uoobi\VLD\include;..\..\..\..\Source\Uoobi\jpeg\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -80,6 +80,7 @@
     <ClCompile Include="..\..\..\..\Source\Tooge\Cube.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\DebugForm.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\Main.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Tooge\Map.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\RenderForm.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\TestForm.cpp" />
   </ItemGroup>
@@ -90,6 +91,7 @@
     <ClInclude Include="..\..\..\..\Source\Tooge\Character.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\Cube.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\DebugForm.h" />
+    <ClInclude Include="..\..\..\..\Source\Tooge\Map.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\RenderForm.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\TestForm.h" />
   </ItemGroup>

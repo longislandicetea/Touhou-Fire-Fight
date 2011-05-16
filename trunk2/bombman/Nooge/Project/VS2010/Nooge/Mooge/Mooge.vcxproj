@@ -28,6 +28,10 @@
     <ClCompile Include="..\..\..\..\Source\Mooge\ResourceManager\CameraManager.cpp" />
     <ClCompile Include="..\..\..\..\Source\Mooge\ResourceManager\PrimitiveManager.cpp" />
     <ClCompile Include="..\..\..\..\Source\Mooge\ResourceManager\TextManager.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Mooge\TinyXml\tinystr.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Mooge\TinyXml\tinyxml.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Mooge\TinyXml\tinyxmlerror.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Mooge\TinyXml\tinyxmlparser.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Source\Mooge\Core\Auxiliary.h" />
@@ -49,6 +53,8 @@
     <ClInclude Include="..\..\..\..\Source\Mooge\ResourceManager\CameraManager.h" />
     <ClInclude Include="..\..\..\..\Source\Mooge\ResourceManager\PrimitiveManager.h" />
     <ClInclude Include="..\..\..\..\Source\Mooge\ResourceManager\TextManager.h" />
+    <ClInclude Include="..\..\..\..\Source\Mooge\TinyXml\tinystr.h" />
+    <ClInclude Include="..\..\..\..\Source\Mooge\TinyXml\tinyxml.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{CC4CC23D-AC08-43C7-A4F0-B47BD132243D}</ProjectGuid>
