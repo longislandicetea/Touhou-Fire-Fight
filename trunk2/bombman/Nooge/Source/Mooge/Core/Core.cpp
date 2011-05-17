@@ -59,7 +59,7 @@ bool CCore::Initial(void* hWnd)
 		//glEnable(GL_LINE_SMOOTH);
 		//glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
 		//glEnable(GL_BLEND);
-		//glEnable (GL_DEPTH_TEST);
+		glEnable (GL_DEPTH_TEST);
 		glEnable(GL_TEXTURE_2D);
 
 		//Set initial flag.

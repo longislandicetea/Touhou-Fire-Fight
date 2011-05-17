@@ -113,8 +113,10 @@ void App::SetupEngine()
 	((GameObjectContainer*)(&*containter))->AddChild(cube3);
 	((GameObjectContainer*)(&*containter))->AddChild(cube4);
 	containter->SetRotateY(45);*/
-	Ref<GameObject> model = Md2Object::Load("c:\\mh_0.md2");
+	Ref<GameObject> model = Md2Object::Load("c:\\mh_normal.md2","c:\\t2.bmp");
 	model->SetRotateY(90);
+	model->SetScale(1);
+	model->SetY(10);
 	stage->AddChild(model);
 	//Create a timer that fires 30 times a second
 	SetTimer(mRenderForm->gethWnd(), 33, 1, NULL);
