@@ -12,6 +12,7 @@
 #include "Console.h"
 #include "Stage.h"
 #include "Cube.h"
+#include "Md2Object.h"
 
 #include "jpeglib.h"	
 
@@ -87,13 +88,13 @@ void App::SetupEngine()
 	//Add Engine object here.
 	//...
 	Ref<Stage> stage(new Stage);
-	Ref<GameObject> cube(new Cube());
+	mMooge->CurrentStage = stage;
+	/*Ref<GameObject> cube(new Cube());
 	Ref<GameObject> cube2(new Cube());
 	Ref<GameObject> cube3(new Cube());
 	Ref<GameObject> cube4(new Cube());
 
 	Ref<GameObject> containter(new GameObjectContainer());
-	mMooge->CurrentStage = stage;
 	stage->AddChild(containter);
 	cube->SetScale(10);
 	cube->SetX(3);
@@ -111,8 +112,10 @@ void App::SetupEngine()
 	((GameObjectContainer*)(&*containter))->AddChild(cube2);
 	((GameObjectContainer*)(&*containter))->AddChild(cube3);
 	((GameObjectContainer*)(&*containter))->AddChild(cube4);
-	containter->SetRotateY(45);
-
+	containter->SetRotateY(45);*/
+	Ref<GameObject> model = Md2Object::Load("c:\\mh_0.md2");
+	model->SetRotateY(90);
+	stage->AddChild(model);
 	//Create a timer that fires 30 times a second
 	SetTimer(mRenderForm->gethWnd(), 33, 1, NULL);
 

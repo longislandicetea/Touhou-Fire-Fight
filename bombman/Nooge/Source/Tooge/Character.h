@@ -6,7 +6,7 @@ class Character;
 class CharacterController
 {
 public:
-	enum action{ UP, DOWN, RIGHT, LEFT, BOMB, IDLE};
+	enum Action { UP, DOWN, RIGHT, LEFT, BOMB, IDLE, ACTION_CNT};
 	virtual int Update(Character *character, float dt) = 0;
 };
 
