@@ -9,12 +9,6 @@ using std::cout;
 using std::cerr;
 using std::endl;
 
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// class Md2Model implementation.
-//
-/////////////////////////////////////////////////////////////////////////////
 // Precomputed normal vector array (162 vectors)
 vec3_t Md2Model::_kAnorms[] = {
 #include "Anorms.h"
@@ -25,13 +19,6 @@ int Md2Model::_kMd2Ident = 'I' + ('D'<<8) + ('P'<<16) + ('2'<<24);
 
 // MD2 format version
 int Md2Model::_kMd2Version = 8;
-
-
-// --------------------------------------------------------------------------
-// Md2Model::Md2Model
-//
-// Constructor.  Load a model from file.
-// --------------------------------------------------------------------------
 
 Md2Model::Md2Model (const string &filename)
 	: _skins (NULL), _texCoords (NULL), _triangles (NULL), _frames (NULL),
@@ -105,13 +92,6 @@ Md2Model::Md2Model (const string &filename)
 	setupAnimations ();
 }
 
-
-// --------------------------------------------------------------------------
-// Md2Model::~Md2Model
-//
-// Destructor.  Free all memory allocated for the model.
-// --------------------------------------------------------------------------
-
 Md2Model::~Md2Model ()
 {
 	delete [] _skins;
@@ -121,13 +101,6 @@ Md2Model::~Md2Model ()
 	delete [] _glcmds;
 }
 
-
-// --------------------------------------------------------------------------
-// Md2Model::loadTexture
-//
-// Load a texture from file.
-// --------------------------------------------------------------------------
-
 void
 	Md2Model::loadTexture (const string &filename)
 {
@@ -135,13 +108,6 @@ void
 	Ref<Texture> tex = Texture::Load(filename);
 	_skinIds.insert (SkinMap::value_type (filename, tex));
 }
-
-
-// --------------------------------------------------------------------------
-// Md2Model::setTexture
-//
-// Set the current texture for the mesh.
-// --------------------------------------------------------------------------
 
 void
 	Md2Model::setTexture (const string &filename)
@@ -154,13 +120,6 @@ void
 	else
 		_tex = Ref<Texture>();
 }
-
-
-// --------------------------------------------------------------------------
-// Md2Model::setupAnimations
-//
-// Setup animation infos.
-// --------------------------------------------------------------------------
 
 void
 	Md2Model::setupAnimations ()
@@ -206,13 +165,6 @@ void
 	// Insert last animation
 	_anims.insert (AnimMap::value_type (currentAnim, animInfo));
 }
-
-
-// --------------------------------------------------------------------------
-// Md2Model::renderFrameImmediate
-//
-// Render the model for the specified frame, using immediate mode.
-// --------------------------------------------------------------------------
 
 void
 	Md2Model::renderFrameImmediate (int frame)
@@ -261,13 +213,6 @@ void
 	glEnd();
 }
 
-
-// --------------------------------------------------------------------------
-// Md2Model::drawModelItpImmediate
-//
-// Render the model with frame interpolation, using immediate mode.
-// --------------------------------------------------------------------------
-
 void
 	Md2Model::drawModelItpImmediate (int frameA, int frameB, float interp)
 {
@@ -304,7 +249,7 @@ void
 			GLfloat s = static_cast<GLfloat>(pTexCoords->s) / _header.skinwidth;
 			GLfloat t = static_cast<GLfloat>(pTexCoords->t) / _header.skinheight;
 
-			glTexCoord2f (s, 1.0f - t);
+			glTexCoord2f (s, t);
 
 			// Compute interpolated normal vector
 			const GLfloat *normA = _kAnorms[pVertA->normalIndex];
@@ -339,13 +284,6 @@ void
 	}
 	glEnd();
 }
-
-
-// --------------------------------------------------------------------------
-// Md2Model::renderFrameWithGLcmds
-//
-// Render the model for the specified frame, using OpenGL commands.
-// --------------------------------------------------------------------------
 
 void
 	Md2Model::renderFrameWithGLcmds (int frame)
@@ -407,13 +345,6 @@ void
 		glEnd();
 	}
 }
-
-
-// --------------------------------------------------------------------------
-// Md2Model::drawModelItpWithGLcmds
-//
-// Render the model with frame interpolation, using OpenGL commands.
-// --------------------------------------------------------------------------
 
 void
 	Md2Model::drawModelItpWithGLcmds (int frameA, int frameB, float interp)
@@ -501,13 +432,6 @@ void
 	}
 }
 
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// class Md2Object implementation.
-//
-/////////////////////////////////////////////////////////////////////////////
-
 Ref<GameObject> Md2Object::Load( const std::string& filename, const std::string &texName )
 {
 	Ref<Md2Model> object(new Md2Model(filename));
@@ -571,6 +495,7 @@ void Md2Object::Update( float dt )
 }
 
 void Md2Object::Draw()
+
 {
 	glPushMatrix ();
 	// Axis rotation

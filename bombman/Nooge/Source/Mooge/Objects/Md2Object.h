@@ -1,20 +1,3 @@
-/* -*- c++ -*- */
-/////////////////////////////////////////////////////////////////////////////
-//
-// Md2Model.h -- Copyright (c) 2005-2006 David Henry
-// last modification: feb. 25, 2006
-//
-// This code is licenced under the MIT license.
-//
-// This software is provided "as is" without express or implied
-// warranties. You may freely copy and compile this source into
-// applications you distribute provided that the copyright text
-// below is included in the resulting source code.
-//
-// Definition of MD2 Model Classes.
-//
-/////////////////////////////////////////////////////////////////////////////
-
 #pragma once
 
 #include <vector>
@@ -191,7 +174,7 @@ private:
 
 class Md2Object : public GameObject {
 public:
-	static Ref<GameObject> Load(const std::string& filename);
+	static Ref<GameObject> Load(const std::string& filename, const std::string &texName);
 
 	virtual void Update(float dt);
 	virtual void Draw();

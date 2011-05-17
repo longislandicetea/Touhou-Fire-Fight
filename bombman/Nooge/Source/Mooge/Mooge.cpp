@@ -35,7 +35,7 @@ CMooge::~CMooge()
 void CMooge::Render()
 {
 	//Clear the window with current clearing color
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	//Draw all primitive objects.
 	Primitives->Draw();
