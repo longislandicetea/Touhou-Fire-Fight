@@ -3,16 +3,22 @@
 
 class Character;
 
-struct CharacterController
-{
-	enum action{ UP, DOWN, RIGHT, LEFT, BOMB, IDLE};
-	virtual int GetCommand(Character *character) = 0;
-};
-
-class Character: public Sprite
+class CharacterController
 {
 public:
-	void Update();
+	enum action{ UP, DOWN, RIGHT, LEFT, BOMB, IDLE};
+	virtual int Update(Character *character, float dt) = 0;
+};
+
+class Character : public Sprite
+{
+public:
+	void Update(float dt);
 private:
 	CharacterController& mCtrl;
+	void doAction(int currentAction, float dt);
+	void Up(float dt);
+	void Down(float dt);
+	void Left(float dt);
+	void Right(float dt);
 };

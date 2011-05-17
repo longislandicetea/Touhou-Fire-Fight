@@ -9,66 +9,57 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
+    <Filter Include="App">
+      <UniqueIdentifier>{2652c4af-d624-47e7-b8d0-fb6bc4262db1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Map">
+      <UniqueIdentifier>{0c799b39-0a21-49e1-bf6a-86dce20e7957}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Character">
+      <UniqueIdentifier>{7943071b-049b-4e76-bd46-b85466a5ac26}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Source\Tooge\Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Source\Tooge\TestForm.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Source\Tooge\DebugForm.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Source\Tooge\RenderForm.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Source\Tooge\AppTwo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Source\Tooge\AppOne.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Source\Tooge\Cube.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Source\Tooge\App.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>App</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Source\Tooge\Character.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\..\..\..\Source\Tooge\RenderForm.cpp">
+      <Filter>App</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Source\Tooge\Map.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\Tooge\Character.cpp">
+      <Filter>Character</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\Tooge\NPCController.cpp">
+      <Filter>Character</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\Source\Tooge\TestForm.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Source\Tooge\DebugForm.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Source\Tooge\RenderForm.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Source\Tooge\AppTwo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Source\Tooge\AppOne.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\Source\Tooge\Cube.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Source\Tooge\App.h">
-      <Filter>Header Files</Filter>
+      <Filter>App</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Source\Tooge\Character.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\..\..\..\Source\Tooge\RenderForm.h">
+      <Filter>App</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Source\Tooge\Map.h">
-      <Filter>Header Files</Filter>
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\Tooge\NPCController.h">
+      <Filter>Character</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\Tooge\Character.h">
+      <Filter>Character</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
