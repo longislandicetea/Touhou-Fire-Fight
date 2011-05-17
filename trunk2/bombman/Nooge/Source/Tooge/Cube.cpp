@@ -5,7 +5,7 @@
 
 Cube::Cube(void)
 {
-	mTex = Texture::LoadBMP("C:\\test.bmp");
+	mTex = Texture::Load("C:\\test.bmp");
 }
 
 

@@ -78,6 +78,9 @@
     <ClCompile Include="..\..\..\..\Source\Mooge\TinyXml\tinyxmlparser.cpp">
       <Filter>TinyXml</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\Mooge\Objects\Md2Object.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Source\Mooge\Objects\2DText.h">
@@ -142,6 +145,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\Source\Mooge\TinyXml\tinyxml.h">
       <Filter>TinyXml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\Mooge\Objects\Md2Object.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\Mooge\Objects\Anorms.h">
+      <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

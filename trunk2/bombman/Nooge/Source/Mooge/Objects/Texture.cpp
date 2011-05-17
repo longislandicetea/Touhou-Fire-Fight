@@ -12,9 +12,14 @@ Texture::Texture( float width, float height, void *data )
 	mWidth = width;
 	glGenTextures(1,&mId);
 	glBindTexture(GL_TEXTURE_2D, mId);
-	glTexImage2D(GL_TEXTURE_2D, 0, 3, mWidth, mHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+	
+	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP);
+	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP);
 	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);	
+
+	gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGB, width, height, 
+		GL_RGB, GL_UNSIGNED_BYTE, data);
 }
 
 Texture::~Texture()
@@ -46,9 +51,9 @@ float Texture::GetID()
 	return mId;
 }
 
-Ref<Texture> Texture::LoadBMP( char *filename )
+Ref<Texture> Texture::Load( const std::string &filename )
 {
-	AUX_RGBImageRec *img = auxDIBImageLoadA(filename);
+	AUX_RGBImageRec *img = auxDIBImageLoadA(filename.c_str());
 	Ref<Texture> ret(new Texture(img->sizeX, img->sizeY, img->data));
 	free(img->data);
 	free(img);

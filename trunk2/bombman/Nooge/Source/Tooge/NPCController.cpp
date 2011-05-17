@@ -2,6 +2,6 @@
 
 int NPCController::Update(Character *character, float dt)
 {
-	return 0;
+	return rand() % CharacterController::ACTION_CNT;
 }
 
