@@ -115,3 +115,10 @@ void GameObject::SetRotateZ( float rotateZ )
 	mRotateZ = rotateZ;
 }
 
+void GameObject::SetPos( float x, float y, float z )
+{
+	SetX(x);
+	SetY(y);
+	SetZ(z);
+}
+

@@ -2,6 +2,7 @@
 #include<vector>
 #include <map>
 #include<string>
+#include "GameObjectContainer.h"
 
 
 enum GridState
@@ -16,16 +17,13 @@ struct GridInfo
 	int row;
 };
 
-class Map
+class RuntimeMap;
+class Map : public Sprite
 {
 public:
+	friend class RuntimeMap;
 	void Load(const char* filename);
 	bool CanPass(int gridId);
-	//void SetBomb(int gridId);
-
-	void Display();
-
-	//void HasBomb(int gridId);
 private:
 	std::vector<GridInfo> mGrids;
 	std::map<std::string,float> mBonus;

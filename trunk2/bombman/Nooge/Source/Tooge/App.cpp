@@ -92,8 +92,8 @@ void App::SetupEngine()
 	
 	Ref<GameObject> model = Md2Object::Load("c:\\mh_normal.md2","c:\\t2.bmp");
 	model->SetRotateY(90);
-	model->SetScale(1);
 	model->SetY(10);
+	//model->SetZ(30);
 	stage->AddChild(model);
 	//Create a timer that fires 30 times a second
 	SetTimer(mRenderForm->gethWnd(), 33, 1, NULL);
