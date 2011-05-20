@@ -18,6 +18,9 @@
     <Filter Include="Character">
       <UniqueIdentifier>{7943071b-049b-4e76-bd46-b85466a5ac26}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Stage">
+      <UniqueIdentifier>{16276068-e393-4894-93c3-20ab9f355554}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Source\Tooge\Main.cpp">
@@ -41,6 +44,9 @@
     <ClCompile Include="..\..\..\..\Source\Tooge\NPCController.cpp">
       <Filter>Character</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\Tooge\GameStage.cpp">
+      <Filter>Stage</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Source\Tooge\Cube.h">
@@ -60,6 +66,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\Source\Tooge\Character.h">
       <Filter>Character</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\Tooge\GameStage.h">
+      <Filter>Stage</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
