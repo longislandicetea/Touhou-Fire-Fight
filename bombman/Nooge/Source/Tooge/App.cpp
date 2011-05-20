@@ -80,39 +80,16 @@ void App::SetupEngine()
 	//Setup camera.
 	mMooge->Cameras->AddCamera(mMainCamera);
 
-	VECTORFS CamEyeVec(40.0, 60.0, 100.0);
+	VECTORFS CamEyeVec(0.0, 60.0, 100.0);
 	VECTORFS CamCenterVec(0.0, 0.0, 0.0);
-	VECTORFS CamUpVec(0.0, 1.0, 0.0);
+	VECTORFS CamUpVec(0.0, 10.0, 0.0);
 	mMainCamera->SetPosition(CamEyeVec, CamCenterVec, CamUpVec);
 
 	//Add Engine object here.
 	//...
 	Ref<Stage> stage(new Stage);
 	mMooge->CurrentStage = stage;
-	/*Ref<GameObject> cube(new Cube());
-	Ref<GameObject> cube2(new Cube());
-	Ref<GameObject> cube3(new Cube());
-	Ref<GameObject> cube4(new Cube());
-
-	Ref<GameObject> containter(new GameObjectContainer());
-	stage->AddChild(containter);
-	cube->SetScale(10);
-	cube->SetX(3);
-
-	cube2->SetScale(10);
-	cube2->SetX(-3);
-
-	cube3->SetScale(10);
-	cube3->SetZ(3);
-
-	cube4->SetScale(10);
-	cube4->SetZ(-3);
-
-	((GameObjectContainer*)(&*containter))->AddChild(cube);
-	((GameObjectContainer*)(&*containter))->AddChild(cube2);
-	((GameObjectContainer*)(&*containter))->AddChild(cube3);
-	((GameObjectContainer*)(&*containter))->AddChild(cube4);
-	containter->SetRotateY(45);*/
+	
 	Ref<GameObject> model = Md2Object::Load("c:\\mh_normal.md2","c:\\t2.bmp");
 	model->SetRotateY(90);
 	model->SetScale(1);
