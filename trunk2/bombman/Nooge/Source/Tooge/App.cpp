@@ -13,6 +13,7 @@
 #include "Stage.h"
 #include "Cube.h"
 #include "Md2Object.h"
+#include "RuntimeMap.h"
 
 #include "jpeglib.h"	
 
@@ -80,9 +81,9 @@ void App::SetupEngine()
 	//Setup camera.
 	mMooge->Cameras->AddCamera(mMainCamera);
 
-	VECTORFS CamEyeVec(0.0, 60.0, 100.0);
+	VECTORFS CamEyeVec(0.0, 120, 100.0);
 	VECTORFS CamCenterVec(0.0, 0.0, 0.0);
-	VECTORFS CamUpVec(0.0, 10.0, 0.0);
+	VECTORFS CamUpVec(0.0, 120.0, 0.0);
 	mMainCamera->SetPosition(CamEyeVec, CamCenterVec, CamUpVec);
 
 	//Add Engine object here.
@@ -93,8 +94,12 @@ void App::SetupEngine()
 	Ref<GameObject> model = Md2Object::Load("c:\\mh_normal.md2","c:\\t2.bmp");
 	model->SetRotateY(90);
 	model->SetY(10);
-	//model->SetZ(30);
-	stage->AddChild(model);
+
+	Ref<GameObject> runtimeMap(new RuntimeMap);
+	cast<GameObject,RuntimeMap>(runtimeMap)->SetMap();
+
+	//stage->AddChild(model);
+	stage->AddChild(runtimeMap);
 	//Create a timer that fires 30 times a second
 	SetTimer(mRenderForm->gethWnd(), 33, 1, NULL);
 

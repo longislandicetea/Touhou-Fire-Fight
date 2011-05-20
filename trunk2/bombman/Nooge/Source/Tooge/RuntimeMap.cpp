@@ -6,29 +6,48 @@
 
 void RuntimeMap::SetMap()
 {
-	for(int i = 0;i<mGrids.size();++i)
+	mMap->Load("c:\\test.xml");
+	for(int i = 0;i<mMap->mGrids.size();++i)
 	{
-		GridInfo tmp = mGrids[i];
+		GridInfo tmp = mMap->mGrids[i];
 		int row = tmp.row;
 		int col = tmp.col;
 
 		switch (tmp.gridState)
 		{
 		case DWALL:
-		{
-			Ref<Dwall> dwall(new Dwall());
-			//dwall->SetPos();
-		}
+			{
+				Ref<GameObject> dwall(new Dwall);
+				dwall->SetPos((6-col)*10.0,0.0,(row-7)*10.0);
+				cast<GameObject,Sprite>(mDwall)->AddChild(dwall);
+				break;
+			}
+		case UWALL:
+			{
+				Ref<GameObject> uwall(new Uwall);
+				uwall->SetPos((6-col)*10.0,0.0,(row-7)*10.0);
+				cast<GameObject,Sprite>(mDwall)->AddChild(uwall);
+				break;
+			}
+		case NPC :
+			{
+			}
+		case PLAYER:
+			{
+			}
 		}
 	}
+	this->AddChild(mDwall);
+	this->AddChild(mUwall);
+	this->AddChild(mBonus);
+	this->AddChild(mNPC);
 }
 
-void RuntimeMap::Update()
+RuntimeMap::RuntimeMap()
 {
-
-}
-
-void RuntimeMap::Draw()
-{
-
+	mMap = Ref<Map>(new Map);
+	mDwall = Ref<GameObject>(new Sprite);
+	mUwall = Ref<GameObject>(new Sprite);
+	mBonus = Ref<GameObject>(new Sprite);
+	mNPC = Ref<GameObject>(new Sprite);
 }
