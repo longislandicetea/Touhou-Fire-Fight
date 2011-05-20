@@ -21,6 +21,12 @@
     <Filter Include="Stage">
       <UniqueIdentifier>{16276068-e393-4894-93c3-20ab9f355554}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Wall">
+      <UniqueIdentifier>{5f5b7968-ee45-417e-8128-9fcd73f30d3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Bonus">
+      <UniqueIdentifier>{e96d6677-43e4-41c8-be7c-1ad2501f663a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Source\Tooge\Main.cpp">
@@ -47,6 +53,9 @@
     <ClCompile Include="..\..\..\..\Source\Tooge\GameStage.cpp">
       <Filter>Stage</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\Tooge\RuntimeMap.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Source\Tooge\Cube.h">
@@ -69,6 +78,18 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\Source\Tooge\GameStage.h">
       <Filter>Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\Tooge\RuntimeMap.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\Tooge\Dwall.h">
+      <Filter>Wall</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\Tooge\Uwall.h">
+      <Filter>Wall</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\Tooge\Bonus.h">
+      <Filter>Bonus</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

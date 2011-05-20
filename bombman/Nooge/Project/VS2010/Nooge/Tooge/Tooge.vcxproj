@@ -81,15 +81,20 @@
     <ClCompile Include="..\..\..\..\Source\Tooge\NPCController.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\RenderForm.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\GameStage.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Tooge\RuntimeMap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Source\Tooge\App.h" />
+    <ClInclude Include="..\..\..\..\Source\Tooge\Bonus.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\Character.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\Cube.h" />
+    <ClInclude Include="..\..\..\..\Source\Tooge\Dwall.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\GameStage.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\Map.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\NPCController.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\RenderForm.h" />
+    <ClInclude Include="..\..\..\..\Source\Tooge\RuntimeMap.h" />
+    <ClInclude Include="..\..\..\..\Source\Tooge\Uwall.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

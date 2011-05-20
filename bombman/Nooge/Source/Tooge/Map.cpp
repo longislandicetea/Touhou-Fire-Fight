@@ -55,15 +55,3 @@ GridState Map::Trans( const char* gridState )
 	else
 		return NPC;
 }
-
-void Map::Display()
-{
-	for(unsigned int i = 0;i<mGrids.size();++i)
-	{
-		std::cout<<mGrids[i].row<<" "<<mGrids[i].col<<" "<<mGrids[i].gridState<<std::endl;
-	}
-
-	std::map<std::string,float>::iterator it;
-	for(it = mBonus.begin();it!=mBonus.end();++it)
-		std::cout<<it->first<<" "<<it->second<<std::endl;
-}
