@@ -63,9 +63,6 @@
     <ClCompile Include="..\..\..\..\Source\Mooge\Objects\Texture.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Source\Mooge\Core\InputSystem.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\Source\Mooge\TinyXml\tinystr.cpp">
       <Filter>TinyXml</Filter>
     </ClCompile>
@@ -136,9 +133,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\Source\Mooge\Objects\Texture.h">
       <Filter>Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Source\Mooge\Core\InputSystem.h">
-      <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Source\Mooge\TinyXml\tinystr.h">
       <Filter>TinyXml</Filter>

@@ -11,6 +11,8 @@ public:
 	float Y1();
 	float X2();
 	float Y2();
+	float CenterX();
+	float CenterY();
 
 	bool TestPoint(float x,float y);
 	bool Intersect(Ref<Grid> grid);

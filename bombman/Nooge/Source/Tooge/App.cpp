@@ -11,9 +11,10 @@
 #include "TextManager.h"
 #include "Console.h"
 #include "Stage.h"
-#include "Cube.h"
 #include "Md2Object.h"
 #include "RuntimeMap.h"
+#include "Character.h"
+#include "PlayerController.h"
 
 #include "jpeglib.h"	
 
@@ -22,11 +23,14 @@ App::App(void): CThread(true),mMooge(NULL),mRenderForm(NULL),mMainCamera(NULL)
 {
 	mRenderForm = new CRenderForm();
 	mMooge = new CMooge();
+	mInputSys = Ref<InputSystem>(new InputSystem);
 
 	mRenderForm->AddCallBackEvent(WM_CREATE, bind(&App::OnRenderFormCreate, this, _1));
 	mRenderForm->AddCallBackEvent(WM_DESTROY, bind(&App::OnRenderFormDestroy, this, _1));
 	mRenderForm->AddCallBackEvent(WM_CHAR, bind(&App::OnRenderFormChar, this, _1));
 	mRenderForm->AddCallBackEvent(WM_TIMER, bind(&App::OnRenderFormTimer, this, _1));
+	mRenderForm->AddCallBackEvent(WM_KEYDOWN, bind(&App::OnRenderFormKeyDown, this, _1));
+	mRenderForm->AddCallBackEvent(WM_KEYUP, bind(&App::OnRenderFormKeyUp, this, _1));
 
 	mRenderForm->Load("Rendering form", 40, 50, 800, 600);
 }
@@ -81,7 +85,7 @@ void App::SetupEngine()
 	//Setup camera.
 	mMooge->Cameras->AddCamera(mMainCamera);
 
-	VECTORFS CamEyeVec(0.0, 120, 100.0);
+	VECTORFS CamEyeVec(0.0, 120,100.0);
 	VECTORFS CamCenterVec(0.0, 0.0, 0.0);
 	VECTORFS CamUpVec(0.0, 120.0, 0.0);
 	mMainCamera->SetPosition(CamEyeVec, CamCenterVec, CamUpVec);
@@ -91,14 +95,23 @@ void App::SetupEngine()
 	Ref<Stage> stage(new Stage);
 	mMooge->CurrentStage = stage;
 	
-	Ref<GameObject> model = Md2Object::Load("c:\\mh_normal.md2","c:\\t2.bmp");
+	/*Ref<GameObject> model = Md2Object::Load("c:\\mh_normal.md2","c:\\t2.bmp");
 	model->SetRotateY(90);
 	model->SetY(10);
+	model->SetX(-5.0);
+	model->SetZ(5.0);*/
 
+	PlayerController* playerCtrl = new PlayerController();
+
+	Ref<GameObject> player = Character::AddController(playerCtrl);
+	player->SetRotateY(90);
+	player->SetX(5);
+	player->SetZ(5);
 	Ref<GameObject> runtimeMap(new RuntimeMap);
 	cast<GameObject,RuntimeMap>(runtimeMap)->SetMap();
 
-	//stage->AddChild(model);
+	stage->AddChild(player);
+	//runtimeMap->SetRotateY(90);
 	stage->AddChild(runtimeMap);
 	//Create a timer that fires 30 times a second
 	SetTimer(mRenderForm->gethWnd(), 33, 1, NULL);
@@ -123,4 +136,59 @@ void App::OnRenderFormTimer( const WinMsgPackage& MsgPack )
 	float dt = (float)(now - mLeastTime) / CLOCKS_PER_SEC;
 	mMooge->Update(dt);
 	mLeastTime = now;
+}
+
+App& App::Inst()
+{
+	static App _app;
+	return _app;
+}
+
+Ref<InputSystem> App::InputSys()
+{
+	return mInputSys;
+}
+
+void App::OnRenderFormKeyDown( const WinMsgPackage& MsgPack )
+{
+	if(!mMooge->Console->IsActivate())
+	{
+		switch(MsgPack.wParam)
+		{
+		case VK_UP:
+			mInputSys->KeyDown(VK_UP);
+			break;
+		case VK_DOWN:
+			mInputSys->KeyDown(VK_DOWN);
+			break;
+		case VK_LEFT:
+			mInputSys->KeyDown(VK_LEFT);
+			break;
+		case VK_RIGHT:
+			mInputSys->KeyDown(VK_RIGHT);
+			break;
+		}
+	}
+}
+
+void App::OnRenderFormKeyUp( const WinMsgPackage& MsgPack )
+{
+	if(!mMooge->Console->IsActivate())
+	{
+		switch(MsgPack.wParam)
+		{
+		case VK_UP:
+			mInputSys->KeyUp(VK_UP);
+			break;
+		case VK_DOWN:
+			mInputSys->KeyUp(VK_DOWN);
+			break;
+		case VK_LEFT:
+			mInputSys->KeyUp(VK_LEFT);
+			break;
+		case VK_RIGHT:
+			mInputSys->KeyUp(VK_RIGHT);
+			break;
+		}
+	}
 }

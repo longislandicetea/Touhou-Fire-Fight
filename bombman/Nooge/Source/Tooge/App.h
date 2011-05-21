@@ -4,6 +4,8 @@
 
 #include"MoogeType.h"
 #include"Thread.h"
+#include "Ref.h"
+#include "InputSystem.h"
 
 using namespace MoogeType;
 
@@ -17,14 +19,18 @@ struct WinMsgPackage;
 class App : public CThread
 {
 public:
-	App(void);
-	~App(void);
+	static App& Inst();
+	~App();
+	Ref<InputSystem> InputSys();
 
 private:
+	App();
 	void OnRenderFormCreate(const WinMsgPackage& MsgPack);
 	void OnRenderFormDestroy(const WinMsgPackage& MsgPack);
 	void OnRenderFormChar(const WinMsgPackage& MsgPack);
 	void OnRenderFormTimer(const WinMsgPackage& MsgPack);
+	void OnRenderFormKeyDown(const WinMsgPackage& MsgPack);
+	void OnRenderFormKeyUp(const WinMsgPackage& MsgPack);
 
 	void SetupEngine();
 	void Execute();
@@ -32,6 +38,7 @@ private:
 	CRenderForm* mRenderForm;
 	CMooge* mMooge;
 	CCamera* mMainCamera;
+	Ref<InputSystem> mInputSys;
 
 	clock_t mLeastTime;
 

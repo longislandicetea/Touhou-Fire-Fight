@@ -28,7 +28,8 @@ int WINAPI _tWinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdL
 	    //CTestForm* mTest = new CTestForm("TestForm", "TestForm", 30, 60, 150, 220);
 		//CAppOne* AppOne = new CAppOne();
 		//CAppTwo* AppTwo = new CAppTwo();
-		App* app = new App();
+
+		App *app = &App::Inst();
 		//***********************************************************
 
 		//[Dont Modify This]: This start our grand windows msg loop.

@@ -1,6 +1,10 @@
 #pragma once
 #include"GameObjectContainer.h"
 
+#include "GameStage.h"
+#include "Ref.h"
+#include "GameObject.h"
+
 class Character;
 
 class CharacterController
@@ -14,11 +18,22 @@ class Character : public Sprite
 {
 public:
 	void Update(float dt);
+	static Ref<GameObject> AddController(CharacterController* ctrl);
 private:
+	Character(CharacterController* ctrl);
 	CharacterController& mCtrl;
 	void doAction(int currentAction, float dt);
-	void Up(float dt);
-	void Down(float dt);
-	void Left(float dt);
-	void Right(float dt);
+	void up(float dt);
+	void down(float dt);
+	void left(float dt);
+	void right(float dt);
+
+	float mSpeed;
+	int mLife;
+	Ref<GameStage> mStage;
+	Ref<GameObject> mModel;
+
+	//vector<Bomb> mBomb;
+	//vector<Bonus> mBonus;
+
 };

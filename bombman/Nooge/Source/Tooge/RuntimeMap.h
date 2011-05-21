@@ -17,6 +17,8 @@ private:
 	Ref<GameObject> mUwall;
 	Ref<GameObject> mBonus;
 	Ref<GameObject> mNPC;
+	Ref<GameObject> mPlayer;
 	Ref<Map> mMap;
+	float mSide;
 
 };

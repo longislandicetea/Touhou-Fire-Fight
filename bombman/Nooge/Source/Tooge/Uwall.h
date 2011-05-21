@@ -1,9 +1,12 @@
 #pragma once
 
-#include "GameObject.h"
+#include "GameObjectContainer.h"
 
-class Uwall : public GameObject
+class Uwall : public Sprite
 {
-public:
-	virtual void Draw(){}
+public :
+	Uwall();
+private:
+	Ref<GameObject> mModel;
+
 };
