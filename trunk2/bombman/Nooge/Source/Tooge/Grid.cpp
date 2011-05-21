@@ -4,7 +4,7 @@ Grid::Grid( float x1,float y1,float x2,float y2 )
 {
 	mX1 = x1;
 	mY1 = y1;
-	mX2 = x1;
+	mX2 = x2;
 	mY2 = y2;
 }
 
@@ -45,4 +45,14 @@ bool Grid::Intersect( Ref<Grid> grid )
 	if(TestPoint(x1,y1) || TestPoint(x1,y2) || TestPoint(x2,y1) || TestPoint(x2,y2))
 		return true;
 	return false;
+}
+
+float Grid::CenterX()
+{
+	return (mX1+mX2)/2;
+}
+
+float Grid::CenterY()
+{
+	return (mY1+mY2)/2;
 }

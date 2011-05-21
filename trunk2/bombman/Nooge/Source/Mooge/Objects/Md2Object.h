@@ -172,7 +172,8 @@ private:
 
 #include "GameObject.h"
 
-class Md2Object : public GameObject {
+class Md2Object : public GameObject 
+{
 public:
 	static Ref<GameObject> Load(const std::string& filename, const std::string &texName);
 

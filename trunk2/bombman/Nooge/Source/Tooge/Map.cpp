@@ -35,13 +35,6 @@ void Map::Load(const char* filename)
 	}
 }
 
-bool Map::CanPass( int gridId )
-{
-	if(mGrids[gridId].gridState == DWALL||mGrids[gridId].gridState == UWALL)
-		return false;
-	return true;
-}
-
 GridState Map::Trans( const char* gridState )
 {
 	if(!strcmp(gridState,"Empty"))

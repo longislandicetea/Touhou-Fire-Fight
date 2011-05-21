@@ -3,6 +3,7 @@
 #include "Uwall.h"
 #include "Bonus.h"
 #include "Character.h"
+#include "Grid.h"
 
 void RuntimeMap::SetMap()
 {
@@ -13,19 +14,21 @@ void RuntimeMap::SetMap()
 		int row = tmp.row;
 		int col = tmp.col;
 
+		Ref<Grid> currentGrid(new Grid((col-7)*mSide,(row-5)*mSide,(col-6)*mSide,(row-6)*mSide));
+
 		switch (tmp.gridState)
 		{
 		case DWALL:
 			{
 				Ref<GameObject> dwall(new Dwall);
-				dwall->SetPos((6-col)*10.0,0.0,(row-7)*10.0);
+				dwall->SetPos(currentGrid->CenterX(),0.0,currentGrid->CenterY());
 				cast<GameObject,Sprite>(mDwall)->AddChild(dwall);
 				break;
 			}
 		case UWALL:
 			{
 				Ref<GameObject> uwall(new Uwall);
-				uwall->SetPos((6-col)*10.0,0.0,(row-7)*10.0);
+				uwall->SetPos(currentGrid->CenterX(),0.0,currentGrid->CenterY());
 				cast<GameObject,Sprite>(mDwall)->AddChild(uwall);
 				break;
 			}
@@ -34,6 +37,8 @@ void RuntimeMap::SetMap()
 			}
 		case PLAYER:
 			{
+				mPlayer->SetPos(currentGrid->CenterX(),0.0,currentGrid->CenterY());
+				break;
 			}
 		}
 	}
@@ -41,6 +46,7 @@ void RuntimeMap::SetMap()
 	this->AddChild(mUwall);
 	this->AddChild(mBonus);
 	this->AddChild(mNPC);
+	this->AddChild(mPlayer);
 }
 
 RuntimeMap::RuntimeMap()
@@ -50,4 +56,6 @@ RuntimeMap::RuntimeMap()
 	mUwall = Ref<GameObject>(new Sprite);
 	mBonus = Ref<GameObject>(new Sprite);
 	mNPC = Ref<GameObject>(new Sprite);
+	mPlayer = Ref<GameObject>(new Sprite);
+	mSide = 10.0;
 }

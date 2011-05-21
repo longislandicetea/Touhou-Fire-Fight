@@ -36,7 +36,8 @@ Ref<GameObject> GameObjectContainer::GetChild( int idx )
 	return mChildren[idx];
 }
 
-Ref<GameObject> GameObjectContainer::GetChild(GameObject *obj) {
+Ref<GameObject> GameObjectContainer::GetChild(GameObject *obj) 
+{
 	//Ref<xxx> : mChildren[i]
 	//xxx : *mChildren[i]
 	//xxx* : &*mChildren[i]

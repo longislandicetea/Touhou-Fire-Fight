@@ -23,10 +23,11 @@ class Map : public Sprite
 public:
 	friend class RuntimeMap;
 	void Load(const char* filename);
-	bool CanPass(int gridId);
-private:
+
+protected:
 	std::vector<GridInfo> mGrids;
 	std::map<std::string,float> mBonus;
 	
+private:
 	GridState Trans(const char* gridState);
 };

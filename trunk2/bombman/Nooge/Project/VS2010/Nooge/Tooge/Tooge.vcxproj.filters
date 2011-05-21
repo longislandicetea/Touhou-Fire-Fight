@@ -30,6 +30,9 @@
     <Filter Include="Grid">
       <UniqueIdentifier>{0c411038-eb50-4bd7-b197-88400639cb87}</UniqueIdentifier>
     </Filter>
+    <Filter Include="InputSystem">
+      <UniqueIdentifier>{86e435fd-e119-4817-abce-45357e055183}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Source\Tooge\Main.cpp">
@@ -64,6 +67,15 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\Source\Tooge\Grid.cpp">
       <Filter>Grid</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\Tooge\PlayerController.cpp">
+      <Filter>Character</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\Tooge\Uwall.cpp">
+      <Filter>Wall</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\Mooge\Core\InputSystem.cpp">
+      <Filter>InputSystem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -102,6 +114,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\Source\Tooge\Grid.h">
       <Filter>Grid</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\Tooge\PlayerController.h">
+      <Filter>Character</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\Mooge\Core\InputSystem.h">
+      <Filter>InputSystem</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

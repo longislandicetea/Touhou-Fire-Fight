@@ -14,7 +14,6 @@
     <ClCompile Include="..\..\..\..\Source\Mooge\Core\Auxiliary.cpp" />
     <ClCompile Include="..\..\..\..\Source\Mooge\Core\Console.cpp" />
     <ClCompile Include="..\..\..\..\Source\Mooge\Core\Core.cpp" />
-    <ClCompile Include="..\..\..\..\Source\Mooge\Core\InputSystem.cpp" />
     <ClCompile Include="..\..\..\..\Source\Mooge\Core\MoogeUtility.cpp" />
     <ClCompile Include="..\..\..\..\Source\Mooge\Mooge.cpp" />
     <ClCompile Include="..\..\..\..\Source\Mooge\Objects\2DText.cpp" />
@@ -38,7 +37,6 @@
     <ClInclude Include="..\..\..\..\Source\Mooge\Core\Auxiliary.h" />
     <ClInclude Include="..\..\..\..\Source\Mooge\Core\Console.h" />
     <ClInclude Include="..\..\..\..\Source\Mooge\Core\Core.h" />
-    <ClInclude Include="..\..\..\..\Source\Mooge\Core\InputSystem.h" />
     <ClInclude Include="..\..\..\..\Source\Mooge\Core\MoogeType.h" />
     <ClInclude Include="..\..\..\..\Source\Mooge\Core\MoogeUtility.h" />
     <ClInclude Include="..\..\..\..\Source\Mooge\Core\Ref.h" />
