@@ -27,6 +27,9 @@
     <Filter Include="Bonus">
       <UniqueIdentifier>{e96d6677-43e4-41c8-be7c-1ad2501f663a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Grid">
+      <UniqueIdentifier>{0c411038-eb50-4bd7-b197-88400639cb87}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Source\Tooge\Main.cpp">
@@ -58,6 +61,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\Source\Tooge\Dwall.cpp">
       <Filter>Wall</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\Tooge\Grid.cpp">
+      <Filter>Grid</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -93,6 +99,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\Source\Tooge\Bonus.h">
       <Filter>Bonus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\Tooge\Grid.h">
+      <Filter>Grid</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
