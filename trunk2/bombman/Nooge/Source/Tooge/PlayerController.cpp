@@ -16,4 +16,5 @@ int PlayerController::Update( Character* character,float dt )
 		return CharacterController::LEFT;
 	else if(inputSys->IsKeyDown(VK_RIGHT))
 		return CharacterController::RIGHT;
+	return CharacterController::IDLE;
 }

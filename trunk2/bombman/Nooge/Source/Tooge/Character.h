@@ -31,10 +31,9 @@ private:
 
 	float mSpeed;
 	int mLife;
-GameStage *mStage;
+	GameStage *mStage;
 	Ref<GameObject> mModel;
-
+	
 	//vector<Bomb> mBomb;
 	//vector<Bonus> mBonus;
-
 };
