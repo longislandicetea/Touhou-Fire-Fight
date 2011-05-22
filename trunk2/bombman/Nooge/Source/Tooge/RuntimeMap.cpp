@@ -3,6 +3,7 @@
 #include "Uwall.h"
 #include "Bonus.h"
 #include "Character.h"
+#include "PlayerController.h"
 #include "Grid.h"
 
 void RuntimeMap::SetMap()
@@ -34,12 +35,17 @@ void RuntimeMap::SetMap()
 				cast<Sprite>(mUwall)->AddChild(uwall);
 				break;
 			}
-		case NPC :
-			{
-			}
 		case PLAYER:
 			{
-				mPlayer->SetPos(currentGrid->CenterX(),0.0,currentGrid->CenterY());
+				PlayerController* playerCtrl = new PlayerController();
+				Ref<GameObject> player = Character::AddController(playerCtrl);
+				player->SetPos(currentGrid->CenterX(),0.0,currentGrid->CenterY());
+				player->SetRotateY(90);
+				cast<Sprite>(mPlayer)->AddChild(player);
+				break;
+			}
+		case NPC :
+			{
 				break;
 			}
 		}
@@ -67,7 +73,7 @@ bool RuntimeMap::CanPass( GameObject* obj )
 	GameObjectContainer* uwallContainer = cast<GameObjectContainer>(mUwall);
 	/*for(int i = 0;i<dwallContainer->NumOfChild();++i)
 	{
-		if(dwallContainer->GetChild(i)->GetBoundingBox()->Intersect(this->GetBoundingBox()))
+		if(dwallContainer->GetChild(i)->GetBoundingBox().Intersect(obj->GetBoundingBox()))
 		{
 			return false;
 			break;

@@ -45,6 +45,6 @@ GridState Map::Trans( const char* gridState )
 		return UWALL;
 	else if(!strcmp(gridState,"Player"))
 		return PLAYER;
-	else
+	else if(!strcmp(gridState,"NPC"))
 		return NPC;
 }
