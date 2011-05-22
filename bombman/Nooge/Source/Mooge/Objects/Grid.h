@@ -19,5 +19,4 @@ public:
 	bool Intersect(Grid grid);
 private:
 	float mX1,mY1,mX2,mY2;
-	float mSideLen;
 };

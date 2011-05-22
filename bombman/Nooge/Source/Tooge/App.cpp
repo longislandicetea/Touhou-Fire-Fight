@@ -99,14 +99,14 @@ void App::SetupEngine()
 	cast<RuntimeMap>(runtimeMap)->SetMap();
 	gameStage->AddChild(runtimeMap);
 
-	PlayerController* playerCtrl = new PlayerController();
+	//PlayerController* playerCtrl = new PlayerController();
 
-	Ref<GameObject> player = Character::AddController(playerCtrl);
-	player->SetRotateY(90);
-	player->SetX(5);
-	player->SetZ(5);
+	//Ref<GameObject> player = Character::AddController(playerCtrl);
+	//player->SetRotateY(90);
+	//player->SetX(5);
+	//player->SetZ(5);
 	
-	gameStage->AddChild(player);
+	//gameStage->AddChild(player);
 	//runtimeMap->SetRotateY(90);
 	
 	//Create a timer that fires 30 times a second
