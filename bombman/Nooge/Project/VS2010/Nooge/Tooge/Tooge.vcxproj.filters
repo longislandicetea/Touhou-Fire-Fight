@@ -5,10 +5,6 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
     <Filter Include="App">
       <UniqueIdentifier>{2652c4af-d624-47e7-b8d0-fb6bc4262db1}</UniqueIdentifier>
     </Filter>
@@ -27,18 +23,12 @@
     <Filter Include="Bonus">
       <UniqueIdentifier>{e96d6677-43e4-41c8-be7c-1ad2501f663a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Grid">
-      <UniqueIdentifier>{0c411038-eb50-4bd7-b197-88400639cb87}</UniqueIdentifier>
-    </Filter>
     <Filter Include="InputSystem">
       <UniqueIdentifier>{86e435fd-e119-4817-abce-45357e055183}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Source\Tooge\Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Source\Tooge\Cube.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Source\Tooge\App.cpp">
@@ -65,9 +55,6 @@
     <ClCompile Include="..\..\..\..\Source\Tooge\Dwall.cpp">
       <Filter>Wall</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Source\Tooge\Grid.cpp">
-      <Filter>Grid</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\Source\Tooge\PlayerController.cpp">
       <Filter>Character</Filter>
     </ClCompile>
@@ -79,9 +66,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\Source\Tooge\Cube.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\Source\Tooge\App.h">
       <Filter>App</Filter>
     </ClInclude>
@@ -111,9 +95,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\Source\Tooge\Bonus.h">
       <Filter>Bonus</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Source\Tooge\Grid.h">
-      <Filter>Grid</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Source\Tooge\PlayerController.h">
       <Filter>Character</Filter>

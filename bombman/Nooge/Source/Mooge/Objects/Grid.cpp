@@ -1,5 +1,7 @@
 #include "Grid.h"
 
+float Grid::SideLen = 10.0;
+
 Grid::Grid( float x1,float y1,float x2,float y2 )
 {
 	mX1 = x1;
@@ -35,12 +37,12 @@ bool Grid::TestPoint( float x,float y )
 	return false;
 }
 
-bool Grid::Intersect( Ref<Grid> grid )
+bool Grid::Intersect(Grid grid )
 {
-	float x1 = grid->X1();
-	float x2 = grid->X2();
-	float y1 = grid->Y1();
-	float y2 = grid->Y2();
+	float x1 = grid.X1();
+	float x2 = grid.X2();
+	float y1 = grid.Y1();
+	float y2 = grid.Y2();
 
 	if(TestPoint(x1,y1) || TestPoint(x1,y2) || TestPoint(x2,y1) || TestPoint(x2,y2))
 		return true;

@@ -15,6 +15,7 @@ class CCore;
 class CCamera;
 class C2DText;
 struct WinMsgPackage;
+class Stage;
 
 class App : public CThread
 {
@@ -22,6 +23,8 @@ public:
 	static App& Inst();
 	~App();
 	Ref<InputSystem> InputSys();
+	Stage *currentStage();
+
 
 private:
 	App();

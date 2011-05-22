@@ -21,6 +21,7 @@
     <ClCompile Include="..\..\..\..\Source\Mooge\Objects\Camera.cpp" />
     <ClCompile Include="..\..\..\..\Source\Mooge\Objects\GameObject.cpp" />
     <ClCompile Include="..\..\..\..\Source\Mooge\Objects\GameObjectContainer.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Mooge\Objects\Grid.cpp" />
     <ClCompile Include="..\..\..\..\Source\Mooge\Objects\Line.cpp" />
     <ClCompile Include="..\..\..\..\Source\Mooge\Objects\Md2Object.cpp" />
     <ClCompile Include="..\..\..\..\Source\Mooge\Objects\Stage.cpp" />
@@ -47,6 +48,7 @@
     <ClInclude Include="..\..\..\..\Source\Mooge\Objects\Camera.h" />
     <ClInclude Include="..\..\..\..\Source\Mooge\Objects\GameObject.h" />
     <ClInclude Include="..\..\..\..\Source\Mooge\Objects\GameObjectContainer.h" />
+    <ClInclude Include="..\..\..\..\Source\Mooge\Objects\Grid.h" />
     <ClInclude Include="..\..\..\..\Source\Mooge\Objects\Line.h" />
     <ClInclude Include="..\..\..\..\Source\Mooge\Objects\Md2Object.h" />
     <ClInclude Include="..\..\..\..\Source\Mooge\Objects\Stage.h" />

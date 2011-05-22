@@ -14,7 +14,9 @@ void RuntimeMap::SetMap()
 		int row = tmp.row;
 		int col = tmp.col;
 
-		Ref<Grid> currentGrid(new Grid((col-7)*mSide,(row-5)*mSide,(col-6)*mSide,(row-6)*mSide));
+		int side = Grid::SideLen;
+
+		Ref<Grid> currentGrid(new Grid((col-7)*side,(row-5)*side,(col-6)*side,(row-6)*side));
 
 		switch (tmp.gridState)
 		{
@@ -22,14 +24,14 @@ void RuntimeMap::SetMap()
 			{
 				Ref<GameObject> dwall(new Dwall);
 				dwall->SetPos(currentGrid->CenterX(),0.0,currentGrid->CenterY());
-				cast<GameObject,Sprite>(mDwall)->AddChild(dwall);
+				cast<Sprite>(mDwall)->AddChild(dwall);
 				break;
 			}
 		case UWALL:
 			{
 				Ref<GameObject> uwall(new Uwall);
 				uwall->SetPos(currentGrid->CenterX(),0.0,currentGrid->CenterY());
-				cast<GameObject,Sprite>(mDwall)->AddChild(uwall);
+				cast<Sprite>(mUwall)->AddChild(uwall);
 				break;
 			}
 		case NPC :
@@ -57,5 +59,27 @@ RuntimeMap::RuntimeMap()
 	mBonus = Ref<GameObject>(new Sprite);
 	mNPC = Ref<GameObject>(new Sprite);
 	mPlayer = Ref<GameObject>(new Sprite);
-	mSide = 10.0;
+}
+
+bool RuntimeMap::CanPass( GameObject* obj )
+{
+	GameObjectContainer* dwallContainer = cast<GameObjectContainer>(mDwall);
+	GameObjectContainer* uwallContainer = cast<GameObjectContainer>(mUwall);
+	/*for(int i = 0;i<dwallContainer->NumOfChild();++i)
+	{
+		if(dwallContainer->GetChild(i)->GetBoundingBox()->Intersect(this->GetBoundingBox()))
+		{
+			return false;
+			break;
+		}
+	}*/
+	for(int j = 0;j<uwallContainer->NumOfChild();++j)
+	{
+		if(uwallContainer->GetChild(j)->GetBoundingBox().Intersect(obj->GetBoundingBox()))
+		{
+			return false;
+			break;
+		}
+	}
+	return true;
 }

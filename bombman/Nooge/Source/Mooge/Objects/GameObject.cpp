@@ -122,3 +122,9 @@ void GameObject::SetPos( float x, float y, float z )
 	SetZ(z);
 }
 
+Grid GameObject::GetBoundingBox()
+{
+	float offset = Grid::SideLen/2;
+	return Grid(mX-offset,mZ-offset,mX+offset,mZ+offset);
+}
+

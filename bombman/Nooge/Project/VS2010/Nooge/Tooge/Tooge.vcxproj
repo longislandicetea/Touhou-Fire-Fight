@@ -76,9 +76,7 @@
     <ClCompile Include="..\..\..\..\Source\Mooge\Core\InputSystem.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\App.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\Character.cpp" />
-    <ClCompile Include="..\..\..\..\Source\Tooge\Cube.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\Dwall.cpp" />
-    <ClCompile Include="..\..\..\..\Source\Tooge\Grid.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\Main.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\Map.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\NPCController.cpp" />
@@ -93,10 +91,8 @@
     <ClInclude Include="..\..\..\..\Source\Tooge\App.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\Bonus.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\Character.h" />
-    <ClInclude Include="..\..\..\..\Source\Tooge\Cube.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\Dwall.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\GameStage.h" />
-    <ClInclude Include="..\..\..\..\Source\Tooge\Grid.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\Map.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\NPCController.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\PlayerController.h" />

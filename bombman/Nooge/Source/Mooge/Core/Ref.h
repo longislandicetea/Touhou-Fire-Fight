@@ -133,7 +133,7 @@
         return cout;
     }
 
-	template<class T, class P>
+	template<class P, class T>
 	P* cast(Ref<T> obj) {
 		return (P*)&*obj;
 	}

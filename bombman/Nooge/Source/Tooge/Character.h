@@ -4,6 +4,7 @@
 #include "GameStage.h"
 #include "Ref.h"
 #include "GameObject.h"
+#include "Grid.h"
 
 class Character;
 
@@ -30,7 +31,7 @@ private:
 
 	float mSpeed;
 	int mLife;
-	Ref<GameStage> mStage;
+GameStage *mStage;
 	Ref<GameObject> mModel;
 
 	//vector<Bomb> mBomb;

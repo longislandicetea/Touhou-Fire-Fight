@@ -11,6 +11,7 @@ class CTextManager;
 class CConsole;
 class CAuxiliary;
 class Stage;
+class RuntimeMap;
 
 //Engine primary interface class.
 class CMooge
@@ -50,7 +51,8 @@ class CMooge
 		CAuxiliary* Auiliary;
 			
 		Ref<Stage>	CurrentStage;
-		Stage* currentStage;
+		Ref<RuntimeMap> CurrentMap;
+
 };
 
 #endif

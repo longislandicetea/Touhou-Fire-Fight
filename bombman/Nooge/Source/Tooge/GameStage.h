@@ -2,13 +2,14 @@
 
 #include "Stage.h"
 #include "Ref.h"
-#include "Map.h"
+#include "RuntimeMap.h"
+#include "GameObject.h"
 
 class GameStage : public Stage
 {
 public:
-	GameStage();
-	void SetMap(Ref<Map> map);
+	GameStage(Ref<GameObject> map);
+	Ref<GameObject> CurrentMap();
 private:
-	Ref<Map> mCurrentMap;
+	Ref<GameObject> mCurrentMap;
 };

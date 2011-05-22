@@ -27,7 +27,7 @@ public:
 protected:
 	std::vector<GridInfo> mGrids;
 	std::map<std::string,float> mBonus;
-	
+
 private:
 	GridState Trans(const char* gridState);
 };
