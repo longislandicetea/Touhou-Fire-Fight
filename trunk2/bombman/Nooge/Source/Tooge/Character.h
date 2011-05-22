@@ -12,7 +12,11 @@ class CharacterController
 {
 public:
 	enum Action { UP, DOWN, RIGHT, LEFT, BOMB, IDLE, ACTION_CNT};
-	virtual int Update(Character *character, float dt) = 0;
+
+	virtual int Update(Character* Character, float dt) = 0;
+
+private:
+	Character* mOwner;
 };
 
 class Character : public Sprite
@@ -20,6 +24,7 @@ class Character : public Sprite
 public:
 	void Update(float dt);
 	static Ref<GameObject> AddController(CharacterController* ctrl);
+	GameStage* GetGameStage();
 private:
 	Character(CharacterController* ctrl);
 	CharacterController& mCtrl;
@@ -31,7 +36,7 @@ private:
 
 	float mSpeed;
 	int mLife;
-	GameStage *mStage;
+	GameStage* mStage;
 	Ref<GameObject> mModel;
 	
 	//vector<Bomb> mBomb;

@@ -11,4 +11,5 @@ public:
 	int Update(Character* character,float dt);
 
 private:
+	Ref<Character> mOwner;
 };

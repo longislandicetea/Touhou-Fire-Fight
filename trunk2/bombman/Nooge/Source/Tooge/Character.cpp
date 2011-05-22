@@ -64,3 +64,8 @@ Ref<GameObject> Character::AddController(CharacterController* ctrl)
 {
 	return Ref<GameObject>(new Character(ctrl));
 }
+
+GameStage* Character::GetGameStage()
+{
+	return mStage;
+}

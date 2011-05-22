@@ -26,3 +26,10 @@ void AIMap::ComputeFloodFill()
 {
 
 }
+
+bool AIMap::IsFree( int row, int col )
+{
+	if(value[row][col] == -1)
+		return false;
+	return true;
+}
