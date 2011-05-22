@@ -2,6 +2,8 @@
 #define _GAMEOBJECT_H
 
 #include "MoogeType.h"
+#include "Grid.h"
+#include "Ref.h"
 
 class GameObjectContainer;
 class GameObject
@@ -21,6 +23,7 @@ public:
 	float GetRotateY();
 	float GetRotateZ();
 	float GetAlpha();
+	Grid GetBoundingBox();
 
 	void SetX(float x);
 	void SetY(float y);
@@ -35,6 +38,7 @@ public:
 	GameObjectContainer* GetParent();
 	GameObject* GetRoot();
 
+
 protected:
 	GameObject();
 	void SetParent(GameObjectContainer* obj);
@@ -45,6 +49,7 @@ private:
 	float mScale;
 	float mRotateX, mRotateY, mRotateZ;
 	GameObjectContainer *mParent;
+	Ref<Grid> mBoundingBox;
 };
 
 #endif

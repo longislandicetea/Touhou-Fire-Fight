@@ -15,6 +15,7 @@
 #include "RuntimeMap.h"
 #include "Character.h"
 #include "PlayerController.h"
+#include "GameStage.h"
 
 #include "jpeglib.h"	
 
@@ -92,14 +93,11 @@ void App::SetupEngine()
 
 	//Add Engine object here.
 	//...
-	Ref<Stage> stage(new Stage);
-	mMooge->CurrentStage = stage;
-	
-	/*Ref<GameObject> model = Md2Object::Load("c:\\mh_normal.md2","c:\\t2.bmp");
-	model->SetRotateY(90);
-	model->SetY(10);
-	model->SetX(-5.0);
-	model->SetZ(5.0);*/
+	Ref<GameObject> runtimeMap(new RuntimeMap);
+	Ref<Stage> gameStage(new GameStage(runtimeMap));
+	mMooge->CurrentStage = gameStage;
+	cast<RuntimeMap>(runtimeMap)->SetMap();
+	gameStage->AddChild(runtimeMap);
 
 	PlayerController* playerCtrl = new PlayerController();
 
@@ -107,12 +105,10 @@ void App::SetupEngine()
 	player->SetRotateY(90);
 	player->SetX(5);
 	player->SetZ(5);
-	Ref<GameObject> runtimeMap(new RuntimeMap);
-	cast<GameObject,RuntimeMap>(runtimeMap)->SetMap();
-
-	stage->AddChild(player);
+	
+	gameStage->AddChild(player);
 	//runtimeMap->SetRotateY(90);
-	stage->AddChild(runtimeMap);
+	
 	//Create a timer that fires 30 times a second
 	SetTimer(mRenderForm->gethWnd(), 33, 1, NULL);
 
@@ -191,4 +187,9 @@ void App::OnRenderFormKeyUp( const WinMsgPackage& MsgPack )
 			break;
 		}
 	}
+}
+
+Stage * App::currentStage()
+{
+	return &*mMooge->CurrentStage;
 }

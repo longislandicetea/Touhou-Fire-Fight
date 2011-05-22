@@ -2,6 +2,8 @@
 #define _STAGE_H
 #include<GameObjectContainer.h>
 
+#include "Ref.h"
+
 class Stage: public GameObjectContainer
 {
 public:

@@ -37,11 +37,6 @@ void CMooge::Render()
 	//Clear the window with current clearing color
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	//Draw all primitive objects.
-	//Primitives->Draw();
-
-	//Draw auxiliary objects here.
-	//These thing could be removed in release version.
 	if(Auiliary->mGridLineVis)
 		Auiliary->DrawXZGrids();
 	if(Auiliary->mAxisVis)
@@ -66,17 +61,8 @@ void CMooge::Render()
 			Auiliary->DrawFPS(Core->GetFontList());
 	}
 
-	/*glColor3f(1.0, 1.0, 1.0);
-	glBegin(GL_POLYGON);
-	glVertex3f(10.0, 0.0, 0.0);
-	glVertex3f(0.0, 10.0, 0.0);
-	glVertex3f(0.0, 0.0, 10.0);
-	glVertex3f(10.0, 10.0, 10.0);
-
-
-	glEnd();*/
-
-	if (!CurrentStage.IsNull()) {
+	if (!CurrentStage.IsNull()) 
+	{
 		CurrentStage->Draw();
 	}
 

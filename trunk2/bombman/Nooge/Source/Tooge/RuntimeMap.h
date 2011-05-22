@@ -11,6 +11,7 @@ public:
 	RuntimeMap();
 	void SetMap();
 	//virtual void Update();
+	bool CanPass(GameObject* obj);
 
 private:
 	Ref<GameObject> mDwall;
@@ -19,6 +20,4 @@ private:
 	Ref<GameObject> mNPC;
 	Ref<GameObject> mPlayer;
 	Ref<Map> mMap;
-	float mSide;
-
 };
