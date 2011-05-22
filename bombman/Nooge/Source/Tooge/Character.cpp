@@ -17,16 +17,16 @@ void Character::doAction( int currentAction, float dt )
 	switch (currentAction)
 	{
 	case CharacterController::UP:
-		up(dt*100);
+		up(dt*mSpeed);
 		break;
 	case CharacterController::DOWN:
-		down(dt*100);
+		down(dt*mSpeed);
 		break;
 	case CharacterController::LEFT:
-		left(dt*100);
+		left(dt*mSpeed);
 		break;
 	case CharacterController::RIGHT:
-		right(dt*100);
+		right(dt*mSpeed);
 		break;
 	}
 }
@@ -57,6 +57,7 @@ Character::Character(CharacterController* ctrl)
 	mModel = Md2Object::Load("c:\\mh_0.md2","c:\\t2.bmp");
 	this->AddChild(mModel);
 	mStage = (GameStage*)App::Inst().currentStage();
+	mSpeed = 100.0;
 }
 
 Ref<GameObject> Character::AddController(CharacterController* ctrl)

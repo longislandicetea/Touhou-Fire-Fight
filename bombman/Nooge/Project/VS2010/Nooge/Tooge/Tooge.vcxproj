@@ -74,6 +74,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Source\Mooge\Core\InputSystem.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Tooge\AIMap.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\App.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\Character.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\Dwall.cpp" />
@@ -88,6 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Source\Mooge\Core\InputSystem.h" />
+    <ClInclude Include="..\..\..\..\Source\Tooge\AIMap.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\App.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\Bonus.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\Character.h" />

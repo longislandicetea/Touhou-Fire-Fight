@@ -96,7 +96,7 @@ void App::SetupEngine()
 	Ref<GameObject> runtimeMap(new RuntimeMap);
 	Ref<Stage> gameStage(new GameStage(runtimeMap));
 	mMooge->CurrentStage = gameStage;
-	cast<RuntimeMap>(runtimeMap)->SetMap();
+	cast<RuntimeMap>(runtimeMap)->LoadMap();
 	gameStage->AddChild(runtimeMap);
 
 	//PlayerController* playerCtrl = new PlayerController();

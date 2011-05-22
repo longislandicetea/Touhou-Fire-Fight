@@ -4,9 +4,11 @@
 #include "Bonus.h"
 #include "Character.h"
 #include "PlayerController.h"
+#include "NPCController.h"
 #include "Grid.h"
+#include "AIMap.h"
 
-void RuntimeMap::SetMap()
+void RuntimeMap::LoadMap()
 {
 	mMap->Load("c:\\test.xml");
 	for(int i = 0;i<mMap->mGrids.size();++i)
@@ -15,9 +17,7 @@ void RuntimeMap::SetMap()
 		int row = tmp.row;
 		int col = tmp.col;
 
-		int side = Grid::SideLen;
-
-		Ref<Grid> currentGrid(new Grid((col-7)*side,(row-5)*side,(col-6)*side,(row-6)*side));
+		Ref<Grid> currentGrid(new Grid(row,col));
 
 		switch (tmp.gridState)
 		{
@@ -46,6 +46,11 @@ void RuntimeMap::SetMap()
 			}
 		case NPC :
 			{
+				NPCController* npcCtrl = new NPCController();
+				Ref<GameObject> npc = Character::AddController(npcCtrl);
+				npc->SetPos(currentGrid->CenterX(),0.0,currentGrid->CenterY());
+				npc->SetRotateY(90);
+				cast<Sprite>(mNPC)->AddChild(npc);
 				break;
 			}
 		}
@@ -88,4 +93,25 @@ bool RuntimeMap::CanPass( GameObject* obj )
 		}
 	}
 	return true;
+}
+
+AIMap* RuntimeMap::CreateAIMap()
+{
+	AIMap* aiMap = new AIMap(100);
+
+	GameObjectContainer* dwallContainer = cast<GameObjectContainer>(mDwall);
+	GameObjectContainer* uwallContainer = cast<GameObjectContainer>(mUwall);
+	for(int i = 0;i<dwallContainer->NumOfChild();++i)
+	{
+		int row = dwallContainer->GetChild(i)->GetBoundingBox().Row();
+		int col = dwallContainer->GetChild(i)->GetBoundingBox().Col();
+		aiMap->SetValue(row,col,-1);
+	}
+	for(int j = 0;j<uwallContainer->NumOfChild();++j)
+	{
+		int row = uwallContainer->GetChild(j)->GetBoundingBox().Row();
+		int col = uwallContainer->GetChild(j)->GetBoundingBox().Col();
+		aiMap->SetValue(row,col,-1);
+	}
+	return aiMap;
 }

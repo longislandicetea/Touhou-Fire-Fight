@@ -10,6 +10,14 @@ Grid::Grid( float x1,float y1,float x2,float y2 )
 	mY2 = y2;
 }
 
+Grid::Grid( int row,int col )
+{
+	mX1 = (col-7)*SideLen;
+	mY1 = (row-5)*SideLen;
+	mX2 = (col-6)*SideLen;
+	mY2 = (row-6)*SideLen;
+}
+
 float Grid::X1()
 {
 	return mX1;
@@ -57,4 +65,14 @@ float Grid::CenterX()
 float Grid::CenterY()
 {
 	return (mY1+mY2)/2;
+}
+
+int Grid::Row()
+{
+	return mRow;
+}
+
+int Grid::Col()
+{
+	return mCol;
 }

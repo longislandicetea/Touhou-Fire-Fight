@@ -5,13 +5,15 @@
 #include "GameObject.h"
 #include "Ref.h"
 
+class AIMap;
 class RuntimeMap : public Map
 {
 public:
 	RuntimeMap();
-	void SetMap();
+	void LoadMap();
 	//virtual void Update();
 	bool CanPass(GameObject* obj);
+	AIMap* CreateAIMap();
 
 private:
 	Ref<GameObject> mDwall;

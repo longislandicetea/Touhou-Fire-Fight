@@ -64,6 +64,9 @@
     <ClCompile Include="..\..\..\..\Source\Mooge\Core\InputSystem.cpp">
       <Filter>InputSystem</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\Tooge\AIMap.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Source\Tooge\App.h">
@@ -101,6 +104,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\Source\Mooge\Core\InputSystem.h">
       <Filter>InputSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\Tooge\AIMap.h">
+      <Filter>Map</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
