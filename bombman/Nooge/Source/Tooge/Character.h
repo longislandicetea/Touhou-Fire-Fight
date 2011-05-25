@@ -21,12 +21,14 @@ private:
 	Character* mOwner;
 };
 
+
 class Character : public Sprite
 {
 public:
 	void Update(float dt);
 	static Ref<GameObject> AddController(CharacterController* ctrl);
 	GameStage* GetGameStage();
+	~Character();
 
 private:
 	Character(CharacterController* ctrl);

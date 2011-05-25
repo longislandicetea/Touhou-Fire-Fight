@@ -5,7 +5,7 @@
 
 int NPCController::Update(Character *character, float dt)
 {
-	return rand() % CharacterController::ACTION_CNT;
+	return rand() %3;
 	//mFloodFillGrid = cast<RuntimeMap>(character->GetGameStage()->CurrentMap())->CreateAIMap();
 	computeFloodFill(character);
 	//computeConception(dt);
