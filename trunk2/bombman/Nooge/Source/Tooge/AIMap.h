@@ -7,7 +7,6 @@ public:
 	void Reset(int value);
 	int GetValue(int row,int col);
 	void SetValue(int row,int col,int value);
-	void ComputeFloodFill();
 	bool IsFree(int row, int col);
 
 private:

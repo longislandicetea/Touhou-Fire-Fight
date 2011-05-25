@@ -16,17 +16,27 @@ void Character::doAction( int currentAction, float dt )
 {
 	switch (currentAction)
 	{
-	case CharacterController::UP:
+	case CharacterController::MOVE_UP:
+		cast<Md2Object>(mModel)->setAnimation("RUN");
 		up(dt*mSpeed);
 		break;
-	case CharacterController::DOWN:
+	case CharacterController::MOVE_DOWN:
+		cast<Md2Object>(mModel)->setAnimation("RUN");
 		down(dt*mSpeed);
 		break;
-	case CharacterController::LEFT:
+	case CharacterController::MOVE_LEFT:
+		cast<Md2Object>(mModel)->setAnimation("RUN");
 		left(dt*mSpeed);
 		break;
-	case CharacterController::RIGHT:
+	case CharacterController::MOVE_RIGHT:
+		cast<Md2Object>(mModel)->setAnimation("RUN");
 		right(dt*mSpeed);
+		break;
+	case CharacterController::DROP_BOMB:
+		//Bomb* tmp = new Bomb();
+
+		break;
+	case CharacterController::TRIGGER_BOMB:
 		break;
 	}
 }
@@ -54,7 +64,8 @@ void Character::right( float dt )
 Character::Character(CharacterController* ctrl)
 	: mCtrl(*ctrl)
 {
-	mModel = Md2Object::Load("c:\\mh_0.md2","c:\\t2.bmp");
+	mModel = Md2Object::Load("c:\\mh_name.md2","c:\\t2.bmp");
+	cast<Md2Object>(mModel)->setAnimation("IDLE");
 	this->AddChild(mModel);
 	mStage = (GameStage*)App::Inst().currentStage();
 	mSpeed = 100.0;
