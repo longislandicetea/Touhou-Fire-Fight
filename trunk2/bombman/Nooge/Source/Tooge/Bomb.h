@@ -8,7 +8,7 @@ class Bomb : public Sprite
 {
 public:
 	Bomb();
-	virtual void Update();
+	//virtual void Update();
 private:
 	Ref<GameObject> mModel;
 	float mTimeToExplosion;

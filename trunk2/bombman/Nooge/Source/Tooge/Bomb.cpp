@@ -9,7 +9,7 @@ Bomb::Bomb()
 	mFlamePower = 1;
 }
 
-void Bomb::Update()
+/*void Bomb::Update()
 {
 
-}
+}*/

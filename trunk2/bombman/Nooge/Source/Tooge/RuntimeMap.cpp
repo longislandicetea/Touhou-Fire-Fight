@@ -57,9 +57,10 @@ void RuntimeMap::LoadMap()
 	}
 	this->AddChild(mDwall);
 	this->AddChild(mUwall);
-	this->AddChild(mBonus);
+	//this->AddChild(mBonus);
 	this->AddChild(mNPC);
 	this->AddChild(mPlayer);
+	this->AddChild(mBomb);
 }
 
 RuntimeMap::RuntimeMap()
@@ -67,7 +68,8 @@ RuntimeMap::RuntimeMap()
 	mMap = Ref<Map>(new Map);
 	mDwall = Ref<GameObject>(new Sprite);
 	mUwall = Ref<GameObject>(new Sprite);
-	mBonus = Ref<GameObject>(new Sprite);
+	mBomb = Ref<GameObject>(new Sprite);
+	//mBonus = Ref<GameObject>(new Sprite);
 	mNPC = Ref<GameObject>(new Sprite);
 	mPlayer = Ref<GameObject>(new Sprite);
 }
@@ -93,6 +95,12 @@ bool RuntimeMap::CanPass( GameObject* obj )
 		}
 	}
 	return true;
+}
+
+void RuntimeMap::AddBomb(Ref<GameObject> bomb)
+{
+	cast<GameObjectContainer>(mBomb)->AddChild(bomb);
+
 }
 
 /*AIMap* RuntimeMap::CreateAIMap()

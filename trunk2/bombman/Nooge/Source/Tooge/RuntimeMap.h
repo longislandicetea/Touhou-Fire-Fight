@@ -14,6 +14,7 @@ public:
 	//virtual void Update();
 	bool CanPass(GameObject* obj);
 	//AIMap* CreateAIMap();
+	void AddBomb(Ref<GameObject> bomb);
 
 private:
 	Ref<GameObject> mDwall;

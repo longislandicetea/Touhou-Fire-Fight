@@ -33,11 +33,12 @@ void Character::doAction( int currentAction, float dt )
 		right(dt*mSpeed);
 		break;
 	case CharacterController::DROP_BOMB:
-		//Bomb* tmp = new Bomb();
-
+		Ref<GameObject> bomb(new Bomb);
+		bomb->SetPos(GetX(),0,GetZ());
+		cast<RuntimeMap>(mStage->CurrentMap())->AddBomb(bomb);
 		break;
-	case CharacterController::TRIGGER_BOMB:
-		break;
+	/*case CharacterController::TRIGGER_BOMB:
+		break;*/
 	}
 }
 
@@ -79,4 +80,9 @@ Ref<GameObject> Character::AddController(CharacterController* ctrl)
 GameStage* Character::GetGameStage()
 {
 	return mStage;
+}
+
+Character::~Character()
+{
+	delete mStage;
 }
