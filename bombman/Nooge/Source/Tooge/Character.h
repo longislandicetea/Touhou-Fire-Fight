@@ -5,13 +5,15 @@
 #include "Ref.h"
 #include "GameObject.h"
 #include "Grid.h"
+#include "Bomb.h"
+#include <vector>
 
 class Character;
 
 class CharacterController
 {
 public:
-	enum Action { UP, DOWN, RIGHT, LEFT, BOMB, IDLE, ACTION_CNT};
+	enum Action { MOVE_UP, MOVE_DOWN, MOVE_RIGHT, MOVE_LEFT, DROP_BOMB, TRIGGER_BOMB,IDLE, ACTION_CNT};
 
 	virtual int Update(Character* Character, float dt) = 0;
 
@@ -25,6 +27,7 @@ public:
 	void Update(float dt);
 	static Ref<GameObject> AddController(CharacterController* ctrl);
 	GameStage* GetGameStage();
+
 private:
 	Character(CharacterController* ctrl);
 	CharacterController& mCtrl;
@@ -38,7 +41,4 @@ private:
 	int mLife;
 	GameStage* mStage;
 	Ref<GameObject> mModel;
-	
-	//vector<Bomb> mBomb;
-	//vector<Bonus> mBonus;
 };

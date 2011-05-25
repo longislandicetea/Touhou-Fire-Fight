@@ -22,10 +22,6 @@ void AIMap::SetValue( int row,int col,int value )
 	this->value[row][col] = value;
 }
 
-void AIMap::ComputeFloodFill()
-{
-
-}
 
 bool AIMap::IsFree( int row, int col )
 {

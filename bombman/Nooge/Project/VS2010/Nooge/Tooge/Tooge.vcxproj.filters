@@ -20,11 +20,11 @@
     <Filter Include="Wall">
       <UniqueIdentifier>{5f5b7968-ee45-417e-8128-9fcd73f30d3a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Bonus">
-      <UniqueIdentifier>{e96d6677-43e4-41c8-be7c-1ad2501f663a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="InputSystem">
       <UniqueIdentifier>{86e435fd-e119-4817-abce-45357e055183}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Item">
+      <UniqueIdentifier>{e96d6677-43e4-41c8-be7c-1ad2501f663a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -67,6 +67,9 @@
     <ClCompile Include="..\..\..\..\Source\Tooge\AIMap.cpp">
       <Filter>Map</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\Tooge\Bomb.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Source\Tooge\App.h">
@@ -97,7 +100,7 @@
       <Filter>Wall</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Source\Tooge\Bonus.h">
-      <Filter>Bonus</Filter>
+      <Filter>Item</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Source\Tooge\PlayerController.h">
       <Filter>Character</Filter>
@@ -107,6 +110,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\Source\Tooge\AIMap.h">
       <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\Tooge\Bomb.h">
+      <Filter>Item</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

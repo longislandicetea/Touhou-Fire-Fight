@@ -13,11 +13,12 @@ public:
 	void LoadMap();
 	//virtual void Update();
 	bool CanPass(GameObject* obj);
-	AIMap* CreateAIMap();
+	//AIMap* CreateAIMap();
 
 private:
 	Ref<GameObject> mDwall;
 	Ref<GameObject> mUwall;
+	Ref<GameObject> mBomb;
 	Ref<GameObject> mBonus;
 	Ref<GameObject> mNPC;
 	Ref<GameObject> mPlayer;

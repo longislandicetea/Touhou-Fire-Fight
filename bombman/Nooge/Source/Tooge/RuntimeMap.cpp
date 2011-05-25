@@ -95,7 +95,7 @@ bool RuntimeMap::CanPass( GameObject* obj )
 	return true;
 }
 
-AIMap* RuntimeMap::CreateAIMap()
+/*AIMap* RuntimeMap::CreateAIMap()
 {
 	AIMap* aiMap = new AIMap(100);
 
@@ -114,4 +114,4 @@ AIMap* RuntimeMap::CreateAIMap()
 		aiMap->SetValue(row,col,-1);
 	}
 	return aiMap;
-}
+}*/

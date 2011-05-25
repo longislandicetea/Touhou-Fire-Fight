@@ -8,8 +8,6 @@ void InputSystem::KeyDown(int key)
 
 void InputSystem::KeyUp(int key)
 {
-	/*set<int>::iterator it = down.find(key);
-	down.erase(it);*/
 	down.erase(key);
 }
 

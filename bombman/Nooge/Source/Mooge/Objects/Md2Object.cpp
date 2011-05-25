@@ -467,7 +467,7 @@ void Md2Object::setAnimation( const std::string& name )
 
 void Md2Object::Update( float dt )
 {
-		int startFrame = mAnimInfo->start;
+	int startFrame = mAnimInfo->start;
 	int endFrame = mAnimInfo->end;
 
 	// _currFrame must range between startFrame and endFrame
