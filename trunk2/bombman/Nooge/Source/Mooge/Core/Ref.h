@@ -42,7 +42,7 @@
         T & operator *() const { return *mObj; }
         T * operator ->() const { return mObj; }
         
-        // Compares two references. References are equal if they refer to the
+        // Compares two references. References are equal if they refer to theIIIIIII
         // same object.
         bool operator ==(const Ref<T> & other) const
         {

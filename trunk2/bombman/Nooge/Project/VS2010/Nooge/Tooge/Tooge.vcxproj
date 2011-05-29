@@ -85,7 +85,6 @@
     <ClCompile Include="..\..\..\..\Source\Tooge\PlayerController.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\RenderForm.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\GameStage.cpp" />
-    <ClCompile Include="..\..\..\..\Source\Tooge\RuntimeMap.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\Uwall.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -101,7 +100,6 @@
     <ClInclude Include="..\..\..\..\Source\Tooge\NPCController.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\PlayerController.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\RenderForm.h" />
-    <ClInclude Include="..\..\..\..\Source\Tooge\RuntimeMap.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\Uwall.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

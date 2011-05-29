@@ -85,10 +85,10 @@ void GameObjectContainer::Draw()
 
 void GameObjectContainer::Update(float dt)
 {
-	ChildrenContainer::const_iterator it = mChildren.begin();
-	for(;it!=mChildren.end();++it)
+	ChildrenContainer children = mChildren;
+	for(int i = 0;i < children.size();++i)
 	{
-		(*it)->Update(dt);
+		children[i]->Update(dt);
 	}
 }
 

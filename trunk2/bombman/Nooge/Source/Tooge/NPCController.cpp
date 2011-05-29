@@ -7,6 +7,7 @@ int NPCController::Update(Character *character, float dt)
 {
 	return rand() %3;
 	//mFloodFillGrid = cast<RuntimeMap>(character->GetGameStage()->CurrentMap())->CreateAIMap();
+	mFloodFillGrid  = new AIMap(100);
 	computeFloodFill(character);
 	//computeConception(dt);
 	//return  mFsm.Update(dt);
@@ -47,8 +48,8 @@ void NPCController::computeFloodFill( int x,int y )
 
 NPCController::~NPCController()
 {
-	delete mDangerGrid;
-	delete mInterestGrid;
+	//delete mDangerGrid;
+	//delete mInterestGrid;
 	delete mFloodFillGrid;
 }
 

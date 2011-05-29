@@ -9,6 +9,7 @@ class Dwall : public Sprite
 {
 public :
 	Dwall();
+	virtual ~Dwall();
 private:
 	Ref<GameObject> mModel;
 

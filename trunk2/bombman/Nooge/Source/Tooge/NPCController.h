@@ -6,12 +6,13 @@
 class NPCController : public CharacterController
 {
 public:
+	//NPCController();
 	int Update(Character *character, float dt);
 	~NPCController();
 
 private:
-	AIMap* mDangerGrid;
-	AIMap* mInterestGrid;
+	//AIMap* mDangerGrid;
+	//AIMap* mInterestGrid;
 	AIMap* mFloodFillGrid;
 	void computeFloodFill(Character *character);
 	void computeFloodFill(int x,int y);

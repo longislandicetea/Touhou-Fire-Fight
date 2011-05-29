@@ -12,7 +12,7 @@
 #include "Console.h"
 #include "Stage.h"
 #include "Md2Object.h"
-#include "RuntimeMap.h"
+#include "Map.h"
 #include "Character.h"
 #include "PlayerController.h"
 #include "GameStage.h"
@@ -92,22 +92,9 @@ void App::SetupEngine()
 	mMainCamera->SetPosition(CamEyeVec, CamCenterVec, CamUpVec);
 
 	//Add Engine object here.
-	//...
-	Ref<GameObject> runtimeMap(new RuntimeMap);
-	Ref<Stage> gameStage(new GameStage(runtimeMap));
+	Ref<GameObject> map = Map::Load("c:\\test.xml");
+	Ref<Stage> gameStage(new GameStage(map));
 	mMooge->CurrentStage = gameStage;
-	cast<RuntimeMap>(runtimeMap)->LoadMap();
-	gameStage->AddChild(runtimeMap);
-
-	//PlayerController* playerCtrl = new PlayerController();
-
-	//Ref<GameObject> player = Character::AddController(playerCtrl);
-	//player->SetRotateY(90);
-	//player->SetX(5);
-	//player->SetZ(5);
-	
-	//gameStage->AddChild(player);
-	//runtimeMap->SetRotateY(90);
 	
 	//Create a timer that fires 30 times a second
 	SetTimer(mRenderForm->gethWnd(), 33, 1, NULL);
