@@ -9,7 +9,10 @@ Bomb::Bomb()
 	mFlamePower = 1;
 }
 
-/*void Bomb::Update()
+void Bomb::Update(float dt)
 {
-
-}*/
+	if(mTimeToExplosion > 0.0)
+		mTimeToExplosion -= dt;
+	else
+		this->RemoveFromParent();	
+}

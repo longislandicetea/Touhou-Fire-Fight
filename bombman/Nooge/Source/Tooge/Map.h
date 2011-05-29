@@ -3,6 +3,8 @@
 #include <map>
 #include<string>
 #include "GameObjectContainer.h"
+#include "GameObject.h"
+#include "Ref.h"
 
 
 enum GridState
@@ -22,12 +24,14 @@ class Map : public Sprite
 {
 public:
 	friend class RuntimeMap;
-	void Load(const char* filename);
+	static Ref<GameObject> Load(const char* filename);
+	std::map< std::string,Ref<GameObject> >Parse();
 
 protected:
+	Map();
 	std::vector<GridInfo> mGrids;
 	std::map<std::string,float> mBonus;
 
 private:
-	GridState Trans(const char* gridState);
+	GridState trans(const char* gridState);
 };

@@ -66,6 +66,7 @@ void CMooge::Render()
 		CurrentStage->Draw();
 	}
 
+	
 	SwapBuffers(Core->mhDC);
 
 	//Render finish.

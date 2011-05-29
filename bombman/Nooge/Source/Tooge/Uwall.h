@@ -6,6 +6,8 @@ class Uwall : public Sprite
 {
 public :
 	Uwall();
+	virtual ~Uwall();
+
 private:
 	Ref<GameObject> mModel;
 
