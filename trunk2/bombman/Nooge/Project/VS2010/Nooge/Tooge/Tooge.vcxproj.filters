@@ -20,9 +20,6 @@
     <Filter Include="InputSystem">
       <UniqueIdentifier>{86e435fd-e119-4817-abce-45357e055183}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Item">
-      <UniqueIdentifier>{e96d6677-43e4-41c8-be7c-1ad2501f663a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Stage\Wall">
       <UniqueIdentifier>{5f5b7968-ee45-417e-8128-9fcd73f30d3a}</UniqueIdentifier>
     </Filter>
@@ -31,6 +28,12 @@
     </Filter>
     <Filter Include="Timer">
       <UniqueIdentifier>{e0d0fbf4-c880-48ff-bde7-c8a84c870114}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Stage\Bomb">
+      <UniqueIdentifier>{e96d6677-43e4-41c8-be7c-1ad2501f663a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Stage\Bonus">
+      <UniqueIdentifier>{d88cc5bf-3807-4ea2-bc99-7b0248786a84}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -71,13 +74,16 @@
       <Filter>Map</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Source\Tooge\Bomb.cpp">
-      <Filter>Item</Filter>
+      <Filter>Stage\Bomb</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Source\Tooge\DataManager.cpp">
       <Filter>DataManager</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Source\Tooge\Timer.cpp">
       <Filter>Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\Tooge\Bonus.cpp">
+      <Filter>Stage\Bonus</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -105,9 +111,6 @@
     <ClInclude Include="..\..\..\..\Source\Tooge\Uwall.h">
       <Filter>Stage\Wall</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Source\Tooge\Bonus.h">
-      <Filter>Item</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\Source\Tooge\PlayerController.h">
       <Filter>Character</Filter>
     </ClInclude>
@@ -118,13 +121,37 @@
       <Filter>Map</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Source\Tooge\Bomb.h">
-      <Filter>Item</Filter>
+      <Filter>Stage\Bomb</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Source\Tooge\DataManager.h">
       <Filter>DataManager</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Source\Tooge\Timer.h">
       <Filter>Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\Tooge\Bonus.h">
+      <Filter>Stage\Bonus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\Tooge\BFaster.h">
+      <Filter>Stage\Bonus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\Tooge\BBombPlus.h">
+      <Filter>Stage\Bonus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\Tooge\BFlamePlus.h">
+      <Filter>Stage\Bonus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\Tooge\BTrigger.h">
+      <Filter>Stage\Bonus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\Tooge\BPush.h">
+      <Filter>Stage\Bonus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\Tooge\BDrop.h">
+      <Filter>Stage\Bonus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\Tooge\BSlower.h">
+      <Filter>Stage\Bonus</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

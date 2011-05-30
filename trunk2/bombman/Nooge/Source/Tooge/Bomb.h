@@ -14,6 +14,5 @@ public:
 private:
 	Ref<GameObject> mModel;
 	Ref<Timer> mTimer;
-	float mTimeToExplosion;
 	int mFlamePower;
 };
