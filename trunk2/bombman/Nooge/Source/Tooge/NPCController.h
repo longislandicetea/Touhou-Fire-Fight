@@ -11,8 +11,8 @@ public:
 	~NPCController();
 
 private:
-	//AIMap* mDangerGrid;
-	//AIMap* mInterestGrid;
+	AIMap* mDangerGrid;
+	AIMap* mInterestGrid;
 	AIMap* mFloodFillGrid;
 	void computeFloodFill(Character *character);
 	void computeFloodFill(int x,int y);

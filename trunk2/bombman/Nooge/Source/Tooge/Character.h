@@ -27,7 +27,6 @@ class Character : public Sprite
 public:
 	void Update(float dt);
 	static Ref<GameObject> AddController(CharacterController* ctrl);
-	GameStage* GetGameStage();
 
 private:
 	Character(CharacterController* ctrl);
@@ -39,7 +38,8 @@ private:
 	void right(float dt);
 
 	float mSpeed;
-	int mLife;
+	int mLifeCnt;
+	int mBombCnt;
 	GameStage* mStage;
 	Ref<GameObject> mModel;
 };

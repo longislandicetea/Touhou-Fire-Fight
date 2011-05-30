@@ -3,16 +3,21 @@
 
 Bomb::Bomb()
 {
-	mModel = Md2Object::Load("c:\\box.md2","c:\\yellowbox.bmp");
+	mModel = Md2Object::Load("c:\\bomb.md2","c:\\bombt.bmp");
 	this->AddChild(mModel);
-	mTimeToExplosion = 1.0;
+	mTimer = Ref<Timer>(new Timer);
+	mTimer->Begin();
 	mFlamePower = 1;
+	
 }
 
 void Bomb::Update(float dt)
 {
-	if(mTimeToExplosion > 0.0)
+	/*if(mTimeToExplosion > 0.0)
 		mTimeToExplosion -= dt;
 	else
-		this->RemoveFromParent();	
+		this->RemoveFromParent();
+		*/
+	if(mTimer->End()>3.0)
+		this->RemoveFromParent();
 }

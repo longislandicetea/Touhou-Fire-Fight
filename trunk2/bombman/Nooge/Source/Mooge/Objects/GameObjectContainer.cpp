@@ -94,9 +94,4 @@ void GameObjectContainer::Update(float dt)
 
 GameObjectContainer::~GameObjectContainer()
 {
-	/*ChildrenContainer::const_iterator it = mChildren.begin();
-	for(;it!=mChildren.end();++it)
-	{
-		delete *it;
-	}*/
 }

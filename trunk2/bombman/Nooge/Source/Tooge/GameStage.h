@@ -12,11 +12,10 @@ public:
 	Ref<GameObject> CurrentMap();
 	Ref<GameObject> Player();
 	bool CanPass(GameObject* obj);
+	void AddBomb(Ref<GameObject> bomb);
 	virtual ~GameStage();
 
 private:
-	void AddBomb(Ref<GameObject> bomb);
-
 	Ref<GameObject> mCurrentMap;
 	Ref<GameObject> mPlayer;
 	Ref<GameObject> mDwall;

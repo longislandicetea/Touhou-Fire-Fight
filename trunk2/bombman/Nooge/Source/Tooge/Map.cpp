@@ -16,12 +16,12 @@
 #include "AIMap.h"
 
 
-Ref<GameObject> Map::Load( const char* filename )
+Ref<GameObject> Map::Load( const std::string& filename )
 {
 	Ref<GameObject> tmp (new Map);
 	Map* ret= cast<Map>(tmp);
 	TiXmlDocument* doc = new TiXmlDocument();
-	doc->LoadFile(filename);
+	doc->LoadFile(filename.c_str());
 	TiXmlElement* rootElement = doc->RootElement();
 	TiXmlElement* gridsElement = rootElement->FirstChildElement();
 	TiXmlElement* gridElement = gridsElement->FirstChildElement();
@@ -91,6 +91,7 @@ std::map< std::string,Ref<GameObject> > Map::Parse()
 			{
 				Ref<GameObject> dwall(new Dwall);
 				dwall->SetPos(currentGrid->CenterX(),0.0,currentGrid->CenterY());
+				dwall->SetScale(0.7);
 				cast<Sprite>(dwallContainer)->AddChild(dwall);
 				break;
 			}
@@ -98,6 +99,7 @@ std::map< std::string,Ref<GameObject> > Map::Parse()
 			{
 				Ref<GameObject> uwall(new Uwall);
 				uwall->SetPos(currentGrid->CenterX(),0.0,currentGrid->CenterY());
+				uwall->SetScale(0.7);
 				cast<Sprite>(uwallContainer)->AddChild(uwall);
 				break;
 			}
