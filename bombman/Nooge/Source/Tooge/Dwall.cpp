@@ -4,11 +4,11 @@ using namespace std;
 
 Dwall::Dwall()
 {
-	mModel = Md2Object::Load("c:\\wall.md2","c:\\wall1.bmp");
+	mModel = Md2Object::Load("c:\\dwall.md2","c:\\dwallt.bmp");
 	this->AddChild(mModel);
 }
 
 Dwall::~Dwall()
 {
-	cout << "Dwall: " << this << endl;
+	cout << "Dwall: " << endl;
 }

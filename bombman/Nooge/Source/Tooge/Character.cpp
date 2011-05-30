@@ -8,14 +8,10 @@ void Character::Update(float dt)
 	int oldZ = this->GetZ();
 	int currentAction = mCtrl.Update(this,dt);
 	doAction(currentAction,dt);
-	GameStage* gs =(GameStage*)(App::Inst().currentStage());
-	//Ref<GameObject> t = gs->CurrentMap();
 	
+	GameStage* gs =(GameStage*)(App::Inst().currentStage());
 	if(!gs->CanPass(this))
 		SetPos(oldX,GetY(),oldZ);
-
-	/*if(!(cast<RuntimeMap>(mStage->CurrentMap())->CanPass(this)))
-		SetPos(oldX,GetY(),oldZ);*/
 }
 
 void Character::doAction( int currentAction, float dt )
@@ -41,7 +37,8 @@ void Character::doAction( int currentAction, float dt )
 	case CharacterController::DROP_BOMB:
 		Ref<GameObject> bomb(new Bomb);
 		bomb->SetPos(GetX(),0,GetZ());
-		//cast<RuntimeMap>(mStage->CurrentMap())->AddBomb(bomb);
+		GameStage* gs = (GameStage*)App::Inst().currentStage();
+		gs->AddBomb(bomb);
 		break;
 	/*case CharacterController::TRIGGER_BOMB:
 		break;*/
@@ -74,16 +71,12 @@ Character::Character(CharacterController* ctrl)
 	mModel = Md2Object::Load("c:\\mh_name.md2","c:\\t2.bmp");
 	cast<Md2Object>(mModel)->setAnimation("IDLE");
 	this->AddChild(mModel);
-	//mStage = (GameStage*)App::Inst().currentStage();
 	mSpeed = 100.0;
+	//mLifeCnt = 
+	//mBombCnt = 
 }
 
 Ref<GameObject> Character::AddController(CharacterController* ctrl)
 {
 	return Ref<GameObject>(new Character(ctrl));
-}
-
-GameStage* Character::GetGameStage()
-{
-	return mStage;
 }

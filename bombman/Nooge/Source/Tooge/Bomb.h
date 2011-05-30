@@ -3,6 +3,7 @@
 #include "GameObjectContainer.h"
 #include "Ref.h"
 #include "GameObject.h"
+#include "Timer.h"
 
 class Bomb : public Sprite
 {
@@ -12,6 +13,7 @@ public:
 
 private:
 	Ref<GameObject> mModel;
+	Ref<Timer> mTimer;
 	float mTimeToExplosion;
 	int mFlamePower;
 };

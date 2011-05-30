@@ -24,7 +24,7 @@ class Map : public Sprite
 {
 public:
 	friend class RuntimeMap;
-	static Ref<GameObject> Load(const char* filename);
+	static Ref<GameObject> Load(const std::string& filename);
 	std::map< std::string,Ref<GameObject> >Parse();
 
 protected:

@@ -26,6 +26,12 @@
     <Filter Include="Stage\Wall">
       <UniqueIdentifier>{5f5b7968-ee45-417e-8128-9fcd73f30d3a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DataManager">
+      <UniqueIdentifier>{8c28f0d0-2049-4e37-a99e-5457b66d33ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Timer">
+      <UniqueIdentifier>{e0d0fbf4-c880-48ff-bde7-c8a84c870114}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Source\Tooge\Main.cpp">
@@ -67,6 +73,12 @@
     <ClCompile Include="..\..\..\..\Source\Tooge\Bomb.cpp">
       <Filter>Item</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\Tooge\DataManager.cpp">
+      <Filter>DataManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\Tooge\Timer.cpp">
+      <Filter>Timer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Source\Tooge\App.h">
@@ -107,6 +119,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\Source\Tooge\Bomb.h">
       <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\Tooge\DataManager.h">
+      <Filter>DataManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\Tooge\Timer.h">
+      <Filter>Timer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

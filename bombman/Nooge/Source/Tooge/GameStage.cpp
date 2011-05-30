@@ -17,11 +17,13 @@ GameStage::GameStage( Ref<GameObject> map )
 	mUwall = info["uwall"];
 	mNpc = info["npc"];
 	mPlayer = info["player"];
+	mBomb  = Ref<GameObject>(new Sprite);
 	
 	this->AddChild(mDwall);
 	this->AddChild(mUwall);
 	this->AddChild(mNpc);
 	this->AddChild(mPlayer);
+	this->AddChild(mBomb);
 }
 
 GameStage::~GameStage()
