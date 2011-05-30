@@ -77,6 +77,7 @@
     <ClCompile Include="..\..\..\..\Source\Tooge\AIMap.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\App.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\Bomb.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Tooge\Bonus.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\Character.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\DataManager.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\Dwall.cpp" />
@@ -93,8 +94,15 @@
     <ClInclude Include="..\..\..\..\Source\Mooge\Core\InputSystem.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\AIMap.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\App.h" />
+    <ClInclude Include="..\..\..\..\Source\Tooge\BBombPlus.h" />
+    <ClInclude Include="..\..\..\..\Source\Tooge\BDrop.h" />
+    <ClInclude Include="..\..\..\..\Source\Tooge\BFaster.h" />
+    <ClInclude Include="..\..\..\..\Source\Tooge\BFlamePlus.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\Bomb.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\Bonus.h" />
+    <ClInclude Include="..\..\..\..\Source\Tooge\BPush.h" />
+    <ClInclude Include="..\..\..\..\Source\Tooge\BSlower.h" />
+    <ClInclude Include="..\..\..\..\Source\Tooge\BTrigger.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\Character.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\DataManager.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\Dwall.h" />

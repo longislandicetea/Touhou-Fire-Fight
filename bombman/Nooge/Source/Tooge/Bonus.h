@@ -1,9 +1,15 @@
 #pragma once
 
+#include "GameObjectContainer.h"
+#include "Ref.h"
 #include "GameObject.h"
+#include "Timer.h"
 
-class Bonus : public GameObject
+class Bonus : public Sprite
 {
 public:
-	virtual void Draw(){}
+
+protected:
+	Ref<GameObject> mModel;
+	Ref<Timer> mTimer;
 };
