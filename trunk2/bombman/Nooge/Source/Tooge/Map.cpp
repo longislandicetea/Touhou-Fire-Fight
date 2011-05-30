@@ -41,7 +41,7 @@ Ref<GameObject> Map::Load( const std::string& filename )
 	while(bonusElement)
 	{
 		std::string tmp(bonusElement->Value());
-		ret->mBonus[tmp] = (float)(atoi(bonusElement->GetText())/100.0);
+		ret->mBonus[tmp] = (float)(atoi(bonusElement->GetText()));
 		bonusElement = bonusElement->NextSiblingElement();
 	}
 	return tmp;
@@ -91,7 +91,7 @@ std::map< std::string,Ref<GameObject> > Map::Parse()
 			{
 				Ref<GameObject> dwall(new Dwall);
 				dwall->SetPos(currentGrid->CenterX(),0.0,currentGrid->CenterY());
-				dwall->SetScale(0.7);
+				//dwall->SetScale(0.7);
 				cast<Sprite>(dwallContainer)->AddChild(dwall);
 				break;
 			}
@@ -99,7 +99,7 @@ std::map< std::string,Ref<GameObject> > Map::Parse()
 			{
 				Ref<GameObject> uwall(new Uwall);
 				uwall->SetPos(currentGrid->CenterX(),0.0,currentGrid->CenterY());
-				uwall->SetScale(0.7);
+				//uwall->SetScale(0.7);
 				cast<Sprite>(uwallContainer)->AddChild(uwall);
 				break;
 			}
@@ -127,4 +127,9 @@ std::map< std::string,Ref<GameObject> > Map::Parse()
 	}
 
 	return ret;
+}
+
+std::map<std::string,int> Map::GetBonusProb()
+{
+	return mBonus;
 }

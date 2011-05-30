@@ -5,6 +5,9 @@
 #include "Map.h"
 #include "GameObject.h"
 
+#include <map>
+#include <string>
+
 class GameStage : public Stage
 {
 public:
@@ -16,10 +19,13 @@ public:
 	virtual ~GameStage();
 
 private:
+	Ref<GameObject> CreateBonus();
+
 	Ref<GameObject> mCurrentMap;
 	Ref<GameObject> mPlayer;
 	Ref<GameObject> mDwall;
 	Ref<GameObject> mUwall;
 	Ref<GameObject> mNpc;
 	Ref<GameObject> mBomb;
+	std::map<std::string,int> mBonusProb;
 };                                                                                                                                                                                                                                                                                                                                                                                                     

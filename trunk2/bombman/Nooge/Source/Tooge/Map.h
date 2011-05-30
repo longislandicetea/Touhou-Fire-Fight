@@ -26,11 +26,12 @@ public:
 	friend class RuntimeMap;
 	static Ref<GameObject> Load(const std::string& filename);
 	std::map< std::string,Ref<GameObject> >Parse();
+	std::map<std::string,int> GetBonusProb();
 
 protected:
 	Map();
 	std::vector<GridInfo> mGrids;
-	std::map<std::string,float> mBonus;
+	std::map<std::string,int> mBonus;
 
 private:
 	GridState trans(const char* gridState);
