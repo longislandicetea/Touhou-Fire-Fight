@@ -3,5 +3,6 @@
 
 class BPush : public Bonus
 {
-
+public:
+	BPush();
 };

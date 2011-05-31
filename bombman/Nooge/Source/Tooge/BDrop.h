@@ -3,5 +3,6 @@
 
 class BDrop : public Bonus
 {
-
+public:
+	BDrop();
 };

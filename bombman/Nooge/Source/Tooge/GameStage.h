@@ -18,10 +18,10 @@ public:
 	void AddBomb(Ref<GameObject> bomb);
 	void AddBonus(Ref<GameObject> bonus);
 	virtual ~GameStage();
+		Ref<GameObject> CreateBonus();
 
 private:
-	Ref<GameObject> CreateBonus();
-	
+
 	Ref<GameObject> mCurrentMap;
 	Ref<GameObject> mPlayer;
 	Ref<GameObject> mDwall;

@@ -3,5 +3,6 @@
 
 class BBombPlus : public Bonus
 {
-
+public :
+	BBombPlus();
 };

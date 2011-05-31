@@ -3,6 +3,7 @@
 
 #include "App.h"
 #include "GameStage.h"
+#include "Bonus.h"
 
 Bomb::Bomb()
 {
@@ -26,5 +27,12 @@ void Bomb::CreateBomb(int x,int y)
 void Bomb::Update(float dt)
 {
 	if(mTimer->End()>3.0)
-		this->RemoveFromParent();
+	{
+		if(mTimer->End()>3.5)
+		{
+			Bonus::CreateBonus(GetX(),GetZ());
+			this->RemoveFromParent();
+		}
+		this->SetAlpha(0.0);
+	}
 }
