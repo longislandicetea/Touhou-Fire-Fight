@@ -8,7 +8,7 @@
 class Bonus : public Sprite
 {
 public:
-
+	static void CreateBonus(int x,int y);
 protected:
 	Ref<GameObject> mModel;
 	Ref<Timer> mTimer;

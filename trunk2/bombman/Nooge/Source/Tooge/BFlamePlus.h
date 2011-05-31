@@ -3,5 +3,6 @@
 
 class BFlamePlus : public Bonus
 {
-
+public:
+	BFlamePlus();
 };

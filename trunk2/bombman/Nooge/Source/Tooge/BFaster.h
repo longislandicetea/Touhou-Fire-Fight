@@ -3,5 +3,6 @@
 
 class BFaster : public Bonus
 {
-
+public:
+	BFaster();
 };

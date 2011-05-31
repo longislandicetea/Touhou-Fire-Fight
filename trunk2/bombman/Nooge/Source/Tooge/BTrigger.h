@@ -3,5 +3,6 @@
 
 class BTrigger : public Bonus
 {
-
+public:
+	BTrigger();
 };

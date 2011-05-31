@@ -3,5 +3,6 @@
 
 class BSlower : public Bonus
 {
-
+public:
+	BSlower();
 };

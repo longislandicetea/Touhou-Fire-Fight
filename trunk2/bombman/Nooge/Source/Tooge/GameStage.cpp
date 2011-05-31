@@ -37,6 +37,7 @@ GameStage::GameStage( Ref<GameObject> map )
 	this->AddChild(mNpc);
 	this->AddChild(mPlayer);
 	this->AddChild(mBomb);
+	this->AddChild(mBonus);
 }
 
 GameStage::~GameStage()
@@ -83,7 +84,7 @@ void GameStage::AddBomb( Ref<GameObject> bomb )
 Ref<GameObject> GameStage::CreateBonus()
 {
 	int r = rand()%100+1;
-	int t = mBonusProb["AddBombP"];
+	//int t = mBonusProb["AddBombP"];
 	if(r < mBonusProb["AddBombP"])
 	{
 		return Ref<GameObject> (new BBombPlus);

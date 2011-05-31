@@ -85,6 +85,27 @@
     <ClCompile Include="..\..\..\..\Source\Tooge\Bonus.cpp">
       <Filter>Stage\Bonus</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\Tooge\BBombPlus.cpp">
+      <Filter>Stage\Bonus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\Tooge\BDrop.cpp">
+      <Filter>Stage\Bonus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\Tooge\BFaster.cpp">
+      <Filter>Stage\Bonus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\Tooge\BFlamePlus.cpp">
+      <Filter>Stage\Bonus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\Tooge\BPush.cpp">
+      <Filter>Stage\Bonus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\Tooge\BSlower.cpp">
+      <Filter>Stage\Bonus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\Tooge\BTrigger.cpp">
+      <Filter>Stage\Bonus</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Source\Tooge\App.h">
