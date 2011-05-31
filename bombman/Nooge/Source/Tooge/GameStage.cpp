@@ -28,6 +28,7 @@ GameStage::GameStage( Ref<GameObject> map )
 	mNpc = info["npc"];
 	mPlayer = info["player"];
 	mBomb  = Ref<GameObject>(new Sprite);
+	mBonus = Ref<GameObject>(new Sprite);
 
 	//mDwall->SetScale(0.7);
 	
@@ -50,8 +51,8 @@ Ref<GameObject> GameStage::Player()
 
 bool GameStage::CanPass( GameObject* obj )
 {
-	Sprite* dwallContainer = cast<Sprite>(mDwall);
-	Sprite* uwallContainer = cast<Sprite>(mUwall);
+	//Sprite* dwallContainer = cast<Sprite>(mDwall);
+	//Sprite* uwallContainer = cast<Sprite>(mUwall);
 	/*for(int i = 0;i<dwallContainer->NumOfChild();++i)
 	{
 		if(dwallContainer->GetChild(i)->GetBoundingBox().Intersect(obj->GetBoundingBox()))
@@ -61,9 +62,10 @@ bool GameStage::CanPass( GameObject* obj )
 		}
 	}*/
 	Grid box = obj->GetBoundingBox();
-	for(int j = 0;j<uwallContainer->NumOfChild();++j)
+	int cnt = cast<Sprite>(mUwall)->NumOfChild();
+	for(int j = 0;j<cnt;++j)
 	{
-		Ref<GameObject> child = uwallContainer->GetChild(j);
+		Ref<GameObject> child = cast<Sprite>(mUwall)->GetChild(j);
 		Grid bBox = child->GetBoundingBox();
 		if(bBox.Intersect(box))
 		{
@@ -118,4 +120,9 @@ Ref<GameObject> GameStage::CreateBonus()
 	}
 	else
 		return Ref<GameObject> (NULL);
+}
+
+void GameStage::AddBonus( Ref<GameObject> bonus )
+{
+	cast<Sprite>(mBonus)->AddChild(bonus);
 }
