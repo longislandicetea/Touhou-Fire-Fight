@@ -1,6 +1,7 @@
 #include"Character.h"
 #include "Md2Object.h"
 #include "App.h"
+#include "Bomb.h"
 
 void Character::Update(float dt)
 {
@@ -35,10 +36,7 @@ void Character::doAction( int currentAction, float dt )
 		right(dt*mSpeed);
 		break;
 	case CharacterController::DROP_BOMB:
-		Ref<GameObject> bomb(new Bomb);
-		bomb->SetPos(GetX(),0,GetZ());
-		GameStage* gs = (GameStage*)App::Inst().currentStage();
-		gs->AddBomb(bomb);
+		Bomb::CreateBomb(GetX(),GetZ());
 		break;
 	/*case CharacterController::TRIGGER_BOMB:
 		break;*/

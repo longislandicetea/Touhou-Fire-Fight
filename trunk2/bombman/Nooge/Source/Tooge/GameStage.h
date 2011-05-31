@@ -16,16 +16,18 @@ public:
 	Ref<GameObject> Player();
 	bool CanPass(GameObject* obj);
 	void AddBomb(Ref<GameObject> bomb);
+	void AddBonus(Ref<GameObject> bonus);
 	virtual ~GameStage();
 
 private:
 	Ref<GameObject> CreateBonus();
-
+	
 	Ref<GameObject> mCurrentMap;
 	Ref<GameObject> mPlayer;
 	Ref<GameObject> mDwall;
 	Ref<GameObject> mUwall;
 	Ref<GameObject> mNpc;
 	Ref<GameObject> mBomb;
+	Ref<GameObject> mBonus;
 	std::map<std::string,int> mBonusProb;
 };                                                                                                                                                                                                                                                                                                                                                                                                     

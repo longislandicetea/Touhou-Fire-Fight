@@ -121,7 +121,10 @@ std::map< std::string,Ref<GameObject> > Map::Parse()
 				cast<Sprite>(npcContainer)->AddChild(npc);
 				break;
 			}
+		case EMPTY:
+			break;
 		}
+
 		if(currentGrid != NULL)
 			delete currentGrid;
 	}

@@ -61,7 +61,7 @@ void GameObjectContainer::Draw()
 	{
 		Ref<GameObject> obj = *it;
 		float childAlpha = obj->GetAlpha();
-		if(1)
+		if(childAlpha>0.0)
 		{
 			glPushMatrix();
 			//scale

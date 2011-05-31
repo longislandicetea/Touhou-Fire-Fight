@@ -10,5 +10,5 @@ Dwall::Dwall()
 
 Dwall::~Dwall()
 {
-	cout << "Dwall: " << endl;
+	cout << "Dwall released" << endl;
 }

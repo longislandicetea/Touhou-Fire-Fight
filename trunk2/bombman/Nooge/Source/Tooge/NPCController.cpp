@@ -5,7 +5,7 @@
 
 int NPCController::Update(Character *character, float dt)
 {
-	return rand() %3;
+	return rand() %4;
 	mDangerGrid = new AIMap(-1);
 	mFloodFillGrid  = new AIMap(100);
 	computeFloodFill(character);
