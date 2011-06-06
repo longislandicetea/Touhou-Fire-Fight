@@ -86,9 +86,9 @@ void App::SetupEngine()
 	//Setup camera.
 	mMooge->Cameras->AddCamera(mMainCamera);
 
-	VECTORFS CamEyeVec(0.0, 120,100.0);
+	VECTORFS CamEyeVec(0.0, 80,200.0);
 	VECTORFS CamCenterVec(0.0, 0.0, 0.0);
-	VECTORFS CamUpVec(0.0, 120.0, 0.0);
+	VECTORFS CamUpVec(0.0, 80.0, 0.0);
 	mMainCamera->SetPosition(CamEyeVec, CamCenterVec, CamUpVec);
 
 	//Add Engine object here.
@@ -110,15 +110,15 @@ void App::Execute()
 	{
 		mMooge->Render();
 		Sleep(1000 / 33);
+		clock_t now = clock();
+		float dt = (float)(now - mLeastTime) / CLOCKS_PER_SEC;
+		mMooge->Update(dt);
+		mLeastTime = now;
 	}
 }
 
 void App::OnRenderFormTimer( const WinMsgPackage& MsgPack )
 {
-	clock_t now = clock();
-	float dt = (float)(now - mLeastTime) / CLOCKS_PER_SEC;
-	mMooge->Update(dt);
-	mLeastTime = now;
 }
 
 App& App::Inst()

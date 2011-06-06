@@ -54,14 +54,6 @@ bool GameStage::CanPass( GameObject* obj )
 {
 	//Sprite* dwallContainer = cast<Sprite>(mDwall);
 	//Sprite* uwallContainer = cast<Sprite>(mUwall);
-	/*for(int i = 0;i<dwallContainer->NumOfChild();++i)
-	{
-		if(dwallContainer->GetChild(i)->GetBoundingBox().Intersect(obj->GetBoundingBox()))
-		{
-			return false;
-			break;
-		}
-	}*/
 	Grid box = obj->GetBoundingBox();
 	int cnt = cast<Sprite>(mUwall)->NumOfChild();
 	for(int j = 0;j<cnt;++j)
@@ -73,6 +65,16 @@ bool GameStage::CanPass( GameObject* obj )
 			return false;
 		}
 	}
+	cnt = cast<Sprite>(mDwall)->NumOfChild();
+	/*for(int i = 0;i<cnt;++i)
+	{
+		Ref<GameObject> child = cast<Sprite>(mDwall)->GetChild(i);
+		Grid bBox = child->GetBoundingBox();
+		if(bBox.Intersect(box))
+		{
+			return false;
+		}
+	}*/
 	return true;
 }
 
@@ -126,4 +128,26 @@ Ref<GameObject> GameStage::CreateBonus()
 void GameStage::AddBonus( Ref<GameObject> bonus )
 {
 	cast<Sprite>(mBonus)->AddChild(bonus);
+}
+
+void GameStage::EatBonus( GameObject* obj )
+{
+	Grid box = obj->GetBoundingBox();
+	int cnt = cast<Sprite>(mBonus)->NumOfChild();
+	for(int i = 0;i<cnt;++i)
+	{
+		Ref<GameObject> child = cast<Sprite>(mBonus)->GetChild(i);
+		Grid bBox = child->GetBoundingBox();
+		if(bBox.Intersect(box))
+		{
+			/*if(typeid(*child) == typeid(BBombPlus))
+			else if(typeid(*child) == typeid(BFlamePlus))
+			else if(typeid(*child) == typeid(BFaster))
+			else if(typeid(*child) == typeid(BTrigger))
+			else if(typeid(*child) == typeid(BPush))4
+			else if(typeid(*child) == typeid(BSlower))
+			else if(typeid(*child) == typeid(BDrop))*/
+			child->RemoveFromParent();
+		}
+	}
 }
