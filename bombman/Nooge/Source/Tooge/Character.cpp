@@ -13,6 +13,7 @@ void Character::Update(float dt)
 	GameStage* gs =(GameStage*)(App::Inst().currentStage());
 	if(!gs->CanPass(this))
 		SetPos(oldX,GetY(),oldZ);
+	gs->EatBonus(this);
 }
 
 void Character::doAction( int currentAction, float dt )

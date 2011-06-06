@@ -15,10 +15,11 @@ public:
 	Ref<GameObject> CurrentMap();
 	Ref<GameObject> Player();
 	bool CanPass(GameObject* obj);
+	void EatBonus(GameObject* obj);
 	void AddBomb(Ref<GameObject> bomb);
 	void AddBonus(Ref<GameObject> bonus);
 	virtual ~GameStage();
-		Ref<GameObject> CreateBonus();
+	Ref<GameObject> CreateBonus();
 
 private:
 
