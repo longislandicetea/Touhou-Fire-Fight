@@ -35,6 +35,9 @@
     <Filter Include="Stage\Bonus">
       <UniqueIdentifier>{d88cc5bf-3807-4ea2-bc99-7b0248786a84}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AI">
+      <UniqueIdentifier>{c1f7592c-dd2a-46af-9179-7d203ba7d8ae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Source\Tooge\Main.cpp">
@@ -106,6 +109,15 @@
     <ClCompile Include="..\..\..\..\Source\Tooge\BTrigger.cpp">
       <Filter>Stage\Bonus</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\Tooge\FSM.cpp">
+      <Filter>AI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\Tooge\State.cpp">
+      <Filter>AI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\Tooge\Transition.cpp">
+      <Filter>AI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Source\Tooge\App.h">
@@ -174,5 +186,17 @@
     <ClInclude Include="..\..\..\..\Source\Tooge\BSlower.h">
       <Filter>Stage\Bonus</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\Tooge\FSM.h">
+      <Filter>AI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\Tooge\State.h">
+      <Filter>AI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\Tooge\Transition.h">
+      <Filter>AI</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
 </Project>

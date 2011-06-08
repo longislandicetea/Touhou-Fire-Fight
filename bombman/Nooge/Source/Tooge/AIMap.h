@@ -8,6 +8,7 @@ public:
 	int GetValue(int row,int col);
 	void SetValue(int row,int col,int value);
 	bool IsFree(int row, int col);
+	void GetBestValuePosition(int x,int y);
 
 private:
 	static const int WIDTH = 15;
