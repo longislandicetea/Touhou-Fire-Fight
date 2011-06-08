@@ -85,6 +85,7 @@
     <ClCompile Include="..\..\..\..\Source\Tooge\BPush.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\BSlower.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\BTrigger.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Tooge\FSM.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\Character.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\DataManager.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\Dwall.cpp" />
@@ -94,7 +95,9 @@
     <ClCompile Include="..\..\..\..\Source\Tooge\PlayerController.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\RenderForm.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\GameStage.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Tooge\State.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\Timer.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Tooge\Transition.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\Uwall.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -110,6 +113,7 @@
     <ClInclude Include="..\..\..\..\Source\Tooge\BPush.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\BSlower.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\BTrigger.h" />
+    <ClInclude Include="..\..\..\..\Source\Tooge\FSM.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\Character.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\DataManager.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\Dwall.h" />
@@ -118,8 +122,13 @@
     <ClInclude Include="..\..\..\..\Source\Tooge\NPCController.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\PlayerController.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\RenderForm.h" />
+    <ClInclude Include="..\..\..\..\Source\Tooge\State.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\Timer.h" />
+    <ClInclude Include="..\..\..\..\Source\Tooge\Transition.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\Uwall.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -2,12 +2,15 @@
 #include"Character.h"
 #include"Ref.h"
 #include "AIMap.h"
+#include"FSM.h"
 
 class NPCController : public CharacterController
 {
 public:
-	//NPCController();
+	NPCController(){};
 	int Update(Character *character, float dt);
+	AIMap* GetInterestGrid();
+	AIMap* GetDangerGrid();
 	~NPCController();
 
 private:
@@ -16,6 +19,7 @@ private:
 	AIMap* mFloodFillGrid;
 	void computeFloodFill(Character *character);
 	void computeFloodFill(int x,int y);
-	//void computeConception();
+	//void computePerception();
 	//Ref<FSM> mFsm;
 };
+

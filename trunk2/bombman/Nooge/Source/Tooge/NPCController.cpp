@@ -9,7 +9,7 @@ int NPCController::Update(Character *character, float dt)
 	mDangerGrid = new AIMap(-1);
 	mFloodFillGrid  = new AIMap(100);
 	computeFloodFill(character);
-	//computeConception(dt);
+	//computePerception(dt);
 	//return  mFsm.Update(dt);
 	
 	return 0;
@@ -53,3 +53,13 @@ NPCController::~NPCController()
 	delete mFloodFillGrid;
 }
 
+
+AIMap* NPCController::GetInterestGrid()
+{
+	return mInterestGrid;
+}
+
+AIMap* NPCController::GetDangerGrid()
+{
+	return mDangerGrid;
+}

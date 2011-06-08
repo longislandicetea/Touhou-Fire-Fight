@@ -5,6 +5,7 @@
 #include <gl/GL.h>
 #include <gl/GLU.h>
 
+
 void GameObjectContainer::AddChild( Ref<GameObject> child )
 {
 	AddChildAt(child,mChildren.size());
