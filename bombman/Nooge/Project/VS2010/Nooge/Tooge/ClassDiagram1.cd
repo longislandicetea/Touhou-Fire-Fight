@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="FSM">
+    <Position X="0.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAABAAAAAAAEAAAABAACABEAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>L:\FM\projects\Bomberman\bombman\bombman\Nooge\Source\Tooge\FSM.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Transition">
+    <Position X="6.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAgAAAAAAAAAAABAAAAAAACAAAgAAAA=</HashCode>
+      <FileName>L:\FM\projects\Bomberman\bombman\bombman\Nooge\Source\Tooge\Transition.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="State">
+    <Position X="2.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAQAABAAIAAAAAAAAAAAAAAAAAAAAACBAAAAAA=</HashCode>
+      <FileName>L:\FM\projects\Bomberman\bombman\bombman\Nooge\Source\Tooge\State.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ClearPathState">
+    <Position X="0.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>L:\FM\projects\Bomberman\bombman\bombman\Nooge\Source\Tooge\State.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FleeState">
+    <Position X="2.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>L:\FM\projects\Bomberman\bombman\bombman\Nooge\Source\Tooge\State.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SearchBonusState">
+    <Position X="5.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>L:\FM\projects\Bomberman\bombman\bombman\Nooge\Source\Tooge\State.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="App" Collapsed="true">
+    <Position X="18.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEABQMABAAAAQAAAAABAAAggAIACAAAgACAEAgQAA=</HashCode>
+      <FileName>L:\FM\projects\Bomberman\bombman\bombman\Nooge\Source\Tooge\App.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CRenderForm" Collapsed="true">
+    <Position X="17" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgACAAAAAAAAQAAAAAAEAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>L:\FM\projects\Bomberman\bombman\bombman\Nooge\Source\Tooge\RenderForm.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AIMap" Collapsed="true">
+    <Position X="17" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAACAAAAIAAABggAAAAAAAAAAAQAACAAAAAAAABAAAA=</HashCode>
+      <FileName>L:\FM\projects\Bomberman\bombman\bombman\Nooge\Source\Tooge\AIMap.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Map" Collapsed="true">
+    <Position X="18.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAggAEAAJAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>L:\FM\projects\Bomberman\bombman\bombman\Nooge\Source\Tooge\Map.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CharacterController" Collapsed="true">
+    <Position X="3.5" Y="6.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>L:\FM\projects\Bomberman\bombman\bombman\Nooge\Source\Tooge\Character.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Character" Collapsed="true">
+    <Position X="22.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAUQAAAAAAACIAAAAAAAAAEAEAAIAAAACAAAAgQAiCA=</HashCode>
+      <FileName>L:\FM\projects\Bomberman\bombman\bombman\Nooge\Source\Tooge\Character.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NPCController" Collapsed="true">
+    <Position X="2.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAASAAAAAEEBAAAABAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>L:\FM\projects\Bomberman\bombman\bombman\Nooge\Source\Tooge\NPCController.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerController" Collapsed="true">
+    <Position X="4.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>L:\FM\projects\Bomberman\bombman\bombman\Nooge\Source\Tooge\PlayerController.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameStage" Collapsed="true">
+    <Position X="22.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABQAAECIAAAAEBQBABAAAAAAAgAACBAAAEAAQAAAAg=</HashCode>
+      <FileName>L:\FM\projects\Bomberman\bombman\bombman\Nooge\Source\Tooge\GameStage.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Dwall" Collapsed="true">
+    <Position X="20.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAIAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>L:\FM\projects\Bomberman\bombman\bombman\Nooge\Source\Tooge\Dwall.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Uwall" Collapsed="true">
+    <Position X="22.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAQAAAAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>L:\FM\projects\Bomberman\bombman\bombman\Nooge\Source\Tooge\Uwall.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Bomb" Collapsed="true">
+    <Position X="10.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAIIAAAAAAAAAAgAAAAAAAAAAAACgAAAA=</HashCode>
+      <FileName>L:\FM\projects\Bomberman\bombman\bombman\Nooge\Source\Tooge\Bomb.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BBombPlus" Collapsed="true">
+    <Position X="8.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>L:\FM\projects\Bomberman\bombman\bombman\Nooge\Source\Tooge\BBombPlus.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BDrop" Collapsed="true">
+    <Position X="10.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>L:\FM\projects\Bomberman\bombman\bombman\Nooge\Source\Tooge\BDrop.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BFaster" Collapsed="true">
+    <Position X="12.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>L:\FM\projects\Bomberman\bombman\bombman\Nooge\Source\Tooge\BFaster.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BFlamePlus" Collapsed="true">
+    <Position X="13.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>L:\FM\projects\Bomberman\bombman\bombman\Nooge\Source\Tooge\BFlamePlus.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Bonus" Collapsed="true">
+    <Position X="9.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAAAAAAAAAAAgAAAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>L:\FM\projects\Bomberman\bombman\bombman\Nooge\Source\Tooge\Bonus.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BPush" Collapsed="true">
+    <Position X="8.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>L:\FM\projects\Bomberman\bombman\bombman\Nooge\Source\Tooge\BPush.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BSlower" Collapsed="true">
+    <Position X="10" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIA=</HashCode>
+      <FileName>L:\FM\projects\Bomberman\bombman\bombman\Nooge\Source\Tooge\BSlower.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BTrigger" Collapsed="true">
+    <Position X="11.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>L:\FM\projects\Bomberman\bombman\bombman\Nooge\Source\Tooge\BTrigger.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InputSystem" Collapsed="true">
+    <Position X="17" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACgAAAAAgAAAAAAAAAAAAAAAAAQAAAAAA=</HashCode>
+      <FileName>L:\FM\projects\Bomberman\bombman\bombman\Nooge\Source\Mooge\Core\InputSystem.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataManager" Collapsed="true">
+    <Position X="18.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>L:\FM\projects\Bomberman\bombman\bombman\Nooge\Source\Tooge\DataManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Timer" Collapsed="true">
+    <Position X="20.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAACAAAEASA=</HashCode>
+      <FileName>L:\FM\projects\Bomberman\bombman\bombman\Nooge\Source\Tooge\Timer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="GridInfo" Collapsed="true">
+    <Position X="17" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAQACgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>L:\FM\projects\Bomberman\bombman\bombman\Nooge\Source\Tooge\Map.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="GridState" Collapsed="true">
+    <Position X="17" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAEAAAAAAAAAAABCEAAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>L:\FM\projects\Bomberman\bombman\bombman\Nooge\Source\Tooge\Map.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="微软雅黑" Size="9" />
+</ClassDiagram>
