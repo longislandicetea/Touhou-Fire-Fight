@@ -193,10 +193,14 @@ bool GameStage::HasUwall( int row,int col )
 
 void GameStage::DwallExplode( int row,int col )
 {
-	int cnt = cast<Sprite>(mDwall)->NumOfChild();
+	//Ref<GameObject> dWall = mDwall;
+	Sprite::ChildrenContainer dWall = cast<Sprite>(mDwall)->GetAllChildren();
+
+	int cnt = dWall.size();
 	for(int i = 0;i<cnt;++i)
 	{
-		Ref<GameObject> child = cast<Sprite>(mDwall)->GetChild(i);
+		//Ref<GameObject> child = cast<Sprite>(dWall)->GetChild(i);
+		Ref<GameObject> child = dWall[i];
 		int tRow = child->GetBoundingBox().Row();
 		int tCol = child->GetBoundingBox().Col();
 

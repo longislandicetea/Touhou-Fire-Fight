@@ -96,3 +96,8 @@ void GameObjectContainer::Update(float dt)
 GameObjectContainer::~GameObjectContainer()
 {
 }
+
+GameObjectContainer::ChildrenContainer GameObjectContainer::GetAllChildren()
+{
+	return mChildren;
+}

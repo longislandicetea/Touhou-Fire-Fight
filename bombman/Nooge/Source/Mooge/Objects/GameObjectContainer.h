@@ -17,6 +17,7 @@ public:
 
 	Ref<GameObject>     GetChild(int idx);
 	Ref<GameObject>		GetChild(GameObject *obj);
+	ChildrenContainer   GetAllChildren();
 
 	int					NumOfChild();
 
