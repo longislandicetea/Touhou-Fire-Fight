@@ -94,6 +94,8 @@ Ref<GameObject> GameStage::CreateBonus()
 	{
 		return Ref<GameObject> (new BBombPlus);
 	}
+	/*if (r>30 && r<70)
+		return Ref<GameObject> (new BBombPlus);*/
 	//t += mBonusProb["AddFlameP"];
 	else if (r< mBonusProb["AddBombP"]+mBonusProb["AddFlameP"])
 	{
@@ -136,17 +138,20 @@ void GameStage::AddBonus( Ref<GameObject> bonus )
 void GameStage::EatBonus( Character* obj )
 {
 	Grid box = obj->GetBoundingBox();
-	int cnt = cast<Sprite>(mBonus)->NumOfChild();
+	//int cnt = cast<Sprite>(mBonus)->NumOfChild();
+	Sprite::ChildrenContainer bonus = cast<Sprite>(mBonus)->GetAllChildren();
+	int cnt = bonus.size();
 	for(int i = 0;i<cnt;++i)
 	{
-		Ref<GameObject> child = cast<Sprite>(mBonus)->GetChild(i);
+		Ref<GameObject> child = bonus[i];
 		Grid bBox = child->GetBoundingBox();
 		if(bBox.Intersect(box))
 		{
 			if(typeid(*child) == typeid(BBombPlus))
 			{
-
+				obj->SetBombCnt(1);
 			}
+
 			else if(typeid(*child) == typeid(BFlamePlus))
 			{
 				obj->SetPower(1);
@@ -165,7 +170,7 @@ void GameStage::EatBonus( Character* obj )
 			}
 			else if(typeid(*child) == typeid(BSlower))
 			{
-
+				obj->SetSpeed(2/3);
 			}
 			else if(typeid(*child) == typeid(BDrop))
 			{
@@ -193,13 +198,11 @@ bool GameStage::HasUwall( int row,int col )
 
 void GameStage::DwallExplode( int row,int col )
 {
-	//Ref<GameObject> dWall = mDwall;
 	Sprite::ChildrenContainer dWall = cast<Sprite>(mDwall)->GetAllChildren();
 
 	int cnt = dWall.size();
 	for(int i = 0;i<cnt;++i)
 	{
-		//Ref<GameObject> child = cast<Sprite>(dWall)->GetChild(i);
 		Ref<GameObject> child = dWall[i];
 		int tRow = child->GetBoundingBox().Row();
 		int tCol = child->GetBoundingBox().Col();

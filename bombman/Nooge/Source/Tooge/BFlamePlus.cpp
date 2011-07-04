@@ -3,6 +3,6 @@
 
 BFlamePlus::BFlamePlus()
 {
-	mModel = Md2Object::Load("c:\\box.md2","c:\\bluebox.bmp");
+	mModel = Md2Object::Load("c:\\box.md2","c:\\boxgreen.bmp");
 	this->AddChild(mModel);
 }

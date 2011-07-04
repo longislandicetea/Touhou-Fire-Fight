@@ -19,6 +19,7 @@ private:
 	void explode();
 
 	int mPower;
+	Character* mOwner;
 	Ref<GameObject> mModel;
 	Ref<Timer> mTimer;
 	std::vector< Ref<Grid> > mFlame;
