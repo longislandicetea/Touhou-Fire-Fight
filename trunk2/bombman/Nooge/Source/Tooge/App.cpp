@@ -86,16 +86,16 @@ void App::SetupEngine()
 	//Setup camera.
 	mMooge->Cameras->AddCamera(mMainCamera);
 
-	VECTORFS CamEyeVec(0.0, 80,200.0);
-	VECTORFS CamCenterVec(0.0, 0.0, 0.0);
-	VECTORFS CamUpVec(0.0, 80.0, 0.0);
+	VECTORFS CamEyeVec(75.0,150.0,200.0);
+	VECTORFS CamCenterVec(75.0, 0.0, 65.0);
+	VECTORFS CamUpVec(0.0, 40.0, 0.0);
 	mMainCamera->SetPosition(CamEyeVec, CamCenterVec, CamUpVec);
 
 	//Add Engine object here.
 	Ref<GameObject> map = Map::Load("c:\\test.xml");
 	Ref<Stage> gameStage(new GameStage(map));
 	mMooge->CurrentStage = gameStage;
-	
+
 	//Create a timer that fires 30 times a second
 	SetTimer(mRenderForm->gethWnd(), 33, 1, NULL);
 

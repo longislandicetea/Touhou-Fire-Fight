@@ -37,7 +37,7 @@ void Character::doAction( int currentAction, float dt )
 		right(dt*mSpeed);
 		break;
 	case CharacterController::DROP_BOMB:
-		Bomb::CreateBomb(GetX(),GetZ());
+		Bomb::CreateBomb(GetX(),GetZ(),this);
 		break;
 	/*case CharacterController::TRIGGER_BOMB:
 		break;*/
@@ -71,6 +71,7 @@ Character::Character(CharacterController* ctrl)
 	cast<Md2Object>(mModel)->setAnimation("IDLE");
 	this->AddChild(mModel);
 	mSpeed = 100.0;
+	mBombPower = 1;
 	//mLifeCnt = 
 	//mBombCnt = 
 }
@@ -78,4 +79,19 @@ Character::Character(CharacterController* ctrl)
 Ref<GameObject> Character::AddController(CharacterController* ctrl)
 {
 	return Ref<GameObject>(new Character(ctrl));
+}
+
+void Character::SetSpeed( int factor )
+{
+	mSpeed *= factor;
+}
+
+void Character::SetPower( int factor )
+{
+	mBombPower += factor;
+}
+
+int Character::GetPower()
+{
+	return mBombPower;
 }

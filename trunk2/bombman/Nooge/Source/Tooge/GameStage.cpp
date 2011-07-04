@@ -11,6 +11,7 @@
 #include "BPush.h"
 #include "BSlower.h"
 #include "BTrigger.h"
+#include "Grid.h"
 
 Ref<GameObject> GameStage::CurrentMap()
 {
@@ -29,15 +30,17 @@ GameStage::GameStage( Ref<GameObject> map )
 	mPlayer = info["player"];
 	mBomb  = Ref<GameObject>(new Sprite);
 	mBonus = Ref<GameObject>(new Sprite);
+	//mFlame = Ref<GameObject>(new Sprite);
 
 	//mDwall->SetScale(0.7);
-	
+
 	this->AddChild(mDwall);
 	this->AddChild(mUwall);
 	this->AddChild(mNpc);
 	this->AddChild(mPlayer);
 	this->AddChild(mBomb);
 	this->AddChild(mBonus);
+	//this->AddChild(mFlame);
 }
 
 GameStage::~GameStage()
@@ -66,7 +69,7 @@ bool GameStage::CanPass( GameObject* obj )
 		}
 	}
 	cnt = cast<Sprite>(mDwall)->NumOfChild();
-	/*for(int i = 0;i<cnt;++i)
+	for(int i = 0;i<cnt;++i)
 	{
 		Ref<GameObject> child = cast<Sprite>(mDwall)->GetChild(i);
 		Grid bBox = child->GetBoundingBox();
@@ -74,7 +77,7 @@ bool GameStage::CanPass( GameObject* obj )
 		{
 			return false;
 		}
-	}*/
+	}
 	return true;
 }
 
@@ -130,7 +133,7 @@ void GameStage::AddBonus( Ref<GameObject> bonus )
 	cast<Sprite>(mBonus)->AddChild(bonus);
 }
 
-void GameStage::EatBonus( GameObject* obj )
+void GameStage::EatBonus( Character* obj )
 {
 	Grid box = obj->GetBoundingBox();
 	int cnt = cast<Sprite>(mBonus)->NumOfChild();
@@ -140,14 +143,64 @@ void GameStage::EatBonus( GameObject* obj )
 		Grid bBox = child->GetBoundingBox();
 		if(bBox.Intersect(box))
 		{
-			/*if(typeid(*child) == typeid(BBombPlus))
+			if(typeid(*child) == typeid(BBombPlus))
+			{
+
+			}
 			else if(typeid(*child) == typeid(BFlamePlus))
+			{
+				obj->SetPower(1);
+			}
 			else if(typeid(*child) == typeid(BFaster))
+			{
+				obj->SetSpeed(1.5);
+			}
 			else if(typeid(*child) == typeid(BTrigger))
-			else if(typeid(*child) == typeid(BPush))4
+			{
+
+			}
+			else if(typeid(*child) == typeid(BPush))
+			{
+
+			}
 			else if(typeid(*child) == typeid(BSlower))
-			else if(typeid(*child) == typeid(BDrop))*/
+			{
+
+			}
+			else if(typeid(*child) == typeid(BDrop))
+			{
+
+			}
 			child->RemoveFromParent();
 		}
+	}
+}
+
+bool GameStage::HasUwall( int row,int col )
+{
+	int cnt = cast<Sprite>(mUwall)->NumOfChild();
+	for(int i = 0;i<cnt;++i)
+	{
+		Ref<GameObject> child = cast<Sprite>(mUwall)->GetChild(i);
+		int tRow = child->GetBoundingBox().Row();
+		int tCol = child->GetBoundingBox().Col();
+
+		if(row == tRow && col == tCol)
+			return true;
+	}
+	return false;
+}
+
+void GameStage::DwallExplode( int row,int col )
+{
+	int cnt = cast<Sprite>(mDwall)->NumOfChild();
+	for(int i = 0;i<cnt;++i)
+	{
+		Ref<GameObject> child = cast<Sprite>(mDwall)->GetChild(i);
+		int tRow = child->GetBoundingBox().Row();
+		int tCol = child->GetBoundingBox().Col();
+
+		if(row == tRow && col == tCol)
+			child->RemoveFromParent();
 	}
 }
