@@ -1,4 +1,5 @@
 #include "Grid.h"
+#include <math.h>
 
 float Grid::SideLen = 10.0;
 
@@ -8,14 +9,20 @@ Grid::Grid( float x1,float y1,float x2,float y2 )
 	mY1 = y1;
 	mX2 = x2;
 	mY2 = y2;
+
+	mRow = (int)(mY2/SideLen +0.5);
+	mCol = (int)(mX1/SideLen +0.5);
 }
 
 Grid::Grid( int row,int col )
 {
-	mX1 = (col-7)*SideLen;
-	mY1 = (row-5)*SideLen;
-	mX2 = (col-6)*SideLen;
-	mY2 = (row-6)*SideLen;
+	mX1 = col*SideLen;
+	mY1 = (row+1)*SideLen;
+	mX2 = (col+1)*SideLen;
+	mY2 = row*SideLen;
+
+	mRow = row;
+	mCol = col;
 }
 
 float Grid::X1()

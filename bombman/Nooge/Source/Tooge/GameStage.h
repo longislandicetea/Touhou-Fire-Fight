@@ -8,6 +8,8 @@
 #include <map>
 #include <string>
 
+class Character;
+
 class GameStage : public Stage
 {
 public:
@@ -15,7 +17,9 @@ public:
 	Ref<GameObject> CurrentMap();
 	Ref<GameObject> Player();
 	bool CanPass(GameObject* obj);
-	void EatBonus(GameObject* obj);
+	bool HasUwall( int row,int col);
+	void DwallExplode( int row,int col);
+	void EatBonus(Character* obj);
 	void AddBomb(Ref<GameObject> bomb);
 	void AddBonus(Ref<GameObject> bonus);
 	virtual ~GameStage();

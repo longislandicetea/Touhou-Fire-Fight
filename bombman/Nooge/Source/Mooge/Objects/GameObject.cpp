@@ -45,7 +45,7 @@ void GameObject::RemoveFromParent()
 {
 	if (mParent)
 		mParent->RemoveChild(
-			mParent->GetChild(this));
+		mParent->GetChild(this));
 }
 
 GameObjectContainer* GameObject::GetParent()
@@ -124,7 +124,8 @@ void GameObject::SetPos( float x, float y, float z )
 
 Grid GameObject::GetBoundingBox()
 {
-	float offset = Grid::SideLen/4;
+	float offset = Grid::SideLen/2;
 	return Grid(mX-offset,mZ-offset,mX+offset,mZ+offset);
 }
+
 
