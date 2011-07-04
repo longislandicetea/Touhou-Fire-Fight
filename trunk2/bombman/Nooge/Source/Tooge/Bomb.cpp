@@ -21,6 +21,7 @@ void Bomb::CreateBomb(int x,int y, Character* owner)
 	GameStage* gs = (GameStage*)App::Inst().currentStage();
 	gs->AddBomb(bomb);
 	cast<Bomb>(bomb)->mPower = owner->GetPower();
+	cast<Bomb>(bomb)->mOwner = owner;
 }
 
 
@@ -31,6 +32,7 @@ void Bomb::Update(float dt)
 		if(mTimer->End()>3.5)
 		{
 			explode();
+			mOwner->SetBombCnt(1);
 			Bonus::CreateBonus(GetX(),GetZ());
 			this->RemoveFromParent();
 		}

@@ -37,7 +37,11 @@ void Character::doAction( int currentAction, float dt )
 		right(dt*mSpeed);
 		break;
 	case CharacterController::DROP_BOMB:
-		Bomb::CreateBomb(GetX(),GetZ(),this);
+		if(mBombCnt>0) 
+		{
+			Bomb::CreateBomb(GetX(),GetZ(),this);
+			SetBombCnt(-1);
+		}
 		break;
 	/*case CharacterController::TRIGGER_BOMB:
 		break;*/
@@ -73,7 +77,7 @@ Character::Character(CharacterController* ctrl)
 	mSpeed = 100.0;
 	mBombPower = 1;
 	//mLifeCnt = 
-	//mBombCnt = 
+	mBombCnt = 1; 
 }
 
 Ref<GameObject> Character::AddController(CharacterController* ctrl)
@@ -94,4 +98,14 @@ void Character::SetPower( int factor )
 int Character::GetPower()
 {
 	return mBombPower;
+}
+
+void Character::SetBombCnt( int factor )
+{
+	mBombCnt += factor;
+}
+
+int Character::GetBombCnt()
+{
+	return mBombCnt;
 }

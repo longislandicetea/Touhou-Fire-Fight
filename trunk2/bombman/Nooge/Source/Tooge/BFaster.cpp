@@ -3,6 +3,6 @@
 
 BFaster::BFaster()
 {
-	mModel = Md2Object::Load("c:\\box.md2","c:\\bluebox.bmp");
+	mModel = Md2Object::Load("c:\\box.md2","c:\\boxorange.bmp");
 	this->AddChild(mModel);
 }

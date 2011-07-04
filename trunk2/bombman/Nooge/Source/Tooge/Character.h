@@ -29,8 +29,10 @@ public:
 	static Ref<GameObject> AddController(CharacterController* ctrl);
 	void SetSpeed(int factor);
 	void SetPower(int factor);
+	void SetBombCnt(int factor);
 
 	int GetPower();
+	int GetBombCnt();
 
 private:
 	Character(CharacterController* ctrl);
