@@ -14,6 +14,15 @@ void Character::Update(float dt)
 	if(!gs->CanPass(this))
 		SetPos(oldX,GetY(),oldZ);
 	gs->EatBonus(this);
+
+	if(mHasDropMalus)
+	{
+		if(mTimer->End()>10.0)
+		{
+			SetBombCnt(1);
+			mHasDropMalus = false;
+		}
+	}
 }
 
 void Character::doAction( int currentAction, float dt )
@@ -77,7 +86,11 @@ Character::Character(CharacterController* ctrl)
 	mSpeed = 100.0;
 	mBombPower = 1;
 	//mLifeCnt = 
-	mBombCnt = 1; 
+	mBombCnt = 1;
+	mHasDropMalus = false;
+
+	//mTimer = new Timer();
+	mTimer = Ref<Timer>(new Timer);
 }
 
 Ref<GameObject> Character::AddController(CharacterController* ctrl)
@@ -108,4 +121,10 @@ void Character::SetBombCnt( int factor )
 int Character::GetBombCnt()
 {
 	return mBombCnt;
+}
+
+void Character::SetTimer()
+{
+	mHasDropMalus = true;
+	mTimer->Begin();
 }

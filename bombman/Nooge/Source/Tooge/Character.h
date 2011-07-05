@@ -6,6 +6,8 @@
 #include "GameObject.h"
 #include "Grid.h"
 #include "Bomb.h"
+#include "Timer.h"
+
 #include <vector>
 
 class Character;
@@ -30,6 +32,7 @@ public:
 	void SetSpeed(int factor);
 	void SetPower(int factor);
 	void SetBombCnt(int factor);
+	void SetTimer();
 
 	int GetPower();
 	int GetBombCnt();
@@ -47,6 +50,10 @@ private:
 	int mBombPower;
 	int mLifeCnt;
 	int mBombCnt;
+	bool mHasDropMalus;
 	GameStage* mStage;
 	Ref<GameObject> mModel;
+
+	//Timer* mTimer;
+	Ref<Timer> mTimer;
 };
