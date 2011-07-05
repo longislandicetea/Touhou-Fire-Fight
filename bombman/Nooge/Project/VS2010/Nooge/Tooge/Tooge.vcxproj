@@ -85,6 +85,7 @@
     <ClCompile Include="..\..\..\..\Source\Tooge\BPush.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\BSlower.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\BTrigger.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Tooge\Decoration.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\FSM.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\Character.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\DataManager.cpp" />
@@ -113,6 +114,7 @@
     <ClInclude Include="..\..\..\..\Source\Tooge\BPush.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\BSlower.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\BTrigger.h" />
+    <ClInclude Include="..\..\..\..\Source\Tooge\Decoration.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\FSM.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\Character.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\DataManager.h" />

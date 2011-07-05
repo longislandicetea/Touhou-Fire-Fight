@@ -12,6 +12,7 @@
 #include "BSlower.h"
 #include "BTrigger.h"
 #include "Grid.h"
+#include "Decoration.h"
 
 Ref<GameObject> GameStage::CurrentMap()
 {
@@ -28,9 +29,11 @@ GameStage::GameStage( Ref<GameObject> map )
 	mUwall = info["uwall"];
 	mNpc = info["npc"];
 	mPlayer = info["player"];
+	mFloor = info["decoration"];
 	mBomb  = Ref<GameObject>(new Sprite);
 	mBonus = Ref<GameObject>(new Sprite);
 
+	this->AddChild(mFloor);
 	this->AddChild(mDwall);
 	this->AddChild(mUwall);
 	this->AddChild(mNpc);
@@ -161,7 +164,7 @@ void GameStage::EatBonus( Character* obj )
 			}
 			else if(typeid(*child) == typeid(BPush))
 			{
-
+				obj->SetPushBonus(true);
 			}
 			else if(typeid(*child) == typeid(BSlower))
 			{
@@ -205,5 +208,28 @@ void GameStage::DwallExplode( int row,int col )
 
 		if(row == tRow && col == tCol)
 			child->RemoveFromParent();
+	}
+}
+
+void GameStage::StepOnBomb( Character* obj )
+{
+	int cnt = cast<Sprite>(mBomb)->NumOfChild();
+	Grid box = obj->GetBoundingBox();
+	for(int i = 0;i<cnt;++i)
+	{
+		Ref<GameObject> child = cast<Sprite>(mBomb)->GetChild(i);
+		Grid cBox = child->GetBoundingBox();
+		if(box.Intersect(cBox))
+		{
+			if(obj->HasPushBonus())
+			{
+				int direction = obj->GetDirection();
+				cast<Bomb>(child)->TriggerPush(direction,10.0); 
+			}
+			else
+			{
+				//dead
+			}
+		}
 	}
 }

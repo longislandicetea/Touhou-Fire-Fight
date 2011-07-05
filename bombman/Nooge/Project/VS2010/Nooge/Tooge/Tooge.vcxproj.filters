@@ -41,6 +41,9 @@
     <Filter Include="Item\Wall">
       <UniqueIdentifier>{5f5b7968-ee45-417e-8128-9fcd73f30d3a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Item\Decrations">
+      <UniqueIdentifier>{13312c02-85fb-475f-9c80-5708ee5f5725}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Source\Tooge\Main.cpp">
@@ -121,6 +124,9 @@
     <ClCompile Include="..\..\..\..\Source\Tooge\Transition.cpp">
       <Filter>AI</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\Tooge\Decoration.cpp">
+      <Filter>Item\Decrations</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Source\Tooge\App.h">
@@ -197,6 +203,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\Source\Tooge\Transition.h">
       <Filter>AI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\Tooge\Decoration.h">
+      <Filter>Item\Decrations</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

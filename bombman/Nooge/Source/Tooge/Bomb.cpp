@@ -12,6 +12,7 @@ Bomb::Bomb()
 	this->AddChild(mModel);
 	mTimer = Ref<Timer>(new Timer);
 	mTimer->Begin();	
+	mPushed = false;
 }
 
 void Bomb::CreateBomb(int x,int y, Character* owner)
@@ -28,6 +29,8 @@ void Bomb::CreateBomb(int x,int y, Character* owner)
 
 void Bomb::Update(float dt)
 {
+	if(mPushed)
+		MoveWhenPushed(dt*mSpeed);
 	if(mTimer->End()>3.0)
 	{
 		if(mTimer->End()>3.5)
@@ -78,4 +81,31 @@ void Bomb::explode()
 		//Bonus::CreateBonus(mFlame[k]->CenterX(),mFlame[k]->CenterY());
 		gs->DwallExplode(r,c);
 	}
+}
+
+void Bomb::MoveWhenPushed(float ds)
+{
+	//0-left 1-down 2-right 3-up
+	switch(mDirection)
+	{
+	case 0:
+		SetZ(GetZ()-ds);
+		break;
+	case 1:
+		SetZ(GetZ()+ds);
+		break;
+	case 2:
+		SetX(GetX()+ds);
+		break;
+	case 3:
+		SetX(GetX()-ds);
+		break;
+	}
+}
+
+void Bomb::TriggerPush( int direction,float speed )
+{
+	mDirection = direction;
+	mSpeed = speed;
+	mPushed = true;
 }

@@ -7,13 +7,14 @@ void Character::Update(float dt)
 {
 	int oldX = this->GetX();
 	int oldZ = this->GetZ();
-	int currentAction = mCtrl.Update(this,dt);
-	doAction(currentAction,dt);
+	mCurrentAction = mCtrl.Update(this,dt);
+	doAction(mCurrentAction,dt);
 	
 	GameStage* gs =(GameStage*)(App::Inst().currentStage());
 	if(!gs->CanPass(this))
 		SetPos(oldX,GetY(),oldZ);
 	gs->EatBonus(this);
+	gs->StepOnBomb(this);
 
 	if(mHasDropMalus)
 	{
@@ -88,8 +89,7 @@ Character::Character(CharacterController* ctrl)
 	//mLifeCnt = 
 	mBombCnt = 1;
 	mHasDropMalus = false;
-
-	//mTimer = new Timer();
+	mHasPushBonus = false;
 	mTimer = Ref<Timer>(new Timer);
 }
 
@@ -128,3 +128,19 @@ void Character::SetTimer()
 	mHasDropMalus = true;
 	mTimer->Begin();
 }
+
+void Character::SetPushBonus(bool hasBonus)
+{
+	mHasPushBonus = hasBonus;
+}
+
+bool Character::HasPushBonus()
+{
+	return mHasPushBonus;
+}
+
+int Character::GetDirection()
+{
+	return mCurrentAction;
+}
+

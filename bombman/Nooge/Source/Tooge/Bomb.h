@@ -13,12 +13,17 @@ class Bomb : public Sprite
 public:
 	static void CreateBomb(int x,int y, Character* owner);
 	virtual void Update(float dt);
+	void TriggerPush(int direction,float speed);
+	void MoveWhenPushed(float ds);
 
 private:
 	Bomb();
 	void explode();
 
 	int mPower;
+	int mDirection;
+	int mSpeed;
+	int mPushed;
 	Character* mOwner;
 	Ref<GameObject> mModel;
 	Ref<Timer> mTimer;
