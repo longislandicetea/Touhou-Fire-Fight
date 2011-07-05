@@ -30,9 +30,6 @@ GameStage::GameStage( Ref<GameObject> map )
 	mPlayer = info["player"];
 	mBomb  = Ref<GameObject>(new Sprite);
 	mBonus = Ref<GameObject>(new Sprite);
-	//mFlame = Ref<GameObject>(new Sprite);
-
-	//mDwall->SetScale(0.7);
 
 	this->AddChild(mDwall);
 	this->AddChild(mUwall);
@@ -40,7 +37,6 @@ GameStage::GameStage( Ref<GameObject> map )
 	this->AddChild(mPlayer);
 	this->AddChild(mBomb);
 	this->AddChild(mBonus);
-	//this->AddChild(mFlame);
 }
 
 GameStage::~GameStage()
@@ -151,7 +147,6 @@ void GameStage::EatBonus( Character* obj )
 			{
 				obj->SetBombCnt(1);
 			}
-
 			else if(typeid(*child) == typeid(BFlamePlus))
 			{
 				obj->SetPower(1);
@@ -174,7 +169,8 @@ void GameStage::EatBonus( Character* obj )
 			}
 			else if(typeid(*child) == typeid(BDrop))
 			{
-
+				obj->SetBombCnt(-obj->GetBombCnt());
+				obj->SetTimer();
 			}
 			child->RemoveFromParent();
 		}

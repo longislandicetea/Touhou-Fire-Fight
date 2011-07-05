@@ -20,8 +20,9 @@ void Bomb::CreateBomb(int x,int y, Character* owner)
 	bomb->SetPos(x,0,y);
 	GameStage* gs = (GameStage*)App::Inst().currentStage();
 	gs->AddBomb(bomb);
-	cast<Bomb>(bomb)->mPower = owner->GetPower();
+	//owner->SetBombCnt(-1);
 	cast<Bomb>(bomb)->mOwner = owner;
+	cast<Bomb>(bomb)->mPower = owner->GetPower();
 }
 
 

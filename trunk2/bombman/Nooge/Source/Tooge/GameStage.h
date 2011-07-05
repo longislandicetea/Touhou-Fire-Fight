@@ -4,6 +4,7 @@
 #include "Ref.h"
 #include "Map.h"
 #include "GameObject.h"
+#include "Timer.h"
 
 #include <map>
 #include <string>
@@ -35,4 +36,6 @@ private:
 	Ref<GameObject> mBomb;
 	Ref<GameObject> mBonus;
 	std::map<std::string,int> mBonusProb;
+
+	Ref<Timer> mTimer;
 };                                                                                                                                                                                                                                                                                                                                                                                                     
