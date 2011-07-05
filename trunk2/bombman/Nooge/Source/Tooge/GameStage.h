@@ -21,6 +21,7 @@ public:
 	bool HasUwall( int row,int col);
 	void DwallExplode( int row,int col);
 	void EatBonus(Character* obj);
+	void StepOnBomb(Character* obj);
 	void AddBomb(Ref<GameObject> bomb);
 	void AddBonus(Ref<GameObject> bonus);
 	virtual ~GameStage();
@@ -35,6 +36,7 @@ private:
 	Ref<GameObject> mNpc;
 	Ref<GameObject> mBomb;
 	Ref<GameObject> mBonus;
+	Ref<GameObject> mFloor;
 	std::map<std::string,int> mBonusProb;
 
 	Ref<Timer> mTimer;

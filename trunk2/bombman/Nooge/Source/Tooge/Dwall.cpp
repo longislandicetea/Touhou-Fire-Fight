@@ -4,7 +4,7 @@ using namespace std;
 
 Dwall::Dwall()
 {
-	mModel = Md2Object::Load("c:\\dwall.md2","c:\\dwallt.bmp");
+	mModel = Md2Object::Load("c:\\wall.md2","c:\\dwallt.bmp");
 	this->AddChild(mModel);
 }
 

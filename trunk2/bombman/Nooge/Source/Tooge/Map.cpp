@@ -14,6 +14,7 @@
 #include "NPCController.h"
 #include "Grid.h"
 #include "AIMap.h"
+#include "Decoration.h"
 
 
 Ref<GameObject> Map::Load( const std::string& filename )
@@ -70,12 +71,18 @@ std::map< std::string,Ref<GameObject> > Map::Parse()
 {
 	this->Load("c:\\test.xml");
 	Ref<GameObject> uwallContainer(new Sprite),dwallContainer(new Sprite),npcContainer(new Sprite),playerContainer(new Sprite);
+	Ref<GameObject> decContainer(new Sprite);
 	std::map< std::string,Ref<GameObject> > ret;
 
 	ret["uwall"] = uwallContainer;
 	ret["dwall"] = dwallContainer;
 	ret["npc"] = npcContainer;
 	ret["player"] = playerContainer;
+	ret["decoration"] = decContainer;
+
+	Ref<GameObject> floor (new Decoration);
+	floor->SetPos(75,5,65);
+	cast<Sprite>(decContainer)->AddChild(floor);
 
 	for(int i = 0;i<mGrids.size();++i)
 	{

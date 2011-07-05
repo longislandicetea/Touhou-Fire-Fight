@@ -33,9 +33,13 @@ public:
 	void SetPower(int factor);
 	void SetBombCnt(int factor);
 	void SetTimer();
+	void SetPushBonus(bool hasBonus);
 
 	int GetPower();
 	int GetBombCnt();
+	int GetDirection();
+
+	bool HasPushBonus();
 
 private:
 	Character(CharacterController* ctrl);
@@ -51,6 +55,9 @@ private:
 	int mLifeCnt;
 	int mBombCnt;
 	bool mHasDropMalus;
+	bool mHasPushBonus;
+	//int mDirection;//0-left 1-down 2-right 3-up
+	int mCurrentAction;
 	GameStage* mStage;
 	Ref<GameObject> mModel;
 
