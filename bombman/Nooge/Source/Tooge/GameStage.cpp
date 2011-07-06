@@ -160,7 +160,7 @@ void GameStage::EatBonus( Character* obj )
 			}
 			else if(typeid(*child) == typeid(BTrigger))
 			{
-
+				obj->SetTrigBonus(true);
 			}
 			else if(typeid(*child) == typeid(BPush))
 			{
@@ -219,11 +219,11 @@ void GameStage::StepOnBomb( Character* obj )
 	{
 		Ref<GameObject> child = cast<Sprite>(mBomb)->GetChild(i);
 		Grid cBox = child->GetBoundingBox();
-		if(box.Intersect(cBox))
+		if(cBox.Intersect(box))
 		{
 			if(obj->HasPushBonus())
 			{
-				int direction = obj->GetDirection();
+				int direction = obj->GetCurState();
 				cast<Bomb>(child)->TriggerPush(direction,10.0); 
 			}
 			else

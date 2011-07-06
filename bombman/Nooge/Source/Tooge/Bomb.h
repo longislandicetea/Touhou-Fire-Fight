@@ -19,11 +19,13 @@ public:
 private:
 	Bomb();
 	void explode();
+	void actWhenSteped();
 
 	int mPower;
 	int mDirection;
 	int mSpeed;
 	int mPushed;
+	bool mInTrigState;
 	Character* mOwner;
 	Ref<GameObject> mModel;
 	Ref<Timer> mTimer;
