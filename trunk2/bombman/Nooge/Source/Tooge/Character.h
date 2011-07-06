@@ -34,12 +34,16 @@ public:
 	void SetBombCnt(int factor);
 	void SetTimer();
 	void SetPushBonus(bool hasBonus);
+	void SetTrigBonus(bool hasBonus);
 
 	int GetPower();
 	int GetBombCnt();
-	int GetDirection();
+	int GetCurState();
 
 	bool HasPushBonus();
+	bool HasTrigBonus();
+
+	Ref<Timer> TrigBonusTimer();
 
 private:
 	Character(CharacterController* ctrl);
@@ -56,11 +60,13 @@ private:
 	int mBombCnt;
 	bool mHasDropMalus;
 	bool mHasPushBonus;
+	bool mHasTrigBonus;
+	
 	//int mDirection;//0-left 1-down 2-right 3-up
 	int mCurrentAction;
 	GameStage* mStage;
 	Ref<GameObject> mModel;
-
-	//Timer* mTimer;
+	
+	Ref<Timer> mTrigTimer;
 	Ref<Timer> mTimer;
 };

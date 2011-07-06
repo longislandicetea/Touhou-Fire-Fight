@@ -13,6 +13,7 @@ Bomb::Bomb()
 	mTimer = Ref<Timer>(new Timer);
 	mTimer->Begin();	
 	mPushed = false;
+	mInTrigState = false;
 }
 
 void Bomb::CreateBomb(int x,int y, Character* owner)
@@ -31,17 +32,30 @@ void Bomb::Update(float dt)
 {
 	if(mPushed)
 		MoveWhenPushed(dt*mSpeed);
-	if(mTimer->End()>3.0)
+	if(!mOwner->HasTrigBonus())
 	{
-		if(mTimer->End()>3.5)
+		if(mTimer->End()>3.0)
 		{
-			explode();
-			mOwner->SetBombCnt(1);
-			Bonus::CreateBonus(GetX(),GetZ());
-			this->RemoveFromParent();
+			if(mTimer->End()>3.5)
+			{
+				actWhenSteped();
+			}
+			this->SetAlpha(0.0);
 		}
-		this->SetAlpha(0.0);
 	}
+	else
+	{
+		if(mOwner->GetCurState() == CharacterController::TRIGGER_BOMB ||mInTrigState)
+		{
+			mInTrigState = true;
+			this->SetAlpha(0.0);
+			if(mOwner->TrigBonusTimer()->End()>0.5)
+			{
+				actWhenSteped();
+			}
+			mOwner->SetTrigBonus(true);
+		}
+	}		
 }
 
 void Bomb::explode()
@@ -108,4 +122,12 @@ void Bomb::TriggerPush( int direction,float speed )
 	mDirection = direction;
 	mSpeed = speed;
 	mPushed = true;
+}
+
+void Bomb::actWhenSteped()
+{
+	explode();
+	mOwner->SetBombCnt(1);
+	Bonus::CreateBonus(GetX(),GetZ());
+	this->RemoveFromParent();
 }

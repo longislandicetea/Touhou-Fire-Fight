@@ -53,8 +53,8 @@ void Character::doAction( int currentAction, float dt )
 			SetBombCnt(-1);
 		}
 		break;
-	/*case CharacterController::TRIGGER_BOMB:
-		break;*/
+	case CharacterController::TRIGGER_BOMB:
+		mTrigTimer->Begin();
 	}
 }
 
@@ -90,7 +90,9 @@ Character::Character(CharacterController* ctrl)
 	mBombCnt = 1;
 	mHasDropMalus = false;
 	mHasPushBonus = false;
+	mHasTrigBonus = false;
 	mTimer = Ref<Timer>(new Timer);
+	mTrigTimer = Ref<Timer>(new Timer);
 }
 
 Ref<GameObject> Character::AddController(CharacterController* ctrl)
@@ -139,8 +141,23 @@ bool Character::HasPushBonus()
 	return mHasPushBonus;
 }
 
-int Character::GetDirection()
+int Character::GetCurState()
 {
 	return mCurrentAction;
+}
+
+void Character::SetTrigBonus( bool hasBonus )
+{
+	mHasTrigBonus = hasBonus;
+}
+
+bool Character::HasTrigBonus()
+{
+	return mHasTrigBonus;
+}
+
+Ref<Timer> Character::TrigBonusTimer()
+{
+	return mTrigTimer;
 }
 
