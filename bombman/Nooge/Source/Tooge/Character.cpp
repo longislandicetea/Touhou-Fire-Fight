@@ -81,7 +81,8 @@ void Character::right( float dt )
 Character::Character(CharacterController* ctrl)
 	: mCtrl(*ctrl)
 {
-	mModel = Md2Object::Load("c:\\mh_name.md2","c:\\t2.bmp");
+	//mModel = Md2Object::Load("c:\\mh_name.md2","c:\\t2.bmp");
+	mModel = Md2Object::Load(DataManager::GetDataPath("Model","player","resource\\data.ini"),DataManager::GetDataPath("Texture","playerT","resource\\data.ini"));
 	cast<Md2Object>(mModel)->setAnimation("IDLE");
 	this->AddChild(mModel);
 	mSpeed = 100.0;

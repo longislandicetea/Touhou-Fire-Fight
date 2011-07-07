@@ -7,6 +7,7 @@
 #include <gl/GL.h>
 
 #include "Texture.h"
+#include "DataManager.h"
 
 using std::map;
 using std::vector;

@@ -88,7 +88,6 @@
     <ClCompile Include="..\..\..\..\Source\Tooge\Decoration.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\FSM.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\Character.cpp" />
-    <ClCompile Include="..\..\..\..\Source\Tooge\DataManager.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\Dwall.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\Main.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\Map.cpp" />
@@ -117,7 +116,6 @@
     <ClInclude Include="..\..\..\..\Source\Tooge\Decoration.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\FSM.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\Character.h" />
-    <ClInclude Include="..\..\..\..\Source\Tooge\DataManager.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\Dwall.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\GameStage.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\Map.h" />

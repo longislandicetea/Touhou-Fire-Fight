@@ -20,9 +20,6 @@
     <Filter Include="InputSystem">
       <UniqueIdentifier>{86e435fd-e119-4817-abce-45357e055183}</UniqueIdentifier>
     </Filter>
-    <Filter Include="DataManager">
-      <UniqueIdentifier>{8c28f0d0-2049-4e37-a99e-5457b66d33ed}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Timer">
       <UniqueIdentifier>{e0d0fbf4-c880-48ff-bde7-c8a84c870114}</UniqueIdentifier>
     </Filter>
@@ -84,9 +81,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\Source\Tooge\Bomb.cpp">
       <Filter>Item\Bomb</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Source\Tooge\DataManager.cpp">
-      <Filter>DataManager</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Source\Tooge\Timer.cpp">
       <Filter>Timer</Filter>
@@ -164,9 +158,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\Source\Tooge\Bomb.h">
       <Filter>Item\Bomb</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Source\Tooge\DataManager.h">
-      <Filter>DataManager</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Source\Tooge\Timer.h">
       <Filter>Timer</Filter>
