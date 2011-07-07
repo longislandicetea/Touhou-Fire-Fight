@@ -8,7 +8,8 @@
 
 Bomb::Bomb()
 {
-	mModel = Md2Object::Load("c:\\bomb.md2","c:\\bombt.bmp");
+	//mModel = Md2Object::Load("c:\\bomb.md2","c:\\bombt.bmp");
+	mModel = Md2Object::Load(DataManager::GetDataPath("Model","bomb","resource\\data.ini"),DataManager::GetDataPath("Texture","bombT","resource\\data.ini"));
 	this->AddChild(mModel);
 	mTimer = Ref<Timer>(new Timer);
 	mTimer->Begin();	

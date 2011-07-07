@@ -15,6 +15,7 @@
 #include "Grid.h"
 #include "AIMap.h"
 #include "Decoration.h"
+#include "DataManager.h"
 
 
 Ref<GameObject> Map::Load( const std::string& filename )
@@ -69,7 +70,9 @@ Map::Map()
 
 std::map< std::string,Ref<GameObject> > Map::Parse()
 {
-	this->Load("c:\\test.xml");
+	this->Load(DataManager::GetDataPath("Map","map","resource\\data.ini"));
+	//this->Load("resource\\test.xml");
+	//this->Load("c:\\test.xml");
 	Ref<GameObject> uwallContainer(new Sprite),dwallContainer(new Sprite),npcContainer(new Sprite),playerContainer(new Sprite);
 	Ref<GameObject> decContainer(new Sprite);
 	std::map< std::string,Ref<GameObject> > ret;

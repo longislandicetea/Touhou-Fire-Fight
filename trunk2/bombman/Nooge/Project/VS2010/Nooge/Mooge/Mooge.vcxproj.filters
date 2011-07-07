@@ -81,6 +81,9 @@
     <ClCompile Include="..\..\..\..\Source\Mooge\Objects\Grid.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\Mooge\Objects\DataManager.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Source\Mooge\Objects\2DText.h">
@@ -150,6 +153,9 @@
       <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Source\Mooge\Objects\Grid.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\Mooge\Objects\DataManager.h">
       <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>
