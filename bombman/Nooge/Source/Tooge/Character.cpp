@@ -85,7 +85,7 @@ Character::Character(CharacterController* ctrl)
 	mModel = Md2Object::Load(DataManager::GetDataPath("Model","player","resource\\data.ini"),DataManager::GetDataPath("Texture","playerT","resource\\data.ini"));
 	cast<Md2Object>(mModel)->setAnimation("IDLE");
 	this->AddChild(mModel);
-	mSpeed = 100.0;
+	mSpeed = 60;
 	mBombPower = 1;
 	//mLifeCnt = 
 	mBombCnt = 1;
