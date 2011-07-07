@@ -47,7 +47,7 @@ float Grid::Y2()
 
 bool Grid::TestPoint( float x,float y )
 {
-	if(x<mX2 && x>mX1 && y<mY2 && y>mY1)
+	if(x<=mX2 && x>=mX1 && y>=mY2 && y<=mY1)
 		return true;
 	return false;
 }
