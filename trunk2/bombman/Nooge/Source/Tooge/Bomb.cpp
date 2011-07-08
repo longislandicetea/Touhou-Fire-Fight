@@ -5,6 +5,7 @@
 #include "GameStage.h"
 #include "Bonus.h"
 #include "Character.h"
+#include "Explosion.h"
 
 Bomb::Bomb()
 {
@@ -86,6 +87,14 @@ void Bomb::explode()
 				else
 					dValid[j] = 0;
 			}
+		}
+
+		for(int k = 0;k<mFlame.size();++k)
+		{
+			int x = mFlame[k]->CenterX();
+			int y = mFlame[k]->CenterY();
+			Ref<GameObject> explosion(new Explosion(x,rand()%5,y));
+			gs->AddChild(explosion);
 		}
 	}
 

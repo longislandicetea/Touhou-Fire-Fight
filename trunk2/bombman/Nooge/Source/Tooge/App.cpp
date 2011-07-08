@@ -16,7 +16,7 @@
 #include "Character.h"
 #include "PlayerController.h"
 #include "GameStage.h"
-
+#include "DataManager.h"
 #include "jpeglib.h"	
 
 
@@ -92,7 +92,8 @@ void App::SetupEngine()
 	mMainCamera->SetPosition(CamEyeVec, CamCenterVec, CamUpVec);
 
 	//Add Engine object here.
-	Ref<GameObject> map = Map::Load("c:\\test.xml");
+	//Ref<GameObject> map = Map::Load("c:\\test.xml");
+	Ref<GameObject> map = Map::Load(DataManager::GetDataPath("Map","map","resource\\data.ini"));
 	Ref<Stage> gameStage(new GameStage(map));
 	mMooge->CurrentStage = gameStage;
 

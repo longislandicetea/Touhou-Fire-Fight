@@ -3,6 +3,8 @@
 #include "App.h"
 #include "Bomb.h"
 
+#include "Explosion.h"
+
 void Character::Update(float dt)
 {
 	int oldX = this->GetX();
@@ -51,10 +53,13 @@ void Character::doAction( int currentAction, float dt )
 		{
 			Bomb::CreateBomb(GetX(),GetZ(),this);
 			SetBombCnt(-1);
+			Explosion* e = new Explosion(GetX(),GetY(),GetZ());
+			e->Draw();
 		}
 		break;
 	case CharacterController::TRIGGER_BOMB:
 		mTrigTimer->Begin();
+		this->SetTrigBonus(false);
 	}
 }
 
