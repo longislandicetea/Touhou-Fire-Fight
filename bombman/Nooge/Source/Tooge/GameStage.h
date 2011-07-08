@@ -37,6 +37,7 @@ private:
 	Ref<GameObject> mBomb;
 	Ref<GameObject> mBonus;
 	Ref<GameObject> mFloor;
+	Ref<GameObject> mExplosion;
 	std::map<std::string,int> mBonusProb;
 
 	Ref<Timer> mTimer;

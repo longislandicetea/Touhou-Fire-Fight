@@ -562,11 +562,11 @@
       <GridState>NPC</GridState>
     </Grid>
   </grids>
-  <AddBombP>15</AddBombP>
-  <AddFlameP>15</AddFlameP>
-  <FasterP>15</FasterP>
-  <PushP>15</PushP>
-  <TriggerP>15</TriggerP>
+  <AddBombP>5</AddBombP>
+  <AddFlameP>5</AddFlameP>
+  <FasterP>5</FasterP>
+  <PushP>60</PushP>
+  <TriggerP>2</TriggerP>
   <SlowerP>5</SlowerP>
   <DropP>5</DropP>
 </Level>

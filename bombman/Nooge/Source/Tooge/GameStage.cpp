@@ -13,6 +13,7 @@
 #include "BTrigger.h"
 #include "Grid.h"
 #include "Decoration.h"
+#include "Explosion.h"
 
 Ref<GameObject> GameStage::CurrentMap()
 {
@@ -225,6 +226,7 @@ void GameStage::StepOnBomb( Character* obj )
 			{
 				int direction = obj->GetCurState();
 				cast<Bomb>(child)->TriggerPush(direction,10.0); 
+				obj->SetPushBonus(false);
 			}
 			else
 			{

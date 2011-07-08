@@ -41,6 +41,9 @@
     <Filter Include="Item\Decrations">
       <UniqueIdentifier>{13312c02-85fb-475f-9c80-5708ee5f5725}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ParticleEffect">
+      <UniqueIdentifier>{9de2687d-523d-494a-8865-e3648bff3129}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Source\Tooge\Main.cpp">
@@ -121,6 +124,12 @@
     <ClCompile Include="..\..\..\..\Source\Tooge\Decoration.cpp">
       <Filter>Item\Decrations</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\Tooge\ParticleSystem.cpp">
+      <Filter>ParticleEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\Tooge\Explosion.cpp">
+      <Filter>ParticleEffect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Source\Tooge\App.h">
@@ -197,6 +206,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\Source\Tooge\Decoration.h">
       <Filter>Item\Decrations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\Tooge\ParticleSystem.h">
+      <Filter>ParticleEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\Tooge\Explosion.h">
+      <Filter>ParticleEffect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
