@@ -3,6 +3,8 @@
 
 PlayerController::PlayerController()
 {
+	mIsSpacePressed = false;
+	mIsShiftPressed = false;
 }
 
 int PlayerController::Update( Character* character,float dt )
@@ -17,8 +19,13 @@ int PlayerController::Update( Character* character,float dt )
 	else if(inputSys->IsKeyDown(VK_RIGHT))
 		return CharacterController::MOVE_RIGHT;
 	else if(inputSys->IsKeyDown(VK_SPACE))
-		return CharacterController::DROP_BOMB;
+		mIsSpacePressed = true;
 	else if(inputSys->IsKeyDown(VK_SHIFT))
 		return CharacterController::TRIGGER_BOMB;
+	if(!inputSys->IsKeyDown(VK_SPACE) && mIsSpacePressed)
+	{
+		mIsSpacePressed = false;
+		return CharacterController::DROP_BOMB;
+	}
 	return CharacterController::IDLE;
 }

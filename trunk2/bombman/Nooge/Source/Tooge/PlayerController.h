@@ -12,4 +12,6 @@ public:
 
 private:
 	Ref<Character> mOwner;
+	bool mIsSpacePressed;
+	bool mIsShiftPressed;
 };

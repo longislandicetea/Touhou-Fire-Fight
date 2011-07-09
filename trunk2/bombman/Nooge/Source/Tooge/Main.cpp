@@ -29,7 +29,7 @@ int WINAPI _tWinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdL
 	//****************** [User Implementation] ******************
 	// Delete your form class here or you'll get some memory leak.
 	//***********************************************************
-	delete app;
+	//delete app;
 		
 	CWinManager::GetInstance()->DeleteInstance();
 	CThreadManager::GetInstance()->DeleteInstance();
