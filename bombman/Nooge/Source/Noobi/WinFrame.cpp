@@ -463,3 +463,22 @@ void CWinFrame::CenterWindow( HWND hwnd )
         (GetSystemMetrics(SM_CYSCREEN) - rc.bottom)/2,
          0, 0, SWP_NOZORDER|SWP_NOSIZE );
 }
+
+
+#include <stdio.h>
+#include <wtypes.h>
+#include <stdarg.h>
+#include <tchar.h>
+
+
+void LogTrace(LPCTSTR pszFormat, ...)
+{
+	va_list pArgs;
+
+	TCHAR szMessageBuffer[16380]={0};
+	va_start( pArgs, pszFormat );
+	_vsntprintf( szMessageBuffer, 16380, pszFormat, pArgs );
+	va_end( pArgs );
+
+	OutputDebugString(szMessageBuffer);
+}

@@ -144,4 +144,7 @@ class CWinFrame
 		map<HWND, CEdit*> mEditMap;
 };
 
+
+void LogTrace(LPCTSTR pszFormat, ...);
+
 #endif

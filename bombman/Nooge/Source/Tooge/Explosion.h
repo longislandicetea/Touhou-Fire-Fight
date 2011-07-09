@@ -3,7 +3,7 @@
 #include <vector>
 #include "GameObjectContainer.h"
 
-#define MAX_PARTICLE 100
+#define MAX_PARTICLE 50
 #define DEFAULT_R 0.75f
 #define DEFAULT_G 0.2f
 #define DEFAULT_B 0.1f

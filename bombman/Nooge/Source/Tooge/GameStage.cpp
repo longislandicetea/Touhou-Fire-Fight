@@ -15,6 +15,8 @@
 #include "Decoration.h"
 #include "Explosion.h"
 
+#include "WinFrame.h"
+
 Ref<GameObject> GameStage::CurrentMap()
 {
 	return mCurrentMap;
@@ -224,8 +226,9 @@ void GameStage::StepOnBomb( Character* obj )
 		{
 			if(obj->HasPushBonus())
 			{
+				LogTrace("push\n");
 				int direction = obj->GetCurState();
-				cast<Bomb>(child)->TriggerPush(direction,10.0); 
+				cast<Bomb>(child)->TriggerPush(direction,70.0); 
 				obj->SetPushBonus(false);
 			}
 			else

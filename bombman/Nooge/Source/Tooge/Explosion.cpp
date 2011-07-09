@@ -13,27 +13,32 @@ Explosion::Explosion( float x,float y,float z )
 	glBlendFunc(GL_ONE,GL_ZERO);
 	//glEnable(GL_POINT_SMOOTH); 
 
+	mParticles.reserve(MAX_PARTICLE);
 	for(int i = 0;i<MAX_PARTICLE;++i)
 	{
 		Particle p;
 		p.x = x;
 		p.y = y;
 		p.z = z;
-		p.xi = p.yi = p.zi = 0.0;
+		p.xi = rand()%50-26;
+		p.yi = rand()%50-25;
+		p.zi = rand()%50-25;
+		//p.xi = p.yi = p.zi = 0.0;
 		p.r = DEFAULT_R;
 		p.g = DEFAULT_G;
 		p.b = DEFAULT_B;
-		p.life = 0.7;
-		p.fade = (rand()%10)/10000+0.003;
+		p.life = 2.2;
+		//p.fade = (rand()%10)/10000+0.003;
+		p.fade = rand()%10/50.0+0.1;
 
-		float factor = 0.05;
+		float factor = 3;
 		p.gx = -p.xi*factor;
 		p.gy = -p.yi*factor;
 		p.gz = -p.zi*factor;
 
 		mParticles.push_back(p);
 	}
-	mParticleSize = 0.1;
+	mParticleSize = 1;
 }
 
 void Explosion::Draw()
@@ -44,33 +49,36 @@ void Explosion::Draw()
 
 	for(int i = 0;i<MAX_PARTICLE;++i)
 	{
-		glPointSize(5.0);
-		glEnable(GL_POINT_SMOOTH);
-		int x = mParticles[i].x;
-		int y = mParticles[i].y;
-		int z = mParticles[i].z;
+		if(mParticles[i].life>0.0)
+		{
+			glPointSize(10.0);
+			glEnable(GL_POINT_SMOOTH);
+			int x = mParticles[i].x;
+			int y = mParticles[i].y;
+			int z = mParticles[i].z;
 
-		float dt = 0.03;
-		mParticles[i].x += mParticles[i].xi/(dt* 100000.0);
-		mParticles[i].xi += mParticles[i].gx;
-		mParticles[i].y += mParticles[i].yi/(dt* 100000.0);
-		mParticles[i].yi += mParticles[i].gy;
-		mParticles[i].z += mParticles[i].zi/(dt* 100000.0);
-		mParticles[i].zi += mParticles[i].gz;
-		
-		mParticles[i].life -= mParticles[i].fade;
-		glColor4f(mParticles[i].r,mParticles[i].g,mParticles[i].b,1);
+			float dt = 0.03;
+			mParticles[i].x += mParticles[i].xi/(dt* 100000.0);
+			mParticles[i].xi += mParticles[i].gx;
+			mParticles[i].y += mParticles[i].yi/(dt* 100000.0);
+			mParticles[i].yi += mParticles[i].gy;
+			mParticles[i].z += mParticles[i].zi/(dt* 100000.0);
+			mParticles[i].zi += mParticles[i].gz;
 
-		glBegin(GL_QUADS);
-		//glTexCoord2f(0.0f,0.0f);
-		glVertex3f(x-mParticleSize,y-mParticleSize,z);
-		//glTexCoord2f(1.0f,0.0f);
-		glVertex3f(x-mParticleSize,y+mParticleSize,z);
-		//glTexCoord2f(1.0f,1.0f);
-		glVertex3f(x+mParticleSize,y+mParticleSize,z);
-		//glTexCoord2f(0.0f,1.0f);
-		glVertex3f(x+mParticleSize,y-mParticleSize,z);
-		glEnd();
+			mParticles[i].life -= mParticles[i].fade;
+			glColor4f(mParticles[i].r,mParticles[i].g,mParticles[i].b,1);
+
+			glBegin(GL_POINTS);
+			//glTexCoord2f(0.0f,0.0f);
+			glVertex3f(x-mParticleSize,y-mParticleSize,z);
+			//glTexCoord2f(1.0f,0.0f);
+			glVertex3f(x-mParticleSize,y+mParticleSize,z);
+			//glTexCoord2f(1.0f,1.0f);
+			glVertex3f(x+mParticleSize,y+mParticleSize,z);
+			//glTexCoord2f(0.0f,1.0f);
+			glVertex3f(x+mParticleSize,y-mParticleSize,z);
+			glEnd();
+		}
 	}  
 	glDisable(GL_BLEND);
 }

@@ -1,4 +1,5 @@
 #include"Character.h"
+#include "WinFrame.h"
 #include "Md2Object.h"
 #include "App.h"
 #include "Bomb.h"
@@ -49,6 +50,8 @@ void Character::doAction( int currentAction, float dt )
 		right(dt*mSpeed);
 		break;
 	case CharacterController::DROP_BOMB:
+		//std::cerr<<"dropping"<<mBombCnt<<std::endl;
+		//LogTrace("dropping:%d\n",mBombCnt);
 		if(mBombCnt>0) 
 		{
 			Bomb::CreateBomb(GetX(),GetZ(),this);
@@ -66,21 +69,25 @@ void Character::doAction( int currentAction, float dt )
 void Character::up( float dt )
 {
 	this->SetZ(GetZ()-dt);
+	mModel->SetRotateY(180);
 }
 
 void Character::down( float dt )
 {
 	this->SetZ(GetZ()+dt);
+	mModel->SetRotateY(0);
 }
 
 void Character::left( float dt )
 {
 	this->SetX(GetX()-dt);
+	mModel->SetRotateY(270);
 }
 
 void Character::right( float dt )
 {
 	this->SetX(GetX()+dt);
+	mModel->SetRotateY(90);
 }
 
 Character::Character(CharacterController* ctrl)
@@ -123,7 +130,9 @@ int Character::GetPower()
 
 void Character::SetBombCnt( int factor )
 {
+	//LogTrace("factor:%d BombCnt:%d, finally:%d \n",factor,mBombCnt,factor + mBombCnt);
 	mBombCnt += factor;
+	// std::cerr<< mBombCnt<<std::endl;
 }
 
 int Character::GetBombCnt()
