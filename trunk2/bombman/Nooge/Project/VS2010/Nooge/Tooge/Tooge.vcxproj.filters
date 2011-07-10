@@ -124,9 +124,6 @@
     <ClCompile Include="..\..\..\..\Source\Tooge\Decoration.cpp">
       <Filter>Item\Decrations</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Source\Tooge\ParticleSystem.cpp">
-      <Filter>ParticleEffect</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\Source\Tooge\Explosion.cpp">
       <Filter>ParticleEffect</Filter>
     </ClCompile>
@@ -206,9 +203,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\Source\Tooge\Decoration.h">
       <Filter>Item\Decrations</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Source\Tooge\ParticleSystem.h">
-      <Filter>ParticleEffect</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Source\Tooge\Explosion.h">
       <Filter>ParticleEffect</Filter>

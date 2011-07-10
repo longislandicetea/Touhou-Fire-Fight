@@ -32,8 +32,13 @@ void Bomb::CreateBomb(int x,int y, Character* owner)
 
 void Bomb::Update(float dt)
 {
+	int oldX = GetX();
+	int oldZ = GetZ();
 	if(mPushed)
 		MoveWhenPushed(dt*mSpeed);
+	GameStage* gs = (GameStage*)App::Inst().currentStage();
+	if(!gs->CanPass(this))
+		SetPos(oldX,GetY(),oldZ);
 	if(!mOwner->HasTrigBonus())
 	{
 		if(mTimer->End()>3.0)

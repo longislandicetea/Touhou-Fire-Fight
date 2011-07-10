@@ -80,6 +80,32 @@ bool GameStage::CanPass( GameObject* obj )
 			return false;
 		}
 	}
+	cnt = cast<Sprite>(mPlayer)->NumOfChild();
+	for(int k = 0;k<cnt;++k)
+	{
+		Ref<GameObject> child = cast<Sprite>(mPlayer)->GetChild(k);
+		if(&*child != obj)
+		{
+			Grid bBox = child->GetBoundingBox();
+			if(bBox.Intersect(box))
+			{
+				return false;
+			}
+		}
+	}
+	cnt = cast<Sprite>(mNpc)->NumOfChild();
+	for(int p = 0;p<cnt;++p)
+	{
+		Ref<GameObject> child = cast<Sprite>(mNpc)->GetChild(p);
+		if(&*child != obj)
+		{
+			Grid bBox = child->GetBoundingBox();
+			if(bBox.Intersect(box))
+			{
+				return false;
+			}
+		}
+	}
 	return true;
 }
 
