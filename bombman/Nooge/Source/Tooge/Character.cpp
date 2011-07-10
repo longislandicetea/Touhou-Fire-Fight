@@ -51,7 +51,7 @@ void Character::doAction( int currentAction, float dt )
 		break;
 	case CharacterController::DROP_BOMB:
 		//std::cerr<<"dropping"<<mBombCnt<<std::endl;
-		//LogTrace("dropping:%d\n",mBombCnt);
+		LogTrace("dropping:%d\n",mBombCnt);
 		if(mBombCnt>0) 
 		{
 			Bomb::CreateBomb(GetX(),GetZ(),this);
@@ -130,7 +130,7 @@ int Character::GetPower()
 
 void Character::SetBombCnt( int factor )
 {
-	//LogTrace("factor:%d BombCnt:%d, finally:%d \n",factor,mBombCnt,factor + mBombCnt);
+	LogTrace("factor:%d BombCnt:%d, finally:%d \n",factor,mBombCnt,factor + mBombCnt);
 	mBombCnt += factor;
 	// std::cerr<< mBombCnt<<std::endl;
 }

@@ -93,7 +93,6 @@
     <ClCompile Include="..\..\..\..\Source\Tooge\Main.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\Map.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\NPCController.cpp" />
-    <ClCompile Include="..\..\..\..\Source\Tooge\ParticleSystem.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\PlayerController.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\RenderForm.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\GameStage.cpp" />
@@ -123,7 +122,6 @@
     <ClInclude Include="..\..\..\..\Source\Tooge\GameStage.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\Map.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\NPCController.h" />
-    <ClInclude Include="..\..\..\..\Source\Tooge\ParticleSystem.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\PlayerController.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\RenderForm.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\State.h" />
