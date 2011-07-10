@@ -127,6 +127,12 @@
     <ClCompile Include="..\..\..\..\Source\Tooge\Explosion.cpp">
       <Filter>ParticleEffect</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\Tooge\MenuStage.cpp">
+      <Filter>Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\Tooge\GUIObject.cpp">
+      <Filter>Stage</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Source\Tooge\App.h">
@@ -206,6 +212,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\Source\Tooge\Explosion.h">
       <Filter>ParticleEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\Tooge\MenuStage.h">
+      <Filter>Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\Tooge\GUIObject.h">
+      <Filter>Stage</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

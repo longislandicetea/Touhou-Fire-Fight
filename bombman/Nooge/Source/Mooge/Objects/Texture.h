@@ -4,7 +4,8 @@
 #include <string>
 #include "Ref.h"
 
-class Texture {
+class Texture 
+{
 public:
 	~Texture();
 
@@ -19,6 +20,7 @@ private:
 	Texture(float width, float height, void *data);
 	float mWidth, mHeight;
 	unsigned int mId;
+	//AUX_RGBImageRec* mImg;
 };
 
 #endif

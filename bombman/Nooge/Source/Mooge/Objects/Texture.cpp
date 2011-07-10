@@ -6,6 +6,7 @@
 #include <gl/GLAux.h>
 
 #pragma warning(disable: 4244)
+
 Texture::Texture( float width, float height, void *data )
 {
 	mHeight = height;
@@ -54,8 +55,21 @@ float Texture::GetID()
 Ref<Texture> Texture::Load( const std::string &filename )
 {
 	AUX_RGBImageRec *img = auxDIBImageLoadA(filename.c_str());
+	//mImg = auxDIBImageLoadA(filename.c_str());
 	Ref<Texture> ret(new Texture(img->sizeX, img->sizeY, img->data));
 	free(img->data);
 	free(img);
 	return ret;
 }
+
+/*void Texture::Display(float x,float y)
+{
+	glMatrixMode(GL_PROJECTION);						// Select The Projection Matrix
+	glPushMatrix();										// Store The Projection Matrix
+	glLoadIdentity();									// Reset The Projection Matrix
+	glOrtho(0,mWidth,0,mHeight,-1,1);							// Set Up An Ortho Screen
+
+	glRasterPos2d(x,y);
+	//glDrawPixels(img->sizeX,textureImage->sizeY,GL_RGB,GL_UNSIGNED_BYTE,textureImage->data);
+	glPopMatrix();		
+}*/
