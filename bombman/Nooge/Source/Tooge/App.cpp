@@ -32,7 +32,8 @@ App::App(void): CThread(true),mMooge(NULL),mRenderForm(NULL),mMainCamera(NULL)
 	mRenderForm->AddCallBackEvent(WM_TIMER, bind(&App::OnRenderFormTimer, this, _1));
 	mRenderForm->AddCallBackEvent(WM_KEYDOWN, bind(&App::OnRenderFormKeyDown, this, _1));
 	mRenderForm->AddCallBackEvent(WM_KEYUP, bind(&App::OnRenderFormKeyUp, this, _1));
-
+	mRenderForm->AddCallBackEvent(WM_LBUTTONDOWN,bind(&App::OnRenderFormButtonDown,this,_1));
+	mRenderForm->AddCallBackEvent(WM_LBUTTONUP,bind(&App::OnRenderFormButtonUp,this,_1));
 	mRenderForm->Load("Rendering form", 40, 50, 800, 600);
 }
 
@@ -192,4 +193,13 @@ void App::OnRenderFormKeyUp( const WinMsgPackage& MsgPack )
 Stage * App::currentStage()
 {
 	return &*mMooge->CurrentStage;
+}
+
+void App::OnRenderFormButtonDown( const WinMsgPackage& MsgPack )
+{
+}
+
+void App::OnRenderFormButtonUp( const WinMsgPackage& MsgPack )
+{
+
 }

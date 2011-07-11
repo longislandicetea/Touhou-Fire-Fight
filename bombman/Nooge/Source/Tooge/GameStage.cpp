@@ -16,6 +16,9 @@
 #include "Explosion.h"
 
 #include "WinFrame.h"
+#include "GUIObject.h"
+#include "Image.h"
+#include "DataManager.h"
 
 Ref<GameObject> GameStage::CurrentMap()
 {
@@ -35,6 +38,7 @@ GameStage::GameStage( Ref<GameObject> map )
 	mFloor = info["decoration"];
 	mBomb  = Ref<GameObject>(new Sprite);
 	mBonus = Ref<GameObject>(new Sprite);
+	mHDU = Ref<GameObject> (new Sprite);
 
 	this->AddChild(mFloor);
 	this->AddChild(mDwall);
@@ -43,6 +47,13 @@ GameStage::GameStage( Ref<GameObject> map )
 	this->AddChild(mPlayer);
 	this->AddChild(mBomb);
 	this->AddChild(mBonus);
+	this->AddChild(mHDU);
+
+	//hud test
+	Ref<Image> image (new Image(DataManager::GetDataPath("Image","tmp","resource\\data.ini")));
+	Ref<GameObject> tmp(new GUIObject(image,0,0,256,256));
+	(*tmp).SetScale(0.5);
+	cast<Sprite>(mHDU)->AddChild(tmp);
 }
 
 GameStage::~GameStage()
