@@ -146,3 +146,23 @@ void Bomb::actWhenSteped()
 	Bonus::CreateBonus(GetX(),GetZ());
 	this->RemoveFromParent();
 }
+
+int Bomb::GetPower()
+{
+	return mPower;
+}
+
+Ref<Timer> Bomb::GetTimer()
+{
+	return mTimer;
+}
+
+bool Bomb::IsInTriggerState()
+{
+	return mInTrigState;
+}
+
+Character* Bomb::GetOwner()
+{
+	return mOwner;
+}

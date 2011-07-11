@@ -19,12 +19,12 @@ State::State(FSM* fsm,int TNum)
 	mOwner = fsm;
 }
 
-State* State::Update(float dt)
+Ref<State> State::Update(float dt)
 {
     for (int i = 0; i < mTNum; ++i)
         if (mTransitionList[i]->IsTrue())
             return mTransitionList[i] ->GetNextState();
-    return this;
+    return Ref<State>(this);
 }
 
 int State::GetAction()

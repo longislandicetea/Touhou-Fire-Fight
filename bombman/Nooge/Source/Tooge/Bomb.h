@@ -16,6 +16,13 @@ public:
 	void TriggerPush(int direction,float speed);
 	void MoveWhenPushed(float ds);
 
+	//for AI
+	int GetPower();
+	Ref<Timer> GetTimer();
+	bool IsInTriggerState();
+	Character* GetOwner();
+
+
 private:
 	Bomb();
 	void explode();

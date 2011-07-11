@@ -18,6 +18,8 @@ public:
 	enum Action { MOVE_UP, MOVE_DOWN, MOVE_RIGHT, MOVE_LEFT, DROP_BOMB, TRIGGER_BOMB,IDLE, ACTION_CNT};
 
 	virtual int Update(Character* Character, float dt) = 0;
+	
+	
 
 private:
 	Character* mOwner;
@@ -44,6 +46,9 @@ public:
 	bool HasTrigBonus();
 
 	Ref<Timer> TrigBonusTimer();
+
+	//for AI
+	
 
 private:
 	Character(CharacterController* ctrl);

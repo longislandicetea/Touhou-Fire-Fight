@@ -15,7 +15,7 @@ class State
 {
 public:
 	State( FSM* fsm,int TNum);
-	State* Update(float dt);
+	Ref<State> Update(float dt);
 	int GetAction();
 protected:
 	vector<Transition*> mTransitionList;
