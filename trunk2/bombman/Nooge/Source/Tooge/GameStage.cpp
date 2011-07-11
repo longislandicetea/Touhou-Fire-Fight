@@ -275,3 +275,8 @@ void GameStage::StepOnBomb( Character* obj )
 		}
 	}
 }
+
+GameObjectContainer::ChildrenContainer GameStage::GetAllBombs()
+{
+	return cast<Sprite>(mBomb)->GetAllChildren();
+}

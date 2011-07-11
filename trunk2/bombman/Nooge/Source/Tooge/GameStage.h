@@ -27,6 +27,9 @@ public:
 	virtual ~GameStage();
 	Ref<GameObject> CreateBonus();
 
+	//for AI
+	GameObjectContainer::ChildrenContainer GetAllBombs();
+
 private:
 
 	Ref<GameObject> mCurrentMap;

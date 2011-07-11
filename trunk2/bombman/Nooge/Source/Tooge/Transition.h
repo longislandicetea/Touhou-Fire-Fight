@@ -11,10 +11,10 @@ class Transition
 {
 public:
 	Transition();
-	State* GetNextState();
+	Ref<State> GetNextState();
 	bool IsTrue();
 
 private:
-	State* mNextState;
-	bool mIsTrue;//??????
+	Ref<State> mNextState;
+	bool mIsTrue;
 };

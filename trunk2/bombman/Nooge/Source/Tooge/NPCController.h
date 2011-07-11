@@ -13,13 +13,17 @@ public:
 	AIMap* GetDangerGrid();
 	~NPCController();
 
+	//for AI
+	//Character* GetCharacter();
+
 private:
 	AIMap* mDangerGrid;
 	AIMap* mInterestGrid;
 	AIMap* mFloodFillGrid;
 	void computeFloodFill(Character *character);
 	void computeFloodFill(int x,int y);
-	//void computePerception();
+	void computePerception(Character* character,float dt);
+	void computeDangerGrid(GameStage* gs, Character* character,float dt);
 	//Ref<FSM> mFsm;
 };
 

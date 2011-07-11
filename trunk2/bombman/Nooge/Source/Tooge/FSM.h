@@ -16,11 +16,11 @@ class FSM
 public:
 	FSM();
 	int Update(float dt);
-	State* CurrentState();
+	Ref<State> CurrentState();
 	//NPCController *  GetNPCController();
 private:
-	vector<State*> mStateList;
-	State* mCurrentState;
+	vector<Ref<State>> mStateList;
+	Ref<State> mCurrentState;
 	//NPCController* mCtrl;
 	int mSNum;//StateNumber
 

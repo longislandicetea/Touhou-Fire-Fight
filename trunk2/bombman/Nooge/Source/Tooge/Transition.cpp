@@ -5,7 +5,7 @@ bool Transition::IsTrue()
 	return mIsTrue;
 }
 
-State* Transition::GetNextState()
+Ref<State> Transition::GetNextState()
 {
 	return mNextState;
 }
