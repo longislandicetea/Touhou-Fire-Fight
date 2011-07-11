@@ -34,6 +34,8 @@ private:
 	void OnRenderFormTimer(const WinMsgPackage& MsgPack);
 	void OnRenderFormKeyDown(const WinMsgPackage& MsgPack);
 	void OnRenderFormKeyUp(const WinMsgPackage& MsgPack);
+	void OnRenderFormButtonDown(const WinMsgPackage& MsgPack);
+	void OnRenderFormButtonUp(const WinMsgPackage& MsgPack);
 
 	void SetupEngine();
 	void Execute();

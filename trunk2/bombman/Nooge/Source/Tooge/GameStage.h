@@ -40,5 +40,7 @@ private:
 	Ref<GameObject> mExplosion;
 	std::map<std::string,int> mBonusProb;
 
+	Ref<GameObject> mHDU;
+
 	Ref<Timer> mTimer;
 };                                                                                                                                                                                                                                                                                                                                                                                                     
