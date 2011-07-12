@@ -3,17 +3,18 @@
 #include "GameStage.h"
 #include "RuntimeMap.h"
 #include"AIMap.h"
+#include<queue>
+using namespace std;
 
 int NPCController::Update(Character *character, float dt)
 {
-	return rand() %4;
+	//return rand() %4;
 	mDangerGrid = new AIMap(-1);
 	mFloodFillGrid  = new AIMap(100);
-	//float start = clock();
 	
 	//computeFloodFill(character);
-	//float end = clock()-start;
-	computePerception(character,dt);
+	
+	//computePerception(character,dt);
 	//return  mFsm.Update(dt);
 
 	return 0;
@@ -32,7 +33,33 @@ void NPCController::computeFloodFill( int x,int y )
 {
 	static int dirX[4] = { -1, 0, 1,  0};
 	static int dirY[4] = {  0, 1, 0, -1};
-	int nextValue = mFloodFillGrid->GetValue(x,y) + 1;
+	queue<pair<int,int>> myQueue;
+	myQueue.push(make_pair(x,y));
+	//mFloodFillGrid->SetValue(x,y,0);
+
+	while(!myQueue.empty())
+	{
+		
+		pair<int,int> pos = myQueue.front();
+		myQueue.pop();
+		for(int i = 0;i<4;++i)
+		{
+			int nextX = pos.first + dirX[i]; int nextY = pos.second + dirY[i];
+		if (mFloodFillGrid->IsFree(nextX, nextY) && mFloodFillGrid->IsInside(nextX,nextY) )
+		{
+			float nextValue = mFloodFillGrid->GetValue(pos.first,pos.second) +1;
+			if (nextValue< mFloodFillGrid->GetValue(nextX,nextY))
+			{
+				mFloodFillGrid->SetValue(nextX, nextY, nextValue);
+				myQueue.push(make_pair(nextX,nextY));
+			}
+		}
+		}
+	}
+
+	//°¤Ç§µ¶µÄµÝ¹é
+
+	/*int nextValue = mFloodFillGrid->GetValue(x,y) + 1;
 	for (int i = 0; i < 4 ; ++i)
 	{
 		int nextX = x + dirX[i]; int nextY = y + dirY[i];
@@ -47,7 +74,7 @@ void NPCController::computeFloodFill( int x,int y )
 		int nextX = x + dirX[i]; int nextY = y + dirY[i];
 		if ( mFloodFillGrid->IsInside(nextX,nextY) && mFloodFillGrid->GetValue(nextX, nextY) == nextValue)
 			computeFloodFill(nextX, nextY);
-	}
+	}*/
 }
 
 void NPCController::computePerception(Character* character, float dt)
@@ -67,9 +94,10 @@ void NPCController::computeDangerGrid(GameStage* gs, Character* character, float
 	GameObjectContainer::ChildrenContainer bombs = gs->GetAllBombs();
 	int nbomb = bombs.size();
 	//compute dangerGrid
+	
 	for(int t = 0;t<nbomb;++t)
 	{
-		Bomb* b = cast<Bomb>(gs->GetAllBombs()[t]);//Bomb*???
+		Bomb* b = cast<Bomb>(gs->GetAllBombs()[t]);
 		int power = b->GetPower();
 		for(int i = -power;i<=power;++i)
 		{

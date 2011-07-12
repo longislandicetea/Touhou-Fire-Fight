@@ -27,6 +27,7 @@ Ref<GameObject> GameStage::CurrentMap()
 
 GameStage::GameStage( Ref<GameObject> map ) 
 {
+	//read map
 	mCurrentMap = map;
 	mBonusProb = cast<Map>(mCurrentMap)->GetBonusProb();
 
@@ -40,6 +41,7 @@ GameStage::GameStage( Ref<GameObject> map )
 	mBonus = Ref<GameObject>(new Sprite);
 	mHDU = Ref<GameObject> (new Sprite);
 
+	//set gamestage
 	this->AddChild(mFloor);
 	this->AddChild(mDwall);
 	this->AddChild(mUwall);
