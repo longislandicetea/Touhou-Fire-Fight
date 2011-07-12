@@ -328,3 +328,18 @@ void GameStage::Draw()
 
 	Stage::Draw();
 }
+
+bool GameStage::HasDwall( int row,int col )
+{
+	int cnt = cast<Sprite>(mDwall)->NumOfChild();
+	for(int i = 0;i<cnt;++i)
+	{
+		Ref<GameObject> child = cast<Sprite>(mDwall)->GetChild(i);
+		int tRow = child->GetBoundingBox().Row();
+		int tCol = child->GetBoundingBox().Col();
+
+		if(row == tRow && col == tCol)
+			return true;
+	}
+	return false;
+}

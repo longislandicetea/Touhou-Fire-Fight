@@ -19,6 +19,7 @@ public:
 	Ref<GameObject> Player();
 	bool CanPass(GameObject* obj);
 	bool HasUwall( int row,int col);
+	bool HasDwall( int row,int col);
 	void DwallExplode( int row,int col);
 	void EatBonus(Character* obj);
 	void StepOnBomb(Character* obj);
