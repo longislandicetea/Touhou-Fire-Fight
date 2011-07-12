@@ -19,6 +19,8 @@
 #include "DataManager.h"
 #include "jpeglib.h"	
 
+#include "MenuStage.h"
+#include <gl/glut.h>
 
 App::App(void): CThread(true),mMooge(NULL),mRenderForm(NULL),mMainCamera(NULL)
 {
@@ -32,8 +34,7 @@ App::App(void): CThread(true),mMooge(NULL),mRenderForm(NULL),mMainCamera(NULL)
 	mRenderForm->AddCallBackEvent(WM_TIMER, bind(&App::OnRenderFormTimer, this, _1));
 	mRenderForm->AddCallBackEvent(WM_KEYDOWN, bind(&App::OnRenderFormKeyDown, this, _1));
 	mRenderForm->AddCallBackEvent(WM_KEYUP, bind(&App::OnRenderFormKeyUp, this, _1));
-	mRenderForm->AddCallBackEvent(WM_LBUTTONDOWN,bind(&App::OnRenderFormButtonDown,this,_1));
-	mRenderForm->AddCallBackEvent(WM_LBUTTONUP,bind(&App::OnRenderFormButtonUp,this,_1));
+	mRenderForm->AddCallBackEvent(WM_LBUTTONDOWN,bind(&App::OnRenderFormClickButton,this,_1));
 	mRenderForm->Load("Rendering form", 40, 50, 800, 600);
 }
 
@@ -87,16 +88,19 @@ void App::SetupEngine()
 	//Setup camera.
 	mMooge->Cameras->AddCamera(mMainCamera);
 
-	VECTORFS CamEyeVec(75.0,150.0,200.0);
+	VECTORFS CamEyeVec(75.0,120.0,200.0);
 	VECTORFS CamCenterVec(75.0, 0.0, 65.0);
 	VECTORFS CamUpVec(0.0, 40.0, 0.0);
 	mMainCamera->SetPosition(CamEyeVec, CamCenterVec, CamUpVec);
 
 	//Add Engine object here.
-	//Ref<GameObject> map = Map::Load("c:\\test.xml");
+	
 	Ref<GameObject> map = Map::Load(DataManager::GetDataPath("Map","map","resource\\data.ini"));
 	Ref<Stage> gameStage(new GameStage(map));
 	mMooge->CurrentStage = gameStage;
+
+	/*Ref<Stage> initStage = MenuStage::LoadStage();
+	mMooge->CurrentStage = initStage;*/
 
 	//Create a timer that fires 30 times a second
 	SetTimer(mRenderForm->gethWnd(), 33, 1, NULL);
@@ -116,6 +120,13 @@ void App::Execute()
 		float dt = (float)(now - mLeastTime) / CLOCKS_PER_SEC;
 		mMooge->Update(dt);
 		mLeastTime = now;
+	}
+
+	if(!mMooge->NextStage.IsNull())
+	{
+		//mMooge->CurrentStage.Clear();
+		mMooge->CurrentStage = mMooge->NextStage;
+		mMooge->NextStage.Clear();
 	}
 }
 
@@ -190,16 +201,20 @@ void App::OnRenderFormKeyUp( const WinMsgPackage& MsgPack )
 	}
 }
 
-Stage * App::currentStage()
+Stage * App::CurrentStage()
 {
 	return &*mMooge->CurrentStage;
 }
 
-void App::OnRenderFormButtonDown( const WinMsgPackage& MsgPack )
+void App::ChangeStage( Ref<Stage> next )
 {
+	mMooge->CurrentStage = next;
 }
 
-void App::OnRenderFormButtonUp( const WinMsgPackage& MsgPack )
+void App::OnRenderFormClickButton( const WinMsgPackage& MsgPack )
 {
-
+	int x = LOWORD(MsgPack.lParam);
+	int y = HIWORD(MsgPack.lParam);
+	CurrentStage()->HandleClickEvent(x,y);
+	LogTrace("%d %d\n",x,y);
 }

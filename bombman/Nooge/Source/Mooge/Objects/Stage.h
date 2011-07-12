@@ -8,6 +8,7 @@ class Stage: public GameObjectContainer
 {
 public:
 	virtual void Draw();
+	virtual void HandleClickEvent(int x,int y) {}
 
 private:
 

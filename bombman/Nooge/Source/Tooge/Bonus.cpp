@@ -4,7 +4,7 @@
 
 void Bonus::CreateBonus(int x,int y)
 {
-	GameStage* gs = (GameStage*)(App::Inst().currentStage());
+	GameStage* gs = (GameStage*)(App::Inst().CurrentStage());
 	Ref<GameObject> bonus = gs->CreateBonus();
 	if(!bonus.IsNull())
 	{

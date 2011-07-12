@@ -80,7 +80,7 @@ void NPCController::computeFloodFill( int x,int y )
 void NPCController::computePerception(Character* character, float dt)
 {
 	//get bomb container
-	GameStage* gs = (GameStage*)App::Inst().currentStage();
+	GameStage* gs = (GameStage*)App::Inst().CurrentStage();
 	
 	computeDangerGrid(gs,character,dt);
 	

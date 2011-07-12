@@ -13,6 +13,7 @@ void Image::Draw(float x1,float y1,float x2,float y2)
 {
 	Texture::Bind(mTexture);
 	
+	//glPushMatrix();
 	glMatrixMode( GL_PROJECTION );
 
 	glPushMatrix();
@@ -32,4 +33,5 @@ void Image::Draw(float x1,float y1,float x2,float y2)
 
 	glMatrixMode( GL_PROJECTION );
 	glPopMatrix();
+	glMatrixMode(GL_MODELVIEW);
 }

@@ -16,7 +16,7 @@ void Character::Update(float dt)
 	mCurrentAction = mCtrl.Update(this,dt);
 	doAction(mCurrentAction,dt);
 	
-	GameStage* gs =(GameStage*)(App::Inst().currentStage());
+	GameStage* gs =(GameStage*)(App::Inst().CurrentStage());
 	if(!gs->CanPass(this))
 		SetPos(oldX,GetY(),oldZ);
 	gs->EatBonus(this);

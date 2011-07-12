@@ -5,6 +5,8 @@
 
 #include <stdlib.h>
 
+#include "WinFrame.h"
+
 Explosion::Explosion( float x,float y,float z )
 {
 	//glEnable(GL_BLEND);
@@ -45,8 +47,11 @@ void Explosion::Draw()
 {
 	glEnable (GL_BLEND); 
 	glBlendFunc (GL_ONE,GL_ONE);
-	glClear(GL_ACCUM_BUFFER_BIT);
+	//glClear(GL_ACCUM_BUFFER_BIT);
 
+	//glPushMatrix();
+	//glMatrixMode(GL_MODELVIEW);
+	//glLoadIdentity();
 	for(int i = 0;i<MAX_PARTICLE;++i)
 	{
 		if(mParticles[i].life>0.0)
@@ -69,16 +74,14 @@ void Explosion::Draw()
 			glColor4f(mParticles[i].r,mParticles[i].g,mParticles[i].b,1);
 
 			glBegin(GL_POINTS);
-			//glTexCoord2f(0.0f,0.0f);
 			glVertex3f(x-mParticleSize,y-mParticleSize,z);
-			//glTexCoord2f(1.0f,0.0f);
 			glVertex3f(x-mParticleSize,y+mParticleSize,z);
-			//glTexCoord2f(1.0f,1.0f);
 			glVertex3f(x+mParticleSize,y+mParticleSize,z);
-			//glTexCoord2f(0.0f,1.0f);
 			glVertex3f(x+mParticleSize,y-mParticleSize,z);
 			glEnd();
+			LogTrace("%d %d %d\n",x,y,z);
 		}
-	}  
+	}
+	glPopMatrix();
 	glDisable(GL_BLEND);
 }
