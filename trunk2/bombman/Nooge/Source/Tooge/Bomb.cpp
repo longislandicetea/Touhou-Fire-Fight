@@ -22,7 +22,7 @@ void Bomb::CreateBomb(int x,int y, Character* owner)
 {
 	Ref<GameObject> bomb(new Bomb);
 	bomb->SetPos(x,0,y);
-	GameStage* gs = (GameStage*)App::Inst().currentStage();
+	GameStage* gs = (GameStage*)App::Inst().CurrentStage();
 	gs->AddBomb(bomb);
 	//owner->SetBombCnt(-1);
 	cast<Bomb>(bomb)->mOwner = owner;
@@ -36,7 +36,7 @@ void Bomb::Update(float dt)
 	int oldZ = GetZ();
 	if(mPushed)
 		MoveWhenPushed(dt*mSpeed);
-	GameStage* gs = (GameStage*)App::Inst().currentStage();
+	GameStage* gs = (GameStage*)App::Inst().CurrentStage();
 	if(!gs->CanPass(this))
 		SetPos(oldX,GetY(),oldZ);
 	if(!mOwner->HasTrigBonus())
@@ -76,7 +76,7 @@ void Bomb::explode()
 	int col = this->GetBoundingBox().Col();
 	mFlame.push_back(Ref<Grid>(new Grid(row,col)));
 
-	GameStage* gs = (GameStage*)App::Inst().currentStage();
+	GameStage* gs = (GameStage*)App::Inst().CurrentStage();
 
 	for(int i = 1;i<=mPower;++i)
 	{

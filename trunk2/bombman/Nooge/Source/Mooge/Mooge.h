@@ -51,6 +51,7 @@ class CMooge
 		CAuxiliary* Auiliary;
 			
 		Ref<Stage>	CurrentStage;
+		Ref<Stage>  NextStage;
 		Ref<RuntimeMap> CurrentMap;
 
 };

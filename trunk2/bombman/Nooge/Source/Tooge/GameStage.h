@@ -27,6 +27,8 @@ public:
 	virtual ~GameStage();
 	Ref<GameObject> CreateBonus();
 
+	void Draw();
+
 	//for AI
 	GameObjectContainer::ChildrenContainer GetAllBombs();
 
