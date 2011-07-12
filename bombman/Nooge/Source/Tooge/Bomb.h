@@ -37,4 +37,5 @@ private:
 	Ref<GameObject> mModel;
 	Ref<Timer> mTimer;
 	std::vector< Ref<Grid> > mFlame;
+	std::vector< Ref<Grid> > mSurroundDwall;
 };

@@ -88,7 +88,13 @@ void Bomb::explode()
 				int nCol = col + i*dy[j];
 
 				if(!gs->HasUwall(nRow,nCol))
+				{
 					mFlame.push_back(Ref<Grid> (new Grid(nRow,nCol)));
+					if(gs->HasDwall(nRow,nCol))
+					{
+						mSurroundDwall.push_back(Ref<Grid> (new Grid(nRow,nCol)));
+					}
+				}
 				else
 					dValid[j] = 0;
 			}
@@ -143,7 +149,9 @@ void Bomb::actWhenSteped()
 {
 	explode();
 	mOwner->SetBombCnt(1);
-	Bonus::CreateBonus(GetX(),GetZ());
+	//Bonus::CreateBonus(GetX(),GetZ());
+	int randId = rand()%(mSurroundDwall.size());
+	Bonus::CreateBonus(mSurroundDwall[randId]->CenterX(),mSurroundDwall[randId]->CenterY());
 	this->RemoveFromParent();
 }
 
