@@ -10,6 +10,7 @@ class Dwall : public Sprite
 public :
 	Dwall();
 	virtual ~Dwall();
+	virtual Grid GetBoundingBox();
 private:
 	Ref<GameObject> mModel;
 

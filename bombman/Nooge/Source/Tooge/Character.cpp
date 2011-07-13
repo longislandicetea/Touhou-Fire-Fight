@@ -179,3 +179,10 @@ Ref<Timer> Character::TrigBonusTimer()
 	return mTrigTimer;
 }
 
+Grid Character::GetBoundingBox()
+{
+
+	float offset = Grid::SideLen/2-2;
+	return Grid(GetX()-offset,GetZ()+offset,GetX()+offset,GetZ()-offset);
+}
+

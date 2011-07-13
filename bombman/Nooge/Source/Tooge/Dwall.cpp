@@ -1,6 +1,6 @@
 #include "Dwall.h"
 #include <iostream>
-using namespace std;
+
 
 Dwall::Dwall()
 {
@@ -11,5 +11,11 @@ Dwall::Dwall()
 
 Dwall::~Dwall()
 {
-	cout << "Dwall released" << endl;
+	//cout << "Dwall released" << endl;
+}
+
+Grid Dwall::GetBoundingBox()
+{
+	float offset = Grid::SideLen/2-1.5;
+	return Grid(GetX()-offset,GetZ()+offset,GetX()+offset,GetZ()-offset);
 }

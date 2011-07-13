@@ -57,7 +57,7 @@ GameStage::GameStage( Ref<GameObject> map )
 	Ref<Image> image (new Image(DataManager::GetDataPath("Image","tmp","resource\\data.ini")));
 	Ref<GameObject> tmp(new GUIObject(image,0,0,128,128));
 	(*tmp).SetScale(0.25);
-	//cast<Sprite>(mHDU)->AddChild(tmp);
+	cast<Sprite>(mHDU)->AddChild(tmp);
 }
 
 GameStage::~GameStage()
@@ -287,6 +287,7 @@ GameObjectContainer::ChildrenContainer GameStage::GetAllBombs()
 
 void GameStage::Draw()
 {
+	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	float lightAmbient[] = {1.0,1.0,1.0,1.0};
 	float lightDiffuse[] = {1.0,1.0,1.0,1.0};
 	float lightPosition[] = {75.0,10.0,65.0,0.0};
@@ -299,25 +300,6 @@ void GameStage::Draw()
 	glLightfv(GL_LIGHT0,GL_POSITION,lightPosition);
 
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT,lmodelAmbient);
-
-	/*glLightfv(GL_LIGHT0,GL_AMBIENT,lightAmbient);
-	glLightfv(GL_LIGHT0,GL_DIFFUSE,lightDiffuse);
-	glLightfv(GL_LIGHT0,GL_POSITION,lightPosition);
-	glLightf(GL_LIGHT0,GL_SPOT_CUTOFF,70.0);
-	glLightfv(GL_LIGHT0,GL_SPOT_DIRECTION,spotDierection);
-
-	float light1Ambient[] = {1.0,1.0,1.0,1.0};
-	float light1Diffuse[] = {1.0,1.0,1.0,1.0};
-	float light1Position[] = {160.0,50.0,65.0}; 
-	float spot1Dierection[] = {-1.0,0.0,0.0};
-
-	glLightfv(GL_LIGHT1,GL_AMBIENT,light1Ambient);
-	glLightfv(GL_LIGHT1,GL_DIFFUSE,light1Diffuse);
-	glLightfv(GL_LIGHT1,GL_POSITION,light1Position);
-	glLightf(GL_LIGHT1,GL_SPOT_CUTOFF,70.0);
-	glLightfv(GL_LIGHT1,GL_SPOT_DIRECTION,spot1Dierection);
-
-	glLightModelfv(GL_LIGHT_MODEL_AMBIENT,lmodelAmbient);*/
 
 	glEnable(GL_COLOR_MATERIAL);
 

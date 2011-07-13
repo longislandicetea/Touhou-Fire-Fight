@@ -150,8 +150,11 @@ void Bomb::actWhenSteped()
 	explode();
 	mOwner->SetBombCnt(1);
 	//Bonus::CreateBonus(GetX(),GetZ());
-	int randId = rand()%(mSurroundDwall.size());
-	Bonus::CreateBonus(mSurroundDwall[randId]->CenterX(),mSurroundDwall[randId]->CenterY());
+	if(!mSurroundDwall.empty())
+	{
+		int randId = rand()%(mSurroundDwall.size());
+		Bonus::CreateBonus(mSurroundDwall[randId]->CenterX(),mSurroundDwall[randId]->CenterY());
+	}
 	this->RemoveFromParent();
 }
 

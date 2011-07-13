@@ -4,6 +4,6 @@
 BSlower::BSlower()
 {
 	//mModel = Md2Object::Load("c:\\box.md2","c:\\boxbrown.bmp");
-	mModel = Md2Object::Load(DataManager::GetDataPath("Model","bonus","resource\\data.ini"),DataManager::GetDataPath("Texture","brown","resource\\data.ini"));
+	mModel = Md2Object::Load(DataManager::GetDataPath("Model","slower","resource\\data.ini"),DataManager::GetDataPath("Texture","slowerT","resource\\data.ini"));
 	this->AddChild(mModel);
 }
