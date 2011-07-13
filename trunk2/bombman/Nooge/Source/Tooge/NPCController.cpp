@@ -12,9 +12,9 @@ int NPCController::Update(Character *character, float dt)
 	mDangerGrid = new AIMap(-1);
 	mFloodFillGrid  = new AIMap(100);
 	
-	//computeFloodFill(character);
+	computeFloodFill(character);
 	
-	//computePerception(character,dt);
+	computePerception(character,dt);
 	//return  mFsm.Update(dt);
 
 	return 0;
@@ -31,11 +31,13 @@ void NPCController::computeFloodFill(Character* character)
 
 void NPCController::computeFloodFill( int x,int y )
 {
+	//floodfill by queue
+
 	static int dirX[4] = { -1, 0, 1,  0};
 	static int dirY[4] = {  0, 1, 0, -1};
 	queue<pair<int,int>> myQueue;
 	myQueue.push(make_pair(x,y));
-	//mFloodFillGrid->SetValue(x,y,0);
+	
 
 	while(!myQueue.empty())
 	{
@@ -86,14 +88,20 @@ void NPCController::computePerception(Character* character, float dt)
 	
 }
 
+void NPCController::computeWalls(GameStage* gs)
+{
+	//GameObjectContainer::ChildrenContainer Uwalls = 
+}
+
 void NPCController::computeDangerGrid(GameStage* gs, Character* character, float dt)
 {
 	const int WIDTH = mDangerGrid->GetWidth();
 	const int HEIGHT = mDangerGrid->GetHeight();
-	//vector<Ref<GameObject>> bombs = (vector<Ref<GameObject>>);
+	
 	GameObjectContainer::ChildrenContainer bombs = gs->GetAllBombs();
 	int nbomb = bombs.size();
-	//compute dangerGrid
+	
+
 	
 	for(int t = 0;t<nbomb;++t)
 	{
@@ -104,6 +112,7 @@ void NPCController::computeDangerGrid(GameStage* gs, Character* character, float
 			int row = b->GetBoundingBox().Row();
 			int col = b->GetBoundingBox().Col();
 			double remain;
+			
 			//trigger
 			if(b->IsInTriggerState() && character == b->GetOwner())
 			{

@@ -10,11 +10,12 @@ class FSM;
 class Transition
 {
 public:
-	Transition();
+	Transition(Ref<State> nextState);
+	virtual ~Transition(){};
 	Ref<State> GetNextState();
-	bool IsTrue();
+	virtual bool IsTrue() = 0;
 
 private:
 	Ref<State> mNextState;
-	bool mIsTrue;
+	
 };

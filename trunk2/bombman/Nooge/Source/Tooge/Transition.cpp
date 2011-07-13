@@ -1,8 +1,10 @@
 #include"Transition.h"
 
-bool Transition::IsTrue()
+
+
+Transition::Transition(Ref<State> nextState):
+mNextState(nextState)
 {
-	return mIsTrue;
 }
 
 Ref<State> Transition::GetNextState()

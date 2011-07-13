@@ -63,6 +63,9 @@
     <ClInclude Include="..\..\..\..\Source\Mooge\TinyXml\tinyxml.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\Image.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{CC4CC23D-AC08-43C7-A4F0-B47BD132243D}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>

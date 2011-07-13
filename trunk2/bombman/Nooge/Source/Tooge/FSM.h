@@ -14,15 +14,17 @@ class FSM;
 class FSM
 {
 public:
-	FSM();
+	FSM(Ref<State> startState);
 	int Update(float dt);
 	Ref<State> CurrentState();
+	~FSM(){};
+	void AddState(Ref<State> state);
 	//NPCController *  GetNPCController();
 private:
 	vector<Ref<State>> mStateList;
 	Ref<State> mCurrentState;
 	//NPCController* mCtrl;
-	int mSNum;//StateNumber
+	
 
 };
 
