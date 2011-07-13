@@ -4,6 +4,7 @@
 #include "AIMap.h"
 #include"FSM.h"
 
+
 class NPCController : public CharacterController
 {
 public:
