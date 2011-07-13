@@ -19,3 +19,11 @@ private:
 	Ref<State> mNextState;
 	
 };
+
+class ToFlee: public Transition
+{
+public:
+	ToFlee(Ref<State> next);
+	//virtual bool IsTrue();
+
+};

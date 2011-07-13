@@ -9,7 +9,7 @@
 
 enum GridState
 {
-	EMPTY, DWALL,UWALL,PLAYER,NPC
+	EMPTY, DWALL,UWALL,NPC,PLAYER
 };
 
 struct GridInfo
