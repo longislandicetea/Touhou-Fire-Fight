@@ -41,6 +41,7 @@ public:
 	int GetPower();
 	int GetBombCnt();
 	int GetCurState();
+	virtual Grid GetBoundingBox();
 
 	bool HasPushBonus();
 	bool HasTrigBonus();

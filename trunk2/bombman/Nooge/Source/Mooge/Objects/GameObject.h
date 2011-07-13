@@ -23,7 +23,7 @@ public:
 	float GetRotateY();
 	float GetRotateZ();
 	float GetAlpha();
-	Grid GetBoundingBox();
+	virtual Grid GetBoundingBox();
 
 	void SetX(float x);
 	void SetY(float y);

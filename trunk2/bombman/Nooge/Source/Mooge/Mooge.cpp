@@ -35,20 +35,20 @@ CMooge::~CMooge()
 void CMooge::Render()
 {
 	//Clear the window with current clearing color
-	//glClearColor(0.0,0.0,0.0,0.0);
+	glClearColor(0.0,0.0,0.0,0.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
-	if(Auiliary->mGridLineVis)
+	/*if(Auiliary->mGridLineVis)
 		//Auiliary->DrawXZGrids();
 	if(Auiliary->mAxisVis)
-		Auiliary->DrawAxis();
+		Auiliary->DrawAxis();*/
 
 	//Post camera to current position.
 	glMatrixMode(GL_MODELVIEW);
 	Cameras->Post();
 
 	//Check if current console is activate.
-	if(Console->mActivate)
+	/*if(Console->mActivate)
 	{
 		//Draw console text.
 		Console->Draw(Core->GetFontList());
@@ -60,7 +60,7 @@ void CMooge::Render()
 			Auiliary->DrawVersionInfo(Core->GetFontList());
 		if(Auiliary->mFPSVis)
 			Auiliary->DrawFPS(Core->GetFontList());
-	}
+	}*/
 
 	if (!CurrentStage.IsNull()) 
 	{
