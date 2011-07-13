@@ -1,8 +1,9 @@
 #include"FSM.h"
 
 
-FSM::FSM(Ref<State> startState)
+FSM::FSM(Ref<NPCController> ctrl, Ref<State> startState)//
 {
+	mCtrl = ctrl;
 	mCurrentState = startState;
 }
 
@@ -13,10 +14,10 @@ int FSM::Update(float dt)
     return mCurrentState->GetAction();
 }
 
-/*NPCController*  FSM::GetNPCController()
+Ref<NPCController>  FSM::GetNPCController()
 {
 	return mCtrl;
-}*/
+}
 
 Ref<State> FSM::CurrentState()
 {
