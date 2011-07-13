@@ -19,6 +19,7 @@
 #include "GUIObject.h"
 #include "Image.h"
 #include "DataManager.h"
+#include"gl/GL.h"
 
 
 Ref<GameObject> GameStage::CurrentMap()
