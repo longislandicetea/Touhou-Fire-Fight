@@ -24,6 +24,7 @@ private:
 	void computeFloodFill(int x,int y);
 	void computePerception(Character* character,float dt);
 	void computeDangerGrid(GameStage* gs, Character* character,float dt);
+	void computeWalls(GameStage* gs);
 	//Ref<FSM> mFsm;
 };
 

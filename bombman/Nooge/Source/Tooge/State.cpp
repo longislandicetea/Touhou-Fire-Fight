@@ -9,27 +9,26 @@ typedef struct
 }Vector3;
 ///////////////////////////////State/////////////////////////////////
 
-State::State(FSM* fsm,int TNum)
-{
-	mTNum = TNum;
-	for(int i = 0;i<TNum;++i)
-	{
-		mTransitionList.push_back(NULL);
-	}
-	mOwner = fsm;
-}
+
 
 Ref<State> State::Update(float dt)
 {
-    for (int i = 0; i < mTNum; ++i)
-        if (mTransitionList[i]->IsTrue())
-            return mTransitionList[i] ->GetNextState();
+	vector<Ref<Transition>>::iterator it = mTransitionList.begin();
+	vector<Ref<Transition>>::iterator end = mTransitionList.end();
+    for (; it !=end ; ++it)
+        if ((*it)->IsTrue())
+            return (*it) ->GetNextState();
     return Ref<State>(this);
 }
 
 int State::GetAction()
 {
 	return 0;//??
+}
+
+void State::AddTransition(Ref<Transition> transition)
+{
+	mTransitionList.push_back(transition);
 }
 
 

@@ -1,12 +1,9 @@
 #include"FSM.h"
 
 
-FSM::FSM()
+FSM::FSM(Ref<State> startState)
 {
-	//mStateList.push_back(Ref<State>(new FleeState));
-	//mStateList.push_back(Ref<State>(new ClearPathState));
-	//mStateList.push_back(Ref<State>(new SearchBonusState));
-	//mCurrentState = mStateList[0];
+	mCurrentState = startState;
 }
 
 int FSM::Update(float dt)
@@ -24,6 +21,11 @@ int FSM::Update(float dt)
 Ref<State> FSM::CurrentState()
 {
 	return mCurrentState;
+}
+
+void FSM::AddState(Ref<State> state)
+{
+	mStateList.push_back(state);
 }
 
 

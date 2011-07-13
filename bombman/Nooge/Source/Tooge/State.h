@@ -14,11 +14,13 @@ class FSM;
 class State
 {
 public:
-	State( FSM* fsm,int TNum);
+	State(){}
+	~State(){}
+	void AddTransition(Ref<Transition> transition);
 	Ref<State> Update(float dt);
 	int GetAction();
 protected:
-	vector<Transition*> mTransitionList;
+	vector<Ref<Transition>> mTransitionList;
 	FSM* mOwner;
 	int mTNum;//TransitionNumber
 };
