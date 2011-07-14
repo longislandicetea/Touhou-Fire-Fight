@@ -10,8 +10,8 @@ FSM::FSM(NPCController* ctrl, Ref<State> startState)//
 int FSM::Update(float dt)
 {
     mCurrentState = mCurrentState->Update(dt);
-
-    return mCurrentState->GetAction();
+	int temp = mCurrentState->GetAction();
+    return temp;
 }
 
 NPCController*  FSM::GetNPCController()

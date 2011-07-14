@@ -48,17 +48,19 @@ void NPCController::initFSM()
 	//transitions
 	Ref<Transition> toFlee(new ToFlee(this,flee));
 	flee->AddTransition(toFlee);//notice prority
+	
 
 	//fsm
-	Ref<FSM> fsm(new FSM(this,flee));
-	fsm->AddState(flee);
+	mFsm = Ref<FSM>(new FSM(this,flee));
+	mFsm->AddState(flee);
 
 }
 
 int NPCController::Update(Character *character, float dt)
 {
+	mOwner = character;
 	//return rand() %4;
-	
+
 	//reset AIMaps
 	mFloodFillGrid->Reset(100);
 	mDangerGrid->Reset(100);
@@ -69,9 +71,9 @@ int NPCController::Update(Character *character, float dt)
 	computeFloodFill(character);
 	
 	//computePerception(character,dt);
-	//return  mFsm.Update(dt);
+	return  mFsm->Update(dt);
 
-	return IDLE;
+	return 0;
 }
 
 void NPCController::computeWalls()

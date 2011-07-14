@@ -37,7 +37,7 @@ State::State(NPCController* ctrl)
 ////////////////////////////////FleeState///////////////////////////////
 
 FleeState::FleeState(NPCController* ctrl):
-State(mCtrl)
+State(ctrl)
 {
 }
 
@@ -58,7 +58,7 @@ int FleeState::GetAction()
 	for(int i = 0;i<4;++i)
 	{
 		float safeValue = dangerGrid->GetValue(col+dirX[i],row+dirY[i]);
-		if(safeValue>dangerGrid->GetValue(safe.col,safe.row))
+		if(safeValue >= dangerGrid->GetValue(safe.col,safe.row))
 		{
 			safe.row = row+dirY[i];
 			safe.col = col+dirX[i];
