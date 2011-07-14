@@ -2,20 +2,20 @@
 
 
 ///////////////////////////////////////////////////////transition///////////////////////////////////////////////////
-Transition::Transition(NPCController* ctrl, Ref<State> nextState):
+Transition::Transition(NPCController* ctrl, State* nextState):
 mNextState(nextState)
 {
 	mCtrl = ctrl;
 }
 
-Ref<State> Transition::GetNextState()
+State* Transition::GetNextState()
 {
 	return mNextState;
 }
 
 //////////////////////////////////////////////////ToFlee///////////////////////////////////////////////
 
-ToFlee::ToFlee(NPCController* ctrl,Ref<State> next):
+ToFlee::ToFlee(NPCController* ctrl,State* next):
 Transition(ctrl,next)
 {}
 

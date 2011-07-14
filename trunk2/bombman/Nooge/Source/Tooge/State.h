@@ -17,11 +17,11 @@ public:
 	enum Action { MOVE_UP, MOVE_DOWN, MOVE_RIGHT, MOVE_LEFT, DROP_BOMB, TRIGGER_BOMB,IDLE, ACTION_CNT};
 	State(NPCController* ctrl);
 	virtual ~State(){}
-	void AddTransition(Ref<Transition> transition);
-	Ref<State> Update(float dt);
+	void AddTransition(Transition* transition);
+	State* Update(float dt);
 	virtual int GetAction() = 0;
 protected:
-	vector<Ref<Transition>> mTransitionList;
+	vector<Transition*> mTransitionList;
 	FSM* mOwner;
 
 	NPCController* mCtrl;

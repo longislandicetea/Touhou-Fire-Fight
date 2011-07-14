@@ -41,17 +41,19 @@ void NPCController::initFSM()
 {
 
 	//states
-	Ref<State> flee(new FleeState(this));
-	
+	//Ref<State> flee(new FleeState(this));
+	State* flee = new FleeState(this);
 
 	
 	//transitions
-	Ref<Transition> toFlee(new ToFlee(this,flee));
+	//Ref<Transition> toFlee(new ToFlee(this,flee));
+	Transition* toFlee = new ToFlee(this,flee);
 	flee->AddTransition(toFlee);//notice prority
 	
 
 	//fsm
-	mFsm = Ref<FSM>(new FSM(this,flee));
+	//mFsm = Ref<FSM>(new FSM(this,flee));
+	mFsm = new FSM(this,flee);
 	mFsm->AddState(flee);
 
 }
