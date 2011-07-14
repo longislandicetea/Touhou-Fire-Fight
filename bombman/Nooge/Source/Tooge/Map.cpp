@@ -83,9 +83,16 @@ std::map< std::string,Ref<GameObject> > Map::Parse()
 	ret["player"] = playerContainer;
 	ret["decoration"] = decContainer;
 
-	Ref<GameObject> floor (new Decoration);
+	Ref<GameObject> floor = Decoration::CreateDecoration("floor");
 	floor->SetPos(75,5,65);
+
+	Ref<GameObject> bamboo = Decoration::CreateDecoration("bamboo");
+	bamboo->SetPos(0,0,0);
+
 	cast<Sprite>(decContainer)->AddChild(floor);
+	cast<Sprite>(decContainer)->AddChild(bamboo);
+
+	int npcCnt= 0;
 
 	for(int i = 0;i<mGrids.size();++i)
 	{
@@ -115,8 +122,9 @@ std::map< std::string,Ref<GameObject> > Map::Parse()
 			}
 		case PLAYER:
 			{
-				PlayerController* playerCtrl = new PlayerController();
-				Ref<GameObject> player = Character::AddController(playerCtrl);
+				/*PlayerController* playerCtrl = new PlayerController();
+				Ref<GameObject> player = Character::AddController(playerCtrl);*/
+				Ref<GameObject> player = Character::CreateCharacter("player");
 				player->SetPos(currentGrid->CenterX(),0.0,currentGrid->CenterY());
 				player->SetRotateY(90);
 				cast<Sprite>(playerContainer)->AddChild(player);
@@ -124,8 +132,22 @@ std::map< std::string,Ref<GameObject> > Map::Parse()
 			}
 		case NPC :
 			{
-				NPCController* npcCtrl = new NPCController();
-				Ref<GameObject> npc = Character::AddController(npcCtrl);
+				/*NPCController* npcCtrl = new NPCController();
+				Ref<GameObject> npc = Character::AddController(npcCtrl);*/
+				Ref<GameObject> npc;
+				switch(npcCnt)
+				{
+				case 0:
+					npc = Character::CreateCharacter("npc1");
+					break;
+				case 1:
+					npc = Character::CreateCharacter("npc2");
+					break;
+				case 2:
+					npc = Character::CreateCharacter("npc3");
+					break;
+				}
+				++npcCnt;
 				npc->SetPos(currentGrid->CenterX(),0.0,currentGrid->CenterY());
 				npc->SetRotateY(90);
 				cast<Sprite>(npcContainer)->AddChild(npc);

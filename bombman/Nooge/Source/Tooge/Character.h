@@ -9,6 +9,7 @@
 #include "Timer.h"
 
 #include <vector>
+#include <string>
 
 class Character;
 
@@ -29,8 +30,8 @@ protected:
 class Character : public Sprite
 {
 public:
+	static Ref<GameObject> CreateCharacter(const std::string& type);
 	void Update(float dt);
-	static Ref<GameObject> AddController(CharacterController* ctrl);
 	void SetSpeed(int factor);
 	void SetPower(int factor);
 	void SetBombCnt(int factor);
@@ -52,8 +53,10 @@ public:
 	
 
 private:
-	Character(CharacterController* ctrl);
+	Character(CharacterController* ctrl,const std::string& type);
+	Ref<GameObject> AddController(CharacterController* ctrl);
 	CharacterController& mCtrl;
+
 	void doAction(int currentAction, float dt);
 	void up(float dt);
 	void down(float dt);
