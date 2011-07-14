@@ -47,6 +47,6 @@ enum AIGridState
 	void computeWalls();
 	void initFSM();
 	
-	Ref<FSM> mFsm;
+	FSM* mFsm;
 };
 

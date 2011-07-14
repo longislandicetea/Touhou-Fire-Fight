@@ -12,19 +12,19 @@ typedef struct
 
 
 
-Ref<State> State::Update(float dt)
+State* State::Update(float dt)
 {
-	vector<Ref<Transition>>::iterator it = mTransitionList.begin();
-	vector<Ref<Transition>>::iterator end = mTransitionList.end();
+	vector<Transition*>::iterator it = mTransitionList.begin();
+	vector<Transition*>::iterator end = mTransitionList.end();
     for (; it !=end ; ++it)
         if ((*it)->IsTrue())
             return (*it) ->GetNextState();
-    return Ref<State>(this);
+    return this;
 }
 
 
 
-void State::AddTransition(Ref<Transition> transition)
+void State::AddTransition(Transition* transition)
 {
 	mTransitionList.push_back(transition);
 }

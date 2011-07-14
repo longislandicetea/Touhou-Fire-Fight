@@ -15,15 +15,15 @@ class FSM;
 class FSM
 {
 public:
-	FSM(NPCController* ctrl, Ref<State> startState);
+	FSM(NPCController* ctrl, State* startState);
 	int Update(float dt);
-	Ref<State> CurrentState();
+	State* CurrentState();
 	~FSM(){};
-	void AddState(Ref<State> state);
+	void AddState(State* state);
 	NPCController*  GetNPCController();
 private:
-	std::vector<Ref<State>> mStateList;
-	Ref<State> mCurrentState;
+	std::vector<State*> mStateList;
+	State* mCurrentState;
 	NPCController* mCtrl;
 	
 };
