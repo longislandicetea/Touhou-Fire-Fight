@@ -29,9 +29,14 @@ void Image::Draw(float x1,float y1,float x2,float y2)
 	glTexCoord2f(1.0,1.0);glVertex3f(x2,y2,0.0);
 	glTexCoord2f(1.0,0.0);glVertex3f(x2,y1,0.0);
 	glEnd();
+	
 	glPopMatrix();
-
 	glMatrixMode( GL_PROJECTION );
 	glPopMatrix();
 	glMatrixMode(GL_MODELVIEW);
+
+	/*glPopMatrix();
+	glMatrixMode(GL_MODELVIEW);
+	glPopMatrix();*/
+
 }

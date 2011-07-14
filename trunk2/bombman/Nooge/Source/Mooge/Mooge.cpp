@@ -41,7 +41,7 @@ void CMooge::Render()
 	if(Auiliary->mGridLineVis)
 		//Auiliary->DrawXZGrids();
 	if(Auiliary->mAxisVis)
-		Auiliary->DrawAxis();
+		//Auiliary->DrawAxis();
 
 	//Post camera to current position.
 	glMatrixMode(GL_MODELVIEW);
@@ -57,9 +57,13 @@ void CMooge::Render()
 		//Draw 2DText.
 		Text->Draw(Core->GetFontList());
 		if(Auiliary->mVersionInfoVis)
+		{
 			Auiliary->DrawVersionInfo(Core->GetFontList());
+		}
 		if(Auiliary->mFPSVis)
-			Auiliary->DrawFPS(Core->GetFontList());
+		{
+			//Auiliary->DrawFPS(Core->GetFontList());
+		}
 	}
 
 	if (!CurrentStage.IsNull()) 
