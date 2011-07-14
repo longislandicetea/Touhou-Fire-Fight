@@ -5,8 +5,8 @@
 //#include"FSM.h"
 
 class FSM;
-//class State;
-//class FleeState;
+class State;
+class FleeState;
 
 //class Transition;
 

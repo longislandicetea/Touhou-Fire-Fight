@@ -4,8 +4,8 @@
 #include "RuntimeMap.h"
 #include"AIMap.h"
 #include<queue>
-#include"NPCController.h"
 //using namespace std;
+#include"FSM.h"//???
 
 NPCController::NPCController()
 {
@@ -39,9 +39,20 @@ NPCController::NPCController()
 	fsm->update();*/
 void NPCController::initFSM()
 {
-	//Ref<NPCController> ctrl(this);
-	//Ref<State> flee(new FleeState(ctrl));
+
+	//states
+	Ref<State> flee(new FleeState(this));
 	
+
+	
+	//transitions
+	Ref<Transition> toFlee(new ToFlee(this,flee));
+	flee->AddTransition(toFlee);//notice prority
+
+	//fsm
+	Ref<FSM> fsm(new FSM(this,flee));
+	fsm->AddState(flee);
+
 }
 
 int NPCController::Update(Character *character, float dt)
@@ -60,7 +71,7 @@ int NPCController::Update(Character *character, float dt)
 	//computePerception(character,dt);
 	//return  mFsm.Update(dt);
 
-	return 0;
+	return IDLE;
 }
 
 void NPCController::computeWalls()

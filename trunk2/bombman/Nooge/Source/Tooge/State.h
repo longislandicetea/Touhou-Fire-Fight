@@ -15,7 +15,7 @@ class State
 {
 public:
 	enum Action { MOVE_UP, MOVE_DOWN, MOVE_RIGHT, MOVE_LEFT, DROP_BOMB, TRIGGER_BOMB,IDLE, ACTION_CNT};
-	State(Ref<NPCController> ctrl);
+	State(NPCController* ctrl);
 	virtual ~State(){}
 	void AddTransition(Ref<Transition> transition);
 	Ref<State> Update(float dt);
@@ -24,7 +24,7 @@ protected:
 	vector<Ref<Transition>> mTransitionList;
 	FSM* mOwner;
 
-	Ref<NPCController> mCtrl;
+	NPCController* mCtrl;
 	
 };
 
@@ -38,7 +38,7 @@ public:
 class FleeState:public State
 {
 public:
-	FleeState(Ref<NPCController> ctrl);
+	FleeState(NPCController* ctrl);
 	virtual ~FleeState(){};
 	int GetAction();
 };

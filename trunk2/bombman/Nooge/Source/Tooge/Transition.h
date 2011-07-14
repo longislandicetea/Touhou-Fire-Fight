@@ -10,21 +10,21 @@ class FSM;
 class Transition
 {
 public:
-	Transition(Ref<NPCController> ctrl,Ref<State> nextState);
+	Transition(NPCController* ctrl,Ref<State> nextState);
 	virtual ~Transition(){};
 	Ref<State> GetNextState();
 	virtual bool IsTrue() = 0;
 
 protected:
 	Ref<State> mNextState;
-	Ref<NPCController> mCtrl;
+	NPCController* mCtrl;
 	
 };
 
 class ToFlee: public Transition
 {
 public:
-	ToFlee(Ref<NPCController> ctrl,Ref<State> next);
+	ToFlee(NPCController* ctrl,Ref<State> next);
 	virtual bool IsTrue();
 
 };

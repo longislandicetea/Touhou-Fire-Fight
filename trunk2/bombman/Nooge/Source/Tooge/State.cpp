@@ -29,14 +29,14 @@ void State::AddTransition(Ref<Transition> transition)
 	mTransitionList.push_back(transition);
 }
 
-State::State(Ref<NPCController> ctrl)
+State::State(NPCController* ctrl)
 {
 	mCtrl = ctrl;
 }
 
 ////////////////////////////////FleeState///////////////////////////////
 
-FleeState::FleeState(Ref<NPCController> ctrl):
+FleeState::FleeState(NPCController* ctrl):
 State(mCtrl)
 {
 }
