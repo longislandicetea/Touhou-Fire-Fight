@@ -2,9 +2,10 @@
 
 
 ///////////////////////////////////////////////////////transition///////////////////////////////////////////////////
-Transition::Transition(Ref<State> nextState):
+Transition::Transition(Ref<NPCController> ctrl, Ref<State> nextState):
 mNextState(nextState)
 {
+	mCtrl = ctrl;
 }
 
 Ref<State> Transition::GetNextState()
@@ -14,6 +15,16 @@ Ref<State> Transition::GetNextState()
 
 //////////////////////////////////////////////////ToFlee///////////////////////////////////////////////
 
-ToFlee::ToFlee(Ref<State> next):
-Transition(next)
+ToFlee::ToFlee(Ref<NPCController> ctrl,Ref<State> next):
+Transition(ctrl,next)
 {}
+
+bool ToFlee::IsTrue()
+{
+	Grid g = mCtrl->GetCharacter()->GetBoundingBox();
+	int row = g.Row();
+	int col = g.Col();
+	if(mCtrl->GetDangerGrid()->GetValue(col,row)<=3.0)
+		return true;
+	return false;
+}

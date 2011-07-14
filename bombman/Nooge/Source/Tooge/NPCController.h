@@ -5,7 +5,17 @@
 //#include"FSM.h"
 
 class FSM;
+//class State;
+//class FleeState;
 
+//class Transition;
+
+
+typedef struct
+{
+	int row;
+	int col;
+}Pos;
 
 class NPCController : public CharacterController
 {
