@@ -42,13 +42,13 @@ void NPCController::initFSM()
 
 	//states
 	//Ref<State> flee(new FleeState(this));
-	State* flee = new FleeState(this);
+	 flee = new FleeState(this);
 
 	
 	//transitions
 	//Ref<Transition> toFlee(new ToFlee(this,flee));
-	Transition* toFlee = new ToFlee(this,flee);
-	flee->AddTransition(toFlee);//notice prority
+	 transToFlee = new ToFlee(this,flee);
+	flee->AddTransition(transToFlee);//notice prority
 	
 
 	//fsm
@@ -267,6 +267,11 @@ NPCController::~NPCController()
 	delete mDangerGrid;
 	delete mInterestGrid;
 	delete mFloodFillGrid;
+	delete mFsm;
+
+	//temp
+	delete flee;
+	delete transToFlee;
 }
 
 

@@ -8,7 +8,7 @@ class FSM;
 class State;
 class FleeState;
 
-//class Transition;
+class Transition;
 
 
 typedef struct
@@ -48,5 +48,8 @@ enum AIGridState
 	void initFSM();
 	
 	FSM* mFsm;
+	State* flee;
+	Transition* transToFlee;
+
 };
 
