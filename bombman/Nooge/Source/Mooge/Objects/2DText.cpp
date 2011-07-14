@@ -35,7 +35,7 @@ void C2DText::Draw(unsigned int FontList)
 		glLoadIdentity();
 
 		//[ToDo]: customize res setup from caller.
-		gluOrtho2D(0, 800, 600, 0);
+		glOrtho(0,800,600, 0, -1, 1);
 
 		glColor4ubv(mTextColor);
 		glRasterPos2i(mPosX, mPosY);
@@ -45,6 +45,10 @@ void C2DText::Draw(unsigned int FontList)
 		glPopMatrix();
 		glMatrixMode(GL_MODELVIEW);
 		glPopMatrix();
+		/*glPopMatrix();
+		glMatrixMode( GL_PROJECTION );
+		glPopMatrix();
+		glMatrixMode(GL_MODELVIEW);*/
 	}
 }
 
