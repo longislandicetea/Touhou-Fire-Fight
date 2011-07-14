@@ -7,6 +7,7 @@ typedef struct
 	float y;
 	float z;
 }Vector3;
+
 ///////////////////////////////State/////////////////////////////////
 
 
@@ -21,17 +22,62 @@ Ref<State> State::Update(float dt)
     return Ref<State>(this);
 }
 
-int State::GetAction()
-{
-	return 0;//??
-}
+
 
 void State::AddTransition(Ref<Transition> transition)
 {
 	mTransitionList.push_back(transition);
 }
 
+State::State(Ref<NPCController> ctrl)
+{
+	mCtrl = ctrl;
+}
 
+////////////////////////////////FleeState///////////////////////////////
+
+FleeState::FleeState(Ref<NPCController> ctrl):
+State(mCtrl)
+{
+}
+
+int FleeState::GetAction()
+{
+    static int dirX[4] = { -1, 0, 1,  0};
+	static int dirY[4] = {  0, 1, 0, -1};
+	Pos safe;
+
+	Grid g = mCtrl->GetCharacter()->GetBoundingBox();
+	safe.row = g.Row();
+	safe.col = g.Col();
+	int row = safe.row;//character's pos
+	int col = safe.col;
+	AIMap* dangerGrid = mCtrl->GetDangerGrid();
+
+	//find safer place
+	for(int i = 0;i<4;++i)
+	{
+		float safeValue = dangerGrid->GetValue(col+dirX[i],row+dirY[i]);
+		if(safeValue>dangerGrid->GetValue(safe.col,safe.row))
+		{
+			safe.row = row+dirY[i];
+			safe.col = col+dirX[i];
+		}
+	}
+
+	//direction???????
+	if(safe.row == row+dirY[0] && safe.col == col+dirX[0])
+		return MOVE_LEFT;
+	else if(safe.row == row+dirY[1] && safe.col == col+dirX[1])
+		return MOVE_UP;
+	else if(safe.row == row+dirY[2] && safe.col == col+dirX[2])
+		return MOVE_RIGHT;
+	else if(safe.row == row+dirY[3] && safe.col == col+dirX[3])
+		return MOVE_DOWN;
+	else
+		return IDLE;
+
+}
 
 
 ///////////////////////////////ClearPathState///////////////////////

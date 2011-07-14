@@ -14,15 +14,18 @@ class FSM;
 class State
 {
 public:
-	State(){}
-	~State(){}
+	enum Action { MOVE_UP, MOVE_DOWN, MOVE_RIGHT, MOVE_LEFT, DROP_BOMB, TRIGGER_BOMB,IDLE, ACTION_CNT};
+	State(Ref<NPCController> ctrl);
+	virtual ~State(){}
 	void AddTransition(Ref<Transition> transition);
 	Ref<State> Update(float dt);
-	int GetAction();
+	virtual int GetAction() = 0;
 protected:
 	vector<Ref<Transition>> mTransitionList;
 	FSM* mOwner;
-	int mTNum;//TransitionNumber
+
+	Ref<NPCController> mCtrl;
+	
 };
 
 class ClearPathState:public State
@@ -35,7 +38,8 @@ public:
 class FleeState:public State
 {
 public:
-	FleeState();
+	FleeState(Ref<NPCController> ctrl);
+	virtual ~FleeState(){};
 	int GetAction();
 };
 

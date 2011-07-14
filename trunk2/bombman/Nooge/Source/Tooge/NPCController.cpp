@@ -17,10 +17,31 @@ NPCController::NPCController()
 
 }
 
+	/*// Higher level state machine
+	State* idle = new IdleState();
+	State* fight = new FightState();
+	FSM* fsm = new FSM(idle);
+
+	Transition * trueFight = new AllwaysTrue(fight);
+	idle->addTransition(trueFight);
+	Transition * trueFire = new AllwaysTrue(fire);
+	fight->addTransition(trueFire);
+
+	fsm->addState(idle);
+	fsm->addState(fight);
+	fsm->addState(fire);
+
+	// Update many times
+	fsm->update();
+	fsm->update();
+	fsm->update();
+	fsm->update();
+	fsm->update();*/
 void NPCController::initFSM()
 {
-	//mFsm = new FSM( this, 
-
+	//Ref<NPCController> ctrl(this);
+	//Ref<State> flee(new FleeState(ctrl));
+	
 }
 
 int NPCController::Update(Character *character, float dt)

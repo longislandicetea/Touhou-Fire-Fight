@@ -18,10 +18,10 @@ public:
 	enum Action { MOVE_UP, MOVE_DOWN, MOVE_RIGHT, MOVE_LEFT, DROP_BOMB, TRIGGER_BOMB,IDLE, ACTION_CNT};
 
 	virtual int Update(Character* Character, float dt) = 0;
-	
+	Character* GetCharacter(){return mOwner;}
 	
 
-private:
+protected:
 	Character* mOwner;
 };
 
