@@ -5,6 +5,8 @@
 #include "Bomb.h"
 
 #include "Explosion.h"
+#include "PlayerController.h"
+#include "NPCController.h"
 
 
 
@@ -93,11 +95,19 @@ void Character::right( float dt )
 	mModel->SetRotateY(90);
 }
 
-Character::Character(CharacterController* ctrl)
+Character::Character(CharacterController* ctrl, const std::string& type)
 	: mCtrl(*ctrl)
 {
 	//mModel = Md2Object::Load("c:\\mh_name.md2","c:\\t2.bmp");
-	mModel = Md2Object::Load(DataManager::GetDataPath("Model","player","resource\\data.ini"),DataManager::GetDataPath("Texture","playerT","resource\\data.ini"));
+	if(type == "player")
+		mModel = Md2Object::Load(DataManager::GetDataPath("Model","player","resource\\data.ini"),DataManager::GetDataPath("Texture","playerT","resource\\data.ini"));
+	else if(type == "npc1")
+		mModel = Md2Object::Load(DataManager::GetDataPath("Model","npc","resource\\data.ini"),DataManager::GetDataPath("Texture","npcT","resource\\data.ini"));
+	else if(type == "npc2")
+		mModel = Md2Object::Load(DataManager::GetDataPath("Model","npc","resource\\data.ini"),DataManager::GetDataPath("Texture","npcT","resource\\data.ini"));
+	else
+		mModel = Md2Object::Load(DataManager::GetDataPath("Model","npc","resource\\data.ini"),DataManager::GetDataPath("Texture","npcT","resource\\data.ini"));
+	
 	cast<Md2Object>(mModel)->setAnimation("IDLE");
 	this->AddChild(mModel);
 	mSpeed = 60;
@@ -111,10 +121,10 @@ Character::Character(CharacterController* ctrl)
 	mTrigTimer = Ref<Timer>(new Timer);
 }
 
-Ref<GameObject> Character::AddController(CharacterController* ctrl)
+/*Ref<GameObject> Character::AddController(CharacterController* ctrl)
 {
 	return Ref<GameObject>(new Character(ctrl));
-}
+}*/
 
 void Character::SetSpeed( int factor )
 {
@@ -184,5 +194,24 @@ Grid Character::GetBoundingBox()
 
 	float offset = Grid::SideLen/2-2;
 	return Grid(GetX()-offset,GetZ()+offset,GetX()+offset,GetZ()-offset);
+}
+
+Ref<GameObject> Character::CreateCharacter( const std::string& type )
+{
+	if(type == "player")
+	{
+		PlayerController* playerCtrl = new PlayerController();
+		return Ref<GameObject> (new Character(playerCtrl,type));
+	}
+	else 
+	{
+		NPCController* npcCtrl = new NPCController();
+		if(type == "npc1")
+			return Ref<GameObject> (new Character(npcCtrl,"npc1"));
+		else if (type == "npc2")
+			return Ref<GameObject> (new Character(npcCtrl,"npc2"));
+		else
+			return Ref<GameObject> (new Character(npcCtrl,"npc3"));
+	}
 }
 
