@@ -15,7 +15,7 @@ class FSM;
 class FSM
 {
 public:
-	FSM(NPCController* ctrl, Ref<State> startState);//
+	FSM(NPCController* ctrl, Ref<State> startState);
 	int Update(float dt);
 	Ref<State> CurrentState();
 	~FSM(){};
