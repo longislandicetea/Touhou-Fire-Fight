@@ -14,13 +14,14 @@ Font::Font()
 	zpos = 0.0;
 }
 
-Font::Font(char *name, int size)
+Font::Font(char *name, int size, const std::string& str)
 {
 	screenX = 0;
 	screenY = 0;
 	xpos = 0.0;
 	ypos = 0.0;
 	zpos = 0.0;
+	content = str;
 	Build(name, size);
 }
 
@@ -54,39 +55,31 @@ void Font::Build(char *name, int size)
 	wglUseFontBitmaps(hDC, 32, 96, callList);
 }
 
-void Font::Print(const char *str, ...)
+void Font::Draw(bool is3D)
 {
+	if(is3D) return;
+	
 	char text[256];
 	va_list args;
 
-	if (str == NULL)
-		return;
-
+	/*if (str == NULL)
+		return;*/
+	char* str = const_cast<char*>(content.c_str());
 	va_start(args, str);
 	vsprintf(text, str, args);
 	va_end(args);
 
 	glPushMatrix();
-	glColor4f(r, g, b, a);
-	glLoadIdentity();
-	glMatrixMode(GL_PROJECTION);
-	//glTranslatef(0.0f, 0.0f, -1.0f);
-	
-	glPushMatrix();
+	//glColor4f(r, g, b, a);
 	glLoadIdentity();
 
-	glOrtho(0,800,600, 0, -1, 1);
 	if (xpos == 0.0 && ypos == 0.0 && zpos == 0.0)
 		glRasterPos2i(screenX, screenY);
 	else
 		glRasterPos3f(xpos, ypos, zpos);
 
-	//glPushAttrib(GL_LIST_BIT);
 	glListBase(callList - 32);
 	glCallLists(strlen(str), GL_UNSIGNED_BYTE, str);
-	//glPopAttrib();
-	glPopMatrix();
-	glMatrixMode(GL_MODELVIEW);
 	glPopMatrix();
 }
 

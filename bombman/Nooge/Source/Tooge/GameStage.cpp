@@ -61,10 +61,13 @@ GameStage::GameStage( Ref<GameObject> map )
 		Ref<GameObject> image(new Image(DataManager::GetDataPath("Image","tmp","resource\\data.ini"),128,128));
 		cast<Sprite>(mHUD)->AddChild(image);
 
-		mFont = Ref<Font>(new Font("Comic Sans MS",28));
+		/*mFont = Ref<Font>(new Font("Comic Sans MS",28));
 		mFont->SetPos2D(390,56);
-		mFont->SetRGB(1.0,1.0,0.0);
-
+		mFont->SetRGB(1.0,1.0,0.0);*/
+		Ref<GameObject> time(new Font("Comic Sans MS",28,"just a test"));
+		cast<Font>(time)->SetPos2D(390,56);
+		cast<Font>(time)->SetRGB(1,1,0);
+		cast<Sprite>(mHUD)->AddChild(time);
 		//mText = Ref<C2DText> (new C2DText("just a test!",400,56,1));
 }
 
@@ -297,7 +300,7 @@ void GameStage::Draw(bool is3D)
 {
         if(is3D)
 		{
-			float lightAmbient[] = {0.3,0.3,0.3,1.0};
+			float lightAmbient[] = {0.7,0.7,0.7,1.0};
 			float lightDiffuse[] = {0.8,0.7,0.75,1.0};
 			float lightPosition[] = {75.0,10.0,65.0,0.0};
 			float lmodelAmbient[] = {0.2,0.2,0.2,1.0};
