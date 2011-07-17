@@ -38,7 +38,11 @@ public:
 
 private:
 
+	//map data
 	Ref<GameObject> mCurrentMap;
+	std::map<std::string,int> mBonusProb;
+
+	//rendered objects
 	Ref<GameObject> mPlayer;
 	Ref<GameObject> mDwall;
 	Ref<GameObject> mUwall;
@@ -47,10 +51,8 @@ private:
 	Ref<GameObject> mBonus;
 	Ref<GameObject> mFloor;
 	Ref<GameObject> mExplosion;
-	std::map<std::string,int> mBonusProb;
-
 	Ref<GameObject> mHUD;
-	Ref<Font> mFont;
+	//Ref<Font> mFont;
 
 	Ref<Timer> mTimer;
 };                                                                                                                                                                                                                                                                                                                                                                                                     
