@@ -89,10 +89,11 @@ void Bomb::explode()
 
 				if(!gs->HasUwall(nRow,nCol))
 				{
-					mFlame.push_back(Ref<Grid> (new Grid(nRow,nCol)));
+					Ref<Grid> curGrid (new Grid(nRow,nCol));
+					mFlame.push_back(curGrid);
 					if(gs->HasDwall(nRow,nCol))
 					{
-						mSurroundDwall.push_back(Ref<Grid> (new Grid(nRow,nCol)));
+						mSurroundDwall.push_back(curGrid);
 					}
 				}
 				else
@@ -100,20 +101,23 @@ void Bomb::explode()
 			}
 		}
 
-		for(int k = 0;k<mFlame.size();++k)
+		/*for(int k = 0;k<mFlame.size();++k)
 		{
 			int x = mFlame[k]->CenterX();
 			int y = mFlame[k]->CenterY();
 			Ref<GameObject> explosion(new Explosion(x,rand()%5,y));
 			gs->AddChild(explosion);
-		}
+		}*/
 	}
 
 	for(int k = 0;k<mFlame.size();++k)
 	{
 		int r = mFlame[k]->Row();
 		int c = mFlame[k]->Col();
-		//Bonus::CreateBonus(mFlame[k]->CenterX(),mFlame[k]->CenterY());
+		int x = mFlame[k]->CenterX();
+		int y = mFlame[k]->CenterY();
+		Ref<GameObject> explosion(new Explosion(x,rand()%5,y));
+		gs->AddExplosion(explosion);
 		gs->DwallExplode(r,c);
 	}
 }

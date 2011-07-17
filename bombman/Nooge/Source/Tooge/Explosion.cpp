@@ -6,15 +6,11 @@
 #include <stdlib.h>
 
 #include "WinFrame.h"
+#include "DataManager.h"
 
 Explosion::Explosion( float x,float y,float z )
 {
-	//glEnable(GL_BLEND);
-	//glEnable(GL_TEXTURE_2D);
-	//glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-	glBlendFunc(GL_ONE,GL_ZERO);
-	//glEnable(GL_POINT_SMOOTH); 
-
+	mFlameTex = Texture::Load(DataManager::GetDataPath("Texture","flameT","resource\\data.ini"));
 	mParticles.reserve(MAX_PARTICLE);
 	for(int i = 0;i<MAX_PARTICLE;++i)
 	{
@@ -30,7 +26,6 @@ Explosion::Explosion( float x,float y,float z )
 		p.g = DEFAULT_G;
 		p.b = DEFAULT_B;
 		p.life = 2.2;
-		//p.fade = (rand()%10)/10000+0.003;
 		p.fade = rand()%10/50.0+0.1;
 
 		float factor = 3;
@@ -41,28 +36,63 @@ Explosion::Explosion( float x,float y,float z )
 		mParticles.push_back(p);
 	}
 	mParticleSize = 1;
+	isDead = false;
 }
 
-void Explosion::Draw()
+void Explosion::Draw(bool is3D)
 {
+	//return;
+	if (!is3D) return;
 	glEnable (GL_BLEND); 
 	glBlendFunc (GL_ONE,GL_ONE);
-	//glClear(GL_ACCUM_BUFFER_BIT);
 
-	//glPushMatrix();
-	//glMatrixMode(GL_MODELVIEW);
-	//glLoadIdentity();
+	Texture::Bind(mFlameTex);
 	for(int i = 0;i<MAX_PARTICLE;++i)
 	{
 		if(mParticles[i].life>0.0)
 		{
-			glPointSize(10.0);
-			glEnable(GL_POINT_SMOOTH);
 			int x = mParticles[i].x;
 			int y = mParticles[i].y;
 			int z = mParticles[i].z;
 
-			float dt = 0.03;
+			glBegin(GL_POINTS);
+				glTexCoord2d(1,1); glVertex3f(x-mParticleSize,y-mParticleSize,z); 
+				glTexCoord2d(0,1); glVertex3f(x-mParticleSize,y+mParticleSize,z); 
+				glTexCoord2d(1,0); glVertex3f(x+mParticleSize,y+mParticleSize,z); 
+				glTexCoord2d(0,0); glVertex3f(x+mParticleSize,y-mParticleSize,z);
+			glEnd();
+
+		}
+	}
+	glDisable(GL_BLEND);
+}
+
+/*bool Explosion::isDead()
+{
+	for(int i = 0;i<mParticles.size();++i)
+	{
+		if(mParticles[i].life>0.0)
+			return false;
+	}
+	return true;
+}*/
+
+void Explosion::Update( float dt )
+{
+	if(isDead)
+		this->RemoveFromParent();
+	else
+		isDead = true;
+	for(int i = 0;i<MAX_PARTICLE;++i)
+	{
+		if(mParticles[i].life>0.0)
+		{
+			isDead = false;
+			glPointSize(10.0);
+			int x = mParticles[i].x;
+			int y = mParticles[i].y;
+			int z = mParticles[i].z;
+
 			mParticles[i].x += mParticles[i].xi/(dt* 100000.0);
 			mParticles[i].xi += mParticles[i].gx;
 			mParticles[i].y += mParticles[i].yi/(dt* 100000.0);
@@ -71,17 +101,6 @@ void Explosion::Draw()
 			mParticles[i].zi += mParticles[i].gz;
 
 			mParticles[i].life -= mParticles[i].fade;
-			glColor4f(mParticles[i].r,mParticles[i].g,mParticles[i].b,1);
-
-			glBegin(GL_POINTS);
-			glVertex3f(x-mParticleSize,y-mParticleSize,z);
-			glVertex3f(x-mParticleSize,y+mParticleSize,z);
-			glVertex3f(x+mParticleSize,y+mParticleSize,z);
-			glVertex3f(x+mParticleSize,y-mParticleSize,z);
-			glEnd();
-			LogTrace("%d %d %d\n",x,y,z);
 		}
 	}
-	glPopMatrix();
-	glDisable(GL_BLEND);
 }

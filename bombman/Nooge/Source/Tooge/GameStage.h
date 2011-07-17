@@ -8,6 +8,8 @@
 
 #include <map>
 #include <string>
+#include "Font.h"
+#include "2DText.h"
 
 class Character;
 
@@ -25,10 +27,11 @@ public:
 	void StepOnBomb(Character* obj);
 	void AddBomb(Ref<GameObject> bomb);
 	void AddBonus(Ref<GameObject> bonus);
+	void AddExplosion(Ref<GameObject> explosion);
 	virtual ~GameStage();
 	Ref<GameObject> CreateBonus();
 
-	void Draw();
+	virtual void Draw(bool is3D);
 
 	//for AI
 	GameObjectContainer::ChildrenContainer GetAllBombs();
@@ -46,7 +49,8 @@ private:
 	Ref<GameObject> mExplosion;
 	std::map<std::string,int> mBonusProb;
 
-	Ref<GameObject> mHDU;
+	Ref<GameObject> mHUD;
+	Ref<Font> mFont;
 
 	Ref<Timer> mTimer;
 };                                                                                                                                                                                                                                                                                                                                                                                                     

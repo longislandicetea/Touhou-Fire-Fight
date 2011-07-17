@@ -54,7 +54,7 @@ int GameObjectContainer::NumOfChild()
 	return mChildren.size();
 }
 
-void GameObjectContainer::Draw()
+void GameObjectContainer::Draw(bool is3D)
 {
 	ChildrenContainer::const_iterator it = mChildren.begin();
 	float alpha = this->GetAlpha();
@@ -76,7 +76,7 @@ void GameObjectContainer::Draw()
 			glRotatef(obj->GetRotateY(), 0.0, 1.0, 0.0);
 			glRotatef(obj->GetRotateZ(), 0.0, 0.0, 1.0);
 
-			obj->Draw();
+			obj->Draw(is3D);
 			childAlpha *= alpha;
 			obj->SetAlpha(childAlpha);
 			glPopMatrix();

@@ -21,7 +21,6 @@
 #include "DataManager.h"
 #include"gl/GL.h"
 
-
 Ref<GameObject> GameStage::CurrentMap()
 {
         return mCurrentMap;
@@ -41,7 +40,9 @@ GameStage::GameStage( Ref<GameObject> map )
         mFloor = info["decoration"];
         mBomb  = Ref<GameObject>(new Sprite);
         mBonus = Ref<GameObject>(new Sprite);
-        mHDU = Ref<GameObject> (new Sprite);
+        mHUD = Ref<GameObject> (new Sprite);
+		mExplosion = Ref<GameObject> (new Sprite);
+		//mFont = Ref<GameObject> (new Sprite);
 
         //set gamestage
         this->AddChild(mFloor);
@@ -51,13 +52,20 @@ GameStage::GameStage( Ref<GameObject> map )
         this->AddChild(mPlayer);
         this->AddChild(mBomb);
         this->AddChild(mBonus);
-        this->AddChild(mHDU);
+        this->AddChild(mHUD);
+		this->AddChild(mExplosion);
+		//this->AddChild(mFont);
 
         //hud test
-        Ref<Image> image (new Image(DataManager::GetDataPath("Image","tmp","resource\\data.ini")));
-        Ref<GameObject> tmp(new GUIObject(image,0,0,128,128));
-        (*tmp).SetScale(0.25);
-        cast<Sprite>(mHDU)->AddChild(tmp);
+
+		Ref<GameObject> image(new Image(DataManager::GetDataPath("Image","tmp","resource\\data.ini"),128,128));
+		cast<Sprite>(mHUD)->AddChild(image);
+
+		mFont = Ref<Font>(new Font("Comic Sans MS",28));
+		mFont->SetPos2D(390,56);
+		mFont->SetRGB(1.0,1.0,0.0);
+
+		//mText = Ref<C2DText> (new C2DText("just a test!",400,56,1));
 }
 
 GameStage::~GameStage()
@@ -285,30 +293,33 @@ GameObjectContainer::ChildrenContainer GameStage::GetAllBombs()
         return cast<Sprite>(mBomb)->GetAllChildren();
 }
 
-void GameStage::Draw()
+void GameStage::Draw(bool is3D)
 {
-        //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        float lightAmbient[] = {1.0,1.0,1.0,1.0};
-        float lightDiffuse[] = {1.0,1.0,1.0,1.0};
-        float lightPosition[] = {75.0,10.0,65.0,0.0};
-        float lmodelAmbient[] = {0.5,0.5,0.5,1.0};
-        //float lightPosition[] = {-10.0,50.0,65.0};
-        //float spotDierection[] = {1.0,0.0,0.0};
-        glShadeModel(GL_SMOOTH);
-        glLightfv(GL_LIGHT0,GL_AMBIENT,lightAmbient);
-        glLightfv(GL_LIGHT0,GL_DIFFUSE,lightDiffuse);
-        glLightfv(GL_LIGHT0,GL_POSITION,lightPosition);
+        if(is3D)
+		{
+			float lightAmbient[] = {0.3,0.3,0.3,1.0};
+			float lightDiffuse[] = {0.8,0.7,0.75,1.0};
+			float lightPosition[] = {75.0,10.0,65.0,0.0};
+			float lmodelAmbient[] = {0.2,0.2,0.2,1.0};
+			glShadeModel(GL_SMOOTH);
+			glLightfv(GL_LIGHT0,GL_AMBIENT,lightAmbient);
+			glLightfv(GL_LIGHT0,GL_DIFFUSE,lightDiffuse);
+			glLightfv(GL_LIGHT0,GL_POSITION,lightPosition);
+			glLightModelfv(GL_LIGHT_MODEL_AMBIENT,lmodelAmbient);
 
-        glLightModelfv(GL_LIGHT_MODEL_AMBIENT,lmodelAmbient);
+			glEnable(GL_LIGHTING);
+			glEnable(GL_LIGHT0);
 
-        glEnable(GL_COLOR_MATERIAL);
-
-        glEnable(GL_LIGHTING);
-        glEnable(GL_LIGHT0);
-        //glEnable(GL_LIGHT1);
-        glEnable(GL_DEPTH_TEST);
-
-        Stage::Draw();
+			glEnable(GL_COLOR_MATERIAL);
+			glColorMaterial(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE);
+			
+			Stage::Draw(true);
+			glDisable(GL_COLOR_MATERIAL);
+			glDisable(GL_LIGHT0);
+			glDisable(GL_LIGHTING);
+		}
+		else
+			Stage::Draw(false);
 }
 
 bool GameStage::HasDwall( int row,int col )
@@ -324,4 +335,9 @@ bool GameStage::HasDwall( int row,int col )
                         return true;
         }
         return false;
+}
+
+void GameStage::AddExplosion( Ref<GameObject> explosion )
+{
+	cast<Sprite>(mExplosion)->AddChild(explosion);
 }

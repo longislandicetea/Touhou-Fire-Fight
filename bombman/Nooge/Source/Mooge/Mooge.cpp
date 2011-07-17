@@ -38,46 +38,48 @@ void CMooge::Render()
 	glClearColor(0.0,0.0,0.0,0.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
-	if(Auiliary->mGridLineVis)
-		//Auiliary->DrawXZGrids();
-	if(Auiliary->mAxisVis)
-		//Auiliary->DrawAxis();
+	glDisable(GL_DITHER);
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_CULL_FACE);
+	glEnable(GL_TEXTURE_2D);
 
 	//Post camera to current position.
 	glMatrixMode(GL_MODELVIEW);
 	Cameras->Post();
 
-	//Check if current console is activate.
-	if(Console->mActivate)
-	{
-		//Draw console text.
-		Console->Draw(Core->GetFontList());
-	}else
-	{
-		//Draw 2DText.
-		Text->Draw(Core->GetFontList());
-		if(Auiliary->mVersionInfoVis)
-		{
-			Auiliary->DrawVersionInfo(Core->GetFontList());
-		}
-		if(Auiliary->mFPSVis)
-		{
-			//Auiliary->DrawFPS(Core->GetFontList());
-		}
-	}
-
+	//draw 3d
 	if (!CurrentStage.IsNull()) 
 	{
-		CurrentStage->Draw();
+		CurrentStage->Draw(true);
 	}
 
+	glDisable(GL_CULL_FACE);
+	glDisable(GL_DEPTH_TEST);
+
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	glMatrixMode(GL_PROJECTION);
+	glPushMatrix();
+	glLoadIdentity();
+	gluOrtho2D(0, 800, 600, 0);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	//Cameras->Post();
+
+	//draw 2d
+	if (!CurrentStage.IsNull())
+	{
+		CurrentStage->Draw(false);
+	}
+	glMatrixMode(GL_PROJECTION);
+	glPopMatrix();
 	
 	SwapBuffers(Core->mhDC);
 
 	//Render finish.
 
 	//Calculate FPS.
-	Auiliary->CalcFPS();
 	Sleep(0);
 }
 

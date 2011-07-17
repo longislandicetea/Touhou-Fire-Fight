@@ -19,8 +19,8 @@ Texture::Texture( float width, float height, void *data )
 	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);	
 
-	gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGB, width, height, 
-		GL_RGB, GL_UNSIGNED_BYTE, data);
+	gluBuild2DMipmaps(GL_TEXTURE_2D, 4, width, height, 
+		GL_RGBA, GL_UNSIGNED_BYTE, data);
 }
 
 Texture::~Texture()
@@ -55,10 +55,29 @@ float Texture::GetID()
 Ref<Texture> Texture::Load( const std::string &filename )
 {
 	AUX_RGBImageRec *img = auxDIBImageLoadA(filename.c_str());
+	int w = img->sizeX;
+	int h = img->sizeY;
+
+	unsigned char* buf = (unsigned char*)malloc(w*h*4*sizeof(unsigned char));
+
+
+	for(int i = 0;i<w;++i)
+	{
+		for(int j = 0;j<h;++j)
+		{
+			int index = i*h+j;
+			memcpy(&buf[index*4],&img->data[index*3],sizeof(unsigned char)*3);
+			if(buf[index*4+0] == 255 && buf[index*4+1] == 255 && buf[index*4+2] == 255)
+				buf[index*4+3] = 0;
+			else
+				buf[index*4+3] = 255;
+		}
+	}
 	//mImg = auxDIBImageLoadA(filename.c_str());
-	Ref<Texture> ret(new Texture(img->sizeX, img->sizeY, img->data));
+	Ref<Texture> ret(new Texture(img->sizeX, img->sizeY, buf));
 	free(img->data);
 	free(img);
+	free(buf);
 	return ret;
 }
 

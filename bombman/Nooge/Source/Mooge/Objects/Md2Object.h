@@ -179,7 +179,7 @@ public:
 	static Ref<GameObject> Load(const std::string& filename, const std::string &texName);
 
 	virtual void Update(float dt);
-	virtual void Draw();
+	virtual void Draw(bool is3D);
 
 	//Helper methods
 	void setAnimation(const std::string& name);	
