@@ -1,7 +1,9 @@
 #pragma once
 
 #include <vector>
-#include "GameObjectContainer.h"
+#include "GameObject.h"
+#include "Ref.h"
+#include "Texture.h"
 
 #define MAX_PARTICLE 50
 #define DEFAULT_R 0.75f
@@ -19,15 +21,18 @@ typedef struct
 }
 Particle;
 
-class Explosion : public Sprite
+class Explosion : public GameObject
 {
 public:
 	Explosion(float x,float y,float z);
-	void Draw();
+	virtual void Draw(bool is3D);
+	virtual void Update(float dt);
 	virtual ~Explosion(){}
 
 private:
 	std::vector<Particle> mParticles;
+	Ref<Texture> mFlameTex;
 	float mParticleSize;
-
+	bool isDead;
+	//sbool isDead();
 };

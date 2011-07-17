@@ -61,8 +61,8 @@ void Character::doAction( int currentAction, float dt )
 		{
 			Bomb::CreateBomb(GetX(),GetZ(),this);
 			SetBombCnt(-1);
-			Explosion* e = new Explosion(GetX(),GetY(),GetZ());
-			e->Draw();
+			//Explosion* e = new Explosion(GetX(),GetY(),GetZ());
+			//e->Draw(true);
 		}
 		break;
 	case CharacterController::TRIGGER_BOMB:
@@ -102,11 +102,11 @@ Character::Character(CharacterController* ctrl, const std::string& type)
 	if(type == "player")
 		mModel = Md2Object::Load(DataManager::GetDataPath("Model","player","resource\\data.ini"),DataManager::GetDataPath("Texture","playerT","resource\\data.ini"));
 	else if(type == "npc1")
-		mModel = Md2Object::Load(DataManager::GetDataPath("Model","npc","resource\\data.ini"),DataManager::GetDataPath("Texture","npcT","resource\\data.ini"));
+		mModel = Md2Object::Load(DataManager::GetDataPath("Model","npc","resource\\data.ini"),DataManager::GetDataPath("Texture","npc1T","resource\\data.ini"));
 	else if(type == "npc2")
-		mModel = Md2Object::Load(DataManager::GetDataPath("Model","npc","resource\\data.ini"),DataManager::GetDataPath("Texture","npcT","resource\\data.ini"));
+		mModel = Md2Object::Load(DataManager::GetDataPath("Model","npc","resource\\data.ini"),DataManager::GetDataPath("Texture","npc2T","resource\\data.ini"));
 	else
-		mModel = Md2Object::Load(DataManager::GetDataPath("Model","npc","resource\\data.ini"),DataManager::GetDataPath("Texture","npcT","resource\\data.ini"));
+		mModel = Md2Object::Load(DataManager::GetDataPath("Model","npc","resource\\data.ini"),DataManager::GetDataPath("Texture","npc3T","resource\\data.ini"));
 	
 	cast<Md2Object>(mModel)->setAnimation("IDLE");
 	this->AddChild(mModel);

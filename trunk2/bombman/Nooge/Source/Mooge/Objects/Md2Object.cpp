@@ -494,9 +494,11 @@ void Md2Object::Update( float dt )
 	mInterp += dt;
 }
 
-void Md2Object::Draw()
+void Md2Object::Draw(bool is3D)
 
 {
+	if (!is3D) return;
+
 	glPushMatrix ();
 	// Axis rotation
 	glRotatef (-90.0f, 1.0f, 0.0f, 0.0f);

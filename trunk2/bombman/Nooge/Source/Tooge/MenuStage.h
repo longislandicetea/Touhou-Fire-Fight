@@ -10,6 +10,7 @@ class MenuStage : public Stage
 public:
 	static Ref<Stage> LoadStage();
 	void HandleClickEvent(int x,int y);
+	virtual void Draw(bool is3D);
 	virtual ~MenuStage() {}
 private:
 	MenuStage();

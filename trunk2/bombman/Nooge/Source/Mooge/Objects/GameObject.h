@@ -11,7 +11,7 @@ class GameObject
 public:
 	friend class GameObjectContainer;
 	
-	virtual void Draw() = 0;
+	virtual void Draw(bool Is3D) = 0;
 	virtual void Update(float dt) {}
 	virtual ~GameObject() {}
 	

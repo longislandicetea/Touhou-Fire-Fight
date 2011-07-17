@@ -84,7 +84,8 @@ std::map< std::string,Ref<GameObject> > Map::Parse()
 	ret["decoration"] = decContainer;
 
 	Ref<GameObject> floor = Decoration::CreateDecoration("floor");
-	floor->SetPos(75,5,65);
+	floor->SetScale(1.5);
+	floor->SetPos(55,-10,55);
 
 	Ref<GameObject> bamboo = Decoration::CreateDecoration("bamboo");
 	bamboo->SetPos(0,0,0);

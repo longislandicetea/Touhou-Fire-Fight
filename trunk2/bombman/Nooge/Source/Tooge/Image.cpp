@@ -4,39 +4,25 @@
 #include <gl\GL.h>
 
 
-Image::Image(const std::string& filename)
+Image::Image(const std::string& filename,int width,int height)
 {
 	mTexture = Texture::Load(filename);
+	mWidth = width;
+	mHeight = height;
 }
 
-void Image::Draw(float x1,float y1,float x2,float y2)
+void Image::Draw(bool is3D)
 {
+	if(is3D) return;
+	
 	Texture::Bind(mTexture);
-	
-	//glPushMatrix();
-	glMatrixMode( GL_PROJECTION );
+	int x = this->GetX();
+	int y = this->GetY();
 
-	glPushMatrix();
-	glLoadIdentity();
-	glOrtho(0,800,600, 0, -1, 1);
-
-	glMatrixMode( GL_MODELVIEW );
-	glPushMatrix();
-	glLoadIdentity();
 	glBegin( GL_QUADS );
-	glTexCoord2f(0.0,0.0);glVertex3f(x1,y1,0.0);
-	glTexCoord2f(0.0,1.0);glVertex3f(x1,y2,0.0);
-	glTexCoord2f(1.0,1.0);glVertex3f(x2,y2,0.0);
-	glTexCoord2f(1.0,0.0);glVertex3f(x2,y1,0.0);
+	glTexCoord2f(0.0,0.0);glVertex3f(0.0,0.0,0.0);
+	glTexCoord2f(0.0,1.0);glVertex3f(0.0,mHeight,0.0);
+	glTexCoord2f(1.0,1.0);glVertex3f(mWidth,mHeight,0.0);
+	glTexCoord2f(1.0,0.0);glVertex3f(mWidth,0.0,0.0);
 	glEnd();
-	
-	glPopMatrix();
-	glMatrixMode( GL_PROJECTION );
-	glPopMatrix();
-	glMatrixMode(GL_MODELVIEW);
-
-	/*glPopMatrix();
-	glMatrixMode(GL_MODELVIEW);
-	glPopMatrix();*/
-
 }

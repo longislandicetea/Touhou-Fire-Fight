@@ -22,7 +22,7 @@ public:
 	int					NumOfChild();
 
 	//override
-	virtual void Draw();
+	virtual void Draw(bool is3D);
 	virtual void Update(float dt);
 private:
 	ChildrenContainer mChildren;
