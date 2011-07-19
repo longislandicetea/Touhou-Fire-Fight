@@ -44,6 +44,9 @@
     <Filter Include="ParticleEffect">
       <UniqueIdentifier>{9de2687d-523d-494a-8865-e3648bff3129}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AudioSystem">
+      <UniqueIdentifier>{90914d1d-a457-4bfc-91b0-7109a99f49fc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Source\Tooge\Main.cpp">
@@ -130,6 +133,9 @@
     <ClCompile Include="..\..\..\..\Source\Tooge\MenuStage.cpp">
       <Filter>Stage</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\Tooge\AudioSystem.cpp">
+      <Filter>AudioSystem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Source\Tooge\App.h">
@@ -212,6 +218,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\Source\Tooge\MenuStage.h">
       <Filter>Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\Tooge\AudioSystem.h">
+      <Filter>AudioSystem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

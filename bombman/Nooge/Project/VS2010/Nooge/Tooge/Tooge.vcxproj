@@ -52,7 +52,7 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>..\Debug;..\..\..\..\Source\Uoobi\VLD\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glaux.lib;Opengl32.lib;glu32.lib;Noobi.lib;Mooge.lib;..\Noobi\Debug\WinFrame.res;vld.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glaux.lib;Opengl32.lib;glu32.lib;Noobi.lib;Mooge.lib;..\Noobi\Debug\WinFrame.res;vld.lib;fmodex_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -76,6 +76,7 @@
     <ClCompile Include="..\..\..\..\Source\Mooge\Core\InputSystem.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\AIMap.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\App.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Tooge\AudioSystem.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\BBombPlus.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\BDrop.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\BFaster.cpp" />
@@ -106,6 +107,7 @@
     <ClInclude Include="..\..\..\..\Source\Mooge\Core\InputSystem.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\AIMap.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\App.h" />
+    <ClInclude Include="..\..\..\..\Source\Tooge\AudioSystem.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\BBombPlus.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\BDrop.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\BFaster.h" />

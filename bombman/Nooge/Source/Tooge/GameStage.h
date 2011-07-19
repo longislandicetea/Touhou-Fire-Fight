@@ -17,6 +17,7 @@ class GameStage : public Stage
 {
 public:
 	GameStage(Ref<GameObject> map);
+	~GameStage();
 	Ref<GameObject> CurrentMap();
 	Ref<GameObject> Player();
 	bool CanPass(GameObject* obj);
@@ -28,10 +29,11 @@ public:
 	void AddBomb(Ref<GameObject> bomb);
 	void AddBonus(Ref<GameObject> bonus);
 	void AddExplosion(Ref<GameObject> explosion);
-	virtual ~GameStage();
+	//virtual ~GameStage();
 	Ref<GameObject> CreateBonus();
 
 	virtual void Draw(bool is3D);
+	virtual void Update(float dt);
 
 	//for AI
 	GameObjectContainer::ChildrenContainer GetAllBombs();
