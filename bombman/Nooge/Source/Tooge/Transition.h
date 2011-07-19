@@ -28,3 +28,17 @@ public:
 	virtual bool IsTrue();
 
 };
+
+class ToSilly: public Transition
+{
+public:
+	ToSilly(NPCController* ctrl,State* next);
+	virtual bool IsTrue();
+};
+
+class ToSearchBonus: public Transition
+{
+public:
+	ToSearchBonus(NPCController* ctrl,State* next);
+	virtual bool IsTrue();
+};

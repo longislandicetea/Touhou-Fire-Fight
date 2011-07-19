@@ -13,6 +13,15 @@ State* Transition::GetNextState()
 	return mNextState;
 }
 
+//////////////////////////////////////////////////ToSilly/////////////////////////////////////////////
+ToSilly::ToSilly(NPCController* ctrl,State* next):
+Transition(ctrl,next)
+{}
+
+bool ToSilly::IsTrue()
+{
+	return true;
+}
 //////////////////////////////////////////////////ToFlee///////////////////////////////////////////////
 
 ToFlee::ToFlee(NPCController* ctrl,State* next):
@@ -27,4 +36,18 @@ bool ToFlee::IsTrue()
 	if(mCtrl->GetDangerGrid()->GetValue(col,row)<=3.0)
 		return true;
 	return false;
+}
+
+////////////////////////////////////////////////ToSearchBonus////////////////////////////////////
+
+ToSearchBonus::ToSearchBonus(NPCController* ctrl,State* next):
+Transition(ctrl,next)
+{}
+
+bool ToSearchBonus::IsTrue()
+{
+	Pos NearestBonus = mCtrl->NearestBonusPos();
+	if(NearestBonus == Pos(-1,-1))
+		return false;
+		return true;
 }

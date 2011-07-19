@@ -91,6 +91,7 @@ void App::SetupEngine()
 	VECTORFS CamEyeVec(75.0,120.0,180.0);
 	VECTORFS CamCenterVec(75.0, 0.0, 65.0);
 	VECTORFS CamUpVec(0.0, 40.0, 0.0);
+
 	mMainCamera->SetPosition(CamEyeVec, CamCenterVec, CamUpVec);
 
 	//Add Engine object here.
