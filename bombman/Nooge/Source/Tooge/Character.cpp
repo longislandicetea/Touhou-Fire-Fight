@@ -8,9 +8,6 @@
 #include "PlayerController.h"
 #include "NPCController.h"
 
-
-
-
 void Character::Update(float dt)
 {
 	int oldX = this->GetX();

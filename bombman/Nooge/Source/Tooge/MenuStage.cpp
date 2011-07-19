@@ -15,28 +15,26 @@ Ref<Stage> MenuStage::LoadStage()
 MenuStage::MenuStage()
 {
 	mGuiObject = Ref<GameObject>(new Sprite);
-	
-	/*Ref<Image> start (new Image(DataManager::GetDataPath("Image","start","resource\\data.ini")));
-	Ref<GameObject> bStart (new GUIObject(start,475,386,692,316));
-	cast<Sprite>(mGuiObject)->AddChild(bStart);*/
-
-	/*Ref<Image> config (new Image(DataManager::GetDataPath("Image","config","resource\\data.ini")));
-	Ref<GameObject> bConfig (new GUIObject(config,407,453,624,383));
-	cast<Sprite>(mGuiObject)->AddChild(bConfig);
-
-	Ref<Image> help (new Image(DataManager::GetDataPath("Image","help","resource\\data.ini")));
-	Ref<GameObject> bHelp (new GUIObject(help,557,519,774,449));
-	cast<Sprite>(mGuiObject)->AddChild(bHelp);
-
-	Ref<Image> quit (new Image(DataManager::GetDataPath("Image","quit","resource\\data.ini")));
-	Ref<GameObject> bQuit (new GUIObject(quit,505,589,722,519));
-	cast<Sprite>(mGuiObject)->AddChild(bQuit);*/
 
 	Ref<GameObject> bgImage (new Image(DataManager::GetDataPath("Image","initStage","resource\\data.ini"),800,600));
 	cast<Sprite>(mGuiObject)->AddChild(bgImage);
 
-	Ref<GameObject> bStart (new Image(DataManager::GetDataPath("Image","start","resource\\data.ini"),216,71));
+	Ref<GameObject> bStart (new Image(DataManager::GetDataPath("Image","start","resource\\data.ini"),230,74));
+	//cast<Image>(bStart)->SetPos2D(475,316);
+	bStart->SetPos(475,316,0.0);
 	cast<Sprite>(mGuiObject)->AddChild(bStart);
+
+	Ref<GameObject> bConfig (new Image(DataManager::GetDataPath("Image","config","resource\\data.ini"),230,74));
+	bConfig->SetPos(407,383,0.0);
+	cast<Sprite>(mGuiObject)->AddChild(bConfig);
+
+	Ref<GameObject> bHelp (new Image(DataManager::GetDataPath("Image","help","resource\\data.ini"),230,74));
+	bHelp->SetPos(557,449,0.0);
+	cast<Sprite>(mGuiObject)->AddChild(bHelp);
+
+	Ref<GameObject> bQuit (new Image(DataManager::GetDataPath("Image","quit","resource\\data.ini"),230,74));
+	bQuit->SetPos(505,519,0.0);
+	cast<Sprite>(mGuiObject)->AddChild(bQuit);
 
 	this->AddChild(mGuiObject);
 }

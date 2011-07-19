@@ -10,8 +10,12 @@ Grid::Grid( float x1,float y1,float x2,float y2 )
 	mX2 = x2;
 	mY2 = y2;
 
-	mRow = (int)(mY2/SideLen +0.5);
-	mCol = (int)(mX1/SideLen +0.5);
+	/*mRow = (int)(mY1/SideLen +0.5);
+	mCol = (int)(mX1/SideLen +0.5);*/
+	mRow = (int)((mY1+mY2)*0.5/SideLen);
+	mCol = (int)((mX1+mX2)*0.5/SideLen);
+
+	//int x = 1;
 }
 
 Grid::Grid( int row,int col )

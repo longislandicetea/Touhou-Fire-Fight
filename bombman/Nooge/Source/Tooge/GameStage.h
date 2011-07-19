@@ -41,6 +41,7 @@ private:
 	//map data
 	Ref<GameObject> mCurrentMap;
 	std::map<std::string,int> mBonusProb;
+	int mWallMap[13][15];
 
 	//rendered objects
 	Ref<GameObject> mPlayer;
@@ -55,4 +56,6 @@ private:
 	//Ref<Font> mFont;
 
 	Ref<Timer> mTimer;
+
+	void initWallMap();
 };                                                                                                                                                                                                                                                                                                                                                                                                     
