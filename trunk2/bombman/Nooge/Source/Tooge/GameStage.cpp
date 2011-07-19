@@ -18,8 +18,11 @@
 #include "WinFrame.h"
 #include "GUIObject.h"
 #include "Image.h"
+#include "Image3D.h"
 #include "DataManager.h"
 #include"gl/GL.h"
+
+#include "vector"
 
 Ref<GameObject> GameStage::CurrentMap()
 {
@@ -42,10 +45,10 @@ GameStage::GameStage( Ref<GameObject> map )
         mBonus = Ref<GameObject>(new Sprite);
         mHUD = Ref<GameObject> (new Sprite);
 		mExplosion = Ref<GameObject> (new Sprite);
-		//mFont = Ref<GameObject> (new Sprite);
 
+		//mPlayer->SetX(GetX()-5);
         //set gamestage
-        this->AddChild(mFloor);
+        //this->AddChild(mFloor);
         this->AddChild(mDwall);
         this->AddChild(mUwall);
         this->AddChild(mNpc);
@@ -54,21 +57,19 @@ GameStage::GameStage( Ref<GameObject> map )
         this->AddChild(mBonus);
         this->AddChild(mHUD);
 		this->AddChild(mExplosion);
-		//this->AddChild(mFont);
 
         //hud test
-
+		Ref<GameObject> bg1(new Image(DataManager::GetDataPath("Image","bg1","resource\\data.ini"),800,600));
+		cast<Sprite>(mHUD)->AddChild(bg1);
+		
 		Ref<GameObject> image(new Image(DataManager::GetDataPath("Image","tmp","resource\\data.ini"),128,128));
 		cast<Sprite>(mHUD)->AddChild(image);
 
-		/*mFont = Ref<Font>(new Font("Comic Sans MS",28));
-		mFont->SetPos2D(390,56);
-		mFont->SetRGB(1.0,1.0,0.0);*/
 		Ref<GameObject> time(new Font("Comic Sans MS",28,"just a test"));
 		cast<Font>(time)->SetPos2D(390,56);
-		cast<Font>(time)->SetRGB(1,1,0);
 		cast<Sprite>(mHUD)->AddChild(time);
-		//mText = Ref<C2DText> (new C2DText("just a test!",400,56,1));
+
+		initWallMap();
 }
 
 GameStage::~GameStage()
@@ -85,54 +86,58 @@ bool GameStage::CanPass( GameObject* obj )
 {
         //Sprite* dwallContainer = cast<Sprite>(mDwall);
         //Sprite* uwallContainer = cast<Sprite>(mUwall);
-        Grid box = obj->GetBoundingBox();
-        int cnt = cast<Sprite>(mUwall)->NumOfChild();
-        for(int j = 0;j<cnt;++j)
-        {
-                Ref<GameObject> child = cast<Sprite>(mUwall)->GetChild(j);
-                Grid bBox = child->GetBoundingBox();
-                if(bBox.Intersect(box))
-                {
-                        return false;
-                }
-        }
-        cnt = cast<Sprite>(mDwall)->NumOfChild();
-        for(int i = 0;i<cnt;++i)
-        {
-                Ref<GameObject> child = cast<Sprite>(mDwall)->GetChild(i);
-                Grid bBox = child->GetBoundingBox();
-                if(bBox.Intersect(box))
-                {
-                        return false;
-                }
-        }
-        cnt = cast<Sprite>(mPlayer)->NumOfChild();
-        for(int k = 0;k<cnt;++k)
-        {
-                Ref<GameObject> child = cast<Sprite>(mPlayer)->GetChild(k);
-                if(&*child != obj)
-                {
-                        Grid bBox = child->GetBoundingBox();
-                        if(bBox.Intersect(box))
-                        {
-                                return false;
-                        }
-                }
-        }
-        cnt = cast<Sprite>(mNpc)->NumOfChild();
-        for(int p = 0;p<cnt;++p)
-        {
-                Ref<GameObject> child = cast<Sprite>(mNpc)->GetChild(p);
-                if(&*child != obj)
-                {
-                        Grid bBox = child->GetBoundingBox();
-                        if(bBox.Intersect(box))
-                        {
-                                return false;
-                        }
-                }
-        }
-        return true;
+	/*Grid box = obj->GetBoundingBox();
+	int row = box.Row();
+	int col = box.Col();
+
+	int dx[9] = {-1,-1,-1,0,0,0,1,1,1};
+	int dy[9] = {-1,0,1,-1,0,1,-1,0,1};
+
+	std::vector< Ref<Grid> > surroundWall;
+	surroundWall.clear();
+
+	for(int i = 0;i<9;++i)
+	{
+		int nRow = row + dx[i];
+		int nCol = col + dy[i];
+
+		if(nRow>=0 && nRow<13 && nCol>=0 && nCol<15)
+		{
+			if(mWallMap[nRow][nCol])
+			{
+				surroundWall.push_back(Ref<Grid>(new Grid(nRow,nCol)));
+			}
+		}
+	}
+
+	for(int j = 0;j<surroundWall.size();++j)
+	{
+		if(box.Intersect(*surroundWall[j]))
+			return false;
+	}
+	return true;*/
+	Grid box = obj->GetBoundingBox();
+	int cnt = cast<Sprite>(mUwall)->NumOfChild();
+	for(int j = 0;j<cnt;++j)
+	{
+		Ref<GameObject> child = cast<Sprite>(mUwall)->GetChild(j);
+		Grid bBox = child->GetBoundingBox();
+		if(bBox.Intersect(box))
+		{
+			return false;
+		}
+	}
+	cnt = cast<Sprite>(mDwall)->NumOfChild();
+	for(int i = 0;i<cnt;++i)
+	{
+		Ref<GameObject> child = cast<Sprite>(mDwall)->GetChild(i);
+		Grid bBox = child->GetBoundingBox();
+		if(bBox.Intersect(box))
+		{
+			return false;
+		}
+	}
+	return true;
 }
 
 void GameStage::AddBomb( Ref<GameObject> bomb )
@@ -320,6 +325,7 @@ void GameStage::Draw(bool is3D)
 			glDisable(GL_COLOR_MATERIAL);
 			glDisable(GL_LIGHT0);
 			glDisable(GL_LIGHTING);
+			;
 		}
 		else
 			Stage::Draw(false);
@@ -343,4 +349,35 @@ bool GameStage::HasDwall( int row,int col )
 void GameStage::AddExplosion( Ref<GameObject> explosion )
 {
 	cast<Sprite>(mExplosion)->AddChild(explosion);
+}
+
+void GameStage::initWallMap()
+{
+	for(int i = 0;i<13;++i)
+	{
+		for(int j = 0;j<15;++j)
+		{
+			mWallMap[i][j] = 0;
+		}
+	}
+
+	int cnt = cast<Sprite>(mUwall)->NumOfChild();
+	for(int j = 0;j<cnt;++j)
+	{
+		Ref<GameObject> child = cast<Sprite>(mUwall)->GetChild(j);
+		Grid bBox = child->GetBoundingBox();
+		int row = bBox.Row();
+		int col = bBox.Col();
+		mWallMap[row][col] = 1;
+	}
+
+	cnt = cast<Sprite>(mDwall)->NumOfChild();
+	for(int i = 0;i<cnt;++i)
+	{
+		Ref<GameObject> child = cast<Sprite>(mDwall)->GetChild(i);
+		Grid bBox = child->GetBoundingBox();
+		int row = bBox.Row();
+		int col = bBox.Col();
+		mWallMap[row][col] = 2;
+	}
 }

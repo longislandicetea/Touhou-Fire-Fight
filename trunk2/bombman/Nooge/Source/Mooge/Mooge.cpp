@@ -37,7 +37,25 @@ void CMooge::Render()
 	//Clear the window with current clearing color
 	glClearColor(0.0,0.0,0.0,0.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	
+
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	glMatrixMode(GL_PROJECTION);
+	glPushMatrix();
+	glLoadIdentity();
+	gluOrtho2D(0, 800, 600, 0);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+
+	//draw 2d
+	if (!CurrentStage.IsNull())
+	{
+		CurrentStage->Draw(false);
+	}
+	glMatrixMode(GL_PROJECTION);
+	glPopMatrix();
+
 	glDisable(GL_DITHER);
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
@@ -56,7 +74,7 @@ void CMooge::Render()
 	glDisable(GL_CULL_FACE);
 	glDisable(GL_DEPTH_TEST);
 
-	glEnable(GL_BLEND);
+	/*glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	glMatrixMode(GL_PROJECTION);
@@ -65,7 +83,6 @@ void CMooge::Render()
 	gluOrtho2D(0, 800, 600, 0);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	//Cameras->Post();
 
 	//draw 2d
 	if (!CurrentStage.IsNull())
@@ -73,13 +90,11 @@ void CMooge::Render()
 		CurrentStage->Draw(false);
 	}
 	glMatrixMode(GL_PROJECTION);
-	glPopMatrix();
+	glPopMatrix();*/
 	
 	SwapBuffers(Core->mhDC);
 
 	//Render finish.
-
-	//Calculate FPS.
 	Sleep(0);
 }
 

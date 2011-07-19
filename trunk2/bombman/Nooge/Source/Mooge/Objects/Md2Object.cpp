@@ -443,11 +443,11 @@ Ref<GameObject> Md2Object::Load( const std::string& filename, const std::string 
 
 Md2Object::Md2Object( Ref<Md2Model> model )
 	: mModel(model), 
-	  mCurrFrame(0), 
-	  mNextFrame(0),
-	  mAnimInfo(NULL),
-	  mInterp(0.0f)
-{	
+	mCurrFrame(0), 
+	mNextFrame(0),
+	mAnimInfo(NULL),
+	mInterp(0.0f)
+{       
 	// Set first animation as default animation
 	mAnimInfo = &mModel->anims ().begin ()->second;
 	mCurrentAnim = mModel->anims ().begin ()->first;

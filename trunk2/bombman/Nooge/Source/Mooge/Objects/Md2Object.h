@@ -150,7 +150,7 @@ private:
 
 private:
 	// Member variables
-	
+
 	// Constants
 	static vec3_t _kAnorms[162];
 	static int _kMd2Ident;
@@ -182,7 +182,7 @@ public:
 	virtual void Draw(bool is3D);
 
 	//Helper methods
-	void setAnimation(const std::string& name);	
+	void setAnimation(const std::string& name);     
 
 private:
 	Md2Object(Ref<Md2Model> model);

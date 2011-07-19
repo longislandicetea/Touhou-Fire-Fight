@@ -67,7 +67,7 @@ Ref<Texture> Texture::Load( const std::string &filename )
 		{
 			int index = i*h+j;
 			memcpy(&buf[index*4],&img->data[index*3],sizeof(unsigned char)*3);
-			if(buf[index*4+0] == 255 && buf[index*4+1] == 255 && buf[index*4+2] == 255)
+			if(buf[index*4+0] == 0 && buf[index*4+1] == 0 && buf[index*4+2] == 0)
 				buf[index*4+3] = 0;
 			else
 				buf[index*4+3] = 255;

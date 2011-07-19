@@ -90,6 +90,9 @@
     <ClCompile Include="..\..\..\..\Source\Mooge\Objects\Font.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\Tooge\Image3D.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Source\Mooge\Objects\2DText.h">
@@ -168,6 +171,9 @@
       <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Source\Mooge\Objects\Font.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\Tooge\Image3D.h">
       <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>
