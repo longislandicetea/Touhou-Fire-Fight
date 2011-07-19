@@ -21,6 +21,7 @@
 #include "Image3D.h"
 #include "DataManager.h"
 #include"gl/GL.h"
+#include "App.h"
 
 #include "vector"
 
@@ -68,6 +69,8 @@ GameStage::GameStage( Ref<GameObject> map )
 		Ref<GameObject> time(new Font("Comic Sans MS",28,"just a test"));
 		cast<Font>(time)->SetPos2D(390,56);
 		cast<Sprite>(mHUD)->AddChild(time);
+
+		App::Inst().AudioSys()->PlayStream(0,"background");
 
 		initWallMap();
 }
@@ -380,4 +383,10 @@ void GameStage::initWallMap()
 		int col = bBox.Col();
 		mWallMap[row][col] = 2;
 	}
+}
+
+void GameStage::Update( float dt )
+{
+	Stage::Update(dt);
+	App::Inst().AudioSys()->Update();
 }

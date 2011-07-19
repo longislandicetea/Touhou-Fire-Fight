@@ -27,6 +27,7 @@ App::App(void): CThread(true),mMooge(NULL),mRenderForm(NULL),mMainCamera(NULL)
 	mRenderForm = new CRenderForm();
 	mMooge = new CMooge();
 	mInputSys = Ref<InputSystem>(new InputSystem);
+	mAudioSys = Ref<AudioSystem>(new AudioSystem);
 
 	mRenderForm->AddCallBackEvent(WM_CREATE, bind(&App::OnRenderFormCreate, this, _1));
 	mRenderForm->AddCallBackEvent(WM_DESTROY, bind(&App::OnRenderFormDestroy, this, _1));
@@ -218,4 +219,9 @@ void App::OnRenderFormClickButton( const WinMsgPackage& MsgPack )
 	int y = HIWORD(MsgPack.lParam);
 	CurrentStage()->HandleClickEvent(x,y);
 	LogTrace("%d %d\n",x,y);
+}
+
+Ref<AudioSystem> App::AudioSys()
+{
+	return mAudioSys;
 }

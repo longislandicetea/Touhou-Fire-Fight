@@ -6,6 +6,7 @@
 #include"Thread.h"
 #include "Ref.h"
 #include "InputSystem.h"
+#include "AudioSystem.h"
 
 using namespace MoogeType;
 
@@ -23,6 +24,7 @@ public:
 	static App& Inst();
 	~App();
 	Ref<InputSystem> InputSys();
+	Ref<AudioSystem> AudioSys();
 	Stage *CurrentStage();
 	void ChangeStage(Ref<Stage> next);
 
@@ -43,6 +45,7 @@ private:
 	CMooge* mMooge;
 	CCamera* mMainCamera;
 	Ref<InputSystem> mInputSys;
+	Ref<AudioSystem> mAudioSys;
 
 	clock_t mLeastTime;
 
