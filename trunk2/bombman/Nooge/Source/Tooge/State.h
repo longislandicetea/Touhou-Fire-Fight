@@ -40,12 +40,21 @@ class FleeState:public State
 public:
 	FleeState(NPCController* ctrl);
 	virtual ~FleeState(){};
-	int GetAction();
+	virtual int GetAction();
 };
 
 class SearchBonusState:public State
 {
 public:
-	SearchBonusState();
-	int GetAction();
+	SearchBonusState(NPCController* ctrl);
+	virtual ~SearchBonusState(){};
+	virtual int GetAction();
+};
+
+class SillyState:public State
+{
+public:
+	SillyState(NPCController* ctrl);
+	virtual ~SillyState(){};
+	virtual int GetAction();
 };

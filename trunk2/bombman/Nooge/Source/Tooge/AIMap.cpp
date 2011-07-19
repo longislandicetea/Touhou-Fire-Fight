@@ -12,14 +12,14 @@ void AIMap::Reset( int value )
 			this->value[i][j] = value;
 }
 
-int AIMap::GetValue( int row,int col )
+int AIMap::GetValue( int col,int row )
 {
-	return this->value[row][col];
+	return this->value[col][row];
 }
 
-void AIMap::SetValue( int row,int col,float value )
+void AIMap::SetValue( int col,int row,float value )
 {
-	this->value[row][col] = value;
+	this->value[col][row] = value;
 }
 
 
@@ -30,9 +30,9 @@ bool AIMap::IsFree( int row, int col )
 	return true;
 }
 
-bool AIMap::IsInside(int row,int col)
+bool AIMap::IsInside(int col,int row)
 {
-	if(row>=0 && row<WIDTH && col >=0 && col<HEIGHT)
+	if(row>=0 && row<HEIGHT && col >=0 && col<WIDTH)
 		return true;
 	return false;
 }

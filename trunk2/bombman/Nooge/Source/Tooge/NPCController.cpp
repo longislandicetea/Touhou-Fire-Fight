@@ -4,57 +4,55 @@
 #include "RuntimeMap.h"
 #include"AIMap.h"
 #include<queue>
-//using namespace std;
-#include"FSM.h"//???
+#include"FSM.h"
+
+#include "BBombPlus.h"
+#include "BDrop.h"
+#include "BFaster.h"
+#include "BFlamePlus.h"
+#include "BPush.h"
+#include "BSlower.h"
+#include "BTrigger.h"
 
 NPCController::NPCController()
 {
 	mDangerGrid = new AIMap(100);
 	mFloodFillGrid  = new AIMap(100);
 	mInterestGrid = new AIMap(0);
-	
+	mNearestBonusPos = Pos(-1,-1);//init the pos-----no bonus
+
 	initFSM();
 
 }
 
-	/*// Higher level state machine
-	State* idle = new IdleState();
-	State* fight = new FightState();
-	FSM* fsm = new FSM(idle);
-
-	Transition * trueFight = new AllwaysTrue(fight);
-	idle->addTransition(trueFight);
-	Transition * trueFire = new AllwaysTrue(fire);
-	fight->addTransition(trueFire);
-
-	fsm->addState(idle);
-	fsm->addState(fight);
-	fsm->addState(fire);
-
-	// Update many times
-	fsm->update();
-	fsm->update();
-	fsm->update();
-	fsm->update();
-	fsm->update();*/
 void NPCController::initFSM()
 {
 
 	//states
-	//Ref<State> flee(new FleeState(this));
-	 flee = new FleeState(this);
+	flee = new FleeState(this);
+	silly = new SillyState(this);
+	searchBonus = new SearchBonusState(this);
 
-	
+
 	//transitions
-	//Ref<Transition> toFlee(new ToFlee(this,flee));
-	 transToFlee = new ToFlee(this,flee);
+	transToFlee = new ToFlee(this,flee);
+	transToSilly = new ToSilly(this,silly);
+	transToSearchBonus = new ToSearchBonus(this,searchBonus);
+
+	//add transitions to states
 	flee->AddTransition(transToFlee);//notice prority
-	
+	flee->AddTransition(transToSearchBonus);
+	flee->AddTransition(transToSilly);
+
+	silly->AddTransition(transToFlee);
+	silly->AddTransition(transToSearchBonus);
+	silly->AddTransition(transToSilly);
 
 	//fsm
-	//mFsm = Ref<FSM>(new FSM(this,flee));
-	mFsm = new FSM(this,flee);
+	mFsm = new FSM(this,silly);
 	mFsm->AddState(flee);
+	mFsm->AddState(searchBonus);
+	mFsm->AddState(silly);
 
 }
 
@@ -69,10 +67,10 @@ int NPCController::Update(Character *character, float dt)
 	mInterestGrid->Reset(0);
 
 	computeWalls();
-	
+
 	computeFloodFill(character);
-	
-	//computePerception(character,dt);
+
+	computePerception(character,dt);
 	return  mFsm->Update(dt);
 
 	return 0;
@@ -88,7 +86,7 @@ void NPCController::computeWalls()
 	{
 		int row = Uwall->GetChild(i)->GetBoundingBox().Row();
 		int col = Uwall->GetChild(i)->GetBoundingBox().Col();
-		
+
 		//set Uwall Value
 		mFloodFillGrid->SetValue(col,row,-UWALL);
 		mDangerGrid->SetValue(col,row,-UWALL);
@@ -112,100 +110,121 @@ void NPCController::computeWalls()
 }
 void NPCController::computeFloodFill(Character* character)
 {
-	int x = character->GetBoundingBox().Row();
-	int y = character->GetBoundingBox().Col();
+	int row = character->GetBoundingBox().Row();
+	int col = character->GetBoundingBox().Col();
 	//mFloodFillGrid->Reset(100);
-	if(mFloodFillGrid->GetValue(x,y) == 100)//not in the wall( = =+ )
+	if(mFloodFillGrid->GetValue(col,row) == 100)//not in the wall( = =+ )
 	{
-	mFloodFillGrid->SetValue(x,y,0);
-	computeFloodFill(x,y);
+		mFloodFillGrid->SetValue(col,row,0);
+		computeFloodFill(col,row);
 	}
 }
 
-void NPCController::computeFloodFill( int x,int y )
+
+
+void NPCController::computeFloodFill( int col,int row )
 {
 	//floodfill by queue
 
 	static int dirX[4] = { -1, 0, 1,  0};
 	static int dirY[4] = {  0, 1, 0, -1};
-	std::queue<pair<int,int>> myQueue;
-	myQueue.push(make_pair(x,y));
-	
+	std::queue<Pos> myQueue;
+	myQueue.push(Pos(col,row));
 
 	while(!myQueue.empty())
 	{
-		
-		pair<int,int> pos = myQueue.front();
+
+		Pos pos = myQueue.front();
 		myQueue.pop();
 		for(int i = 0;i<4;++i)
 		{
-			int nextX = pos.first + dirX[i]; int nextY = pos.second + dirY[i];
+			int nextX = pos.col + dirX[i]; int nextY = pos.row + dirY[i];
 			if (mFloodFillGrid->GetValue(nextX,nextY)!=-UWALL && mFloodFillGrid->GetValue(nextX,nextY)!=-DWALL && mFloodFillGrid->IsInside(nextX,nextY) )
-		{
-			float nextValue = mFloodFillGrid->GetValue(pos.first,pos.second) +1;
-			if (nextValue< mFloodFillGrid->GetValue(nextX,nextY))
 			{
-				mFloodFillGrid->SetValue(nextX, nextY, nextValue);
-				myQueue.push(make_pair(nextX,nextY));
+				float nextValue = mFloodFillGrid->GetValue(pos.col,pos.row) +1;
+				if (nextValue< mFloodFillGrid->GetValue(nextX,nextY))
+				{
+					mFloodFillGrid->SetValue(nextX, nextY, nextValue);
+					myQueue.push(Pos(nextX,nextY));
+				}
 			}
 		}
-		}
 	}
+}
 
-	//°¤Ç§µ¶µÄµÝ¹é
+stack<Pos> NPCController::getPathTo(int col,int row)
+{
+	 int dirX[4] = { -1, 0, 1,  0};
+	 int dirY[4] = {  0, 1, 0, -1};
 
-	/*int nextValue = mFloodFillGrid->GetValue(x,y) + 1;
-	for (int i = 0; i < 4 ; ++i)
+	stack<Pos> path;
+	if(mFloodFillGrid->IsInside(col,row))
 	{
-		int nextX = x + dirX[i]; int nextY = y + dirY[i];
-		if (mFloodFillGrid->IsFree(nextX, nextY) && mFloodFillGrid->IsInside(nextX,nextY) )
+	float dValue = mFloodFillGrid->GetValue(col,row);
+	if(dValue != 100 && dValue != -DWALL && dValue != -UWALL)
+	{
+		//path.push(Pos(col,row));
+		int nextCol = col;
+		int nextRow = row;
+
+		while(dValue--)
 		{
-			if (nextValue < mFloodFillGrid->GetValue(nextX,nextY))
-				mFloodFillGrid->SetValue(nextX, nextY, nextValue);
+			path.push(Pos(nextCol,nextRow));
+			for(int i = 0;i<4;++i)
+			{
+				if(mFloodFillGrid->GetValue(nextCol+dirX[i],nextRow+dirY[i])==dValue)
+				{
+					nextCol = nextCol+dirX[i];
+					nextRow = nextRow + dirY[i];
+					//path.push(Pos(col+dirX[i],row+dirY[i]));
+					break;
+				}
+			}
 		}
 	}
-	for (int i = 0; i < 4 ; ++i)
-	{
-		int nextX = x + dirX[i]; int nextY = y + dirY[i];
-		if ( mFloodFillGrid->IsInside(nextX,nextY) && mFloodFillGrid->GetValue(nextX, nextY) == nextValue)
-			computeFloodFill(nextX, nextY);
-	}*/
+	}
+	return path;
 }
 
 void NPCController::computePerception(Character* character, float dt)
 {
 	//get bomb container
 	GameStage* gs = (GameStage*)App::Inst().CurrentStage();
-	
+
 	computeDangerGrid(gs,character,dt);
-	
+	computeInterestGrid(gs,character,dt);
+
+
 }
 
+std::stack<Pos> NPCController::getPathTo(Pos pos)
+{
+	std::stack<Pos> path = getPathTo(pos.col,pos.row);
+	return path;
+}
 
 
 void NPCController::computeDangerGrid(GameStage* gs, Character* character, float dt)
 {
 	const int WIDTH = mDangerGrid->GetWidth();
 	const int HEIGHT = mDangerGrid->GetHeight();
-	
+
 	GameObjectContainer::ChildrenContainer bombs = gs->GetAllBombs();
 	int nbomb = bombs.size();
-	
 
-	
 	for(int t = 0;t<nbomb;++t)
 	{
 		Bomb* b = cast<Bomb>(gs->GetAllBombs()[t]);
 		int power = b->GetPower();
-		
+
 		int rowCount = 0; int colCount =0;
 		for(int i = -power;i<=power;++i)
 		{
 			int row = b->GetBoundingBox().Row();
 			int col = b->GetBoundingBox().Col();
-			
+
 			double remain;
-			
+
 			//trigger
 			if(b->IsInTriggerState() && character == b->GetOwner())         //trigger bomb is mine~
 			{
@@ -219,36 +238,38 @@ void NPCController::computeDangerGrid(GameStage* gs, Character* character, float
 					remain = 3.0-b->GetTimer()->Last();   //not trigger bomb
 
 				//compute dangerous rows
-				if(row+i>=0 && row+i<=WIDTH)
+				if(row+i>=0 && row+i<=HEIGHT)
 				{
-					float rowValue = mDangerGrid->GetValue(row+i,col);
-					
-					if(rowValue!=-DWALL && rowValue != -UWALL)
+					float rowValue = mDangerGrid->GetValue(col, row+i);
+
+					if(rowValue != -UWALL)
 					{
-						   if(rowCount ==1|| rowCount ==0 )
-						   {
-							   rowCount =1 ;
-							   mDangerGrid->SetValue(col, row+i,remain);
-						   }
+						if(rowCount ==1|| rowCount ==0 )
+						{
+							rowCount =1 ;
+							if(rowValue !=-DWALL)
+							mDangerGrid->SetValue(col, row+i,remain);
+						}
 					}
 					else 
 					{
 						if(rowCount == 1)
 							rowCount = 2;
 					}
-					
+
 				}
 
 				//compute dangerous cols
-				if(col+i>=0 && col+i<=HEIGHT)
+				if(col+i>=0 && col+i<=WIDTH)
 				{
-					float colValue = mDangerGrid->GetValue(col,row+i);
+					float colValue = mDangerGrid->GetValue(col+i,row);
 					if(colValue!=-DWALL && colValue != -UWALL)
 					{
 						if(colCount == 1 || colCount == 0)
 						{
 							colCount = 1;
-							mDangerGrid->SetValue(col,row+i,remain);
+							if(colValue !=-DWALL)
+							mDangerGrid->SetValue(col+i,row,remain);
 						}
 					}
 					else
@@ -258,6 +279,49 @@ void NPCController::computeDangerGrid(GameStage* gs, Character* character, float
 					}
 				}
 			}
+		}
+//int test = 0;//debug
+	}
+	
+}
+
+void NPCController::computeInterestGrid(GameStage*gs,Character* character,float dt)
+{
+	
+	GameObjectContainer* bonus = cast<GameObjectContainer>(gs->GetChild(BONUS));
+	int nbonus = bonus->NumOfChild();
+	int count = 0;
+	for(int t = 0;t<nbonus;++t)
+	{
+		
+		Ref<GameObject> child = bonus->GetChild(t);
+		if(typeid(*child) == typeid(BFlamePlus) || typeid(*child) == typeid(BBombPlus)
+			|| typeid(*child) == typeid(BFaster)
+			|| typeid(*child) == typeid(BTrigger)
+			|| typeid(*child) == typeid(BPush))
+		{
+			int col = child->GetBoundingBox().Col();
+			int row = child->GetBoundingBox().Row();
+			//mInterestGrid->SetValue(col,row,5);
+
+			//get NearestBonusPos
+			int value = mFloodFillGrid->GetValue(col,row);
+			if(value != -DWALL && value != -UWALL && value != 100)
+			{
+				if(mNearestBonusPos == Pos(-1,-1))
+				{
+					mNearestBonusPos = Pos(col,row);
+				}
+				else if(value<mFloodFillGrid->GetValue(col,row))
+				{
+					mNearestBonusPos = Pos(col,row);
+				}
+			}
+		}
+		else if(typeid(*child)== typeid(BSlower)|| typeid(*child)== typeid(BDrop))
+		{
+			//mInterestGrid->SetValue(child->GetBoundingBox().Col(),child->GetBoundingBox().Row(),-5);
+			
 		}
 	}
 }
@@ -272,6 +336,15 @@ NPCController::~NPCController()
 	//temp
 	delete flee;
 	delete transToFlee;
+	delete silly;
+	delete transToSilly;
+	delete searchBonus;
+	delete transToSearchBonus;
+}
+
+Pos NPCController::NearestBonusPos()
+{
+	return mNearestBonusPos;
 }
 
 
