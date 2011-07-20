@@ -22,6 +22,8 @@ void Bomb::CreateBomb(int x,int y, Character* owner)
 {
 	Ref<GameObject> bomb(new Bomb);
 	bomb->SetPos(x,0,y);
+	bomb->SetCol();
+	bomb->SetRow();
 	GameStage* gs = (GameStage*)App::Inst().CurrentStage();
 	gs->AddBomb(bomb);
 	//owner->SetBombCnt(-1);
