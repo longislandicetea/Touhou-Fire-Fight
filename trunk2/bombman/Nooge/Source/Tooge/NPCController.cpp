@@ -40,17 +40,17 @@ void NPCController::initFSM()
 	transToSearchBonus = new ToSearchBonus(this,searchBonus);
 
 	//add transitions to states
-	flee->AddTransition(transToFlee);//notice prority
+	//flee->AddTransition(transToFlee);//notice prority
 	flee->AddTransition(transToSearchBonus);
 	flee->AddTransition(transToSilly);
 
-	silly->AddTransition(transToFlee);
+	//silly->AddTransition(transToFlee);
 	silly->AddTransition(transToSearchBonus);
 	silly->AddTransition(transToSilly);
 
 	//fsm
 	mFsm = new FSM(this,silly);
-	mFsm->AddState(flee);
+	//mFsm->AddState(flee);
 	mFsm->AddState(searchBonus);
 	mFsm->AddState(silly);
 
