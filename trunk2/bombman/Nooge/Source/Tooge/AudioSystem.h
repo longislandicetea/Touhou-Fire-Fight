@@ -12,8 +12,9 @@ class AudioSystem
 public:
 	AudioSystem();
 	void PlayStream(int channelId, const std::string& key);
-	void PlaySound(int channelId, const std::string& key);
-	void Pause();
+	void PlayEffectSound(int channelId, const std::string& key);
+	void Pause(int channelId);
+	void Stop(int channelId);
 
 	void Update();
 

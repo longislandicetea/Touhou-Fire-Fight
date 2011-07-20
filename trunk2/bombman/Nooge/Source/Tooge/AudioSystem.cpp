@@ -10,6 +10,9 @@ AudioSystem::AudioSystem()
 	mSounds["background"] = buf;
 
 	mResult = mSys->createStream("resource\\730880.mp3",FMOD_DEFAULT,0,&buf); 
+	mSounds["menubackground"] = buf;
+
+	mResult = mSys->createStream("resource\\cursor.mp3",FMOD_DEFAULT,0,&buf); 
 	mSounds["menubutton"] = buf;
 
 	FMOD::Channel* channel1;
@@ -24,17 +27,22 @@ void AudioSystem::PlayStream( int channelId, const std::string& key )
 	mResult = mSys->playSound(FMOD_CHANNEL_FREE, mSounds[key], false, &mChannels[channelId]);
 }
 
-void AudioSystem::PlaySound( int channelId, const std::string& key )
+void AudioSystem::PlayEffectSound( int channelId, const std::string& key )
 {
 	mResult = mSys->playSound(FMOD_CHANNEL_FREE, mSounds[key], false, &mChannels[channelId]);
 }
 
-void AudioSystem::Pause()
+void AudioSystem::Pause(int channelId)
 {
-
+	mResult = mChannels[channelId]->setPaused(false);	
 }
 
 void AudioSystem::Update()
 {
 	mResult = mSys->update();
+}
+
+void AudioSystem::Stop( int channelId )
+{
+	mResult = mChannels[channelId]->stop();	
 }

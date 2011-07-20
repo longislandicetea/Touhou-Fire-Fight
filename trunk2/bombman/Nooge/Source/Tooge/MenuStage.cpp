@@ -37,15 +37,19 @@ MenuStage::MenuStage()
 	cast<Sprite>(mGuiObject)->AddChild(bQuit);
 
 	this->AddChild(mGuiObject);
+
+	App::Inst().AudioSys()->PlayStream(0,"menubackground");
 }
 
 void MenuStage::HandleClickEvent(int x, int y)
 {
-	if(x<=400 && x>=0)
+	if(x<700 && x>475 && y>316 && y<390)
 	{
+		App::Inst().AudioSys()->PlayEffectSound(1,"menubutton");
 		Ref<GameObject> map = Map::Load(DataManager::GetDataPath("Map","map","resource\\data.ini"));
 		Ref<Stage> gameStage(new GameStage(map));
 		App::Inst().ChangeStage(gameStage);
+		App::Inst().AudioSys()->Stop(0);
 	}
 }
 
