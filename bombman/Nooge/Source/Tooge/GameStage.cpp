@@ -17,8 +17,8 @@
 
 #include "WinFrame.h"
 #include "GUIObject.h"
-#include "Image.h"
-#include "Image3D.h"
+
+
 #include "DataManager.h"
 #include"gl/GL.h"
 #include "App.h"
@@ -50,13 +50,13 @@ GameStage::GameStage( Ref<GameObject> map )
 		//mPlayer->SetX(GetX()-5);
         //set gamestage
         //this->AddChild(mFloor);
+		this->AddChild(mHUD);
         this->AddChild(mDwall);
         this->AddChild(mUwall);
         this->AddChild(mNpc);
         this->AddChild(mPlayer);
         this->AddChild(mBomb);
         this->AddChild(mBonus);
-        this->AddChild(mHUD);
 		this->AddChild(mExplosion);
 
         //hud test

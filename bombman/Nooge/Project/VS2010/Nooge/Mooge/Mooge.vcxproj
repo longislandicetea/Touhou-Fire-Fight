@@ -36,7 +36,6 @@
     <ClCompile Include="..\..\..\..\Source\Mooge\TinyXml\tinyxmlerror.cpp" />
     <ClCompile Include="..\..\..\..\Source\Mooge\TinyXml\tinyxmlparser.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\Image.cpp" />
-    <ClCompile Include="..\..\..\..\Source\Tooge\Image3D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Source\Mooge\Core\Auxiliary.h" />
@@ -65,7 +64,6 @@
     <ClInclude Include="..\..\..\..\Source\Mooge\TinyXml\tinystr.h" />
     <ClInclude Include="..\..\..\..\Source\Mooge\TinyXml\tinyxml.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\Image.h" />
-    <ClInclude Include="..\..\..\..\Source\Tooge\Image3D.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
