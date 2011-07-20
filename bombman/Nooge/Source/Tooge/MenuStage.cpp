@@ -5,7 +5,7 @@
 
 #include "App.h"
 #include "Map.h"
-#include "GameStage.h"
+#include "SelectStage.h"
 
 Ref<Stage> MenuStage::LoadStage()
 {
@@ -48,9 +48,7 @@ void MenuStage::HandleClickEvent(int x, int y)
 		App::Inst().AudioSys()->PlayEffectSound(1,"menubutton");
 		App::Inst().AudioSys()->Resume(1);
 		App::Inst().AudioSys()->Stop(0);
-		Ref<GameObject> map = Map::Load(DataManager::GetDataPath("Map","map","resource\\data.ini"));
-		Ref<Stage> gameStage(new GameStage(map));
-		App::Inst().ChangeStage(gameStage);
+		App::Inst().ChangeStage(SelectStage::LoadStage());
 	}
 	else if (x<637 && x>407 && y<457 && y>383)
 	{

@@ -16,7 +16,7 @@ class Character;
 class GameStage : public Stage
 {
 public:
-	GameStage(Ref<GameObject> map);
+	GameStage(Ref<GameObject> map, int level);
 	~GameStage();
 	Ref<GameObject> CurrentMap();
 	Ref<GameObject> Player();
@@ -58,8 +58,12 @@ private:
 	Ref<GameObject> mHUD;
 	Ref<GameObject> mCountdownTimerFont;
 
+	//timer
 	Ref<Timer> mTimer;
 	float mCountdownTimer;
+
+	//level
+	int mLevel;
 	
 	void initWallMap();
 

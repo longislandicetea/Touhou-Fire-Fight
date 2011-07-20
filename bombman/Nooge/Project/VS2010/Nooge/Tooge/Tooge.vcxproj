@@ -100,6 +100,7 @@
     <ClCompile Include="..\..\..\..\Source\Tooge\PlayerController.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\RenderForm.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\GameStage.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Tooge\SelectStage.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\State.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\Timer.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\Transition.cpp" />
@@ -130,6 +131,7 @@
     <ClInclude Include="..\..\..\..\Source\Tooge\NPCController.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\PlayerController.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\RenderForm.h" />
+    <ClInclude Include="..\..\..\..\Source\Tooge\SelectStage.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\State.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\Timer.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\Transition.h" />

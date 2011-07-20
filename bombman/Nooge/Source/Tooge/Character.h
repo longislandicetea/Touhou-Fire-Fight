@@ -35,6 +35,7 @@ public:
 	void SetSpeed(int factor);
 	void SetPower(int factor);
 	void SetBombCnt(int factor);
+	void SetLifeCnt(int factor);
 	void SetTimer();
 	void SetPushBonus(bool hasBonus);
 	void SetTrigBonus(bool hasBonus);

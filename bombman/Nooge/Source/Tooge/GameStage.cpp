@@ -31,7 +31,7 @@ Ref<GameObject> GameStage::CurrentMap()
         return mCurrentMap;
 }
 
-GameStage::GameStage( Ref<GameObject> map ) 
+GameStage::GameStage( Ref<GameObject> map,int level) 
 {
         //read map
         mCurrentMap = map;
@@ -39,6 +39,9 @@ GameStage::GameStage( Ref<GameObject> map )
 
 		//set countdown timer
 		mCountdownTimer = 180;
+
+		//set level
+		mLevel = level;
 
         std::map< std::string,Ref<GameObject> > info = cast<Map>(mCurrentMap)->Parse();
         mDwall = info["dwall"];
@@ -63,21 +66,32 @@ GameStage::GameStage( Ref<GameObject> map )
         this->AddChild(mBonus);
 		this->AddChild(mExplosion);
 
-        //hud test
-		Ref<GameObject> bg1(new Image(DataManager::GetDataPath("Image","bg1","resource\\data.ini"),800,600));
-		cast<Sprite>(mHUD)->AddChild(bg1);
+        //background
+		Ref<GameObject> bg;
+		switch (mLevel)
+		{
+		case 1:
+			bg = Ref<GameObject>(new Image(DataManager::GetDataPath("Image","bg1","resource\\data.ini"),800,600)); break;
+		case 2:
+			bg = Ref<GameObject>(new Image(DataManager::GetDataPath("Image","bg2","resource\\data.ini"),800,600)); break;
+		case 3:
+			bg = Ref<GameObject>(new Image(DataManager::GetDataPath("Image","bg3","resource\\data.ini"),800,600)); break;
+		}
+		cast<Sprite>(mHUD)->AddChild(bg);
 		
+		//hud
 		Ref<GameObject> image(new Image(DataManager::GetDataPath("Image","tmp","resource\\data.ini"),128,128));
 		cast<Sprite>(mHUD)->AddChild(image);
 
-		/*Ref<GameObject> time(new Font("Comic Sans MS",28,"just a test"));*/
+		//timer
 		mCountdownTimerFont = Ref<GameObject>(new Font("Comic Sans MS",28,"3:00"));
 		cast<Font>(mCountdownTimerFont)->SetPos2D(390,56);
 		cast<Sprite>(mHUD)->AddChild(mCountdownTimerFont);
 
+		//music
 		App::Inst().AudioSys()->PlayStream(0,"background");
 
-		initWallMap();
+		//initWallMap();
 }
 
 GameStage::~GameStage()
@@ -291,14 +305,14 @@ void GameStage::StepOnBomb( Character* obj )
                 {
                         if(obj->HasPushBonus())
                         {
-                                LogTrace("push\n");
+                                //LogTrace("push\n");
                                 int direction = obj->GetCurState();
                                 cast<Bomb>(child)->TriggerPush(direction,70.0); 
                                 obj->SetPushBonus(false);
                         }
                         else
                         {
-                                //dead
+							obj->SetLifeCnt(-1);
                         }
                 }
         }
