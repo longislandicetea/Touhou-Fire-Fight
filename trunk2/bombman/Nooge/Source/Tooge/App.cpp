@@ -107,7 +107,7 @@ void App::SetupEngine()
 	//Add Engine object here.
 	
 	Ref<GameObject> map = Map::Load(DataManager::GetDataPath("Map","map","resource\\data.ini"));
-	Ref<Stage> gameStage(new GameStage(map));
+	Ref<Stage> gameStage(new GameStage(map,1));
 	mMooge->CurrentStage = gameStage;
 
 	/*Ref<Stage> initStage = MenuStage::LoadStage();

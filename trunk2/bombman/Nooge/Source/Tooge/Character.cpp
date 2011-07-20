@@ -125,7 +125,7 @@ Character::Character(CharacterController* ctrl, const std::string& type)
 	this->AddChild(mModel);
 	mSpeed = 60;
 	mBombPower = 1;
-	//mLifeCnt = 
+	mLifeCnt = 1;
 	mBombCnt = 1;
 	mHasDropMalus = false;
 	mHasPushBonus = false;
@@ -231,5 +231,10 @@ Ref<GameObject> Character::CreateCharacter( const std::string& type )
 		else
 			return Ref<GameObject> (new Character(npcCtrl,"npc3"));
 	}
+}
+
+void Character::SetLifeCnt( int factor )
+{
+	mLifeCnt += factor;
 }
 
