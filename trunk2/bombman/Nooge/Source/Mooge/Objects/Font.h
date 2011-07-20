@@ -24,6 +24,7 @@ public:
 
 	void SetRGB(float red, float green, float blue) { r = red; g = green; b = blue; a = 1.0; }
 	void SetRGBA(float red, float green, float blue, float alpha) { r = red; g = green; b = blue; a = alpha; }
+	void SetContent(const std::string& str);
 
 private:
 	unsigned int texID;		// font texture id

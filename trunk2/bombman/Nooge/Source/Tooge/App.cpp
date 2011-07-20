@@ -22,6 +22,11 @@
 #include "MenuStage.h"
 #include <gl/glut.h>
 
+void glMouseMotion(int x, int y)
+{
+
+}
+
 App::App(void): CThread(true),mMooge(NULL),mRenderForm(NULL),mMainCamera(NULL)
 {
 	mRenderForm = new CRenderForm();
@@ -36,6 +41,7 @@ App::App(void): CThread(true),mMooge(NULL),mRenderForm(NULL),mMainCamera(NULL)
 	mRenderForm->AddCallBackEvent(WM_KEYDOWN, bind(&App::OnRenderFormKeyDown, this, _1));
 	mRenderForm->AddCallBackEvent(WM_KEYUP, bind(&App::OnRenderFormKeyUp, this, _1));
 	mRenderForm->AddCallBackEvent(WM_LBUTTONDOWN,bind(&App::OnRenderFormClickButton,this,_1));
+	mRenderForm->AddCallBackEvent(WM_MOUSEHOVER,bind(&App::OnRenderFormMouseOver,this,_1));
 	mRenderForm->Load("Rendering form", 40, 50, 800, 600);
 }
 
@@ -111,6 +117,8 @@ void App::SetupEngine()
 	SetTimer(mRenderForm->gethWnd(), 33, 1, NULL);
 
 	mLeastTime = clock();
+
+	//glutPassiveMotionFunc(glMouseMotion);
 }
 
 void App::Execute()
@@ -227,4 +235,12 @@ void App::OnRenderFormClickButton( const WinMsgPackage& MsgPack )
 Ref<AudioSystem> App::AudioSys()
 {
 	return mAudioSys;
+}
+
+void App::OnRenderFormMouseOver( const WinMsgPackage& MsgPack )
+{
+	int x = LOWORD(MsgPack.lParam);
+	int y = HIWORD(MsgPack.lParam);
+	CurrentStage()->HandleMouseOverEvent(x,y);
+	LogTrace("%d %d\n",x,y);
 }

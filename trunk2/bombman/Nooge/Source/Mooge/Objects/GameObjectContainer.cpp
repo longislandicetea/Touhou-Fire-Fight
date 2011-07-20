@@ -5,7 +5,6 @@
 #include <gl/GL.h>
 #include <gl/GLU.h>
 
-
 void GameObjectContainer::AddChild( Ref<GameObject> child )
 {
 	AddChildAt(child,mChildren.size());
@@ -91,6 +90,7 @@ void GameObjectContainer::Update(float dt)
 	{
 		children[i]->Update(dt);
 	}
+	//LogTrace("%f\n",dt);
 }
 
 GameObjectContainer::~GameObjectContainer()

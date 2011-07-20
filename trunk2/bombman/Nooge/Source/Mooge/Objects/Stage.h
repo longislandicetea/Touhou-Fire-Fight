@@ -9,6 +9,7 @@ class Stage: public GameObjectContainer
 public:
 	virtual void Draw(bool is3D);
 	virtual void HandleClickEvent(int x,int y) {}
+	virtual void HandleMouseOverEvent(int x,int y) {}
 
 private:
 

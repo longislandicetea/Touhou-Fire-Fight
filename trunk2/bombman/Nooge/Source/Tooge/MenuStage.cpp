@@ -46,14 +46,54 @@ void MenuStage::HandleClickEvent(int x, int y)
 	if(x<700 && x>475 && y>316 && y<390)
 	{
 		App::Inst().AudioSys()->PlayEffectSound(1,"menubutton");
+		App::Inst().AudioSys()->Resume(1);
+		App::Inst().AudioSys()->Stop(0);
 		Ref<GameObject> map = Map::Load(DataManager::GetDataPath("Map","map","resource\\data.ini"));
 		Ref<Stage> gameStage(new GameStage(map));
 		App::Inst().ChangeStage(gameStage);
-		App::Inst().AudioSys()->Stop(0);
+	}
+	else if (x<637 && x>407 && y<457 && y>383)
+	{
+		App::Inst().AudioSys()->PlayEffectSound(1,"menubutton");
+		App::Inst().AudioSys()->Resume(1);
+	}
+	else if (x<787 && x>557 && y<523 && y>449)
+	{
+		App::Inst().AudioSys()->PlayEffectSound(1,"menubutton");
+		App::Inst().AudioSys()->Resume(1);
+	}
+	else if(x<735 && x>505 && y<593 && y>519)
+	{
+		App::Inst().AudioSys()->PlayEffectSound(1,"menubutton");
+		App::Inst().AudioSys()->Resume(1);
 	}
 }
 
 void MenuStage::Draw(bool is3D)
 {
 	Stage::Draw(is3D);
+}
+
+void MenuStage::HandleMouseOverEvent( int x,int y )
+{
+	if(x<700 && x>475 && y>316 && y<390)
+	{
+		App::Inst().AudioSys()->PlayEffectSound(1,"menubutton");
+		App::Inst().AudioSys()->Resume(1);
+	}
+	else if (x<637 && x>407 && y<457 && y>383)
+	{
+		App::Inst().AudioSys()->PlayEffectSound(1,"menubutton");
+		App::Inst().AudioSys()->Resume(1);
+	}
+	else if (x<787 && x>557 && y<523 && y>449)
+	{
+		App::Inst().AudioSys()->PlayEffectSound(1,"menubutton");
+		App::Inst().AudioSys()->Resume(1);
+	}
+	else if(x<735 && x>505 && y<593 && y>519)
+	{
+		App::Inst().AudioSys()->PlayEffectSound(1,"menubutton");
+		App::Inst().AudioSys()->Resume(1);
+	}
 }

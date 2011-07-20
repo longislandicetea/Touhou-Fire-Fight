@@ -15,6 +15,7 @@ public:
 	void PlayEffectSound(int channelId, const std::string& key);
 	void Pause(int channelId);
 	void Stop(int channelId);
+	void Resume(int channelId);
 
 	void Update();
 

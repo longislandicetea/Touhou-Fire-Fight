@@ -54,10 +54,14 @@ private:
 	Ref<GameObject> mBonus;
 	Ref<GameObject> mFloor;
 	Ref<GameObject> mExplosion;
+	
 	Ref<GameObject> mHUD;
-	//Ref<Font> mFont;
+	Ref<GameObject> mCountdownTimerFont;
 
 	Ref<Timer> mTimer;
-
+	float mCountdownTimer;
+	
 	void initWallMap();
+
+	std::string timeToString(int restTime);
 };                                                                                                                                                                                                                                                                                                                                                                                                     
