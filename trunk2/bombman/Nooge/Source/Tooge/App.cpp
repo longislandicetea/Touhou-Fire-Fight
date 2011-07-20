@@ -89,9 +89,12 @@ void App::SetupEngine()
 	//Setup camera.
 	mMooge->Cameras->AddCamera(mMainCamera);
 
-	VECTORFS CamEyeVec(75.0,120.0,200.0);
-	VECTORFS CamCenterVec(75.0, 0.0, 75.0);
-	VECTORFS CamUpVec(0.0, 1, 1.0);
+	//VECTORFS CamEyeVec(75.0,120.0,200.0);
+	VECTORFS CamEyeVec(75.0,150.0,75.0);
+	//VECTORFS CamCenterVec(75.0, 0.0, 75.0);
+	VECTORFS CamCenterVec(75.0, 0.0,75.0);
+	//VECTORFS CamUpVec(0.0, 1, 1.0);
+	VECTORFS CamUpVec(0.0, 1, -1.0);
 
 	mMainCamera->SetPosition(CamEyeVec, CamCenterVec, CamUpVec);
 

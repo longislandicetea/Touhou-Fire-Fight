@@ -38,18 +38,34 @@ void Character::doAction( int currentAction, float dt )
 	case CharacterController::MOVE_UP:
 		//cast<Md2Object>(mModel)->setAnimation("RUN");
 		up(dt*mSpeed);
+		SetCol();
+		//if(typeid(this->mCtrl) == typeid(NPCController))
+			LogTrace("up: %f  %f\n %d  %d\n"
+			,GetX(),GetZ(),GetBoundingBox().Col(),GetBoundingBox().Row());
 		break;
 	case CharacterController::MOVE_DOWN:
 		//cast<Md2Object>(mModel)->setAnimation("RUN");
 		down(dt*mSpeed);
+		SetCol();
+		//if(typeid(this->mCtrl) == typeid(NPCController))
+			LogTrace("down: %f  %f\n %d  %d\n"
+			,GetX(),GetZ(),GetBoundingBox().Col(),GetBoundingBox().Row());
 		break;
 	case CharacterController::MOVE_LEFT:
 		//cast<Md2Object>(mModel)->setAnimation("RUN");
 		left(dt*mSpeed);
+		SetRow();
+		//if(typeid(this->mCtrl) == typeid(NPCController))
+			LogTrace("left: %f  %f\n %d  %d\n"
+			,GetX(),GetZ(),GetBoundingBox().Col(),GetBoundingBox().Row());
 		break;
 	case CharacterController::MOVE_RIGHT:
 		//cast<Md2Object>(mModel)->setAnimation("RUN");
 		right(dt*mSpeed);
+		SetRow();
+		//if(typeid(this->mCtrl) == typeid(NPCController))
+			LogTrace("right: %f  %f\n %d  %d\n"
+			,GetX(),GetZ(),GetBoundingBox().Col(),GetBoundingBox().Row());
 		break;
 	case CharacterController::DROP_BOMB:
 		//std::cerr<<"dropping"<<mBombCnt<<std::endl;
@@ -136,6 +152,11 @@ void Character::SetPower( int factor )
 int Character::GetPower()
 {
 	return mBombPower;
+}
+
+float Character::GetSpeed()
+{
+	return mSpeed;
 }
 
 void Character::SetBombCnt( int factor )

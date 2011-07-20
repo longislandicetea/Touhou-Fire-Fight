@@ -122,6 +122,28 @@ void GameObject::SetPos( float x, float y, float z )
 	SetZ(z);
 }
 
+void GameObject::SetCol()
+{
+	//SetX(col*Grid::SideLen);
+	//SetX(GetBoundingBox().Col()*Grid::SideLen);
+   int offset = GetX();
+	if( offset%10<5)
+		SetX(offset+5-offset%5);
+	else
+		SetX(offset-offset%5);
+}
+
+void GameObject::SetRow()
+{
+	//SetZ(row*Grid::SideLen);
+	//SetZ(GetBoundingBox().Row()*Grid::SideLen);
+	   int offset = GetZ();
+	if( offset%10<5)
+		SetZ(offset+5-offset%5);
+	else
+		SetZ(offset-offset%5);
+}
+
 Grid GameObject::GetBoundingBox()
 {
 	float offset = Grid::SideLen/2-0.8;
