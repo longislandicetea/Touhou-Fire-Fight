@@ -46,3 +46,8 @@ void AudioSystem::Stop( int channelId )
 {
 	mResult = mChannels[channelId]->stop();	
 }
+
+void AudioSystem::Resume( int channelId )
+{
+	mResult = mChannels[channelId]->setMode(FMOD_LOOP_NORMAL);
+}

@@ -23,7 +23,8 @@
 #include"gl/GL.h"
 #include "App.h"
 
-#include "vector"
+#include <vector>
+#include <stdlib.h>
 
 Ref<GameObject> GameStage::CurrentMap()
 {
@@ -35,6 +36,9 @@ GameStage::GameStage( Ref<GameObject> map )
         //read map
         mCurrentMap = map;
         mBonusProb = cast<Map>(mCurrentMap)->GetBonusProb();
+
+		//set countdown timer
+		mCountdownTimer = 180;
 
         std::map< std::string,Ref<GameObject> > info = cast<Map>(mCurrentMap)->Parse();
         mDwall = info["dwall"];
@@ -66,9 +70,10 @@ GameStage::GameStage( Ref<GameObject> map )
 		Ref<GameObject> image(new Image(DataManager::GetDataPath("Image","tmp","resource\\data.ini"),128,128));
 		cast<Sprite>(mHUD)->AddChild(image);
 
-		Ref<GameObject> time(new Font("Comic Sans MS",28,"just a test"));
-		cast<Font>(time)->SetPos2D(390,56);
-		cast<Sprite>(mHUD)->AddChild(time);
+		/*Ref<GameObject> time(new Font("Comic Sans MS",28,"just a test"));*/
+		mCountdownTimerFont = Ref<GameObject>(new Font("Comic Sans MS",28,"3:00"));
+		cast<Font>(mCountdownTimerFont)->SetPos2D(390,56);
+		cast<Sprite>(mHUD)->AddChild(mCountdownTimerFont);
 
 		App::Inst().AudioSys()->PlayStream(0,"background");
 
@@ -389,4 +394,30 @@ void GameStage::Update( float dt )
 {
 	Stage::Update(dt);
 	App::Inst().AudioSys()->Update();
+	
+	mCountdownTimer -= dt;
+
+	if(mCountdownTimer>0)
+		cast<Font>(mCountdownTimerFont)->SetContent(timeToString(mCountdownTimer));
+}
+
+std::string GameStage::timeToString( int restTime )
+{
+	string timeStr;
+
+	int m = restTime/60;
+	int s = restTime-m*60;
+
+	char buf1[5];
+	char buf2[5];
+
+	itoa(m,buf1,10);
+	itoa(s,buf2,10);
+
+	if(s<10)
+		timeStr = string(buf1)+ ":" + "0"+string(buf2);
+	else
+		timeStr = string(buf1)+ ":" + string(buf2);
+
+	return timeStr;
 }

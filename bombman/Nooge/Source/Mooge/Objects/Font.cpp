@@ -87,3 +87,8 @@ void Font::ClearFont()
 {
 	glDeleteLists(callList, 96);
 }
+
+void Font::SetContent( const std::string& str )
+{
+	content = str;
+}
