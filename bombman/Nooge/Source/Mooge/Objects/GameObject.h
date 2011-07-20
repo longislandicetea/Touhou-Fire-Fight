@@ -29,6 +29,8 @@ public:
 	void SetY(float y);
 	void SetZ(float z);
 	void SetPos(float x, float y, float z);
+	void SetCol();
+	void SetRow();
 	void SetScale(float scale);
 	void SetRotateX(float rotateX);
 	void SetRotateY(float rotateY);

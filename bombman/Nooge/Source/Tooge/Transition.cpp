@@ -30,10 +30,11 @@ Transition(ctrl,next)
 
 bool ToFlee::IsTrue()
 {
-	//Grid g = mCtrl->GetCharacter()->GetBoundingBox();
+	
 	int row = mCtrl->GetCharacter()->GetBoundingBox().Row();
 	int col = mCtrl->GetCharacter()->GetBoundingBox().Col();
-	if(mCtrl->GetDangerGrid()->GetValue(col,row)<=3.0)
+	float speed = mCtrl->GetCharacter()->GetSpeed();
+	if(mCtrl->GetDangerGrid()->GetValue(col,row)<=3.0)//Grid::SideLen/2/speed
 		return true;
 	return false;
 }
@@ -47,7 +48,7 @@ Transition(ctrl,next)
 bool ToSearchBonus::IsTrue()
 {
 	Pos NearestBonus = mCtrl->NearestBonusPos();
-	if(NearestBonus == Pos(-1,-1))
+	if(NearestBonus == Pos(-1,-1) )//|| rand()%10<5
 		return false;
 		return true;
 }

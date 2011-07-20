@@ -41,8 +41,10 @@ State(ctrl)
 
 int SillyState::GetAction()
 {
+	//if(rand()%10 == 0)
+	   //return DROP_BOMB;
+	//return MOVE_UP;
 	return IDLE;
-	//return DROP_BOMB;
 }
 
 ////////////////////////////////FleeState///////////////////////////////
@@ -77,13 +79,14 @@ int FleeState::GetAction()
 	}
 
 	//choose action
-	if(safe.row == row+dirY[0] && safe.col == col+dirX[0])
+	
+	if(safe.row == row+dirY[0] && safe.col == col+dirX[0]  )//can NPC pass the next 格子
 		return MOVE_LEFT;
-	else if(safe.row == row+dirY[1] && safe.col == col+dirX[1])
+	else if(safe.row == row+dirY[1] && safe.col == col+dirX[1] )
 		return MOVE_DOWN;
-	else if(safe.row == row+dirY[2] && safe.col == col+dirX[2])
+	else if(safe.row == row+dirY[2] && safe.col == col+dirX[2] )
 		return MOVE_RIGHT;
-	else if(safe.row == row+dirY[3] && safe.col == col+dirX[3])
+	else if(safe.row == row+dirY[3] && safe.col == col+dirX[3] )
 		return MOVE_UP;
 	else
 		return IDLE;
@@ -100,13 +103,16 @@ int SearchBonusState::GetAction()
 	Pos myPosition = Pos(mCtrl->GetCharacter()->GetBoundingBox().Col(),mCtrl->GetCharacter()->GetBoundingBox().Row());
 	Pos nearestBonus = mCtrl->NearestBonusPos();
 	std::stack<Pos> path = mCtrl->getPathTo(nearestBonus);
-	if(path.empty())
+
+	//choose action
+	float can= Grid::SideLen/mCtrl->GetCharacter()->GetSpeed();//若有危险 能否通过
+	if(path.empty() || (!path.empty()&& mCtrl->GetDangerGrid()->GetValue(path.top().col,path.top().row)<=can))
 		return IDLE;
-   else if(myPosition.col<path.top().col)
+   else if(myPosition.col<path.top().col )
 		return MOVE_RIGHT;
-	else if(myPosition.col>path.top().col)
+	else if(myPosition.col>path.top().col )
 		return MOVE_LEFT;
-	else if(myPosition.row>path.top().row)
+	else if(myPosition.row>path.top().row )
 		return MOVE_UP;
 	else if(myPosition.row<path.top().row)
 		return MOVE_DOWN;
