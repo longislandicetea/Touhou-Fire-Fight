@@ -24,7 +24,6 @@
 #include "App.h"
 
 #include <vector>
-#include <stdlib.h>
 
 Ref<GameObject> GameStage::CurrentMap()
 {
@@ -48,15 +47,13 @@ GameStage::GameStage( Ref<GameObject> map,int level)
         mUwall = info["uwall"];
         mNpc = info["npc"];
         mPlayer = info["player"];
-        mFloor = info["decoration"];
         mBomb  = Ref<GameObject>(new Sprite);
         mBonus = Ref<GameObject>(new Sprite);
         mHUD = Ref<GameObject> (new Sprite);
 		mExplosion = Ref<GameObject> (new Sprite);
+		mDecoration = Ref<GameObject> (new Sprite);
 
-		//mPlayer->SetX(GetX()-5);
         //set gamestage
-        //this->AddChild(mFloor);
 		this->AddChild(mHUD);
         this->AddChild(mDwall);
         this->AddChild(mUwall);
@@ -65,6 +62,7 @@ GameStage::GameStage( Ref<GameObject> map,int level)
         this->AddChild(mBomb);
         this->AddChild(mBonus);
 		this->AddChild(mExplosion);
+		this->AddChild(mDecoration);
 
         //background
 		Ref<GameObject> bg;
@@ -78,6 +76,30 @@ GameStage::GameStage( Ref<GameObject> map,int level)
 			bg = Ref<GameObject>(new Image(DataManager::GetDataPath("Image","bg3","resource\\data.ini"),800,600)); break;
 		}
 		cast<Sprite>(mHUD)->AddChild(bg);
+
+		//bamboo
+		int r[2] = {1,-1};
+		for(int i = 0;i<150;i += 4)
+		{
+			Ref<GameObject> bamboo = Decoration::CreateDecoration("bamboo");
+			bamboo->SetPos(i,-5,-0.5);
+			bamboo->SetRotateZ((rand()%20)*r[rand()%2]);
+			cast<Sprite>(mDecoration)->AddChild(bamboo);
+		}
+		for(int i = 0;i<130;i += 4)
+		{
+			Ref<GameObject> bamboo = Decoration::CreateDecoration("bamboo");
+			bamboo->SetPos(-0.5,-5,i);
+			bamboo->SetRotateX((rand()%20)*r[rand()%2]);
+			cast<Sprite>(mDecoration)->AddChild(bamboo);
+		}
+		for(int i = 0;i<130;i += 4)
+		{
+			Ref<GameObject> bamboo = Decoration::CreateDecoration("bamboo");
+			bamboo->SetPos(150.5,-5,i);
+			bamboo->SetRotateX((rand()%20)*r[rand()%2]);
+			cast<Sprite>(mDecoration)->AddChild(bamboo);
+		}
 		
 		//hud
 		Ref<GameObject> image(new Image(DataManager::GetDataPath("Image","tmp","resource\\data.ini"),128,128));

@@ -52,7 +52,7 @@ private:
 	Ref<GameObject> mNpc;
 	Ref<GameObject> mBomb;
 	Ref<GameObject> mBonus;
-	Ref<GameObject> mFloor;
+	Ref<GameObject> mDecoration;
 	Ref<GameObject> mExplosion;
 	
 	Ref<GameObject> mHUD;
