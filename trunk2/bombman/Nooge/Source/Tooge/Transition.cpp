@@ -21,6 +21,7 @@ Transition(ctrl,next)
 
 bool ToSilly::IsTrue()
 {
+	//LogTrace("Silly\n");
 	return true;
 }
 //////////////////////////////////////////////////ToFlee///////////////////////////////////////////////
@@ -36,7 +37,11 @@ bool ToFlee::IsTrue()
 	int col = mCtrl->GetCharacter()->GetBoundingBox().Col();
 	float speed = mCtrl->GetCharacter()->GetSpeed();
 	if(mCtrl->GetDangerGrid()->GetValue(col,row)<=3.0)//Grid::SideLen/2/speed
+	{
+		LogTrace("Flee\n");
 		return true;
+	}
+		
 	return false;
 }
 
@@ -51,8 +56,8 @@ bool ToSearchBonus::IsTrue()
 	Pos NearestBonus = mCtrl->NearestBonusPos();
 	if(NearestBonus == Pos(-1,-1) )//|| rand()%10<5
 		return false;
-	//if(mCtrl->getPathTo(NearestBonus).size() >10)//如果太远就不去
-		//return false;
+	if(mCtrl->getPathTo(NearestBonus).size() >7)//如果太远就不去
+		return false;
 	LogTrace("SearchBonus\n");
 		return true;
 }
@@ -67,7 +72,10 @@ bool ToOpen::IsTrue()
 	for(int i = 1;i<4;++i)
 	{
 		if(!mCtrl->GetInterestGrid()->GetValuePositions(i).empty())
+		{
+			LogTrace("Open\n");
 			return true;
+		}
 	}
 	return false;
 }

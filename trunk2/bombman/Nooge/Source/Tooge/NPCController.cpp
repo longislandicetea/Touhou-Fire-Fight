@@ -61,7 +61,7 @@ void NPCController::initFSM()
 
 	open->AddTransition(transToFlee);
 	open->AddTransition(transToSearchBonus);
-	open->AddTransition(transToOpen);
+	//open->AddTransition(transToOpen);
 	open->AddTransition(transToSilly);
 
 	//fsm
@@ -228,7 +228,7 @@ void NPCController::computeDangerGrid(GameStage* gs, Character* character, float
 		int power = b->GetPower();
 
 		int dx[4] = {-1,0,1,0};
-	    int dy[4] = {0,1,0,-1};
+		int dy[4] = {0,1,0,-1};
 
 		for(int i = 0;i<=power;++i)
 		{
@@ -284,8 +284,8 @@ void NPCController::computeInterestGrid(GameStage*gs,Character* character,float 
 
 void NPCController::computeDwall(GameStage* gs,Character* character,float dt)
 {
-		const int dx[4] = {-1,0,1,0};
-	    const int dy[4] = {0,1,0,-1};
+	const int dx[4] = {-1,0,1,0};
+	const int dy[4] = {0,1,0,-1};
 	GameObjectContainer* dwall = cast<GameObjectContainer>(gs->GetChild(DWALL));
 	int ndwall = dwall->NumOfChild();
 	for(int t = 0;t<ndwall;++t)
@@ -306,42 +306,45 @@ void NPCController::computeDwall(GameStage* gs,Character* character,float dt)
 
 void NPCController::computeBonus(GameStage*gs,Character*character,float dt)
 {
-		GameObjectContainer* bonus = cast<GameObjectContainer>(gs->GetChild(BONUS));
+	GameObjectContainer* bonus = cast<GameObjectContainer>(gs->GetChild(BONUS));
 	int nbonus = bonus->NumOfChild();
-	
+
 	//log*********************************
-	if(nbonus !=0)
-		LogTrace("Bonus:   %d\n",nbonus);
+	//if(nbonus !=0)
+	//LogTrace("Bonus:   %d\n",nbonus);
 
 	for(int t = 0;t<nbonus;++t)
 	{
-		Ref<GameObject> child = bonus->GetChild(t);
-		if(typeid(*child) == typeid(BFlamePlus) || typeid(*child) == typeid(BBombPlus)
-			|| typeid(*child) == typeid(BFaster)
-			|| typeid(*child) == typeid(BTrigger)
-			|| typeid(*child) == typeid(BPush))
+		Bonus* child = cast<Bonus>(bonus->GetChild(t));
+		if(child->GetTimer()->End()>1.0)//time for NPCs to detect the bonus
 		{
-			int col = child->GetBoundingBox().Col();
-			int row = child->GetBoundingBox().Row();
-			//mInterestGrid->SetValue(col,row,5);
-
-			//get NearestBonusPos
-			int value = mFloodFillGrid->GetValue(col,row);
-			if(value != -DWALL && value != -UWALL && value != 100)
+			if(typeid(*child) == typeid(BFlamePlus) || typeid(*child) == typeid(BBombPlus)
+				|| typeid(*child) == typeid(BFaster)
+				|| typeid(*child) == typeid(BTrigger)
+				|| typeid(*child) == typeid(BPush))
 			{
-				if(mNearestBonusPos == Pos(-1,-1))
+				int col = child->GetBoundingBox().Col();
+				int row = child->GetBoundingBox().Row();
+				//mInterestGrid->SetValue(col,row,5);
+
+				//get NearestBonusPos
+				int value = mFloodFillGrid->GetValue(col,row);
+				if(value != -DWALL && value != -UWALL && value != 100)
 				{
-					mNearestBonusPos = Pos(col,row);
-				}
-				else if(value<mFloodFillGrid->GetValue(col,row))
-				{
-					mNearestBonusPos = Pos(col,row);
+					if(mNearestBonusPos == Pos(-1,-1))
+					{
+						mNearestBonusPos = Pos(col,row);
+					}
+					else if(value<mFloodFillGrid->GetValue(col,row))
+					{
+						mNearestBonusPos = Pos(col,row);
+					}
 				}
 			}
-		}
-		else if(typeid(*child)== typeid(BSlower)|| typeid(*child)== typeid(BDrop))
-		{
-			mInterestGrid->SetValue(child->GetBoundingBox().Col(),child->GetBoundingBox().Row(),-5);
+			else if(typeid(*child)== typeid(BSlower)|| typeid(*child)== typeid(BDrop))
+			{
+				mInterestGrid->SetValue(child->GetBoundingBox().Col(),child->GetBoundingBox().Row(),-5);
+			}
 		}
 	}
 }

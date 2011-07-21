@@ -12,3 +12,8 @@ void Bonus::CreateBonus(int x,int y)
 		gs->AddBonus(bonus);
 	}
 }
+
+Ref<Timer> Bonus::GetTimer()
+{
+	return mTimer;
+}
