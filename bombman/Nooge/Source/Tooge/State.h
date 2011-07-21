@@ -58,3 +58,11 @@ public:
 	virtual ~SillyState(){};
 	virtual int GetAction();
 };
+
+class OpenState: public State
+{
+public:
+	OpenState(NPCController* ctrl);
+	virtual ~OpenState(){};
+	virtual int GetAction();
+};

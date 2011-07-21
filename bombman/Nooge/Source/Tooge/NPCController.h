@@ -10,29 +10,16 @@ class State;
 class FleeState;
 class SillyState;
 class SearchBonusState;
+class OpenState;
 
 class Transition;
 class ToFlee;
 class ToSilly;
 class ToSearchBonus;
+class ToOpen;
 
 
-struct Pos
-{
-	int row;
-	int col;
-public:
-	Pos(int tcol,int trow){row = trow;col = tcol;}
-	Pos(){}
-	//"=="
-	bool operator == (const Pos& pos)
-	{
-		if(this->col == pos.col && this->row == pos.row)
-			return true;
-		return false;
-	}
-	
-};
+
 
 class NPCController : public CharacterController
 {
@@ -65,6 +52,8 @@ enum AIGridState
 	void computePerception(Character* character,float dt);
 	void computeDangerGrid(GameStage* gs, Character* character,float dt);
 	void computeInterestGrid(GameStage*gs,Character* character,float dt);
+	void computeBonus(GameStage*gs,Character*character,float dt);
+	void computeDwall(GameStage* gs,Character* character,float dt);
 
 	void computeWalls();
 	void initFSM();
@@ -78,5 +67,8 @@ enum AIGridState
 
 	State* searchBonus;
 	Transition* transToSearchBonus;
+
+	State* open;
+	Transition* transToOpen;
 };
 

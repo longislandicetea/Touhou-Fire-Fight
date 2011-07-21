@@ -42,3 +42,10 @@ public:
 	ToSearchBonus(NPCController* ctrl,State* next);
 	virtual bool IsTrue();
 };
+
+class ToOpen: public Transition
+{
+public:
+	ToOpen(NPCController* ctrl,State*next);
+	virtual bool IsTrue();
+};

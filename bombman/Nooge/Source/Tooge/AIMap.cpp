@@ -1,5 +1,6 @@
 #include "AIMap.h"
 
+
 AIMap::AIMap( int initValue )
 {
 	Reset(initValue);
@@ -15,6 +16,11 @@ void AIMap::Reset( int value )
 int AIMap::GetValue( int col,int row )
 {
 	return this->value[col][row];
+}
+
+int AIMap::GetValue(Pos pos)
+{
+	return GetValue(pos.GetCol(),pos.GetRow());
 }
 
 void AIMap::SetValue( int col,int row,float value )
@@ -45,4 +51,25 @@ int AIMap::GetHeight()
 int AIMap::GetWidth()
 {
 	return WIDTH;
+}
+
+std::vector<Pos> AIMap::GetValuePositions(float tvalue)
+{
+	std::vector<Pos> positions;
+	//float maxVal = value[0][0];
+	for(int col = 0;col<WIDTH;++col)
+	{
+		for(int row = 0; row<HEIGHT;++row)
+		{
+			if(value[col][row]==tvalue)
+				positions.push_back(Pos(col,row));
+			/*if(value[col][row]>maxVal)
+			//{
+				if(value[col][row]>maxVal)
+					positions.clear();
+				positions.push_back(Pos(col,row));
+			}*/
+		}
+	}
+	return positions;
 }
