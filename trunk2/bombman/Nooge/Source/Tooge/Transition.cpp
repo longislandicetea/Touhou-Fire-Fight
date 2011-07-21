@@ -1,4 +1,5 @@
 #include"Transition.h"
+#include "WinFrame.h"
 
 
 ///////////////////////////////////////////////////////transition///////////////////////////////////////////////////
@@ -50,5 +51,23 @@ bool ToSearchBonus::IsTrue()
 	Pos NearestBonus = mCtrl->NearestBonusPos();
 	if(NearestBonus == Pos(-1,-1) )//|| rand()%10<5
 		return false;
+	//if(mCtrl->getPathTo(NearestBonus).size() >10)//如果太远就不去
+		//return false;
+	LogTrace("SearchBonus\n");
 		return true;
+}
+
+///////////////////////////////////////ToOpen///////////////////////////
+ToOpen::ToOpen(NPCController* ctrl,State*next):
+Transition(ctrl,next)
+{}
+
+bool ToOpen::IsTrue()
+{
+	for(int i = 1;i<4;++i)
+	{
+		if(!mCtrl->GetInterestGrid()->GetValuePositions(i).empty())
+			return true;
+	}
+	return false;
 }

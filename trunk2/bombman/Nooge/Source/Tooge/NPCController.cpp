@@ -14,6 +14,8 @@
 #include "BSlower.h"
 #include "BTrigger.h"
 
+#include "WinFrame.h"
+
 NPCController::NPCController()
 {
 	mDangerGrid = new AIMap(100);
@@ -32,27 +34,42 @@ void NPCController::initFSM()
 	flee = new FleeState(this);
 	silly = new SillyState(this);
 	searchBonus = new SearchBonusState(this);
+	open = new OpenState(this);
 
 
 	//transitions
 	transToFlee = new ToFlee(this,flee);
 	transToSilly = new ToSilly(this,silly);
 	transToSearchBonus = new ToSearchBonus(this,searchBonus);
+	transToOpen = new ToOpen(this,open);
 
 	//add transitions to states
 	flee->AddTransition(transToFlee);//notice prority
 	flee->AddTransition(transToSearchBonus);
+	//flee->AddTransition(transToOpen);
 	flee->AddTransition(transToSilly);
+
+	searchBonus->AddTransition(transToFlee);
+	searchBonus->AddTransition(transToSearchBonus);
+	//searchBonus->AddTransition(transToOpen);
+	searchBonus->AddTransition(transToSilly);
 
 	silly->AddTransition(transToFlee);
 	silly->AddTransition(transToSearchBonus);
+	//silly->AddTransition(transToOpen);
 	silly->AddTransition(transToSilly);
+
+	open->AddTransition(transToFlee);
+	open->AddTransition(transToSearchBonus);
+	open->AddTransition(transToOpen);
+	open->AddTransition(transToSilly);
 
 	//fsm
 	mFsm = new FSM(this,silly);
 	mFsm->AddState(flee);
 	mFsm->AddState(searchBonus);
 	mFsm->AddState(silly);
+	mFsm->AddState(open);
 
 }
 
@@ -65,6 +82,7 @@ int NPCController::Update(Character *character, float dt)
 	mFloodFillGrid->Reset(100);
 	mDangerGrid->Reset(100);
 	mInterestGrid->Reset(0);
+	mNearestBonusPos = Pos(-1,-1);
 
 	computeWalls();
 
@@ -119,9 +137,6 @@ void NPCController::computeFloodFill(Character* character)
 		computeFloodFill(col,row);
 	}
 }
-
-
-
 void NPCController::computeFloodFill( int col,int row )
 {
 	//floodfill by queue
@@ -151,7 +166,6 @@ void NPCController::computeFloodFill( int col,int row )
 		}
 	}
 }
-
 stack<Pos> NPCController::getPathTo(int col,int row)
 {
 	int dirX[4] = { -1, 0, 1,  0};
@@ -185,7 +199,6 @@ stack<Pos> NPCController::getPathTo(int col,int row)
 	}
 	return path;
 }
-
 void NPCController::computePerception(Character* character, float dt)
 {
 	//get bomb container
@@ -196,14 +209,11 @@ void NPCController::computePerception(Character* character, float dt)
 
 
 }
-
 std::stack<Pos> NPCController::getPathTo(Pos pos)
 {
 	std::stack<Pos> path = getPathTo(pos.col,pos.row);
 	return path;
 }
-
-
 void NPCController::computeDangerGrid(GameStage* gs, Character* character, float dt)
 {
 	const int WIDTH = mDangerGrid->GetWidth();
@@ -261,60 +271,50 @@ void NPCController::computeDangerGrid(GameStage* gs, Character* character, float
 		}
 	}
 }
-
-//compute dangerous rows
-/*if(row+i>=0 && row+i<=HEIGHT)
-{
-float rowValue = mDangerGrid->GetValue(col, row+i);
-
-if(rowValue != -UWALL)
-{
-if(rowCount ==1|| rowCount ==0 )
-{
-rowCount =1 ;
-if(rowValue !=-DWALL && remain<rowValue)
-mDangerGrid->SetValue(col, row+i,remain);
-}
-}
-else 
-{
-if(rowCount == 1)
-rowCount = 2;
-}
-
-}
-
-//compute dangerous cols
-if(col+i>=0 && col+i<=WIDTH)
-{
-float colValue = mDangerGrid->GetValue(col+i,row);
-if(colValue!=-DWALL)
-{
-if(colCount == 1 || colCount == 0)
-{
-colCount = 1;
-if(colValue !=-DWALL && remain<colValue)
-mDangerGrid->SetValue(col+i,row,remain);
-}
-}
-else
-{
-if(colCount == 1)
-colCount = 2;
-}
-}
-}*/
-
-
 void NPCController::computeInterestGrid(GameStage*gs,Character* character,float dt)
 {
 
-	GameObjectContainer* bonus = cast<GameObjectContainer>(gs->GetChild(BONUS));
+	//about Bonuses
+	computeBonus(gs,character,dt);
+
+	//aboutDwalls
+	computeDwall(gs,character,dt);
+
+}
+
+void NPCController::computeDwall(GameStage* gs,Character* character,float dt)
+{
+		const int dx[4] = {-1,0,1,0};
+	    const int dy[4] = {0,1,0,-1};
+	GameObjectContainer* dwall = cast<GameObjectContainer>(gs->GetChild(DWALL));
+	int ndwall = dwall->NumOfChild();
+	for(int t = 0;t<ndwall;++t)
+	{
+		Ref<GameObject> child = dwall->GetChild(t);
+		int col = child->GetBoundingBox().Col();
+		int row = child->GetBoundingBox().Row();
+		for(int i = 0;i<4;++i)
+		{
+			int value = mInterestGrid->GetValue(col+dx[i],row+dy[i]);
+			if(value!=-UWALL)
+			{
+				mInterestGrid->SetValue(col+dx[i],row+dy[i],value+1);
+			}
+		}
+	}
+}
+
+void NPCController::computeBonus(GameStage*gs,Character*character,float dt)
+{
+		GameObjectContainer* bonus = cast<GameObjectContainer>(gs->GetChild(BONUS));
 	int nbonus = bonus->NumOfChild();
-	int count = 0;
+	
+	//log*********************************
+	if(nbonus !=0)
+		LogTrace("Bonus:   %d\n",nbonus);
+
 	for(int t = 0;t<nbonus;++t)
 	{
-
 		Ref<GameObject> child = bonus->GetChild(t);
 		if(typeid(*child) == typeid(BFlamePlus) || typeid(*child) == typeid(BBombPlus)
 			|| typeid(*child) == typeid(BFaster)
@@ -341,8 +341,7 @@ void NPCController::computeInterestGrid(GameStage*gs,Character* character,float 
 		}
 		else if(typeid(*child)== typeid(BSlower)|| typeid(*child)== typeid(BDrop))
 		{
-			//mInterestGrid->SetValue(child->GetBoundingBox().Col(),child->GetBoundingBox().Row(),-5);
-
+			mInterestGrid->SetValue(child->GetBoundingBox().Col(),child->GetBoundingBox().Row(),-5);
 		}
 	}
 }
@@ -361,6 +360,8 @@ NPCController::~NPCController()
 	delete transToSilly;
 	delete searchBonus;
 	delete transToSearchBonus;
+	delete open;
+	delete transToOpen;
 }
 
 Pos NPCController::NearestBonusPos()
