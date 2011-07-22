@@ -32,7 +32,7 @@ class Character : public Sprite
 public:
 	static Ref<GameObject> CreateCharacter(const std::string& type);
 	void Update(float dt);
-	void SetSpeed(int factor);
+	void SetSpeed(float factor);
 	void SetPower(int factor);
 	void SetBombCnt(int factor);
 	void SetLifeCnt(int factor);

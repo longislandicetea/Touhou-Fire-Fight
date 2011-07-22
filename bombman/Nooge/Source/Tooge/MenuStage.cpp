@@ -7,6 +7,8 @@
 #include "Map.h"
 #include "SelectStage.h"
 
+#include "WinFrame.h"
+
 Ref<Stage> MenuStage::LoadStage()
 {
 	return Ref<Stage> (new MenuStage());
@@ -76,8 +78,12 @@ void MenuStage::HandleMouseOverEvent( int x,int y )
 {
 	if(x<700 && x>475 && y>316 && y<390)
 	{
-		App::Inst().AudioSys()->PlayEffectSound(1,"menubutton");
-		App::Inst().AudioSys()->Resume(1);
+		cast<Sprite>(mGuiObject)->GetChild(1)->RemoveFromParent();
+		Ref<GameObject> bStart (new Image(DataManager::GetDataPath("Image","start1","resource\\data.ini"),230,74));
+		bStart->SetPos(475,316,0.0);
+		cast<Sprite>(mGuiObject)->AddChildAt(bStart,1);
+		LogTrace("%d %d\n",x,y);
+
 	}
 	else if (x<637 && x>407 && y<457 && y>383)
 	{

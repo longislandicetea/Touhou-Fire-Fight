@@ -19,6 +19,8 @@ class CCore
 		//Check if the core been initialed.
 		bool IsInitial();
 
+		HWND GetHwnd();
+
 	private:
 		//Default constructor.
 		CCore();

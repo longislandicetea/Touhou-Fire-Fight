@@ -139,7 +139,7 @@ Character::Character(CharacterController* ctrl, const std::string& type)
 	return Ref<GameObject>(new Character(ctrl));
 }*/
 
-void Character::SetSpeed( int factor )
+void Character::SetSpeed( float factor )
 {
 	mSpeed *= factor;
 }
