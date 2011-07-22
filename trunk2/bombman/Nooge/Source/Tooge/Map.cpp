@@ -109,7 +109,7 @@ std::map< std::string,Ref<GameObject> > Map::Parse()
 			{
 				Ref<GameObject> dwall(new Dwall);
 				dwall->SetPos(currentGrid->CenterX(),0.0,currentGrid->CenterY());
-				//dwall->SetScale(0.7);
+				dwall->SetY(-5);
 				cast<Sprite>(dwallContainer)->AddChild(dwall);
 				break;
 			}
@@ -117,7 +117,6 @@ std::map< std::string,Ref<GameObject> > Map::Parse()
 			{
 				Ref<GameObject> uwall(new Uwall);
 				uwall->SetPos(currentGrid->CenterX(),0.0,currentGrid->CenterY());
-				//uwall->SetScale(0.7);
 				cast<Sprite>(uwallContainer)->AddChild(uwall);
 				break;
 			}

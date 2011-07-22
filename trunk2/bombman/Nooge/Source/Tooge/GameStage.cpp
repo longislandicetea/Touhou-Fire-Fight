@@ -272,7 +272,8 @@ void GameStage::EatBonus( Character* obj )
                         }
                         else if(typeid(*child) == typeid(BSlower))
                         {
-                                obj->SetSpeed(2/3);
+                                obj->SetSpeed(0.67);
+								LogTrace("%f",obj->GetSpeed());
                         }
                         else if(typeid(*child) == typeid(BDrop))
                         {

@@ -5,6 +5,7 @@
 #include "App.h"
 #include "Map.h"
 #include "GameStage.h"
+#include "MenuStage.h"
 
 Ref<Stage> SelectStage::LoadStage()
 {
@@ -44,6 +45,8 @@ void SelectStage::HandleClickEvent(int x, int y)
 		Ref<GameObject> map = Map::Load(DataManager::GetDataPath("Map","map","resource\\data.ini"));
 		Ref<Stage> gameStage(new GameStage(map,1));
 		App::Inst().ChangeStage(gameStage);
+		
+		//App::Inst().ChangeStage(MenuStage::LoadStage());
 	}
 	else if (y>200 && y<400)
 	{

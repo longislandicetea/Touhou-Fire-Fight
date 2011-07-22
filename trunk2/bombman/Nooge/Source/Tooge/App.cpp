@@ -21,11 +21,7 @@
 
 #include "MenuStage.h"
 #include <gl/glut.h>
-
-void glMouseMotion(int x, int y)
-{
-
-}
+#include "SelectStage.h"
 
 App::App(void): CThread(true),mMooge(NULL),mRenderForm(NULL),mMainCamera(NULL)
 {
@@ -41,7 +37,7 @@ App::App(void): CThread(true),mMooge(NULL),mRenderForm(NULL),mMainCamera(NULL)
 	mRenderForm->AddCallBackEvent(WM_KEYDOWN, bind(&App::OnRenderFormKeyDown, this, _1));
 	mRenderForm->AddCallBackEvent(WM_KEYUP, bind(&App::OnRenderFormKeyUp, this, _1));
 	mRenderForm->AddCallBackEvent(WM_LBUTTONDOWN,bind(&App::OnRenderFormClickButton,this,_1));
-	mRenderForm->AddCallBackEvent(WM_MOUSEHOVER,bind(&App::OnRenderFormMouseOver,this,_1));
+	mRenderForm->AddCallBackEvent(WM_MOUSEMOVE,bind(&App::OnRenderFormMouseMove,this,_1));
 	mRenderForm->Load("Rendering form", 40, 50, 800, 600);
 }
 
@@ -97,11 +93,10 @@ void App::SetupEngine()
 
 	//VECTORFS CamEyeVec(75.0,120.0,200.0);
 	VECTORFS CamEyeVec(75.0,150.0,75.0);
-	//VECTORFS CamCenterVec(75.0, 0.0, 75.0);
 	VECTORFS CamCenterVec(75.0, 0.0,75.0);
 	//VECTORFS CamUpVec(0.0, 1, 1.0);
 	VECTORFS CamUpVec(0.0, 1, -1.0);
-
+	
 	mMainCamera->SetPosition(CamEyeVec, CamCenterVec, CamUpVec);
 
 	//Add Engine object here.
@@ -112,6 +107,9 @@ void App::SetupEngine()
 
 	/*Ref<Stage> initStage = MenuStage::LoadStage();
 	mMooge->CurrentStage = initStage;*/
+
+	/*Ref<Stage> selectStage = SelectStage::LoadStage();
+	mMooge->CurrentStage = selectStage;*/
 
 	//Create a timer that fires 30 times a second
 	SetTimer(mRenderForm->gethWnd(), 33, 1, NULL);
@@ -137,9 +135,8 @@ void App::Execute()
 
 	if(!mMooge->NextStage.IsNull())
 	{
-		//mMooge->CurrentStage.Clear();
 		mMooge->CurrentStage = mMooge->NextStage;
-		mMooge->NextStage.Clear();
+		//mMooge->NextStage.Clear();
 	}
 }
 
@@ -237,7 +234,7 @@ Ref<AudioSystem> App::AudioSys()
 	return mAudioSys;
 }
 
-void App::OnRenderFormMouseOver( const WinMsgPackage& MsgPack )
+void App::OnRenderFormMouseMove( const WinMsgPackage& MsgPack )
 {
 	int x = LOWORD(MsgPack.lParam);
 	int y = HIWORD(MsgPack.lParam);

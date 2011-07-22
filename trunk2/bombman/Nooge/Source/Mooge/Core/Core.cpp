@@ -159,3 +159,8 @@ unsigned int CCore::GetFontList()
 {
 	return mFontList;
 }
+
+HWND CCore::GetHwnd()
+{
+	return mhWnd;
+}
