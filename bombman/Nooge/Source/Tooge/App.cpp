@@ -37,7 +37,7 @@ App::App(void): CThread(true),mMooge(NULL),mRenderForm(NULL),mMainCamera(NULL)
 	mRenderForm->AddCallBackEvent(WM_KEYDOWN, bind(&App::OnRenderFormKeyDown, this, _1));
 	mRenderForm->AddCallBackEvent(WM_KEYUP, bind(&App::OnRenderFormKeyUp, this, _1));
 	mRenderForm->AddCallBackEvent(WM_LBUTTONDOWN,bind(&App::OnRenderFormClickButton,this,_1));
-	mRenderForm->AddCallBackEvent(WM_MOUSEMOVE,bind(&App::OnRenderFormMouseMove,this,_1));
+	//mRenderForm->AddCallBackEvent(WM_MOUSEMOVE,bind(&App::OnRenderFormMouseMove,this,_1));
 	mRenderForm->Load("Rendering form", 40, 50, 800, 600);
 }
 
@@ -215,7 +215,7 @@ void App::OnRenderFormClickButton( const WinMsgPackage& MsgPack )
 	int x = LOWORD(MsgPack.lParam);
 	int y = HIWORD(MsgPack.lParam);
 	CurrentStage()->HandleClickEvent(x,y);
-	LogTrace("%d %d\n",x,y);
+	//LogTrace("%d %d\n",x,y);
 }
 
 Ref<AudioSystem> App::AudioSys()
@@ -223,14 +223,14 @@ Ref<AudioSystem> App::AudioSys()
 	return mAudioSys;
 }
 
-void App::OnRenderFormMouseMove( const WinMsgPackage& MsgPack )
+/*void App::OnRenderFormMouseMove( const WinMsgPackage& MsgPack )
 {
 	int x = LOWORD(MsgPack.lParam);
 	int y = HIWORD(MsgPack.lParam);
-	//if(CurrentStage() != NULL)
-	//	CurrentStage()->HandleMouseOverEvent(x,y);
+	if(CurrentStage() != NULL)
+		CurrentStage()->HandleMouseOverEvent(x,y);
 	//LogTrace("%d %d\n",x,y);
-}
+}*/
 
 Ref<Stage> App::createStage( int stageId )
 {
@@ -248,6 +248,7 @@ Ref<Stage> App::createStage( int stageId )
 			break;
 		}
 	default:
-		LogTrace("%d not exists",stageId);break;
+		//LogTrace("%d not exists",stageId);
+		break;
 	}
 }
