@@ -29,6 +29,7 @@ void Character::Update(float dt)
 			mHasDropMalus = false;
 		}
 	}
+	Sprite::Update(dt);
 }
 
 void Character::doAction( int currentAction, float dt )
@@ -36,9 +37,10 @@ void Character::doAction( int currentAction, float dt )
 	switch (currentAction)
 	{
 	case CharacterController::MOVE_UP:
-		//cast<Md2Object>(mModel)->setAnimation("RUN");
 		up(dt*mSpeed);
 		SetCol();
+		if(mLastAction == CharacterController::IDLE)
+			cast<Md2Object>(mModel)->setAnimation("RUN");
 		//if(typeid(this->mCtrl) == typeid(NPCController))
 			//LogTrace("up: %f  %f\n %d  %d\n"
 			//,GetX(),GetZ(),GetBoundingBox().Col(),GetBoundingBox().Row());
@@ -47,6 +49,8 @@ void Character::doAction( int currentAction, float dt )
 		//cast<Md2Object>(mModel)->setAnimation("RUN");
 		down(dt*mSpeed);
 		SetCol();
+		if(mLastAction == CharacterController::IDLE)
+			cast<Md2Object>(mModel)->setAnimation("RUN");
 		//if(typeid(this->mCtrl) == typeid(NPCController))
 			//LogTrace("down: %f  %f\n %d  %d\n"
 			//,GetX(),GetZ(),GetBoundingBox().Col(),GetBoundingBox().Row());
@@ -55,6 +59,8 @@ void Character::doAction( int currentAction, float dt )
 		//cast<Md2Object>(mModel)->setAnimation("RUN");
 		left(dt*mSpeed);
 		SetRow();
+		if(mLastAction == CharacterController::IDLE)
+			cast<Md2Object>(mModel)->setAnimation("RUN");
 		//if(typeid(this->mCtrl) == typeid(NPCController))
 			//LogTrace("left: %f  %f\n %d  %d\n"
 			//,GetX(),GetZ(),GetBoundingBox().Col(),GetBoundingBox().Row());
@@ -63,6 +69,8 @@ void Character::doAction( int currentAction, float dt )
 		//cast<Md2Object>(mModel)->setAnimation("RUN");
 		right(dt*mSpeed);
 		SetRow();
+		if(mLastAction == CharacterController::IDLE)
+			cast<Md2Object>(mModel)->setAnimation("RUN");
 		//if(typeid(this->mCtrl) == typeid(NPCController))
 			//LogTrace("right: %f  %f\n %d  %d\n"
 			//,GetX(),GetZ(),GetBoundingBox().Col(),GetBoundingBox().Row());
@@ -81,7 +89,12 @@ void Character::doAction( int currentAction, float dt )
 	case CharacterController::TRIGGER_BOMB:
 		mTrigTimer->Begin();
 		this->SetTrigBonus(false);
+		break;
+	case CharacterController::IDLE:
+		cast<Md2Object>(mModel)->setAnimation("IDLE");
 	}
+
+	mLastAction = (CharacterController::Action)currentAction;
 }
 
 void Character::up( float dt )
@@ -121,7 +134,7 @@ Character::Character(CharacterController* ctrl, const std::string& type)
 	else
 		mModel = Md2Object::Load(DataManager::GetDataPath("Model","npc","resource\\data.ini"),DataManager::GetDataPath("Texture","npc3T","resource\\data.ini"));
 	
-	cast<Md2Object>(mModel)->setAnimation("IDLE");
+	cast<Md2Object>(mModel)->setAnimation("RUN");
 	this->AddChild(mModel);
 	mSpeed = 60;
 	mBombPower = 1;
@@ -132,6 +145,8 @@ Character::Character(CharacterController* ctrl, const std::string& type)
 	mHasTrigBonus = false;
 	mTimer = Ref<Timer>(new Timer);
 	mTrigTimer = Ref<Timer>(new Timer);
+
+	mLastAction = CharacterController::IDLE;
 }
 
 /*Ref<GameObject> Character::AddController(CharacterController* ctrl)

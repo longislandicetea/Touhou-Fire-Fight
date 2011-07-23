@@ -139,6 +139,9 @@
     <ClCompile Include="..\..\..\..\Source\Tooge\SelectStage.cpp">
       <Filter>Stage</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\EndStage.cpp">
+      <Filter>Stage</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Source\Tooge\App.h">
@@ -226,6 +229,9 @@
       <Filter>AudioSystem</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Source\Tooge\SelectStage.h">
+      <Filter>Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\EndStage.h">
       <Filter>Stage</Filter>
     </ClInclude>
   </ItemGroup>

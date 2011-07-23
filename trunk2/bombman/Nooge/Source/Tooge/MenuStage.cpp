@@ -50,7 +50,7 @@ void MenuStage::HandleClickEvent(int x, int y)
 		App::Inst().AudioSys()->PlayEffectSound(1,"menubutton");
 		App::Inst().AudioSys()->Resume(1);
 		App::Inst().AudioSys()->Stop(0);
-		App::Inst().ChangeStage(SelectStage::LoadStage());
+		App::Inst().ChangeStage(2);
 	}
 	else if (x<637 && x>407 && y<457 && y>383)
 	{
@@ -76,28 +76,35 @@ void MenuStage::Draw(bool is3D)
 
 void MenuStage::HandleMouseOverEvent( int x,int y )
 {
-	if(x<700 && x>475 && y>316 && y<390)
+	mLastX = x;
+	mLastY = y;
+	LogTrace("lastX: %d lastY: %d\n",mLastX,mLastY);
+}
+
+void MenuStage::Update( float dt )
+{
+	if(mLastX<700 && mLastX>475 && mLastY>316 && mLastY<390)
 	{
 		cast<Sprite>(mGuiObject)->GetChild(1)->RemoveFromParent();
 		Ref<GameObject> bStart (new Image(DataManager::GetDataPath("Image","start1","resource\\data.ini"),230,74));
 		bStart->SetPos(475,316,0.0);
 		cast<Sprite>(mGuiObject)->AddChildAt(bStart,1);
-		LogTrace("%d %d\n",x,y);
+	}
+	else if (mLastX<637 && mLastX>407 && mLastY<457 && mLastY>383)
+	{
+		App::Inst().AudioSys()->PlayEffectSound(1,"menubutton");
+		App::Inst().AudioSys()->Resume(1);
+	}
+	else if (mLastX<787 && mLastX>557 && mLastY<523 && mLastY>449)
+	{
+		App::Inst().AudioSys()->PlayEffectSound(1,"menubutton");
+		App::Inst().AudioSys()->Resume(1);
+	}
+	else if(mLastX<735 && mLastX>505 && mLastY<593 && mLastY>519)
+	{
+		App::Inst().AudioSys()->PlayEffectSound(1,"menubutton");
+		App::Inst().AudioSys()->Resume(1);
+	} else {
 
-	}
-	else if (x<637 && x>407 && y<457 && y>383)
-	{
-		App::Inst().AudioSys()->PlayEffectSound(1,"menubutton");
-		App::Inst().AudioSys()->Resume(1);
-	}
-	else if (x<787 && x>557 && y<523 && y>449)
-	{
-		App::Inst().AudioSys()->PlayEffectSound(1,"menubutton");
-		App::Inst().AudioSys()->Resume(1);
-	}
-	else if(x<735 && x>505 && y<593 && y>519)
-	{
-		App::Inst().AudioSys()->PlayEffectSound(1,"menubutton");
-		App::Inst().AudioSys()->Resume(1);
 	}
 }

@@ -26,7 +26,7 @@ public:
 	Ref<InputSystem> InputSys();
 	Ref<AudioSystem> AudioSys();
 	Stage *CurrentStage();
-	void ChangeStage(Ref<Stage> next);
+	void ChangeStage(int next);
 
 private:
 	App();
@@ -41,6 +41,7 @@ private:
 	void SetupEngine();
 	void Execute();
 
+	Ref<Stage> createStage(int stageId);
 	CRenderForm* mRenderForm;
 	CMooge* mMooge;
 	CCamera* mMainCamera;
