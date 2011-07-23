@@ -91,25 +91,17 @@ void App::SetupEngine()
 	//Setup camera.
 	mMooge->Cameras->AddCamera(mMainCamera);
 
-	//VECTORFS CamEyeVec(75.0,120.0,200.0);
-	VECTORFS CamEyeVec(75.0,150.0,75.0);
+	VECTORFS CamEyeVec(75.0,120.0,200.0);
+	//VECTORFS CamEyeVec(75.0,150.0,75.0);
 	VECTORFS CamCenterVec(75.0, 0.0,75.0);
-	//VECTORFS CamUpVec(0.0, 1, 1.0);
-	VECTORFS CamUpVec(0.0, 1, -1.0);
+	VECTORFS CamUpVec(0.0, 1, 1.0);
+	//VECTORFS CamUpVec(0.0, 1, -1.0);
 	
 	mMainCamera->SetPosition(CamEyeVec, CamCenterVec, CamUpVec);
 
 	//Add Engine object here.
 	
-	Ref<GameObject> map = Map::Load(DataManager::GetDataPath("Map","map","resource\\data.ini"));
-	Ref<Stage> gameStage(new GameStage(map,1));
-	mMooge->CurrentStage = gameStage;
-
-	/*Ref<Stage> initStage = MenuStage::LoadStage();
-	mMooge->CurrentStage = initStage;*/
-
-	/*Ref<Stage> selectStage = SelectStage::LoadStage();
-	mMooge->CurrentStage = selectStage;*/
+	mMooge->NextStageId = 0;
 
 	//Create a timer that fires 30 times a second
 	SetTimer(mRenderForm->gethWnd(), 33, 1, NULL);
@@ -126,17 +118,14 @@ void App::Execute()
 	while(!this->mTerminated)
 	{
 		mMooge->Render();
-		Sleep(1000 / 33);
-		clock_t now = clock();
-		float dt = (float)(now - mLeastTime) / CLOCKS_PER_SEC;
+		float dt = 1.0 / 30;
 		mMooge->Update(dt);
-		mLeastTime = now;
-	}
-
-	if(!mMooge->NextStage.IsNull())
-	{
-		mMooge->CurrentStage = mMooge->NextStage;
-		//mMooge->NextStage.Clear();
+		
+		if(mMooge->NextStageId != -1)
+		{
+			mMooge->CurrentStage = createStage(mMooge->NextStageId);
+			mMooge->NextStageId = -1;
+		}
 	}
 }
 
@@ -216,9 +205,9 @@ Stage * App::CurrentStage()
 	return &*mMooge->CurrentStage;
 }
 
-void App::ChangeStage( Ref<Stage> next )
+void App::ChangeStage( int next )
 {
-	mMooge->CurrentStage = next;
+	mMooge->NextStageId = next;
 }
 
 void App::OnRenderFormClickButton( const WinMsgPackage& MsgPack )
@@ -238,6 +227,27 @@ void App::OnRenderFormMouseMove( const WinMsgPackage& MsgPack )
 {
 	int x = LOWORD(MsgPack.lParam);
 	int y = HIWORD(MsgPack.lParam);
-	CurrentStage()->HandleMouseOverEvent(x,y);
-	LogTrace("%d %d\n",x,y);
+	//if(CurrentStage() != NULL)
+	//	CurrentStage()->HandleMouseOverEvent(x,y);
+	//LogTrace("%d %d\n",x,y);
+}
+
+Ref<Stage> App::createStage( int stageId )
+{
+	switch(stageId)
+	{
+	case 0:
+		return MenuStage::LoadStage(); break;
+	case 1:
+		return SelectStage::LoadStage();break;
+	case 2:
+		{
+			Ref<GameObject> map = Map::Load(DataManager::GetDataPath("Map","map","resource\\data.ini"));
+			Ref<Stage> gameStage(new GameStage(map,1));
+			return gameStage;
+			break;
+		}
+	default:
+		LogTrace("%d not exists",stageId);break;
+	}
 }

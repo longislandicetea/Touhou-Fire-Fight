@@ -75,6 +75,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\..\Source\EndStage.cpp" />
     <ClCompile Include="..\..\..\..\Source\Mooge\Core\InputSystem.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\AIMap.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\App.cpp" />
@@ -107,6 +108,7 @@
     <ClCompile Include="..\..\..\..\Source\Tooge\Uwall.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\Source\EndStage.h" />
     <ClInclude Include="..\..\..\..\Source\Mooge\Core\InputSystem.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\AIMap.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\App.h" />

@@ -51,7 +51,7 @@ class CMooge
 		CAuxiliary* Auiliary;
 			
 		Ref<Stage>	CurrentStage;
-		Ref<Stage>  NextStage;
+		int NextStageId;
 		Ref<RuntimeMap> CurrentMap;
 
 };

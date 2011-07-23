@@ -370,7 +370,6 @@ void GameStage::Draw(bool is3D)
 			glDisable(GL_COLOR_MATERIAL);
 			glDisable(GL_LIGHT0);
 			glDisable(GL_LIGHTING);
-			;
 		}
 		else
 			Stage::Draw(false);
@@ -435,7 +434,13 @@ void GameStage::Update( float dt )
 	mCountdownTimer -= dt;
 
 	if(mCountdownTimer>0)
+	{
+		for(int i = 0;i<3;++i)
+		{
+			//int if(cast<Sprite>(mNpc)->GetChild(i))
+		}
 		cast<Font>(mCountdownTimerFont)->SetContent(timeToString(mCountdownTimer));
+	}
 }
 
 std::string GameStage::timeToString( int restTime )

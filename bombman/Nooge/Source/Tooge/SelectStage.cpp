@@ -32,7 +32,7 @@ SelectStage::SelectStage()
 	bHelp->SetPos(557,449,0.0);
 	cast<Sprite>(mGuiObject)->AddChild(bHelp);*/
 
-	this->AddChild(mGuiObject);
+	//this->AddChild(mGuiObject);
 }
 
 void SelectStage::HandleClickEvent(int x, int y)
@@ -42,27 +42,17 @@ void SelectStage::HandleClickEvent(int x, int y)
 		//App::Inst().AudioSys()->PlayEffectSound(1,"menubutton");
 		//App::Inst().AudioSys()->Resume(1);
 		//App::Inst().AudioSys()->Stop(0);
-		Ref<GameObject> map = Map::Load(DataManager::GetDataPath("Map","map","resource\\data.ini"));
-		Ref<Stage> gameStage(new GameStage(map,1));
-		App::Inst().ChangeStage(gameStage);
-		
+		App::Inst().ChangeStage(2);
+
 		//App::Inst().ChangeStage(MenuStage::LoadStage());
 	}
 	else if (y>200 && y<400)
 	{
-		/*App::Inst().AudioSys()->PlayEffectSound(1,"menubutton");
-		App::Inst().AudioSys()->Resume(1);*/
-		Ref<GameObject> map = Map::Load(DataManager::GetDataPath("Map","map","resource\\data.ini"));
-		Ref<Stage> gameStage(new GameStage(map,2));
-		App::Inst().ChangeStage(gameStage);
+
 	}
 	else if (y>400 && y<600)
 	{
-		/*App::Inst().AudioSys()->PlayEffectSound(1,"menubutton");
-		App::Inst().AudioSys()->Resume(1);*/
-		Ref<GameObject> map = Map::Load(DataManager::GetDataPath("Map","map","resource\\data.ini"));
-		Ref<Stage> gameStage(new GameStage(map,3));
-		App::Inst().ChangeStage(gameStage);
+		
 	}
 }
 

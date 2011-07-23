@@ -72,6 +72,8 @@ private:
 	bool mHasDropMalus;
 	bool mHasPushBonus;
 	bool mHasTrigBonus;
+
+	CharacterController::Action mLastAction;
 	
 	//int mDirection;//0-left 1-down 2-right 3-up
 	int mCurrentAction;
