@@ -37,7 +37,7 @@ private:
 	void OnRenderFormKeyDown(const WinMsgPackage& MsgPack);
 	void OnRenderFormKeyUp(const WinMsgPackage& MsgPack);
 	void OnRenderFormClickButton(const WinMsgPackage& MsgPack);
-	void OnRenderFormMouseMove(const WinMsgPackage& MsgPack);
+	//void OnRenderFormMouseMove(const WinMsgPackage& MsgPack);
 	void SetupEngine();
 	void Execute();
 

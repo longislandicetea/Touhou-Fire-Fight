@@ -74,12 +74,12 @@ void MenuStage::Draw(bool is3D)
 	Stage::Draw(is3D);
 }
 
-void MenuStage::HandleMouseOverEvent( int x,int y )
+/*void MenuStage::HandleMouseOverEvent( int x,int y )
 {
 	mLastX = x;
 	mLastY = y;
 	LogTrace("lastX: %d lastY: %d\n",mLastX,mLastY);
-}
+}*/
 
 void MenuStage::Update( float dt )
 {

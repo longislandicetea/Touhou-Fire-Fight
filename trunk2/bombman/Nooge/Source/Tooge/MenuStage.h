@@ -16,8 +16,8 @@ class MenuStage : public Stage
 public:
 	static Ref<Stage> LoadStage();
 	void HandleClickEvent(int x,int y);
-	void HandleMouseOverEvent(int x,int y);
-	void HandleMouseLeaveEvent(int x,int y);
+	//void HandleMouseOverEvent(int x,int y);
+	//void HandleMouseLeaveEvent(int x,int y);
 	virtual void Draw(bool is3D);
 	virtual void Update(float dt);
 	virtual ~MenuStage() {}
