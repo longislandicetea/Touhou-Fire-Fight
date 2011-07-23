@@ -437,14 +437,16 @@ void GameStage::Update( float dt )
 	
 	mCountdownTimer -= dt;
 
-	if(mCountdownTimer>0)
+	if(mCountdownTimer >= 0)
 	{
-		for(int i = 0;i<3;++i)
-		{
-			//int if(cast<Sprite>(mNpc)->GetChild(i))
-		}
 		cast<Font>(mCountdownTimerFont)->SetContent(timeToString(mCountdownTimer));
+		if(isDead[0] && isDead[1] && isDead[2] && (!isDead[3]))
+			App::Inst().ChangeStage(7);
+		else if (isDead[3])
+			App::Inst().ChangeStage(8);
 	}
+	else
+		App::Inst().ChangeStage(8);
 }
 
 std::string GameStage::timeToString( int restTime )

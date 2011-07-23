@@ -22,6 +22,7 @@
 #include "MenuStage.h"
 #include <gl/glut.h>
 #include "SelectStage.h"
+#include "EndStage.h"
 
 App::App(void): CThread(true),mMooge(NULL),mRenderForm(NULL),mMainCamera(NULL)
 {
@@ -247,6 +248,40 @@ Ref<Stage> App::createStage( int stageId )
 			return gameStage;
 			break;
 		}
+	case 3:
+		{
+			Ref<GameObject> map = Map::Load(DataManager::GetDataPath("Map","map","resource\\data.ini"));
+			Ref<Stage> gameStage(new GameStage(map,2));
+			return gameStage;
+			break;
+		}
+	case 4 :
+		{
+			Ref<GameObject> map = Map::Load(DataManager::GetDataPath("Map","map","resource\\data.ini"));
+			Ref<Stage> gameStage(new GameStage(map,3));
+			return gameStage;
+			break;
+		}
+	case 5 :
+	{
+		//config
+		break;
+	}
+	case 6:
+	{
+		//help
+		break;
+	}
+	case 7:
+	{
+		return EndStage::LoadStage("win");
+		break;
+	}
+	case 8:
+	{
+		return EndStage::LoadStage("lose");	
+		break;
+	}
 	default:
 		//LogTrace("%d not exists",stageId);
 		break;

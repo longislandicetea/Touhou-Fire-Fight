@@ -12,6 +12,6 @@ public:
 	void HandleClickEvent(int x,int y);
 	virtual ~EndStage() {}
 private:
-	EndStage();
+	EndStage(const std::string& result);
 	Ref<GameObject> mGuiObject;
 };
