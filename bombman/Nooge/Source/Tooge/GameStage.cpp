@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <cstdlib>
+#include <string.h>
 #include "PlayerController.h"
 
 #include "BBombPlus.h"
@@ -63,6 +64,8 @@ GameStage::GameStage( Ref<GameObject> map,int level)
         this->AddChild(mBonus);
 		this->AddChild(mExplosion);
 		this->AddChild(mDecoration);
+
+		memset(isDead,0,sizeof(isDead));
 
         //background
 		Ref<GameObject> bg;
@@ -273,7 +276,7 @@ void GameStage::EatBonus( Character* obj )
                         else if(typeid(*child) == typeid(BSlower))
                         {
                                 obj->SetSpeed(0.67);
-								LogTrace("%f",obj->GetSpeed());
+								//LogTrace("%f",obj->GetSpeed());
                         }
                         else if(typeid(*child) == typeid(BDrop))
                         {
@@ -333,10 +336,11 @@ void GameStage::StepOnBomb( Character* obj )
                                 cast<Bomb>(child)->TriggerPush(direction,70.0); 
                                 obj->SetPushBonus(false);
                         }
-                        else
+                        /*else
                         {
-							obj->SetLifeCnt(-1);
-                        }
+							//obj->SetLifeCnt(-1);
+							obj->RemoveFromParent();
+                        }*/
                 }
         }
 }
@@ -462,4 +466,35 @@ std::string GameStage::timeToString( int restTime )
 		timeStr = string(buf1)+ ":" + string(buf2);
 
 	return timeStr;
+}
+
+void GameStage::CheckCharacterLife(int row,int col)
+{
+	int cnt = cast<Sprite>(mNpc)->NumOfChild();
+	for(int i = 0;i<cnt;++i)
+	{
+		if(!isDead[i])
+		{
+			Ref<GameObject> child = cast<Sprite>(mNpc)->GetChild(i);
+			Grid bBox = child->GetBoundingBox();
+			if(bBox.Row() == row && bBox.Col() == col)
+			{
+				child->RemoveFromParent();
+				isDead[i] = true;
+				//play effect
+			}
+		}
+	}
+
+	if(!isDead[3])
+	{
+		Ref<GameObject> player = cast<Sprite>(mPlayer)->GetChild(0);
+		Grid playerBox = player->GetBoundingBox();
+		if(playerBox.Row() == row && playerBox.Col() == col)
+		{
+			player->RemoveFromParent();
+			//play effect
+			isDead[3] = true;
+		}
+	}
 }
