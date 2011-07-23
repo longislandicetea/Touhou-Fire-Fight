@@ -32,6 +32,8 @@ public:
 	//virtual ~GameStage();
 	Ref<GameObject> CreateBonus();
 
+	void CheckCharacterLife(int row,int col);
+
 	virtual void Draw(bool is3D);
 	virtual void Update(float dt);
 
@@ -57,6 +59,8 @@ private:
 	
 	Ref<GameObject> mHUD;
 	Ref<GameObject> mCountdownTimerFont;
+	
+	bool isDead[4];
 
 	//timer
 	Ref<Timer> mTimer;

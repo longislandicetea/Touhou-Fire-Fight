@@ -102,14 +102,6 @@ void Bomb::explode()
 					dValid[j] = 0;
 			}
 		}
-
-		/*for(int k = 0;k<mFlame.size();++k)
-		{
-			int x = mFlame[k]->CenterX();
-			int y = mFlame[k]->CenterY();
-			Ref<GameObject> explosion(new Explosion(x,rand()%5,y));
-			gs->AddChild(explosion);
-		}*/
 	}
 
 	for(int k = 0;k<mFlame.size();++k)
@@ -120,6 +112,7 @@ void Bomb::explode()
 		int y = mFlame[k]->CenterY();
 		Ref<GameObject> explosion(new Explosion(x,rand()%5,y));
 		gs->AddExplosion(explosion);
+		gs->CheckCharacterLife(r,c);
 		gs->DwallExplode(r,c);
 	}
 }

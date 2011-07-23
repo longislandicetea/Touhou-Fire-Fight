@@ -22,7 +22,6 @@ MenuStage::MenuStage()
 	cast<Sprite>(mGuiObject)->AddChild(bgImage);
 
 	Ref<GameObject> bStart (new Image(DataManager::GetDataPath("Image","start","resource\\data.ini"),230,74));
-	//cast<Image>(bStart)->SetPos2D(475,316);
 	bStart->SetPos(475,316,0.0);
 	cast<Sprite>(mGuiObject)->AddChild(bStart);
 
@@ -45,6 +44,8 @@ MenuStage::MenuStage()
 
 void MenuStage::HandleClickEvent(int x, int y)
 {
+	mLastX = x;
+	mLastY = y;
 	if(x<700 && x>475 && y>316 && y<390)
 	{
 		App::Inst().AudioSys()->PlayEffectSound(1,"menubutton");
@@ -104,7 +105,8 @@ void MenuStage::Update( float dt )
 	{
 		App::Inst().AudioSys()->PlayEffectSound(1,"menubutton");
 		App::Inst().AudioSys()->Resume(1);
-	} else {
-
+	} 
+	else 
+	{
 	}
 }
