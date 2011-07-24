@@ -78,12 +78,6 @@ enum AIGridState
 	State* silly;
 	Transition* transToSilly;
 
-	State* searchBonus;
-	Transition* transToSearchBonus;
-
-	State* open;
-	Transition* transToOpen;
-
 	State* dropBomb;
 	Transition* transToDropBomb;
 

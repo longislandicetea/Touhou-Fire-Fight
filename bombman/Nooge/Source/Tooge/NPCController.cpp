@@ -33,8 +33,6 @@ void NPCController::initFSM()
 	//states
 	flee = new FleeState(this);
 	silly = new SillyState(this);
-	searchBonus = new SearchBonusState(this);
-	open = new OpenState(this);
 	dropBomb = new DropBombState(this);
 	clearPath = new ClearPathState(this);
 	trigger = new TriggerState(this);
@@ -42,14 +40,12 @@ void NPCController::initFSM()
 	//transitions
 	transToFlee = new ToFlee(this,flee);
 	transToSilly = new ToSilly(this,silly);
-	transToSearchBonus = new ToSearchBonus(this,searchBonus);
-	transToOpen = new ToOpen(this,open);
 	transToClearPath = new ToClearPath(this,clearPath);
 	transToDropBomb = new ToDropBomb(this,dropBomb);
 	transToTrigger = new ToTrigger(this,trigger);
 
 	//add transitions to states
-	flee->AddTransition(transToFlee);//notice prority
+	flee->AddTransition(transToFlee);
 	flee->AddTransition(transToTrigger);
 	flee->AddTransition(transToDropBomb);
 	flee->AddTransition(transToClearPath);
@@ -245,7 +241,7 @@ void NPCController::computeEnemy(GameStage* gs, Character* character, float dt)
 {
 	GameObjectContainer* npc = cast<GameObjectContainer>(gs->GetChild(NPC));
 	GameObjectContainer* player = cast<GameObjectContainer>(gs->GetChild(PLAYER));
-	vector<Pos> enemyPos;
+	std::vector<Pos> enemyPos;
 
 	//add player
 	GameObject* play = cast<GameObject>(player->GetChild(0));
@@ -400,7 +396,7 @@ void NPCController::computeBonus(GameStage*gs,Character*character,float dt)
 				mInterestGrid->SetValue(col,row,4);
 
 				//get NearestBonusPos
-				int value = mFloodFillGrid->GetValue(col,row);
+				/*int value = mFloodFillGrid->GetValue(col,row);
 				if(value != -DWALL && value != -UWALL && value != 100)
 				{
 					if(mNearestBonusPos == Pos(-1,-1))
@@ -411,7 +407,7 @@ void NPCController::computeBonus(GameStage*gs,Character*character,float dt)
 					{
 						mNearestBonusPos = Pos(col,row);
 					}
-				}
+				}*/
 			}
 			else if(typeid(*child)== typeid(BSlower)|| typeid(*child)== typeid(BDrop))
 			{
@@ -428,19 +424,20 @@ NPCController::~NPCController()
 	delete mFloodFillGrid;
 	delete mFsm;
 
-	//temp
+	
+	//flee
 	delete flee;
 	delete transToFlee;
+	//silly
 	delete silly;
 	delete transToSilly;
-	delete searchBonus;
-	delete transToSearchBonus;
-	delete open;
-	delete transToOpen;
+	//clearPath
 	delete clearPath;
 	delete transToClearPath;
+	//dropBomb
 	delete dropBomb;
 	delete transToDropBomb;
+	//trigger
 	delete trigger;
 	delete transToTrigger;
 }
