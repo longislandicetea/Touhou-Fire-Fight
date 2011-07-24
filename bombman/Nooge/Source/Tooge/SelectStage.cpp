@@ -1,15 +1,15 @@
 #include "SelectStage.h"
-#include "GUIObject.h"
 #include "DataManager.h"
 
 #include "App.h"
 #include "Map.h"
 #include "GameStage.h"
 #include "MenuStage.h"
+#include "Image.h"
 
 Ref<Stage> SelectStage::LoadStage()
 {
-	return Ref<Stage> (new SelectStage());
+	return Ref<Stage> (new SelectStage);
 }
 
 SelectStage::SelectStage()
@@ -19,42 +19,48 @@ SelectStage::SelectStage()
 	Ref<GameObject> bgImage (new Image(DataManager::GetDataPath("Image","selectStage","resource\\data.ini"),800,600));
 	cast<Sprite>(mGuiObject)->AddChild(bgImage);
 
-	/*Ref<GameObject> bStart (new Image(DataManager::GetDataPath("Image","start","resource\\data.ini"),230,74));
-	//cast<Image>(bStart)->SetPos2D(475,316);
-	bStart->SetPos(475,316,0.0);
-	cast<Sprite>(mGuiObject)->AddChild(bStart);
+	Ref<GameObject> back(new Image(DataManager::GetDataPath("Image","back","resource\\data.ini"),211,64));
+	back->SetPos(569,516,0);
+	cast<Sprite>(mGuiObject)->AddChild(back);
 
-	Ref<GameObject> bConfig (new Image(DataManager::GetDataPath("Image","config","resource\\data.ini"),230,74));
-	bConfig->SetPos(407,383,0.0);
-	cast<Sprite>(mGuiObject)->AddChild(bConfig);
-
-	Ref<GameObject> bHelp (new Image(DataManager::GetDataPath("Image","help","resource\\data.ini"),230,74));
-	bHelp->SetPos(557,449,0.0);
-	cast<Sprite>(mGuiObject)->AddChild(bHelp);*/
-
-	//this->AddChild(mGuiObject);
+	this->AddChild(mGuiObject);
 }
 
 void SelectStage::HandleClickEvent(int x, int y)
 {
-	if(y>0 && y<200)
+	if (x>569 && x<780 && y>516 && y<580)
 	{
-		//App::Inst().AudioSys()->PlayEffectSound(1,"menubutton");
-		//App::Inst().AudioSys()->Resume(1);
-		//App::Inst().AudioSys()->Stop(0);
+		App::Inst().AudioSys()->PlayEffectSound(1,"menubutton");
+		App::Inst().ChangeStage(0);
+	}
+
+	else if(x>336 && x<628 && y>175 && y<254)
+	{
+		App::Inst().AudioSys()->PlayEffectSound(1,"menubutton");
+		App::Inst().AudioSys()->Stop(0);
 		App::Inst().ChangeStage(2);
-
-		//App::Inst().ChangeStage(MenuStage::LoadStage());
 	}
-	else if (y>200 && y<400)
-	{
 
-	}
-	else if (y>400 && y<600)
+	else if (x>443 && x<766 && y>276 && y<355)
 	{
-		
+		App::Inst().AudioSys()->PlayEffectSound(1,"menubutton");
+		App::Inst().AudioSys()->Stop(0);
+		App::Inst().ChangeStage(3);
+	}
+	else if (x>391 && x<689 && y>379 && y<452)
+	{
+		App::Inst().AudioSys()->PlayEffectSound(1,"menubutton");
+		App::Inst().AudioSys()->Stop(0);
+		App::Inst().ChangeStage(4);
 	}
 }
+void SelectStage::Update( float dt )
+{
+	Stage::Update(dt);
+	App::Inst().AudioSys()->Update();
+}
+
+
 
 
 

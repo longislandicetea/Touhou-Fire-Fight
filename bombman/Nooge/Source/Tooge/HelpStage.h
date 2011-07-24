@@ -5,14 +5,15 @@
 
 #include <vector>
 
-class SelectStage : public Stage
+class HelpStage : public Stage
 {
 public:
 	static Ref<Stage> LoadStage();
 	void HandleClickEvent(int x,int y);
+	virtual ~HelpStage() {}
+
 	virtual void Update(float dt);
-	virtual ~SelectStage() {}
 private:
-	SelectStage();
+	HelpStage();
 	Ref<GameObject> mGuiObject;
 };

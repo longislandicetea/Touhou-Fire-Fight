@@ -23,6 +23,8 @@
 #include <gl/glut.h>
 #include "SelectStage.h"
 #include "EndStage.h"
+#include "HelpStage.h"
+#include "ConfigStage.h"
 
 App::App(void): CThread(true),mMooge(NULL),mRenderForm(NULL),mMainCamera(NULL)
 {
@@ -264,12 +266,12 @@ Ref<Stage> App::createStage( int stageId )
 		}
 	case 5 :
 	{
-		//config
+		return ConfigStage::LoadStage();
 		break;
 	}
 	case 6:
 	{
-		//help
+		return HelpStage::LoadStage();
 		break;
 	}
 	case 7:
@@ -286,4 +288,13 @@ Ref<Stage> App::createStage( int stageId )
 		//LogTrace("%d not exists",stageId);
 		break;
 	}
+}
+
+Ref<Texture> App::GetFlameTexture()
+{
+	if(mFlameTexture.IsNull())
+	{
+		mFlameTexture = Texture::Load(DataManager::GetDataPath("Texture","flameT","resource\\data.ini"));
+	}
+	return mFlameTexture;
 }

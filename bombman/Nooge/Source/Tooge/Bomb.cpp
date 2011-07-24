@@ -73,7 +73,9 @@ void Bomb::explode()
 	int dy[4] = {0,1,0,-1};
 
 	int dValid[4] = {1,1,1,1};
-
+	
+	mFlame.reserve(30);
+	mSurroundDwall.reserve(30);
 	int row = this->GetBoundingBox().Row();
 	int col = this->GetBoundingBox().Col();
 	mFlame.push_back(Ref<Grid>(new Grid(row,col)));
@@ -103,7 +105,7 @@ void Bomb::explode()
 			}
 		}
 	}
-	App::Inst().AudioSys()->PlayEffectSound(1,"explode");
+	if(! App::Inst().AudioSys()->IsSndMute()) App::Inst().AudioSys()->PlayEffectSound(1,"explode");
 	for(int k = 0;k<mFlame.size();++k)
 	{
 		int r = mFlame[k]->Row();

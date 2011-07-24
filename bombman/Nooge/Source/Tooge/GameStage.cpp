@@ -73,22 +73,22 @@ GameStage::GameStage( Ref<GameObject> map,int level)
 		{
 		case 1:
 			bg = Ref<GameObject>(new Image(DataManager::GetDataPath("Image","bg1","resource\\data.ini"),800,600));
-			App::Inst().AudioSys()->PlayStream(0,"bgm1");
+			if(! App::Inst().AudioSys()->IsBgmMute()) App::Inst().AudioSys()->PlayStream(0,"bgm3");
 			break;
 		case 2:
 			bg = Ref<GameObject>(new Image(DataManager::GetDataPath("Image","bg2","resource\\data.ini"),800,600)); 
-			App::Inst().AudioSys()->PlayStream(0,"bgm2");
+			if(! App::Inst().AudioSys()->IsBgmMute()) App::Inst().AudioSys()->PlayStream(0,"bgm2");
 			break;
 		case 3:
 			bg = Ref<GameObject>(new Image(DataManager::GetDataPath("Image","bg3","resource\\data.ini"),800,600));
-			App::Inst().AudioSys()->PlayStream(0,"bgm3");
+			if(! App::Inst().AudioSys()->IsBgmMute()) App::Inst().AudioSys()->PlayStream(0,"bgm1");
 			break;
 		}
 		cast<Sprite>(mHUD)->AddChild(bg);
 
 		//bamboo
 		int r[2] = {1,-1};
-		for(int i = 0;i<150;i += 4)
+		/*for(int i = 0;i<150;i += 4)
 		{
 			Ref<GameObject> bamboo = Decoration::CreateDecoration("bamboo");
 			bamboo->SetPos(i,-5,-0.5);
@@ -108,7 +108,7 @@ GameStage::GameStage( Ref<GameObject> map,int level)
 			bamboo->SetPos(150.5,-5,i);
 			bamboo->SetRotateX((rand()%20)*r[rand()%2]);
 			cast<Sprite>(mDecoration)->AddChild(bamboo);
-		}
+		}*/
 		
 		//hud
 		Ref<GameObject> image(new Image(DataManager::GetDataPath("Image","tmp","resource\\data.ini"),128,128));
@@ -120,9 +120,6 @@ GameStage::GameStage( Ref<GameObject> map,int level)
 		cast<Sprite>(mHUD)->AddChild(mCountdownTimerFont);
 
 		//music
-		App::Inst().AudioSys()->PlayStream(0,"background");
-
-		//initWallMap();
 }
 
 GameStage::~GameStage()
@@ -259,7 +256,7 @@ void GameStage::EatBonus( Character* obj )
                 Grid bBox = child->GetBoundingBox();
                 if(bBox.Intersect(box))
                 {
-                        App::Inst().AudioSys()->PlayEffectSound(1,"eatbonus");
+                        if(! App::Inst().AudioSys()->IsSndMute()) App::Inst().AudioSys()->PlayEffectSound(1,"eatbonus");
 						if(typeid(*child) == typeid(BBombPlus))
                         {
                                 obj->SetBombCnt(1);

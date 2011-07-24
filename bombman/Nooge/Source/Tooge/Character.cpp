@@ -64,7 +64,7 @@ void Character::doAction( int currentAction, float dt )
 		if(mBombCnt>0) 
 		{
 			Bomb::CreateBomb(GetX(),GetZ(),this);
-			App::Inst().AudioSys()->PlayEffectSound(1,"dropbomb");
+			if(! App::Inst().AudioSys()->IsSndMute()) App::Inst().AudioSys()->PlayEffectSound(1,"dropbomb");
 			SetBombCnt(-1);
 		}
 		break;
