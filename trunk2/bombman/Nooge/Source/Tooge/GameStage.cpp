@@ -72,11 +72,17 @@ GameStage::GameStage( Ref<GameObject> map,int level)
 		switch (mLevel)
 		{
 		case 1:
-			bg = Ref<GameObject>(new Image(DataManager::GetDataPath("Image","bg1","resource\\data.ini"),800,600)); break;
+			bg = Ref<GameObject>(new Image(DataManager::GetDataPath("Image","bg1","resource\\data.ini"),800,600));
+			App::Inst().AudioSys()->PlayStream(0,"bgm1");
+			break;
 		case 2:
-			bg = Ref<GameObject>(new Image(DataManager::GetDataPath("Image","bg2","resource\\data.ini"),800,600)); break;
+			bg = Ref<GameObject>(new Image(DataManager::GetDataPath("Image","bg2","resource\\data.ini"),800,600)); 
+			App::Inst().AudioSys()->PlayStream(0,"bgm2");
+			break;
 		case 3:
-			bg = Ref<GameObject>(new Image(DataManager::GetDataPath("Image","bg3","resource\\data.ini"),800,600)); break;
+			bg = Ref<GameObject>(new Image(DataManager::GetDataPath("Image","bg3","resource\\data.ini"),800,600));
+			App::Inst().AudioSys()->PlayStream(0,"bgm3");
+			break;
 		}
 		cast<Sprite>(mHUD)->AddChild(bg);
 
@@ -253,7 +259,8 @@ void GameStage::EatBonus( Character* obj )
                 Grid bBox = child->GetBoundingBox();
                 if(bBox.Intersect(box))
                 {
-                        if(typeid(*child) == typeid(BBombPlus))
+                        App::Inst().AudioSys()->PlayEffectSound(1,"eatbonus");
+						if(typeid(*child) == typeid(BBombPlus))
                         {
                                 obj->SetBombCnt(1);
                         }
@@ -441,12 +448,21 @@ void GameStage::Update( float dt )
 	{
 		cast<Font>(mCountdownTimerFont)->SetContent(timeToString(mCountdownTimer));
 		if(isDead[0] && isDead[1] && isDead[2] && (!isDead[3]))
+		{
+			App::Inst().AudioSys()->Stop(0);
 			App::Inst().ChangeStage(7);
+		}
 		else if (isDead[3])
+		{	
+			App::Inst().AudioSys()->Stop(0);
 			App::Inst().ChangeStage(8);
+		}
 	}
 	else
+	{
+		App::Inst().AudioSys()->Stop(0);
 		App::Inst().ChangeStage(8);
+	}
 }
 
 std::string GameStage::timeToString( int restTime )

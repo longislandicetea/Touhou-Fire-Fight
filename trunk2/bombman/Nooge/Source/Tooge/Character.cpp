@@ -41,49 +41,31 @@ void Character::doAction( int currentAction, float dt )
 		up(dt*mSpeed);
 		if(mLastAction == CharacterController::IDLE)
 			cast<Md2Object>(mModel)->setAnimation("RUN");
-		//if(typeid(this->mCtrl) == typeid(NPCController))
-			//LogTrace("up: %f  %f\n %d  %d\n"
-			//,GetX(),GetZ(),GetBoundingBox().Col(),GetBoundingBox().Row());
 		break;
 	case CharacterController::MOVE_DOWN:
-		//cast<Md2Object>(mModel)->setAnimation("RUN");
 		SetCol();
 		down(dt*mSpeed);
 		if(mLastAction == CharacterController::IDLE)
 			cast<Md2Object>(mModel)->setAnimation("RUN");
-		//if(typeid(this->mCtrl) == typeid(NPCController))
-			//LogTrace("down: %f  %f\n %d  %d\n"
-			//,GetX(),GetZ(),GetBoundingBox().Col(),GetBoundingBox().Row());
 		break;
 	case CharacterController::MOVE_LEFT:
-		//cast<Md2Object>(mModel)->setAnimation("RUN");
 		SetRow();
 		left(dt*mSpeed);
 		if(mLastAction == CharacterController::IDLE)
 			cast<Md2Object>(mModel)->setAnimation("RUN");
-		//if(typeid(this->mCtrl) == typeid(NPCController))
-			//LogTrace("left: %f  %f\n %d  %d\n"
-			//,GetX(),GetZ(),GetBoundingBox().Col(),GetBoundingBox().Row());
 		break;
 	case CharacterController::MOVE_RIGHT:
-		//cast<Md2Object>(mModel)->setAnimation("RUN");
 		SetRow();
 		right(dt*mSpeed);
 		if(mLastAction == CharacterController::IDLE)
 			cast<Md2Object>(mModel)->setAnimation("RUN");
-		//if(typeid(this->mCtrl) == typeid(NPCController))
-			//LogTrace("right: %f  %f\n %d  %d\n"
-			//,GetX(),GetZ(),GetBoundingBox().Col(),GetBoundingBox().Row());
 		break;
 	case CharacterController::DROP_BOMB:
-		//std::cerr<<"dropping"<<mBombCnt<<std::endl;
-		LogTrace("dropping:%d\n",mBombCnt);
 		if(mBombCnt>0) 
 		{
 			Bomb::CreateBomb(GetX(),GetZ(),this);
+			App::Inst().AudioSys()->PlayEffectSound(1,"dropbomb");
 			SetBombCnt(-1);
-			//Explosion* e = new Explosion(GetX(),GetY(),GetZ());
-			//e->Draw(true);
 		}
 		break;
 	case CharacterController::TRIGGER_BOMB:

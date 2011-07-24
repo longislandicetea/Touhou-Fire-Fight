@@ -45,7 +45,7 @@ void Bomb::Update(float dt)
 	{
 		if(mTimer->End()>3.0)
 		{
-			if(mTimer->End()>3.5)
+			if(mTimer->End()>3.3)
 			{
 				actWhenSteped();
 			}
@@ -58,7 +58,7 @@ void Bomb::Update(float dt)
 		{
 			mInTrigState = true;
 			this->SetAlpha(0.0);
-			if(mOwner->TrigBonusTimer()->End()>0.5)
+			if(mOwner->TrigBonusTimer()->End()>0.3)
 			{
 				actWhenSteped();
 			}
@@ -103,7 +103,7 @@ void Bomb::explode()
 			}
 		}
 	}
-
+	App::Inst().AudioSys()->PlayEffectSound(1,"explode");
 	for(int k = 0;k<mFlame.size();++k)
 	{
 		int r = mFlame[k]->Row();
