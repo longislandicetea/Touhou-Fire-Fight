@@ -49,28 +49,35 @@ void NPCController::initFSM()
 	//add transitions to states
 	flee->AddTransition(transToFlee);
 	flee->AddTransition(transToTrigger);
-	flee->AddTransition(transToAttack);
+	//flee->AddTransition(transToAttack);
 	flee->AddTransition(transToDropBomb);
 	flee->AddTransition(transToClearPath);
 	flee->AddTransition(transToSilly);
 
+	trigger->AddTransition(transToFlee);
+	trigger->AddTransition(transToTrigger);
+	//trigger->AddTransition(transToAttack);
+	trigger->AddTransition(transToDropBomb);
+	trigger->AddTransition(transToClearPath);
+	trigger->AddTransition(transToSilly);
+	
 	silly->AddTransition(transToFlee);
 	silly->AddTransition(transToTrigger);
-	silly->AddTransition(transToAttack);
+	//silly->AddTransition(transToAttack);
 	silly->AddTransition(transToDropBomb);
 	silly->AddTransition(transToClearPath);
 	silly->AddTransition(transToSilly);
 
 	clearPath->AddTransition(transToFlee);
 	clearPath->AddTransition(transToTrigger);
-	clearPath->AddTransition(transToAttack);
+	//clearPath->AddTransition(transToAttack);
 	clearPath->AddTransition(transToDropBomb);
 	clearPath->AddTransition(transToClearPath);
 	clearPath->AddTransition(transToSilly);
 
 	dropBomb->AddTransition(transToFlee);
 	dropBomb->AddTransition(transToTrigger);
-	dropBomb->AddTransition(transToAttack);
+	//dropBomb->AddTransition(transToAttack);
 	dropBomb->AddTransition(transToDropBomb);
 	dropBomb->AddTransition(transToClearPath);
 	dropBomb->AddTransition(transToSilly);
@@ -107,6 +114,8 @@ int NPCController::Update(Character *character, float dt)
 	mMostInterest = Pos(-1,-1);
 	mNearestEnemyPos = Pos(-1,-1);
 	mIsTrigChance = false;
+	if(!mEnemyPos.empty())
+		mEnemyPos.clear();
 
 	computeWalls();
 
@@ -191,15 +200,15 @@ void NPCController::computeFloodFill( int col,int row )
 				{
 					mFloodFillGrid->SetValue(nextX, nextY, nextValue);
 					myQueue.push(Pos(nextX,nextY));
-					if(mInterestGrid->GetValue(nextX,nextY)>0 )
+					if(mInterestGrid->GetValue(nextX,nextY)>0 && mDangerGrid->GetValue(nextX,nextY)>=3.0)
 					{
 						if(mMostInterest == Pos(-1,-1))
 							mMostInterest = Pos(nextX,nextY);
-						else if(nextValue<=mFloodFillGrid->GetValue(mMostInterest)
-							&& mInterestGrid->GetValue(nextX,nextY)>mInterestGrid->GetValue(mMostInterest))
-						{
-							mMostInterest = Pos(nextX,nextY);
-						}
+						//else if(nextValue<=mFloodFillGrid->GetValue(mMostInterest)
+							//&& mInterestGrid->GetValue(nextX,nextY)>mInterestGrid->GetValue(mMostInterest))
+						//{
+							//mMostInterest = Pos(nextX,nextY);
+						//}
 
 					}
 				}
@@ -258,12 +267,12 @@ void NPCController::computeEnemy(GameStage* gs, Character* character, float dt)
 {
 	GameObjectContainer* npc = cast<GameObjectContainer>(gs->GetChild(NPC));
 	GameObjectContainer* player = cast<GameObjectContainer>(gs->GetChild(PLAYER));
-	std::vector<Pos> enemyPos;
+	mEnemyPos;
 
 	//add player
 	if(player != NULL) {GameObject* play = cast<GameObject>(player->GetChild(0));
 	mNearestEnemyPos = Pos(play->GetBoundingBox().Col(),play->GetBoundingBox().Row());
-	enemyPos.push_back(mNearestEnemyPos);}
+	mEnemyPos.push_back(mNearestEnemyPos);}
 
 	//compare npcs
 	if(npc!=NULL) {
@@ -274,7 +283,8 @@ void NPCController::computeEnemy(GameStage* gs, Character* character, float dt)
 		if(child != character)
 		{
 			Pos pos = Pos(child->GetBoundingBox().Col(),child->GetBoundingBox().Row());
-			enemyPos.push_back(pos);
+			//if(mFloodFillGrid->GetValue(mNearestEnemyPos) !=)
+			mEnemyPos.push_back(pos);
 			if(mFloodFillGrid->GetValue(mNearestEnemyPos) > mFloodFillGrid->GetValue(pos))
 			{
 				mNearestEnemyPos = Pos(pos);
@@ -288,13 +298,19 @@ void NPCController::computeEnemy(GameStage* gs, Character* character, float dt)
 
 	if(character->HasTrigBonus() && mDangerGrid->GetValue(character->GetBoundingBox().Col(),character->GetBoundingBox().Row())!=-5)
 	{
-		for(int i = 0;i<enemyPos.size();++i)
+		for(int i = 0;i<mEnemyPos.size();++i)
 		{
-			if(mDangerGrid->GetValue(enemyPos[i]) == -5)
+			if(mDangerGrid->GetValue(mEnemyPos[i]) == -5)
 				mIsTrigChance = true;
 		}
 	}
 }
+
+std::vector<Pos> NPCController::GetEnemyPos()
+{
+	return mEnemyPos;
+}
+
 std::stack<Pos> NPCController::getPathTo(Pos pos)
 {
 	std::stack<Pos> path = getPathTo(pos.col,pos.row);
