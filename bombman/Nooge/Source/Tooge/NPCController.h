@@ -43,6 +43,7 @@ public:
 	Pos NearestBonusPos();
 	Pos MostInterestPos();
 	Pos NearestEnemyPos();
+	vector<Pos> GetEnemyPos();
 	std::stack<Pos> getPathTo(int col,int row);
 	std::stack<Pos> getPathTo(Pos pos);
 	bool IsTrigChance();
@@ -60,6 +61,7 @@ enum AIGridState
 	Pos mNearestBonusPos;//the position of the nearest bonus
 	Pos mMostInterest;
 	Pos mNearestEnemyPos;
+	std::vector<Pos> mEnemyPos;
 	bool mIsTrigChance;
 	void computeFloodFill(Character *character);
 	void computeFloodFill(int col,int row);

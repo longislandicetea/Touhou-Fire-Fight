@@ -91,15 +91,15 @@ Transition(ctrl,next)
 
 bool ToDropBomb::IsTrue()
 {
-	if(true )
+	if(mCtrl->GetCharacter()->GetBombCnt() != 0 )
 	{
 		Pos myPosition = Pos(mCtrl->GetCharacter()->GetBoundingBox().Col(),mCtrl->GetCharacter()->GetBoundingBox().Row());
 		float value = mCtrl->GetInterestGrid()->GetValue(myPosition);
-		if(value>0 && value <=3
-			&& value>=mCtrl->GetInterestGrid()->GetValue(myPosition.col+1,myPosition.row)
-			&& value>=mCtrl->GetInterestGrid()->GetValue(myPosition.col-1,myPosition.row)
-			&& value>=mCtrl->GetInterestGrid()->GetValue(myPosition.col,myPosition.row+1)
-			&& value>=mCtrl->GetInterestGrid()->GetValue(myPosition.col,myPosition.row-1))
+		if(value>0 && value <=3)
+			//&& value>=mCtrl->GetInterestGrid()->GetValue(myPosition.col+1,myPosition.row)
+			//&& value>=mCtrl->GetInterestGrid()->GetValue(myPosition.col-1,myPosition.row)
+			//&& value>=mCtrl->GetInterestGrid()->GetValue(myPosition.col,myPosition.row+1)
+			//&& value>=mCtrl->GetInterestGrid()->GetValue(myPosition.col,myPosition.row-1))
 		{
 			LogTrace("DropBomb");
 			return true;
@@ -115,7 +115,7 @@ Transition(ctrl,next)
 
 bool ToClearPath::IsTrue()
 {
-	if(true)
+	if(mCtrl->GetCharacter()->GetBombCnt()!=0)
 	{
 	if(mCtrl->MostInterestPos() != Pos(-1,-1))
 	{
@@ -149,10 +149,38 @@ Transition(ctrl,next)
 
 bool ToAttack::IsTrue()
 {
-	if(rand()%100<30&& mCtrl->NearestEnemyPos() != Pos(-1,-1))
+	/*if(mCtrl->GetCharacter()->GetBombCnt() !=0 &&  mCtrl->NearestEnemyPos() != Pos(-1,-1))
 	{
 		LogTrace("Attack");
 		return true;
 	}
+	return false;*/
+	if(mCtrl->GetCharacter()->GetBombCnt() != 0)
+	{
+	std::vector<Pos> enemyPos = mCtrl->GetEnemyPos();
+	int power = mCtrl->GetCharacter()->GetPower();
+	Pos myPosition = Pos(mCtrl->GetCharacter()->GetBoundingBox().Col(),mCtrl->GetCharacter()->GetBoundingBox().Row());
+
+		int dx[4] = {-1,0,1,0};
+		int dy[4] = {0,1,0,-1};
+		
+	int dValid[4] = {1,1,1,1};
+	for(int t = 0;t<enemyPos.size();++t)
+	{
+		for(int i = 0;i<power;++i)
+	{
+		
+		for(int j = 0;j<4;++j)
+		{
+				if(dValid[j])
+				{
+					if(Pos(myPosition.col+dx[j],myPosition.row+dy[j]) == enemyPos[t])
+						return true;
+				}
+		}
+	}
+	}
+	}
 	return false;
+
 }

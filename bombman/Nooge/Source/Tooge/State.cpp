@@ -11,21 +11,15 @@ State* State::Update(float dt)
 	vector<Transition*>::iterator it = mTransitionList.begin();
 	vector<Transition*>::iterator end = mTransitionList.end();
 
-	for(int i = 0;i<2;++i,++it)
-	if((*it)->IsTrue())
-	{
-		return (*it)->GetNextState();
-	}
-
 	for (; it !=end ; ++it)
 		if ((*it)->IsTrue())
 		{
-			if(this != (*it)->GetNextState() && this->mTimer->IsOpen() && this->mTimer->End()>=2.0)
+			if(this != (*it)->GetNextState() )//&& this->mTimer->IsOpen() && this->mTimer->End()>=1.0
 			{
 				SetTimer(false);
 				(*it)->GetNextState()->SetTimer(true);
-				return (*it) ->GetNextState();
 			}
+			return (*it) ->GetNextState();
 		}
 	return this;
 }
@@ -199,10 +193,12 @@ int ClearPathState::GetAction()
 
 	//choose action
 	float can= Grid::SideLen/mCtrl->GetCharacter()->GetSpeed();//若有危险 能否通过
-	if(path.empty() ) //||(!path.empty()&& mCtrl->GetDangerGrid()->GetValue(path.top().col,path.top().row)<=can)
+	if(path.empty() ) //
 	{
 		return IDLE;
 	}
+	if(!path.empty() && mCtrl->GetDangerGrid()->GetValue(path.top().col,path.top().row)<=3.0)
+		return IDLE;
 	else if(myPosition.GetCol()<path.top().GetCol() )
 	{
 		return MOVE_RIGHT;
@@ -219,7 +215,6 @@ int ClearPathState::GetAction()
 	{
 		return MOVE_DOWN;
 	}
-	//LogTrace(" IDLE\n");
 	return IDLE;
 }
 
@@ -241,48 +236,6 @@ State(ctrl)
 
 int AttackState::GetAction()
 {
-	Pos enemyPos = mCtrl->NearestEnemyPos();
-	int power = mCtrl->GetCharacter()->GetPower();
-	Pos myPosition = Pos(mCtrl->GetCharacter()->GetBoundingBox().Col(),mCtrl->GetCharacter()->GetBoundingBox().Row());
-
-		int dx[4] = {-1,0,1,0};
-		int dy[4] = {0,1,0,-1};
-		
-	int dValid[4] = {1,1,1,1};
-	for(int i = 0;i<power;++i)
-	{
-		
-		for(int j = 0;j<4;++j)
-		{
-				if(dValid[j])
-				{
-					if(Pos(myPosition.col+dx[j],myPosition.row+dy[j]) == enemyPos)
-						return DROP_BOMB;
-				}
-		}
-	}
-
-	std::stack<Pos> path = mCtrl->getPathTo(enemyPos);
-	if(path.empty() ) //||(!path.empty()&& mCtrl->GetDangerGrid()->GetValue(path.top().col,path.top().row)<=can)
-	{
-		return IDLE;
-	}
-	else if(myPosition.GetCol()<path.top().GetCol() )
-	{
-		return MOVE_RIGHT;
-	}
-	else if(myPosition.GetCol()>path.top().GetCol() )
-	{
-		return MOVE_LEFT;
-	}
-	else if(myPosition.GetRow()>path.top().GetRow() )
-	{
-		return MOVE_UP;
-	}
-	else if(myPosition.GetRow()<path.top().GetRow())
-	{
-		return MOVE_DOWN;
-	}
-	return IDLE;
+	return DROP_BOMB;
 }
 	
