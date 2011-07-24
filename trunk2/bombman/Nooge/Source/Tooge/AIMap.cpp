@@ -11,6 +11,8 @@ void AIMap::Reset( int value )
 	for(int i = 0;i<WIDTH;++i)
 		for(int j = 0;j<HEIGHT;++j)
 			this->value[i][j] = value;
+
+	maxValue = value;
 }
 
 int AIMap::GetValue( int col,int row )
@@ -26,6 +28,9 @@ int AIMap::GetValue(Pos pos)
 void AIMap::SetValue( int col,int row,float value )
 {
 	this->value[col][row] = value;
+	
+	if(value>maxValue)
+		maxValue = value;
 }
 
 
@@ -56,6 +61,11 @@ int AIMap::GetWidth()
 std::vector<Pos> AIMap::GetValuePositions(float tvalue)
 {
 	std::vector<Pos> positions;
+	
+	//if the value is too large
+	if(tvalue>maxValue)
+		return positions;
+
 	//float maxVal = value[0][0];
 	for(int col = 0;col<WIDTH;++col)
 	{

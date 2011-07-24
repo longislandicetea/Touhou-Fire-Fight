@@ -21,8 +21,12 @@ Transition(ctrl,next)
 
 bool ToSilly::IsTrue()
 {
-	//LogTrace("Silly\n");
+	
+	//if(mCtrl->GetCharacter()->GetBombCnt()==0)
+		//{LogTrace("Silly\n");
 	return true;
+	//}
+	return false;
 }
 //////////////////////////////////////////////////ToFlee///////////////////////////////////////////////
 
@@ -69,7 +73,7 @@ Transition(ctrl,next)
 
 bool ToOpen::IsTrue()
 {
-	for(int i = 1;i<4;++i)
+	for(int i = 4;i<=7;++i)
 	{
 		if(!mCtrl->GetInterestGrid()->GetValuePositions(i).empty())
 		{

@@ -46,6 +46,8 @@ int SillyState::GetAction()
 	//if(temp%9 == 0)
 	//return rand()%5;
 	//return MOVE_UP;
+	//if(mCtrl->GetCharacter()->GetBombCnt()!=0)
+	//return DROP_BOMB;
 	return IDLE;
 }
 
@@ -129,21 +131,23 @@ State(ctrl)
 int OpenState::GetAction()
 {
 	AIMap* interest = mCtrl->GetInterestGrid();
-	Pos myPosition = Pos(mCtrl->GetCharacter()->GetBoundingBox().Row(),mCtrl->GetCharacter()->GetBoundingBox().Col());
-	for(int t = 3;t>0;--t)
+	Pos myPosition = Pos(mCtrl->GetCharacter()->GetBoundingBox().Col(),mCtrl->GetCharacter()->GetBoundingBox().Row());
+	
+	for(int t = 7;t>0;--t)
 	{
-		if(interest->GetValue(myPosition) ==t)
-			return DROP_BOMB;
+		//if(interest->GetValue(myPosition) ==t)
+			//return DROP_BOMB;
 		std::vector<Pos> positions = interest->GetValuePositions(t);
 		stack<Pos> minPath;
 		for(int i = 0;i<positions.size();++i)
 		{
 			stack<Pos> path= mCtrl->getPathTo(positions[i]);
-			
-			if((!path.empty() && minPath.empty() ) || 
-				(!path.empty() && !minPath.empty() && path.size()<minPath.size()))
+			if(!path.empty())
+			{
+			if(minPath.empty()  || ( !minPath.empty() && path.size()<minPath.size()))
 			{
 				minPath = path;
+			}
 			}
 		}
 		if(!minPath.empty())
@@ -156,6 +160,8 @@ int OpenState::GetAction()
 					return MOVE_UP;
 				else if(myPosition.GetRow()<minPath.top().GetRow())
 					return MOVE_DOWN;
+				else
+					return IDLE;
 		}
 	}
 	return IDLE;

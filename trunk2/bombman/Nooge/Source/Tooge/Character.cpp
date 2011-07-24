@@ -37,8 +37,8 @@ void Character::doAction( int currentAction, float dt )
 	switch (currentAction)
 	{
 	case CharacterController::MOVE_UP:
-		up(dt*mSpeed);
 		SetCol();
+		up(dt*mSpeed);
 		if(mLastAction == CharacterController::IDLE)
 			cast<Md2Object>(mModel)->setAnimation("RUN");
 		//if(typeid(this->mCtrl) == typeid(NPCController))
@@ -47,8 +47,8 @@ void Character::doAction( int currentAction, float dt )
 		break;
 	case CharacterController::MOVE_DOWN:
 		//cast<Md2Object>(mModel)->setAnimation("RUN");
-		down(dt*mSpeed);
 		SetCol();
+		down(dt*mSpeed);
 		if(mLastAction == CharacterController::IDLE)
 			cast<Md2Object>(mModel)->setAnimation("RUN");
 		//if(typeid(this->mCtrl) == typeid(NPCController))
@@ -57,8 +57,8 @@ void Character::doAction( int currentAction, float dt )
 		break;
 	case CharacterController::MOVE_LEFT:
 		//cast<Md2Object>(mModel)->setAnimation("RUN");
-		left(dt*mSpeed);
 		SetRow();
+		left(dt*mSpeed);
 		if(mLastAction == CharacterController::IDLE)
 			cast<Md2Object>(mModel)->setAnimation("RUN");
 		//if(typeid(this->mCtrl) == typeid(NPCController))
@@ -67,8 +67,8 @@ void Character::doAction( int currentAction, float dt )
 		break;
 	case CharacterController::MOVE_RIGHT:
 		//cast<Md2Object>(mModel)->setAnimation("RUN");
-		right(dt*mSpeed);
 		SetRow();
+		right(dt*mSpeed);
 		if(mLastAction == CharacterController::IDLE)
 			cast<Md2Object>(mModel)->setAnimation("RUN");
 		//if(typeid(this->mCtrl) == typeid(NPCController))

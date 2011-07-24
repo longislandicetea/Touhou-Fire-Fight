@@ -40,4 +40,5 @@ private:
 	static const int WIDTH = 15;
 	static const int HEIGHT = 13;
 	float value[WIDTH][HEIGHT];
+	float maxValue;
 };
