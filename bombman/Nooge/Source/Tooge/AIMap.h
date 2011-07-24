@@ -18,6 +18,13 @@ public:
 			return true;
 		return false;
 	}
+
+	bool operator != (const Pos& pos)
+	{
+		if(this->col != pos.col || this->row != pos.row)
+			return true;
+		return false;
+	}
 	
 };
 

@@ -132,11 +132,11 @@ int OpenState::GetAction()
 {
 	AIMap* interest = mCtrl->GetInterestGrid();
 	Pos myPosition = Pos(mCtrl->GetCharacter()->GetBoundingBox().Col(),mCtrl->GetCharacter()->GetBoundingBox().Row());
-	
+
 	for(int t = 7;t>0;--t)
 	{
 		//if(interest->GetValue(myPosition) ==t)
-			//return DROP_BOMB;
+		//return DROP_BOMB;
 		std::vector<Pos> positions = interest->GetValuePositions(t);
 		stack<Pos> minPath;
 		for(int i = 0;i<positions.size();++i)
@@ -144,39 +144,108 @@ int OpenState::GetAction()
 			stack<Pos> path= mCtrl->getPathTo(positions[i]);
 			if(!path.empty())
 			{
-			if(minPath.empty()  || ( !minPath.empty() && path.size()<minPath.size()))
-			{
-				minPath = path;
-			}
+				if(minPath.empty()  || ( !minPath.empty() && path.size()<minPath.size()))
+				{
+					minPath = path;
+				}
 			}
 		}
 		if(!minPath.empty())
 		{
 			if(myPosition.GetCol()<minPath.top().GetCol() )
-					return MOVE_RIGHT;
-				else if(myPosition.GetCol()>minPath.top().GetCol() )
-					return MOVE_LEFT;
-				else if(myPosition.GetRow()>minPath.top().GetRow() )
-					return MOVE_UP;
-				else if(myPosition.GetRow()<minPath.top().GetRow())
-					return MOVE_DOWN;
-				else
-					return IDLE;
+				return MOVE_RIGHT;
+			else if(myPosition.GetCol()>minPath.top().GetCol() )
+				return MOVE_LEFT;
+			else if(myPosition.GetRow()>minPath.top().GetRow() )
+				return MOVE_UP;
+			else if(myPosition.GetRow()<minPath.top().GetRow())
+				return MOVE_DOWN;
+			else
+				return IDLE;
 		}
 	}
 	return IDLE;
 }
 
+///////////////////////////////DropBombState////////////////////////
+DropBombState::DropBombState(NPCController* ctrl):
+State(ctrl)
+{}
 
+int DropBombState::GetAction()
+{
+	if(mCtrl->GetCharacter()->GetBombCnt()>0)
+		return DROP_BOMB;
+	else 
+		return IDLE;
+}
 
 ///////////////////////////////ClearPathState///////////////////////
+ClearPathState::ClearPathState(NPCController* ctrl):
+State(ctrl)
+{}
+
+
 int ClearPathState::GetAction()
 {
+	Pos myPosition = Pos(mCtrl->GetCharacter()->GetBoundingBox().Col(),mCtrl->GetCharacter()->GetBoundingBox().Row());
+	Pos mostInterest = mCtrl->MostInterestPos();
+	std::stack<Pos> path = mCtrl->getPathTo(mostInterest);
+
+	//choose action
+	float can= Grid::SideLen/mCtrl->GetCharacter()->GetSpeed();//若有危险 能否通过
+	if(path.empty() || (!path.empty()&& mCtrl->GetDangerGrid()->GetValue(path.top().col,path.top().row)<=can))
+		return IDLE;
+	else if(myPosition.GetCol()<path.top().GetCol() )
+		return MOVE_RIGHT;
+	else if(myPosition.GetCol()>path.top().GetCol() )
+		return MOVE_LEFT;
+	else if(myPosition.GetRow()>path.top().GetRow() )
+		return MOVE_UP;
+	else if(myPosition.GetRow()<path.top().GetRow())
+		return MOVE_DOWN;
+	return IDLE;
+
+	/*AIMap* interest = mCtrl->GetInterestGrid();
+	Pos myPosition = Pos(mCtrl->GetCharacter()->GetBoundingBox().Col(),mCtrl->GetCharacter()->GetBoundingBox().Row());
+
+	for(int t = 7;t>0;--t)
+	{
+
+		std::vector<Pos> positions = interest->GetValuePositions(t);
+		stack<Pos> minPath;
+		for(int i = 0;i<positions.size();++i)
+		{
+			stack<Pos> path= mCtrl->getPathTo(positions[i]);
+			if(!path.empty())
+			{
+				if(minPath.empty()  || ( !minPath.empty() && path.size()<minPath.size()))
+				{
+					minPath = path;
+				}
+			}
+		}
+		if(!minPath.empty())
+		{
+			if(myPosition.GetCol()<minPath.top().GetCol() )
+				return MOVE_RIGHT;
+			else if(myPosition.GetCol()>minPath.top().GetCol() )
+				return MOVE_LEFT;
+			else if(myPosition.GetRow()>minPath.top().GetRow() )
+				return MOVE_UP;
+			else if(myPosition.GetRow()<minPath.top().GetRow())
+				return MOVE_DOWN;
+			else
+				return IDLE;
+		}
+	}
+	return IDLE;*/
+}
 
 	// get the best interesting position
-	int x = 0, y = 0;
-	AIMap* interest =mCtrl->GetInterestGrid();
-	return 0;}
+	//int x = 0, y = 0;
+	//AIMap* interest =mCtrl->GetInterestGrid();
+	//return 0;}
 //	interest->GetBestValuePosition(x,y);
 // compute the path
 // List<Vector3>* path = controller->getPathTo(x,y);

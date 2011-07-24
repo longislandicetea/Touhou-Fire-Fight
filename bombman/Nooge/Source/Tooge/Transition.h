@@ -49,3 +49,17 @@ public:
 	ToOpen(NPCController* ctrl,State*next);
 	virtual bool IsTrue();
 };
+
+class ToDropBomb: public Transition
+{
+public:
+	ToDropBomb(NPCController* ctrl, State* next);
+	virtual bool IsTrue();
+};
+
+class ToClearPath: public Transition
+{
+public:
+	ToClearPath(NPCController* ctrl, State* next);
+	virtual bool IsTrue();
+};

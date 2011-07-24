@@ -11,12 +11,16 @@ class FleeState;
 class SillyState;
 class SearchBonusState;
 class OpenState;
+class ClearPathState;
+class DropBombState;
 
 class Transition;
 class ToFlee;
 class ToSilly;
 class ToSearchBonus;
 class ToOpen;
+class ToDropBomb;
+class ToClearPath;
 
 
 
@@ -29,9 +33,11 @@ public:
 	AIMap* GetInterestGrid();
 	AIMap* GetDangerGrid();
 	~NPCController();
+	
 
 	//for AI
 	Pos NearestBonusPos();
+	Pos MostInterestPos();
 	std::stack<Pos> getPathTo(int col,int row);
 	std::stack<Pos> getPathTo(Pos pos);
 
@@ -46,6 +52,7 @@ enum AIGridState
 	AIMap* mInterestGrid;
 	AIMap* mFloodFillGrid;
 	Pos mNearestBonusPos;//the position of the nearest bonus
+	Pos mMostInterest;
 	void computeFloodFill(Character *character);
 	void computeFloodFill(int col,int row);
 	
@@ -70,5 +77,11 @@ enum AIGridState
 
 	State* open;
 	Transition* transToOpen;
+
+	State* dropBomb;
+	Transition* transToDropBomb;
+
+	State* clearPath;
+	Transition* transToClearPath;
 };
 

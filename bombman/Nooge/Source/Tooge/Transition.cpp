@@ -21,9 +21,9 @@ Transition(ctrl,next)
 
 bool ToSilly::IsTrue()
 {
-	
+
 	//if(mCtrl->GetCharacter()->GetBombCnt()==0)
-		//{LogTrace("Silly\n");
+	//{LogTrace("Silly\n");
 	return true;
 	//}
 	return false;
@@ -36,7 +36,7 @@ Transition(ctrl,next)
 
 bool ToFlee::IsTrue()
 {
-	
+
 	int row = mCtrl->GetCharacter()->GetBoundingBox().Row();
 	int col = mCtrl->GetCharacter()->GetBoundingBox().Col();
 	float speed = mCtrl->GetCharacter()->GetSpeed();
@@ -45,7 +45,7 @@ bool ToFlee::IsTrue()
 		LogTrace("Flee\n");
 		return true;
 	}
-		
+
 	return false;
 }
 
@@ -63,7 +63,7 @@ bool ToSearchBonus::IsTrue()
 	if(mCtrl->getPathTo(NearestBonus).size() >7)//如果太远就不去
 		return false;
 	LogTrace("SearchBonus\n");
-		return true;
+	return true;
 }
 
 ///////////////////////////////////////ToOpen///////////////////////////
@@ -81,5 +81,32 @@ bool ToOpen::IsTrue()
 			return true;
 		}
 	}
+	return false;
+}
+
+////////////////////////////////////ToDropBomb////////////////////////////
+ToDropBomb::ToDropBomb(NPCController* ctrl, State* next):
+Transition(ctrl,next)
+{}
+
+bool ToDropBomb::IsTrue()
+{
+	int row = mCtrl->GetCharacter()->GetBoundingBox().Row();
+	int col = mCtrl->GetCharacter()->GetBoundingBox().Col();
+	float value = mCtrl->GetInterestGrid()->GetValue(col,row);
+	if(value>0 && value <=3)
+		return true;
+	return false;
+}
+
+//////////////////////////////////ToClearPath//////////////////////////////
+ToClearPath::ToClearPath(NPCController* ctrl,State* next):
+Transition(ctrl,next)
+{}
+
+bool ToClearPath::IsTrue()
+{
+	if(mCtrl->MostInterestPos() != Pos(-1,-1))
+		return true;
 	return false;
 }
