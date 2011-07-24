@@ -62,8 +62,8 @@ void NPCController::initFSM()
 
 	silly->AddTransition(transToFlee);
 	//silly->AddTransition(transToSearchBonus);
-	flee->AddTransition(transToDropBomb);
-	flee->AddTransition(transToClearPath);
+	silly->AddTransition(transToDropBomb);
+	silly->AddTransition(transToClearPath);
 	//silly->AddTransition(transToOpen);
 	silly->AddTransition(transToSilly);
 
@@ -184,7 +184,7 @@ void NPCController::computeFloodFill( int col,int row )
 						if(mMostInterest == Pos(-1,-1))
 							mMostInterest = Pos(nextX,nextY);
 						else if(nextValue<=mFloodFillGrid->GetValue(mMostInterest)
-							&& nextValue>mInterestGrid->GetValue(mMostInterest))
+							&& mInterestGrid->GetValue(nextX,nextY)>mInterestGrid->GetValue(mMostInterest))
 						{
 							mMostInterest = Pos(nextX,nextY);
 						}
@@ -194,8 +194,11 @@ void NPCController::computeFloodFill( int col,int row )
 			}
 		}
 	}
-	if(mMostInterest != Pos(-1,-1) && mFloodFillGrid->GetValue(mMostInterest)+5>= mFloodFillGrid->GetValue(mNearestBonusPos))
+	if(mMostInterest != Pos(-1,-1) 
+		&& mNearestBonusPos != Pos(-1,-1)
+		&& ((mFloodFillGrid->GetValue(mMostInterest)+5 )>= mFloodFillGrid->GetValue(mNearestBonusPos)))
 		mMostInterest = mNearestBonusPos;
+	LogTrace("MostInterestPos: %d  %d\n",mMostInterest.col,mMostInterest.row);
 }
 stack<Pos> NPCController::getPathTo(int col,int row)
 {
@@ -346,10 +349,6 @@ void NPCController::computeBonus(GameStage*gs,Character*character,float dt)
 	GameObjectContainer* bonus = cast<GameObjectContainer>(gs->GetChild(BONUS));
 	int nbonus = bonus->NumOfChild();
 
-	//log*********************************
-	//if(nbonus !=0)
-	//LogTrace("Bonus:   %d\n",nbonus);
-
 	for(int t = 0;t<nbonus;++t)
 	{
 		Bonus* child = cast<Bonus>(bonus->GetChild(t));
@@ -404,6 +403,10 @@ NPCController::~NPCController()
 	delete transToSearchBonus;
 	delete open;
 	delete transToOpen;
+	delete clearPath;
+	delete transToClearPath;
+	delete dropBomb;
+	delete transToDropBomb;
 }
 
 Pos NPCController::NearestBonusPos()
