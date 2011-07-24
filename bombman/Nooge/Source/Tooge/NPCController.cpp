@@ -252,6 +252,7 @@ void NPCController::computeEnemy(GameStage* gs, Character* character, float dt)
 	for(int i = 0;i<npc->NumOfChild();++i)
 	{
 		GameObject * child = cast<GameObject>(npc->GetChild(i));
+		if(child != NULL) {
 		if(child != character)
 		{
 			Pos pos = Pos(child->GetBoundingBox().Col(),child->GetBoundingBox().Row());
@@ -260,6 +261,7 @@ void NPCController::computeEnemy(GameStage* gs, Character* character, float dt)
 			{
 				mNearestEnemyPos = Pos(pos);
 			}
+		}
 		}
 	}
 

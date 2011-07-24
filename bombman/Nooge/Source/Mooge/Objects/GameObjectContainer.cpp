@@ -13,8 +13,11 @@ void GameObjectContainer::AddChild( Ref<GameObject> child )
 void GameObjectContainer::AddChildAt( Ref<GameObject> child, int idx )
 {
 	//pay attention to the order! remove->set->add
-	child->RemoveFromParent();
-	child->SetParent(this);
+	if(!child.IsNull())
+	{
+		child->RemoveFromParent();
+		child->SetParent(this);
+	}
 	ChildrenContainer::const_iterator it = mChildren.begin();
 	mChildren.insert(it+idx,child);
 }
@@ -22,12 +25,22 @@ void GameObjectContainer::AddChildAt( Ref<GameObject> child, int idx )
 void GameObjectContainer::RemoveChild( Ref<GameObject> child )
 {
 	ChildrenContainer::const_iterator it;
-	it = std::find(mChildren.begin(),mChildren.end(),child);
+	for(it = mChildren.begin();it != mChildren.end();)
+	{
+		if(*it == child)
+		{
+			//child->SetParent(NULL);
+			it = mChildren.erase(it);
+		}
+		else
+			it++;
+	}
+	/*//it = std::find(mChildren.begin(),mChildren.end(),child);
 	if(it != mChildren.end())
 	{
 		child->SetParent(NULL);
 		mChildren.erase(it);
-	}
+	}*/
 }
 
 
@@ -60,6 +73,7 @@ void GameObjectContainer::Draw(bool is3D)
 	for(;it!=mChildren.end();++it)
 	{
 		Ref<GameObject> obj = *it;
+		if(!obj.IsNull()) {
 		float childAlpha = obj->GetAlpha();
 		if(childAlpha>0.0)
 		{
@@ -80,6 +94,7 @@ void GameObjectContainer::Draw(bool is3D)
 			obj->SetAlpha(childAlpha);
 			glPopMatrix();
 		}
+		}
 	}
 }
 
@@ -88,7 +103,8 @@ void GameObjectContainer::Update(float dt)
 	ChildrenContainer children = mChildren;
 	for(int i = 0;i < children.size();++i)
 	{
-		children[i]->Update(dt);
+		if(!children[i].IsNull()) {
+			children[i]->Update(dt);}
 	}
 	//LogTrace("%f\n",dt);
 }

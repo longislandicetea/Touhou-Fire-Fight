@@ -33,6 +33,7 @@ public:
 	Ref<GameObject> CreateBonus();
 
 	void CheckCharacterLife(int row,int col);
+	void SetBonusCnt(int bonusId);
 
 	virtual void Draw(bool is3D);
 	virtual void Update(float dt);
@@ -59,6 +60,7 @@ private:
 	
 	Ref<GameObject> mHUD;
 	Ref<GameObject> mCountdownTimerFont;
+	Ref<GameObject> mBonusCntFont;
 	
 	bool isDead[4];
 
@@ -68,8 +70,11 @@ private:
 
 	//level
 	int mLevel;
-	
+
+	//num of bonus (player)
+	int mBonusCnt[7];
 	void initWallMap();
 
 	std::string timeToString(int restTime);
+	std::string intToString(int cnt);
 };                                                                                                                                                                                                                                                                                                                                                                                                     

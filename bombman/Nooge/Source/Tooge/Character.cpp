@@ -27,6 +27,7 @@ void Character::Update(float dt)
 		{
 			SetBombCnt(1);
 			mHasDropMalus = false;
+			if(this == &*gs->Player()) gs->SetBonusCnt(6);
 		}
 	}
 	Sprite::Update(dt);
@@ -158,7 +159,7 @@ float Character::GetSpeed()
 
 void Character::SetBombCnt( int factor )
 {
-	LogTrace("factor:%d BombCnt:%d, finally:%d \n",factor,mBombCnt,factor + mBombCnt);
+	//LogTrace("factor:%d BombCnt:%d, finally:%d \n",factor,mBombCnt,factor + mBombCnt);
 	mBombCnt += factor;
 	// std::cerr<< mBombCnt<<std::endl;
 }

@@ -21,7 +21,7 @@ public:
 	bool  IsSndMute() {return mSndMute;}
 
 	void Update();
-
+	~AudioSystem();
 private:
 	FMOD::System* mSys;
 	std::map<std::string, FMOD::Sound*> mSounds;

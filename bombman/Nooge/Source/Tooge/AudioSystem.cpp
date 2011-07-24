@@ -94,3 +94,8 @@ void AudioSystem::Mute( int channelId,bool isMute )
 	else
 		mSndMute = isMute;
 }
+
+AudioSystem::~AudioSystem()
+{
+	mResult = mSys->release();
+}

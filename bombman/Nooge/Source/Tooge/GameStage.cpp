@@ -25,6 +25,7 @@
 #include "App.h"
 
 #include <vector>
+#include <string.h>
 
 Ref<GameObject> GameStage::CurrentMap()
 {
@@ -36,6 +37,9 @@ GameStage::GameStage( Ref<GameObject> map,int level)
         //read map
         mCurrentMap = map;
         mBonusProb = cast<Map>(mCurrentMap)->GetBonusProb();
+
+		//set bonus cnt
+		memset(mBonusCnt,0,sizeof(mBonusCnt));
 
 		//set countdown timer
 		mCountdownTimer = 180;
@@ -53,6 +57,7 @@ GameStage::GameStage( Ref<GameObject> map,int level)
         mHUD = Ref<GameObject> (new Sprite);
 		mExplosion = Ref<GameObject> (new Sprite);
 		mDecoration = Ref<GameObject> (new Sprite);
+		mBonusCntFont = Ref<GameObject>(new Sprite);
 
         //set gamestage
 		this->AddChild(mHUD);
@@ -64,6 +69,7 @@ GameStage::GameStage( Ref<GameObject> map,int level)
         this->AddChild(mBonus);
 		this->AddChild(mExplosion);
 		this->AddChild(mDecoration);
+		this->AddChild(mBonusCntFont);
 
 		memset(isDead,0,sizeof(isDead));
 
@@ -111,15 +117,69 @@ GameStage::GameStage( Ref<GameObject> map,int level)
 		}*/
 		
 		//hud
-		Ref<GameObject> image(new Image(DataManager::GetDataPath("Image","tmp","resource\\data.ini"),128,128));
-		cast<Sprite>(mHUD)->AddChild(image);
+		Ref<GameObject> imgBonus(new Image(DataManager::GetDataPath("Image","hudBonus","resource\\data.ini"),698,133));
+		imgBonus->SetPos(51,0,0);
+		cast<Sprite>(mHUD)->AddChild(imgBonus);
+        
+		//player state
+		Ref<GameObject> npc1(new Image(DataManager::GetDataPath("Image","npc10","resource\\data.ini"),99,60));
+		npc1->SetPos(13,144,0);
+		cast<Sprite>(mHUD)->AddChild(npc1);
+
+		//npc1 state
+		Ref<GameObject> npc2(new Image(DataManager::GetDataPath("Image","npc20","resource\\data.ini"),107,60));
+		npc2->SetPos(1,220,0);
+		cast<Sprite>(mHUD)->AddChild(npc2);
+
+		//npc2 state
+		Ref<GameObject> npc3(new Image(DataManager::GetDataPath("Image","npc30","resource\\data.ini"),107,61));
+		npc3->SetPos(694,140,0);
+		cast<Sprite>(mHUD)->AddChild(npc3);
+
+		//npc3 state
+		Ref<GameObject> npc4(new Image(DataManager::GetDataPath("Image","npc40","resource\\data.ini"),107,61));
+		npc4->SetPos(694,222,0);
+		cast<Sprite>(mHUD)->AddChild(npc4);
 
 		//timer
-		mCountdownTimerFont = Ref<GameObject>(new Font("Comic Sans MS",28,"3:00"));
-		cast<Font>(mCountdownTimerFont)->SetPos2D(390,56);
+		mCountdownTimerFont = Ref<GameObject>(new Font("Comic Sans MS",18,"3:00"));
+		cast<Font>(mCountdownTimerFont)->SetPos2D(226,35);
 		cast<Sprite>(mHUD)->AddChild(mCountdownTimerFont);
+		
+		//bombplus-0
+		Ref<GameObject> bombplus (new Font("Comic Sans MS",10,"0"));
+		cast<Font>(bombplus)->SetPos2D(416,70);
+		cast<Sprite>(mBonusCntFont)->AddChild(bombplus);
 
-		//music
+		//flameplus-1
+		Ref<GameObject> flameplus (new Font("Comic Sans MS",10,"0"));
+		cast<Font>(flameplus)->SetPos2D(537,70);
+		cast<Sprite>(mBonusCntFont)->AddChild(flameplus);
+
+		//faster--2
+		Ref<GameObject> faster (new Font("Comic Sans MS",10,"0"));
+		cast<Font>(faster)->SetPos2D(508,40);
+		cast<Sprite>(mBonusCntFont)->AddChild(faster);
+
+		//trigger--3
+		Ref<GameObject> trigger (new Font("Comic Sans MS",10,"0"));
+		cast<Font>(trigger)->SetPos2D(570,40);
+		cast<Sprite>(mBonusCntFont)->AddChild(trigger);
+
+		//push--4
+		Ref<GameObject> pushbomb (new Font("Comic Sans MS",10,"0"));
+		cast<Font>(pushbomb)->SetPos2D(475,70);
+		cast<Sprite>(mBonusCntFont)->AddChild(pushbomb);
+
+		//slower--5
+		Ref<GameObject> slower (new Font("Comic Sans MS",10,"0"));
+		cast<Font>(slower)->SetPos2D(384,40);
+		cast<Sprite>(mBonusCntFont)->AddChild(slower);
+
+		//drop--6
+		Ref<GameObject> dropall (new Font("Comic Sans MS",10,"0"));
+		cast<Font>(dropall)->SetPos2D(447,40);
+		cast<Sprite>(mBonusCntFont)->AddChild(dropall);
 }
 
 GameStage::~GameStage()
@@ -129,7 +189,7 @@ GameStage::~GameStage()
 
 Ref<GameObject> GameStage::Player()
 {
-        return mPlayer;
+        return cast<Sprite>(mPlayer)->GetChild(0);
 }
 
 bool GameStage::CanPass( GameObject* obj )
@@ -260,32 +320,41 @@ void GameStage::EatBonus( Character* obj )
 						if(typeid(*child) == typeid(BBombPlus))
                         {
                                 obj->SetBombCnt(1);
+								if(obj == &*Player()) ++mBonusCnt[0];
                         }
                         else if(typeid(*child) == typeid(BFlamePlus))
                         {
                                 obj->SetPower(1);
+								if(obj == &*Player()) ++mBonusCnt[1];
                         }
                         else if(typeid(*child) == typeid(BFaster))
                         {
+                                //obj->SetSpeed(1.2);
+								if(obj == &*Player()) ++mBonusCnt[2];
+
                                 obj->SetSpeed(1.1);
+
                         }
                         else if(typeid(*child) == typeid(BTrigger))
                         {
                                 obj->SetTrigBonus(true);
+								if(obj == &*Player()) ++mBonusCnt[3];
                         }
                         else if(typeid(*child) == typeid(BPush))
                         {
                                 obj->SetPushBonus(true);
+								if(obj == &*Player()) ++mBonusCnt[4];
                         }
                         else if(typeid(*child) == typeid(BSlower))
                         {
                                 obj->SetSpeed(0.67);
-								//LogTrace("%f",obj->GetSpeed());
+								if(obj == &*Player()) ++mBonusCnt[5];
                         }
                         else if(typeid(*child) == typeid(BDrop))
                         {
                                 obj->SetBombCnt(-obj->GetBombCnt());
                                 obj->SetTimer();
+								if(obj == &*Player()) ++mBonusCnt[6];
                         }
                         child->RemoveFromParent();
                 }
@@ -339,6 +408,7 @@ void GameStage::StepOnBomb( Character* obj )
                                 int direction = obj->GetCurState();
                                 cast<Bomb>(child)->TriggerPush(direction,70.0); 
                                 obj->SetPushBonus(false);
+								if(obj == &*Player()) this->SetBonusCnt(4);
                         }
                         /*else
                         {
@@ -443,6 +513,13 @@ void GameStage::Update( float dt )
 
 	if(mCountdownTimer >= 0)
 	{
+		int cnt = cast<Sprite>(mBonusCntFont)->NumOfChild();
+		for(int i = 0;i<cnt;++i)
+		{
+			Ref<GameObject> f = cast<Sprite>(mBonusCntFont)->GetChild(i);
+			cast<Font>(f)->SetContent(intToString(mBonusCnt[i]));
+		}
+
 		cast<Font>(mCountdownTimerFont)->SetContent(timeToString(mCountdownTimer));
 		if(isDead[0] && isDead[1] && isDead[2] && (!isDead[3]))
 		{
@@ -500,7 +577,27 @@ void GameStage::CheckCharacterLife(int row,int col)
 			if(bBox.Row() == row && bBox.Col() == col)
 			{
 				child->RemoveFromParent();
+				child->GetParent()->AddChildAt(Ref<GameObject>(NULL),i);
+				LogTrace("npc %d is dead!\n",i);
 				isDead[i] = true;
+				/*cast<Sprite>(mHUD)->GetChild(i+4)->RemoveFromParent();
+				Ref<GameObject> newnpc;
+				switch(i)
+				{
+				case 0:
+					newnpc = Ref<GameObject>(new Image(DataManager::GetDataPath("Image","npc21","resource\\data.ini"),107,60));
+					newnpc->SetPos(1,220,0);
+					break;
+				case 1:
+					newnpc = Ref<GameObject>(new Image(DataManager::GetDataPath("Image","npc31","resource\\data.ini"),107,61));
+					newnpc->SetPos(694,140,0);
+					break;
+				case 2:
+					newnpc = Ref<GameObject>(new Image(DataManager::GetDataPath("Image","npc40","resource\\data.ini"),107,61));
+					newnpc->SetPos(694,222,0);
+					break;
+				}
+				cast<Sprite>(mHUD)->AddChildAt(newnpc,i+4);*/
 				//play effect
 			}
 		}
@@ -512,9 +609,25 @@ void GameStage::CheckCharacterLife(int row,int col)
 		Grid playerBox = player->GetBoundingBox();
 		if(playerBox.Row() == row && playerBox.Col() == col)
 		{
-			player->RemoveFromParent();
+			//player->RemoveFromParent();
 			//play effect
 			isDead[3] = true;
 		}
 	}
+}
+
+std::string GameStage::intToString( int cnt )
+{
+	string str;
+	char buf1[5];
+
+	itoa(cnt,buf1,10);
+	str = string(buf1);
+
+	return str;
+}
+
+void GameStage::SetBonusCnt( int bonusId )
+{
+	--mBonusCnt[bonusId];
 }

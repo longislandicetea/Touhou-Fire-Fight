@@ -43,7 +43,7 @@ bool ToFlee::IsTrue()
 	float speed = mCtrl->GetCharacter()->GetSpeed();
 	if(mCtrl->GetDangerGrid()->GetValue(col,row)<=3.0)//Grid::SideLen/2/speed
 	{
-		LogTrace("Flee\n");
+		//LogTrace("Flee\n");
 		return true;
 	}
 
@@ -63,7 +63,7 @@ bool ToSearchBonus::IsTrue()
 		return false;
 	if(mCtrl->getPathTo(NearestBonus).size() >7)//如果太远就不去
 		return false;
-	LogTrace("SearchBonus\n");
+	//LogTrace("SearchBonus\n");
 	return true;
 }
 
@@ -78,7 +78,7 @@ bool ToOpen::IsTrue()
 	{
 		if(!mCtrl->GetInterestGrid()->GetValuePositions(i).empty())
 		{
-			LogTrace("Open\n");
+			//LogTrace("Open\n");
 			return true;
 		}
 	}
@@ -103,7 +103,7 @@ bool ToDropBomb::IsTrue()
 			&& value>=mCtrl->GetInterestGrid()->GetValue(myPosition.col,myPosition.row-1))
 		{
 			return true;
-			LogTrace("DropBomb\n");
+			//LogTrace("DropBomb\n");
 		}
 	}
 	return false;
@@ -118,7 +118,7 @@ bool ToClearPath::IsTrue()
 {
 	if(mCtrl->MostInterestPos() != Pos(-1,-1))
 	{
-		LogTrace("ClearPath\n");
+		//LogTrace("ClearPath\n");
 		return true;
 	}
 	return false;

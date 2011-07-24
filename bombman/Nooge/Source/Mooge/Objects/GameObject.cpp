@@ -44,8 +44,10 @@ void GameObject::SetAlpha( float alpha )
 void GameObject::RemoveFromParent()
 {
 	if (mParent)
-		mParent->RemoveChild(
-		mParent->GetChild(this));
+	{
+		mParent->RemoveChild(mParent->GetChild(this));
+	}
+		//mParent->AddChildAt(Ref<GameObject>(NULL),)
 }
 
 GameObjectContainer* GameObject::GetParent()
