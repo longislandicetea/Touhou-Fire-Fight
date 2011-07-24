@@ -49,24 +49,20 @@ void MenuStage::HandleClickEvent(int x, int y)
 	if(x<700 && x>475 && y>316 && y<390)
 	{
 		App::Inst().AudioSys()->PlayEffectSound(1,"menubutton");
-		App::Inst().AudioSys()->Resume(1);
 		App::Inst().AudioSys()->Stop(0);
 		App::Inst().ChangeStage(2);
 	}
 	else if (x<637 && x>407 && y<457 && y>383)
 	{
 		App::Inst().AudioSys()->PlayEffectSound(1,"menubutton");
-		App::Inst().AudioSys()->Resume(1);
 	}
 	else if (x<787 && x>557 && y<523 && y>449)
 	{
 		App::Inst().AudioSys()->PlayEffectSound(1,"menubutton");
-		App::Inst().AudioSys()->Resume(1);
 	}
 	else if(x<735 && x>505 && y<593 && y>519)
 	{
 		App::Inst().AudioSys()->PlayEffectSound(1,"menubutton");
-		App::Inst().AudioSys()->Resume(1);
 	}
 }
 
@@ -94,17 +90,17 @@ void MenuStage::Update( float dt )
 	else if (mLastX<637 && mLastX>407 && mLastY<457 && mLastY>383)
 	{
 		App::Inst().AudioSys()->PlayEffectSound(1,"menubutton");
-		App::Inst().AudioSys()->Resume(1);
+		//App::Inst().AudioSys()->Resume(1);
 	}
 	else if (mLastX<787 && mLastX>557 && mLastY<523 && mLastY>449)
 	{
 		App::Inst().AudioSys()->PlayEffectSound(1,"menubutton");
-		App::Inst().AudioSys()->Resume(1);
+		//App::Inst().AudioSys()->Resume(1);
 	}
 	else if(mLastX<735 && mLastX>505 && mLastY<593 && mLastY>519)
 	{
 		App::Inst().AudioSys()->PlayEffectSound(1,"menubutton");
-		App::Inst().AudioSys()->Resume(1);
+		//App::Inst().AudioSys()->Resume(1);
 	} 
 	else 
 	{

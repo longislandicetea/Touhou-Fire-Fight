@@ -26,11 +26,6 @@ void Explosion::Draw(bool is3D)
 
 	Texture::Bind(mFlameTex);
 	glScalef(mParticleSize, mParticleSize, mParticleSize);
-	/*glBegin(GL_QUADS);
-	glTexCoord2f(0.0,0.0);glVertex3f(-1.0,1,0.0);
-	glTexCoord2f(0.0,1.0);glVertex3f(-1.0,-1.0,0.0);
-	glTexCoord2f(1.0,1.0);glVertex3f(1,0.-1,0.0);
-	glTexCoord2f(1.0,0.0);glVertex3f(1,1,0.0);*/
 
 	GLUquadricObj *quadric;
 	quadric = gluNewQuadric();
@@ -45,10 +40,10 @@ void Explosion::Draw(bool is3D)
 
 void Explosion::Update( float dt )
 {
-	mLife -= dt;
+	mLife -= dt*2;
 	if (mLife < 0) 
 	{
 		this->RemoveFromParent();
 	}
-	mParticleSize += dt * 10;
+	mParticleSize += dt * 20;
 }

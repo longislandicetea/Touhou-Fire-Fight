@@ -474,8 +474,8 @@ void Md2Object::Update( float dt )
 	if (mCurrFrame < startFrame)
 		mCurrFrame = startFrame;
 
-	if (mCurrFrame > endFrame)
-		mCurrFrame = startFrame;
+	/*if (mCurrFrame > endFrame)
+		mCurrFrame = startFrame;*/
 
 	// Compute current and next frames.
 	if (mInterp >= 1.0)
@@ -491,7 +491,7 @@ void Md2Object::Update( float dt )
 		if (mNextFrame >= endFrame)
 			mNextFrame = startFrame;
 	}
-	mInterp += dt;
+	mInterp += dt*100;
 }
 
 void Md2Object::Draw(bool is3D)
