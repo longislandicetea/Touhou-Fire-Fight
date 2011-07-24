@@ -54,17 +54,18 @@ void Bomb::Update(float dt)
 	}
 	else
 	{
+		//mInTrigState = true;
 		if(mOwner->GetCurState() == CharacterController::TRIGGER_BOMB ||mInTrigState)
 		{
 			mInTrigState = true;
 			this->SetAlpha(0.0);
-			if(mOwner->TrigBonusTimer()->End()>0.3)
-			{
+			//if(mOwner->TrigBonusTimer()->End()>0.3)
 				actWhenSteped();
-			}
+			
 			mOwner->SetTrigBonus(true);
+			if(mOwner == &*gs->Player()) gs->SetBonusCnt(3);
 		}
-	}		
+	}
 }
 
 void Bomb::explode()
