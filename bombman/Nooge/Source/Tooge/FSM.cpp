@@ -5,6 +5,7 @@ FSM::FSM(NPCController* ctrl, State* startState)//
 {
 	mCtrl = ctrl;
 	mCurrentState = startState;
+	startState->SetTimer(true);
 }
 
 int FSM::Update(float dt)

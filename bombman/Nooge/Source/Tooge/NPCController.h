@@ -13,6 +13,8 @@ class SearchBonusState;
 class OpenState;
 class ClearPathState;
 class DropBombState;
+class TriggerState;
+class AttackState;
 
 class Transition;
 class ToFlee;
@@ -21,6 +23,8 @@ class ToSearchBonus;
 class ToOpen;
 class ToDropBomb;
 class ToClearPath;
+class ToTrigger;
+class ToAttack;
 
 
 
@@ -86,5 +90,8 @@ enum AIGridState
 
 	State* trigger;
 	Transition* transToTrigger;
+
+	State* attack;
+	Transition* transToAttack;
 };
 

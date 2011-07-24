@@ -70,3 +70,10 @@ public:
 	ToTrigger(NPCController* ctrl, State* next);
 	virtual bool IsTrue();
 };
+
+class ToAttack: public Transition
+{
+public:
+	ToAttack(NPCController* ctrl, State* next);
+	virtual bool IsTrue();
+};

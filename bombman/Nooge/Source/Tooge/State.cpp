@@ -10,15 +10,22 @@ State* State::Update(float dt)
 {
 	vector<Transition*>::iterator it = mTransitionList.begin();
 	vector<Transition*>::iterator end = mTransitionList.end();
+
+	for(int i = 0;i<2;++i,++it)
+	if((*it)->IsTrue())
+	{
+		return (*it)->GetNextState();
+	}
+
 	for (; it !=end ; ++it)
 		if ((*it)->IsTrue())
 		{
-			if(this != (*it)->GetNextState())
+			if(this != (*it)->GetNextState() && this->mTimer->IsOpen() && this->mTimer->End()>=2.0)
 			{
 				SetTimer(false);
 				(*it)->GetNextState()->SetTimer(true);
+				return (*it) ->GetNextState();
 			}
-			return (*it) ->GetNextState();
 		}
 	return this;
 }
@@ -101,24 +108,20 @@ int FleeState::GetAction()
 	//flee time too long! waiting for death!
 	if(mTimer->End()>1.0)
 	{ 
-		//LogTrace(" IDLE\n");
 		return IDLE;
 	}
 
 	//int t = rand()%safe.size();
 	if(safe.row == myPosition.row+dirY[0] && safe.col== myPosition.col+dirX[0]  )//can NPC pass the next 格子
 	{
-		//LogTrace(" LEFT\n");
 		return MOVE_LEFT;
 	}
 	else if(safe.row == myPosition.row+dirY[1] && safe.col== myPosition.col+dirX[1] )
 	{
-		//LogTrace(" DOWN\n");
 		return MOVE_DOWN;
 	}
 	else if(safe.row == myPosition.row+dirY[2] && safe.col== myPosition.col+dirX[2] )
 	{
-		//LogTrace(" RIGHT\n");
 		return MOVE_RIGHT;
 	}
 	else if(safe.row == myPosition.row+dirY[3] && safe.col== myPosition.col+dirX[3])
@@ -198,27 +201,22 @@ int ClearPathState::GetAction()
 	float can= Grid::SideLen/mCtrl->GetCharacter()->GetSpeed();//若有危险 能否通过
 	if(path.empty() ) //||(!path.empty()&& mCtrl->GetDangerGrid()->GetValue(path.top().col,path.top().row)<=can)
 	{
-		//LogTrace(" IDLE\n");
 		return IDLE;
 	}
 	else if(myPosition.GetCol()<path.top().GetCol() )
 	{
-		//LogTrace(" RIGHT\n");
 		return MOVE_RIGHT;
 	}
 	else if(myPosition.GetCol()>path.top().GetCol() )
 	{
-		//LogTrace(" LEFT\n");
 		return MOVE_LEFT;
 	}
 	else if(myPosition.GetRow()>path.top().GetRow() )
 	{
-		//LogTrace(" UP\n");
 		return MOVE_UP;
 	}
 	else if(myPosition.GetRow()<path.top().GetRow())
 	{
-		//LogTrace(" DOWN\n");
 		return MOVE_DOWN;
 	}
 	//LogTrace(" IDLE\n");
@@ -243,6 +241,48 @@ State(ctrl)
 
 int AttackState::GetAction()
 {
+	Pos enemyPos = mCtrl->NearestEnemyPos();
+	int power = mCtrl->GetCharacter()->GetPower();
+	Pos myPosition = Pos(mCtrl->GetCharacter()->GetBoundingBox().Col(),mCtrl->GetCharacter()->GetBoundingBox().Row());
+
+		int dx[4] = {-1,0,1,0};
+		int dy[4] = {0,1,0,-1};
+		
+	int dValid[4] = {1,1,1,1};
+	for(int i = 0;i<power;++i)
+	{
+		
+		for(int j = 0;j<4;++j)
+		{
+				if(dValid[j])
+				{
+					if(Pos(myPosition.col+dx[j],myPosition.row+dy[j]) == enemyPos)
+						return DROP_BOMB;
+				}
+		}
+	}
+
+	std::stack<Pos> path = mCtrl->getPathTo(enemyPos);
+	if(path.empty() ) //||(!path.empty()&& mCtrl->GetDangerGrid()->GetValue(path.top().col,path.top().row)<=can)
+	{
+		return IDLE;
+	}
+	else if(myPosition.GetCol()<path.top().GetCol() )
+	{
+		return MOVE_RIGHT;
+	}
+	else if(myPosition.GetCol()>path.top().GetCol() )
+	{
+		return MOVE_LEFT;
+	}
+	else if(myPosition.GetRow()>path.top().GetRow() )
+	{
+		return MOVE_UP;
+	}
+	else if(myPosition.GetRow()<path.top().GetRow())
+	{
+		return MOVE_DOWN;
+	}
 	return IDLE;
 }
 	
