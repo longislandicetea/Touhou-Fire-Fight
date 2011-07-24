@@ -21,8 +21,8 @@ int PlayerController::Update( Character* character,float dt )
 	else if(inputSys->IsKeyDown(VK_SPACE))
 		mIsSpacePressed = true;
 	else if(inputSys->IsKeyDown(VK_SHIFT))
-		//return CharacterController::TRIGGER_BOMB;
 		mIsShiftPressed = true;
+	//else if(inputSys->IsKeyDown(VK_ESCAPE))
 	if(!inputSys->IsKeyDown(VK_SPACE) && mIsSpacePressed)
 	{
 		mIsSpacePressed = false;

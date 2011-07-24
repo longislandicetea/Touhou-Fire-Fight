@@ -460,6 +460,11 @@ void GameStage::Update( float dt )
 		App::Inst().AudioSys()->Stop(0);
 		App::Inst().ChangeStage(8);
 	}
+	if(App::Inst().InputSys()->IsKeyDown(VK_ESCAPE))
+	{
+		App::Inst().AudioSys()->Stop(0);
+		App::Inst().ChangeStage(0);
+	}
 }
 
 std::string GameStage::timeToString( int restTime )
