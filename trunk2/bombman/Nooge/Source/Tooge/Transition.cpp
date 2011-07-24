@@ -120,3 +120,16 @@ bool ToClearPath::IsTrue()
 	}
 	return false;
 }
+
+//////////////////////////////////////////////////ToTrigger////////////////////////////////
+ToTrigger::ToTrigger(NPCController* ctrl, State* next):
+Transition(ctrl,next)
+{}
+
+bool ToTrigger::IsTrue()
+{
+	if(mCtrl->IsTrigChance() 
+		|| (mCtrl->GetCharacter()->HasTrigBonus() && mCtrl->GetCharacter()->TrigBonusTimer()->End() > 5.0))
+		return true;
+	return false;
+}

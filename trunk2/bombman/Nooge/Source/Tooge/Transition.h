@@ -63,3 +63,10 @@ public:
 	ToClearPath(NPCController* ctrl, State* next);
 	virtual bool IsTrue();
 };
+
+class ToTrigger: public Transition
+{
+public:
+	ToTrigger(NPCController* ctrl, State* next);
+	virtual bool IsTrue();
+};

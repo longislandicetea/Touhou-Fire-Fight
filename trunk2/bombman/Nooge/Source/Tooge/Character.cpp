@@ -192,6 +192,7 @@ int Character::GetCurState()
 void Character::SetTrigBonus( bool hasBonus )
 {
 	mHasTrigBonus = hasBonus;
+	mTrigTimer->Begin();
 }
 
 bool Character::HasTrigBonus()

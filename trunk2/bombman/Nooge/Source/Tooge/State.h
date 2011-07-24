@@ -74,3 +74,11 @@ public:
 	virtual ~DropBombState(){};
 	virtual int GetAction();
 };
+
+class TriggerState: public State
+{
+public:
+	TriggerState(NPCController* ctrl);
+	virtual ~TriggerState(){}
+	virtual int GetAction();
+};

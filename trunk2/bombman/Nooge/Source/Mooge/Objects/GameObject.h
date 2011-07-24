@@ -5,6 +5,8 @@
 #include "Grid.h"
 #include "Ref.h"
 
+
+class Pos;
 class GameObjectContainer;
 class GameObject
 {
@@ -24,6 +26,7 @@ public:
 	float GetRotateZ();
 	float GetAlpha();
 	virtual Grid GetBoundingBox();
+	//Pos GetBoundingPos();
 
 	void SetX(float x);
 	void SetY(float y);

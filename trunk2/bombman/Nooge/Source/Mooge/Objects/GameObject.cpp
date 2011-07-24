@@ -150,4 +150,11 @@ Grid GameObject::GetBoundingBox()
 	return Grid(mX-offset,mZ+offset,mX+offset,mZ-offset);
 }
 
+/*Pos GameObject::GetBoundingPos()
+{
+	Pos pos = Pos(GetBoundingBox().Col(),GetBoundingBox().Row());
+	return pos;
+}*/
+
+
 
