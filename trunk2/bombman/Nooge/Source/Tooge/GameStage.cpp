@@ -241,10 +241,12 @@ bool GameStage::CanPass( GameObject* obj )
 	for(int i = 0;i<cnt;++i)
 	{
 		Ref<GameObject> child = cast<Sprite>(mDwall)->GetChild(i);
+		if(!child.IsNull()){
 		Grid bBox = child->GetBoundingBox();
 		if(bBox.Intersect(box))
 		{
 			return false;
+		}
 		}
 	}
 	return true;
@@ -308,11 +310,13 @@ void GameStage::EatBonus( Character* obj )
 {
         Grid box = obj->GetBoundingBox();
         //int cnt = cast<Sprite>(mBonus)->NumOfChild();
+		if(!mBonus.IsNull()) {
         Sprite::ChildrenContainer bonus = cast<Sprite>(mBonus)->GetAllChildren();
         int cnt = bonus.size();
         for(int i = 0;i<cnt;++i)
         {
                 Ref<GameObject> child = bonus[i];
+				if(!child.IsNull()) {
                 Grid bBox = child->GetBoundingBox();
                 if(bBox.Intersect(box))
                 {
@@ -358,7 +362,9 @@ void GameStage::EatBonus( Character* obj )
                         }
                         child->RemoveFromParent();
                 }
+				}
         }
+		}
 }
 
 bool GameStage::HasUwall( int row,int col )
@@ -459,11 +465,13 @@ bool GameStage::HasDwall( int row,int col )
         for(int i = 0;i<cnt;++i)
         {
                 Ref<GameObject> child = cast<Sprite>(mDwall)->GetChild(i);
+				if(!child.IsNull()) {
                 int tRow = child->GetBoundingBox().Row();
                 int tCol = child->GetBoundingBox().Col();
 
                 if(row == tRow && col == tCol)
                         return true;
+				}
         }
         return false;
 }
@@ -517,7 +525,7 @@ void GameStage::Update( float dt )
 		for(int i = 0;i<cnt;++i)
 		{
 			Ref<GameObject> f = cast<Sprite>(mBonusCntFont)->GetChild(i);
-			cast<Font>(f)->SetContent(intToString(mBonusCnt[i]));
+			if(!f.IsNull()) cast<Font>(f)->SetContent(intToString(mBonusCnt[i]));
 		}
 
 		cast<Font>(mCountdownTimerFont)->SetContent(timeToString(mCountdownTimer));
@@ -573,6 +581,7 @@ void GameStage::CheckCharacterLife(int row,int col)
 		if(!isDead[i])
 		{
 			Ref<GameObject> child = cast<Sprite>(mNpc)->GetChild(i);
+			if(!child.IsNull()) {
 			Grid bBox = child->GetBoundingBox();
 			if(bBox.Row() == row && bBox.Col() == col)
 			{
@@ -580,7 +589,7 @@ void GameStage::CheckCharacterLife(int row,int col)
 				child->GetParent()->AddChildAt(Ref<GameObject>(NULL),i);
 				LogTrace("npc %d is dead!\n",i);
 				isDead[i] = true;
-				/*cast<Sprite>(mHUD)->GetChild(i+4)->RemoveFromParent();
+				cast<Sprite>(mHUD)->GetChild(i+3)->RemoveFromParent();
 				Ref<GameObject> newnpc;
 				switch(i)
 				{
@@ -593,12 +602,13 @@ void GameStage::CheckCharacterLife(int row,int col)
 					newnpc->SetPos(694,140,0);
 					break;
 				case 2:
-					newnpc = Ref<GameObject>(new Image(DataManager::GetDataPath("Image","npc40","resource\\data.ini"),107,61));
+					newnpc = Ref<GameObject>(new Image(DataManager::GetDataPath("Image","npc41","resource\\data.ini"),107,61));
 					newnpc->SetPos(694,222,0);
 					break;
 				}
-				cast<Sprite>(mHUD)->AddChildAt(newnpc,i+4);*/
+				cast<Sprite>(mHUD)->AddChildAt(newnpc,i+3);
 				//play effect
+			}
 			}
 		}
 	}
