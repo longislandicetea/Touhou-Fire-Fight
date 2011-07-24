@@ -45,23 +45,27 @@ void NPCController::initFSM()
 
 	//add transitions to states
 	flee->AddTransition(transToFlee);//notice prority
-	flee->AddTransition(transToSearchBonus);
-	//flee->AddTransition(transToOpen);
+	//flee->AddTransition(transToSearchBonus);
+	
+	flee->AddTransition(transToOpen);
 	flee->AddTransition(transToSilly);
 
 	searchBonus->AddTransition(transToFlee);
-	searchBonus->AddTransition(transToSearchBonus);
-	//searchBonus->AddTransition(transToOpen);
+	//searchBonus->AddTransition(transToSearchBonus);
+	
+	searchBonus->AddTransition(transToOpen);
 	searchBonus->AddTransition(transToSilly);
 
 	silly->AddTransition(transToFlee);
-	silly->AddTransition(transToSearchBonus);
-	//silly->AddTransition(transToOpen);
+	//silly->AddTransition(transToSearchBonus);
+	
+	silly->AddTransition(transToOpen);
 	silly->AddTransition(transToSilly);
 
 	open->AddTransition(transToFlee);
-	open->AddTransition(transToSearchBonus);
-	//open->AddTransition(transToOpen);
+	//open->AddTransition(transToSearchBonus);
+	
+	open->AddTransition(transToOpen);
 	open->AddTransition(transToSilly);
 
 	//fsm
@@ -154,7 +158,10 @@ void NPCController::computeFloodFill( int col,int row )
 		for(int i = 0;i<4;++i)
 		{
 			int nextX = pos.col + dirX[i]; int nextY = pos.row + dirY[i];
-			if (mFloodFillGrid->GetValue(nextX,nextY)!=-UWALL && mFloodFillGrid->GetValue(nextX,nextY)!=-DWALL && mFloodFillGrid->IsInside(nextX,nextY) )
+			if (mFloodFillGrid->GetValue(nextX,nextY)!=-UWALL 
+				&& mFloodFillGrid->GetValue(nextX,nextY)!=-DWALL 
+				&& mFloodFillGrid->IsInside(nextX,nextY) 
+				&& mDangerGrid->GetValue(nextX,nextY) >=3.0)//no danger
 			{
 				float nextValue = mFloodFillGrid->GetValue(pos.col,pos.row) +1;
 				if (nextValue< mFloodFillGrid->GetValue(nextX,nextY))
@@ -296,7 +303,7 @@ void NPCController::computeDwall(GameStage* gs,Character* character,float dt)
 		for(int i = 0;i<4;++i)
 		{
 			int value = mInterestGrid->GetValue(col+dx[i],row+dy[i]);
-			if(value!=-UWALL)
+			if(value!=-UWALL && value!=-DWALL)
 			{
 				mInterestGrid->SetValue(col+dx[i],row+dy[i],value+1);
 			}
@@ -325,7 +332,9 @@ void NPCController::computeBonus(GameStage*gs,Character*character,float dt)
 			{
 				int col = child->GetBoundingBox().Col();
 				int row = child->GetBoundingBox().Row();
-				//mInterestGrid->SetValue(col,row,5);
+
+				//interestGrid
+				mInterestGrid->SetValue(col,row,4);
 
 				//get NearestBonusPos
 				int value = mFloodFillGrid->GetValue(col,row);
