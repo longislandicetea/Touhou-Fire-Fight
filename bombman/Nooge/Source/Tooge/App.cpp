@@ -250,21 +250,21 @@ Ref<Stage> App::createStage( int stageId )
 		return SelectStage::LoadStage();break;
 	case 2:
 		{
-			Ref<GameObject> map = Map::Load(DataManager::GetDataPath("Map","map","resource\\data.ini"));
+			Ref<GameObject> map = Map::Load(DataManager::GetDataPath("Map","level1","resource\\data.ini"),1);
 			Ref<Stage> gameStage(new GameStage(map,1));
 			return gameStage;
 			break;
 		}
 	case 3:
 		{
-			Ref<GameObject> map = Map::Load(DataManager::GetDataPath("Map","map","resource\\data.ini"));
+			Ref<GameObject> map = Map::Load(DataManager::GetDataPath("Map","level2","resource\\data.ini"),2);
 			Ref<Stage> gameStage(new GameStage(map,2));
 			return gameStage;
 			break;
 		}
 	case 4 :
 		{
-			Ref<GameObject> map = Map::Load(DataManager::GetDataPath("Map","map","resource\\data.ini"));
+			Ref<GameObject> map = Map::Load(DataManager::GetDataPath("Map","level3","resource\\data.ini"),3);
 			Ref<Stage> gameStage(new GameStage(map,3));
 			return gameStage;
 			break;
