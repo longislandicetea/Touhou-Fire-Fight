@@ -35,19 +35,23 @@ void NPCController::initFSM()
 	silly = new SillyState(this);
 	searchBonus = new SearchBonusState(this);
 	open = new OpenState(this);
-
+	dropBomb = new DropBombState(this);
+	clearPath = new ClearPathState(this);
 
 	//transitions
 	transToFlee = new ToFlee(this,flee);
 	transToSilly = new ToSilly(this,silly);
 	transToSearchBonus = new ToSearchBonus(this,searchBonus);
 	transToOpen = new ToOpen(this,open);
+	transToClearPath = new ToClearPath(this,clearPath);
+	transToDropBomb = new ToDropBomb(this,dropBomb);
 
 	//add transitions to states
 	flee->AddTransition(transToFlee);//notice prority
 	//flee->AddTransition(transToSearchBonus);
-	
-	flee->AddTransition(transToOpen);
+	flee->AddTransition(transToDropBomb);
+	flee->AddTransition(transToClearPath);
+	//flee->AddTransition(transToOpen);
 	flee->AddTransition(transToSilly);
 
 	searchBonus->AddTransition(transToFlee);
@@ -58,22 +62,29 @@ void NPCController::initFSM()
 
 	silly->AddTransition(transToFlee);
 	//silly->AddTransition(transToSearchBonus);
-	
-	silly->AddTransition(transToOpen);
+	flee->AddTransition(transToDropBomb);
+	flee->AddTransition(transToClearPath);
+	//silly->AddTransition(transToOpen);
 	silly->AddTransition(transToSilly);
 
-	open->AddTransition(transToFlee);
-	//open->AddTransition(transToSearchBonus);
-	
-	open->AddTransition(transToOpen);
-	open->AddTransition(transToSilly);
+	clearPath->AddTransition(transToFlee);
+	clearPath->AddTransition(transToDropBomb);
+	clearPath->AddTransition(transToClearPath);
+	clearPath->AddTransition(transToSilly);
+
+	dropBomb->AddTransition(transToFlee);
+	dropBomb->AddTransition(transToDropBomb);
+	dropBomb->AddTransition(transToClearPath);
+	dropBomb->AddTransition(transToSilly);
 
 	//fsm
 	mFsm = new FSM(this,silly);
 	mFsm->AddState(flee);
-	mFsm->AddState(searchBonus);
+	//mFsm->AddState(searchBonus);
 	mFsm->AddState(silly);
-	mFsm->AddState(open);
+	mFsm->AddState(dropBomb);
+	mFsm->AddState(clearPath);
+	//mFsm->AddState(open);
 
 }
 
@@ -87,12 +98,12 @@ int NPCController::Update(Character *character, float dt)
 	mDangerGrid->Reset(100);
 	mInterestGrid->Reset(0);
 	mNearestBonusPos = Pos(-1,-1);
+	mMostInterest = Pos(-1,-1);
 
 	computeWalls();
 
-	computeFloodFill(character);
-
 	computePerception(character,dt);
+	computeFloodFill(character);
 	return  mFsm->Update(dt);
 
 	return 0;
@@ -168,10 +179,23 @@ void NPCController::computeFloodFill( int col,int row )
 				{
 					mFloodFillGrid->SetValue(nextX, nextY, nextValue);
 					myQueue.push(Pos(nextX,nextY));
+					if(mInterestGrid->GetValue(nextX,nextY)>0 )
+					{
+						if(mMostInterest == Pos(-1,-1))
+							mMostInterest = Pos(nextX,nextY);
+						else if(nextValue<=mFloodFillGrid->GetValue(mMostInterest)
+							&& nextValue>mInterestGrid->GetValue(mMostInterest))
+						{
+							mMostInterest = Pos(nextX,nextY);
+						}
+						
+					}
 				}
 			}
 		}
 	}
+	if(mMostInterest != Pos(-1,-1) && mFloodFillGrid->GetValue(mMostInterest)+5>= mFloodFillGrid->GetValue(mNearestBonusPos))
+		mMostInterest = mNearestBonusPos;
 }
 stack<Pos> NPCController::getPathTo(int col,int row)
 {
@@ -221,6 +245,12 @@ std::stack<Pos> NPCController::getPathTo(Pos pos)
 	std::stack<Pos> path = getPathTo(pos.col,pos.row);
 	return path;
 }
+
+Pos NPCController::MostInterestPos()
+{
+	return mMostInterest;
+}
+
 void NPCController::computeDangerGrid(GameStage* gs, Character* character, float dt)
 {
 	const int WIDTH = mDangerGrid->GetWidth();

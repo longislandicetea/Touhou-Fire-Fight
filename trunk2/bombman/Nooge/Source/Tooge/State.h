@@ -31,7 +31,7 @@ protected:
 class ClearPathState:public State
 {
 public:
-	ClearPathState();
+	ClearPathState(NPCController* ctrl);
 	int GetAction();
 };
 
@@ -64,5 +64,13 @@ class OpenState: public State
 public:
 	OpenState(NPCController* ctrl);
 	virtual ~OpenState(){};
+	virtual int GetAction();
+};
+
+class DropBombState: public State
+{
+public:
+	DropBombState(NPCController* ctrl);
+	virtual ~DropBombState(){};
 	virtual int GetAction();
 };
