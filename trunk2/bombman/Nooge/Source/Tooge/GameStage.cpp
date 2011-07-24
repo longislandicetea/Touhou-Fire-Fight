@@ -267,7 +267,7 @@ void GameStage::EatBonus( Character* obj )
                         }
                         else if(typeid(*child) == typeid(BFaster))
                         {
-                                obj->SetSpeed(1.5);
+                                obj->SetSpeed(1.1);
                         }
                         else if(typeid(*child) == typeid(BTrigger))
                         {

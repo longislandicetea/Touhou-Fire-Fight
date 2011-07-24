@@ -4,7 +4,7 @@
 #include"FSM.h"
 #include"NPCController.h"
 #include<vector>
-using namespace std;
+//using namespace std;
 
 //declaration of class
 class State;
@@ -21,7 +21,7 @@ public:
 	State* Update(float dt);
 	virtual int GetAction() = 0;
 protected:
-	vector<Transition*> mTransitionList;
+	std::vector<Transition*> mTransitionList;
 	FSM* mOwner;
 
 	NPCController* mCtrl;

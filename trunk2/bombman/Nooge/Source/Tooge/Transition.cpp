@@ -94,10 +94,13 @@ bool ToDropBomb::IsTrue()
 {
 	if(true )
 	{
-		int row = mCtrl->GetCharacter()->GetBoundingBox().Row();
-		int col = mCtrl->GetCharacter()->GetBoundingBox().Col();
-		float value = mCtrl->GetInterestGrid()->GetValue(col,row);
-		if(value>0 && value <=3)
+		Pos myPosition = Pos(mCtrl->GetCharacter()->GetBoundingBox().Col(),mCtrl->GetCharacter()->GetBoundingBox().Row());
+		float value = mCtrl->GetInterestGrid()->GetValue(myPosition);
+		if(value>0 && value <=3
+			&& value>=mCtrl->GetInterestGrid()->GetValue(myPosition.col+1,myPosition.row)
+			&& value>=mCtrl->GetInterestGrid()->GetValue(myPosition.col-1,myPosition.row)
+			&& value>=mCtrl->GetInterestGrid()->GetValue(myPosition.col,myPosition.row+1)
+			&& value>=mCtrl->GetInterestGrid()->GetValue(myPosition.col,myPosition.row-1))
 		{
 			return true;
 			LogTrace("DropBomb\n");
