@@ -38,8 +38,10 @@ public:
 	//for AI
 	Pos NearestBonusPos();
 	Pos MostInterestPos();
+	Pos NearestEnemyPos();
 	std::stack<Pos> getPathTo(int col,int row);
 	std::stack<Pos> getPathTo(Pos pos);
+	bool IsTrigChance();
 
 private:
 enum AIGridState
@@ -53,6 +55,8 @@ enum AIGridState
 	AIMap* mFloodFillGrid;
 	Pos mNearestBonusPos;//the position of the nearest bonus
 	Pos mMostInterest;
+	Pos mNearestEnemyPos;
+	bool mIsTrigChance;
 	void computeFloodFill(Character *character);
 	void computeFloodFill(int col,int row);
 	
@@ -61,11 +65,13 @@ enum AIGridState
 	void computeInterestGrid(GameStage*gs,Character* character,float dt);
 	void computeBonus(GameStage*gs,Character*character,float dt);
 	void computeDwall(GameStage* gs,Character* character,float dt);
+	void computeEnemy(GameStage* gs, Character* character, float dt);
 
 	void computeWalls();
 	void initFSM();
 	
 	FSM* mFsm;
+
 	State* flee;
 	Transition* transToFlee;
 	
@@ -83,5 +89,8 @@ enum AIGridState
 
 	State* clearPath;
 	Transition* transToClearPath;
+
+	State* trigger;
+	Transition* transToTrigger;
 };
 

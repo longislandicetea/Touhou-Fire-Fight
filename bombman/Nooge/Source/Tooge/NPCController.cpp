@@ -21,7 +21,7 @@ NPCController::NPCController()
 	mDangerGrid = new AIMap(100);
 	mFloodFillGrid  = new AIMap(100);
 	mInterestGrid = new AIMap(0);
-	mNearestBonusPos = Pos(-1,-1);//init the pos-----no bonus
+
 
 	initFSM();
 
@@ -37,6 +37,7 @@ void NPCController::initFSM()
 	open = new OpenState(this);
 	dropBomb = new DropBombState(this);
 	clearPath = new ClearPathState(this);
+	trigger = new TriggerState(this);
 
 	//transitions
 	transToFlee = new ToFlee(this,flee);
@@ -45,34 +46,29 @@ void NPCController::initFSM()
 	transToOpen = new ToOpen(this,open);
 	transToClearPath = new ToClearPath(this,clearPath);
 	transToDropBomb = new ToDropBomb(this,dropBomb);
+	transToTrigger = new ToTrigger(this,trigger);
 
 	//add transitions to states
 	flee->AddTransition(transToFlee);//notice prority
-	//flee->AddTransition(transToSearchBonus);
+	flee->AddTransition(transToTrigger);
 	flee->AddTransition(transToDropBomb);
 	flee->AddTransition(transToClearPath);
-	//flee->AddTransition(transToOpen);
 	flee->AddTransition(transToSilly);
 
-	searchBonus->AddTransition(transToFlee);
-	//searchBonus->AddTransition(transToSearchBonus);
-	
-	searchBonus->AddTransition(transToOpen);
-	searchBonus->AddTransition(transToSilly);
-
 	silly->AddTransition(transToFlee);
-	//silly->AddTransition(transToSearchBonus);
+	silly->AddTransition(transToTrigger);
 	silly->AddTransition(transToDropBomb);
 	silly->AddTransition(transToClearPath);
-	//silly->AddTransition(transToOpen);
 	silly->AddTransition(transToSilly);
 
 	clearPath->AddTransition(transToFlee);
+	clearPath->AddTransition(transToTrigger);
 	clearPath->AddTransition(transToDropBomb);
 	clearPath->AddTransition(transToClearPath);
 	clearPath->AddTransition(transToSilly);
 
 	dropBomb->AddTransition(transToFlee);
+	dropBomb->AddTransition(transToTrigger);
 	dropBomb->AddTransition(transToDropBomb);
 	dropBomb->AddTransition(transToClearPath);
 	dropBomb->AddTransition(transToSilly);
@@ -80,11 +76,10 @@ void NPCController::initFSM()
 	//fsm
 	mFsm = new FSM(this,silly);
 	mFsm->AddState(flee);
-	//mFsm->AddState(searchBonus);
+	mFsm->AddState(trigger);
 	mFsm->AddState(silly);
 	mFsm->AddState(dropBomb);
 	mFsm->AddState(clearPath);
-	//mFsm->AddState(open);
 
 }
 
@@ -92,6 +87,7 @@ int NPCController::Update(Character *character, float dt)
 {
 	mOwner = character;
 	//return rand() %4;
+	GameStage* gs = (GameStage*)App::Inst().CurrentStage();
 
 	//reset AIMaps
 	mFloodFillGrid->Reset(100);
@@ -99,16 +95,19 @@ int NPCController::Update(Character *character, float dt)
 	mInterestGrid->Reset(0);
 	mNearestBonusPos = Pos(-1,-1);
 	mMostInterest = Pos(-1,-1);
+	mNearestEnemyPos = Pos(-1,-1);
+	mIsTrigChance = false;
 
 	computeWalls();
 
 	computePerception(character,dt);
 	computeFloodFill(character);
+	computeEnemy(gs,character,dt);
+
 	return  mFsm->Update(dt);
 
 	return 0;
 }
-
 void NPCController::computeWalls()
 {
 	GameStage* gs = (GameStage*)App::Inst().CurrentStage();
@@ -188,17 +187,17 @@ void NPCController::computeFloodFill( int col,int row )
 						{
 							mMostInterest = Pos(nextX,nextY);
 						}
-						
+
 					}
 				}
 			}
 		}
 	}
-	if(mMostInterest != Pos(-1,-1) 
+	if(  mMostInterest != Pos(-1,-1) 
 		&& mNearestBonusPos != Pos(-1,-1)
-		&& ((mFloodFillGrid->GetValue(mMostInterest)+5 )>= mFloodFillGrid->GetValue(mNearestBonusPos)))
+		&& ((mFloodFillGrid->GetValue(mMostInterest)+3 )>= mFloodFillGrid->GetValue(mNearestBonusPos)))
 		mMostInterest = mNearestBonusPos;
-	LogTrace("MostInterestPos: %d  %d\n",mMostInterest.col,mMostInterest.row);
+	//LogTrace("MostInterestPos: %d  %d\n",mMostInterest.col,mMostInterest.row);
 }
 stack<Pos> NPCController::getPathTo(int col,int row)
 {
@@ -240,18 +239,56 @@ void NPCController::computePerception(Character* character, float dt)
 
 	computeDangerGrid(gs,character,dt);
 	computeInterestGrid(gs,character,dt);
+}
 
+void NPCController::computeEnemy(GameStage* gs, Character* character, float dt)
+{
+	GameObjectContainer* npc = cast<GameObjectContainer>(gs->GetChild(NPC));
+	GameObjectContainer* player = cast<GameObjectContainer>(gs->GetChild(PLAYER));
+	vector<Pos> enemyPos;
 
+	//add player
+	GameObject* play = cast<GameObject>(player->GetChild(0));
+	mNearestEnemyPos = Pos(play->GetBoundingBox().Col(),play->GetBoundingBox().Row());
+	enemyPos.push_back(mNearestEnemyPos);
+
+	//compare npcs     Is it necessary???
+	for(int i = 0;i<npc->NumOfChild();++i)
+	{
+		GameObject * child = cast<GameObject>(npc->GetChild(i));
+		if(child != character)
+		{
+			Pos pos = Pos(child->GetBoundingBox().Col(),child->GetBoundingBox().Row());
+			enemyPos.push_back(pos);
+			if(mFloodFillGrid->GetValue(mNearestEnemyPos) > mFloodFillGrid->GetValue(pos))
+			{
+				mNearestEnemyPos = Pos(pos);
+			}
+		}
+	}
+
+	if(character->HasTrigBonus() && mDangerGrid->GetValue(character->GetBoundingBox().Col(),character->GetBoundingBox().Row())!=-5)
+	{
+		for(int i = 0;i<enemyPos.size();++i)
+		{
+			if(mDangerGrid->GetValue(enemyPos[i]) == -5)
+				mIsTrigChance = true;
+		}
+	}
 }
 std::stack<Pos> NPCController::getPathTo(Pos pos)
 {
 	std::stack<Pos> path = getPathTo(pos.col,pos.row);
 	return path;
 }
-
 Pos NPCController::MostInterestPos()
 {
 	return mMostInterest;
+}
+
+Pos NPCController::NearestEnemyPos()
+{
+	return mNearestEnemyPos;
 }
 
 void NPCController::computeDangerGrid(GameStage* gs, Character* character, float dt)
@@ -278,34 +315,31 @@ void NPCController::computeDangerGrid(GameStage* gs, Character* character, float
 			double remain;
 
 			//trigger
-			if(b->IsInTriggerState() && character == b->GetOwner())         //trigger bomb is mine~
+			if(b->IsInTriggerState() && character == b->GetOwner())
 			{
-				continue;
+				remain = -5;
 			}
+			else if(b->IsInTriggerState() && character != b->GetOwner())   //trigger bomb is not mine!
+				remain = 0;
 			else
+				remain = 3.0-b->GetTimer()->Last();   //not trigger bomb
+
+
+			int dValid[4] = {1,1,1,1};
+			for(int j = 0;j<4;++j)
 			{
-				if(b->IsInTriggerState() && character != b->GetOwner())   //trigger bomb is not mine!
-					remain = 0;
-				else
-					remain = 3.0-b->GetTimer()->Last();   //not trigger bomb
-
-
-				int dValid[4] = {1,1,1,1};
-				for(int j = 0;j<4;++j)
+				if(dValid[j])
 				{
-					if(dValid[j])
+					int nRow = row + i*dx[j];
+					int nCol = col + i*dy[j];
+					float rowValue = mDangerGrid->GetValue(nCol,nRow);
+					if(rowValue != -UWALL)
 					{
-						int nRow = row + i*dx[j];
-						int nCol = col + i*dy[j];
-						float rowValue = mDangerGrid->GetValue(nCol,nRow);
-						if(rowValue != -UWALL)
-						{
-							if(rowValue!=-DWALL && remain<rowValue)
-								mDangerGrid->SetValue(nCol,nRow,remain);
-						}
-						else
-							dValid[j] = 0;
+						if(rowValue!=-DWALL && remain<rowValue)
+							mDangerGrid->SetValue(nCol,nRow,remain);
 					}
+					else
+						dValid[j] = 0;
 				}
 			}
 		}
@@ -352,7 +386,7 @@ void NPCController::computeBonus(GameStage*gs,Character*character,float dt)
 	for(int t = 0;t<nbonus;++t)
 	{
 		Bonus* child = cast<Bonus>(bonus->GetChild(t));
-		if(child->GetTimer()->End()>1.0)//time for NPCs to detect the bonus
+		if(child->GetTimer()->End()>1.5)//time for NPCs to detect the bonus
 		{
 			if(typeid(*child) == typeid(BFlamePlus) || typeid(*child) == typeid(BBombPlus)
 				|| typeid(*child) == typeid(BFaster)
@@ -407,11 +441,18 @@ NPCController::~NPCController()
 	delete transToClearPath;
 	delete dropBomb;
 	delete transToDropBomb;
+	delete trigger;
+	delete transToTrigger;
 }
 
 Pos NPCController::NearestBonusPos()
 {
 	return mNearestBonusPos;
+}
+
+bool NPCController::IsTrigChance()
+{
+	return mIsTrigChance;
 }
 
 
