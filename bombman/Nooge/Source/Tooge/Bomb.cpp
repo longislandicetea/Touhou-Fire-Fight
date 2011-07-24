@@ -158,6 +158,7 @@ void Bomb::actWhenSteped()
 		Bonus::CreateBonus(mSurroundDwall[randId]->CenterX(),mSurroundDwall[randId]->CenterY());
 	}
 	this->RemoveFromParent();
+	//this->GetParent()->AddChildAt()
 }
 
 int Bomb::GetPower()

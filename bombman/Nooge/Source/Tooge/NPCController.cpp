@@ -123,17 +123,20 @@ void NPCController::computeWalls()
 
 	//set DWALL
 	GameObjectContainer* Dwall = cast<GameObjectContainer>(gs->GetChild(DWALL));
+	if(Dwall != NULL){
 	int DwallNum = Dwall->NumOfChild();
 	for(int i = 0;i<DwallNum;++i)
 	{
+		if(!Dwall->GetChild(i).IsNull()) {
 		int row = Dwall->GetChild(i)->GetBoundingBox().Row();
 		int col = Dwall->GetChild(i)->GetBoundingBox().Col();
 
 		//set Dwall Value
 		mFloodFillGrid->SetValue(col,row,-DWALL);
 		mDangerGrid->SetValue(col,row,-DWALL);
-		mInterestGrid->SetValue(col,row,-DWALL);
+		mInterestGrid->SetValue(col,row,-DWALL);}
 
+	}
 	}
 }
 void NPCController::computeFloodFill(Character* character)
@@ -244,11 +247,12 @@ void NPCController::computeEnemy(GameStage* gs, Character* character, float dt)
 	std::vector<Pos> enemyPos;
 
 	//add player
-	GameObject* play = cast<GameObject>(player->GetChild(0));
+	if(player != NULL) {GameObject* play = cast<GameObject>(player->GetChild(0));
 	mNearestEnemyPos = Pos(play->GetBoundingBox().Col(),play->GetBoundingBox().Row());
-	enemyPos.push_back(mNearestEnemyPos);
+	enemyPos.push_back(mNearestEnemyPos);}
 
 	//compare npcs     Is it necessary???
+	if(npc!=NULL) {
 	for(int i = 0;i<npc->NumOfChild();++i)
 	{
 		GameObject * child = cast<GameObject>(npc->GetChild(i));
@@ -263,6 +267,7 @@ void NPCController::computeEnemy(GameStage* gs, Character* character, float dt)
 			}
 		}
 		}
+	}
 	}
 
 	if(character->HasTrigBonus() && mDangerGrid->GetValue(character->GetBoundingBox().Col(),character->GetBoundingBox().Row())!=-5)
@@ -359,10 +364,12 @@ void NPCController::computeDwall(GameStage* gs,Character* character,float dt)
 	const int dx[4] = {-1,0,1,0};
 	const int dy[4] = {0,1,0,-1};
 	GameObjectContainer* dwall = cast<GameObjectContainer>(gs->GetChild(DWALL));
+	if(dwall!= NULL) {
 	int ndwall = dwall->NumOfChild();
 	for(int t = 0;t<ndwall;++t)
 	{
 		Ref<GameObject> child = dwall->GetChild(t);
+		if(!child.IsNull()) {
 		int col = child->GetBoundingBox().Col();
 		int row = child->GetBoundingBox().Row();
 		for(int i = 0;i<4;++i)
@@ -373,17 +380,21 @@ void NPCController::computeDwall(GameStage* gs,Character* character,float dt)
 				mInterestGrid->SetValue(col+dx[i],row+dy[i],value+1);
 			}
 		}
+		}
+	}
 	}
 }
 
 void NPCController::computeBonus(GameStage*gs,Character*character,float dt)
 {
 	GameObjectContainer* bonus = cast<GameObjectContainer>(gs->GetChild(BONUS));
+	if(bonus!=NULL) {
 	int nbonus = bonus->NumOfChild();
 
 	for(int t = 0;t<nbonus;++t)
 	{
 		Bonus* child = cast<Bonus>(bonus->GetChild(t));
+		if(child != NULL) {
 		if(child->GetTimer()->End()>1.5)//time for NPCs to detect the bonus
 		{
 			if(typeid(*child) == typeid(BFlamePlus) || typeid(*child) == typeid(BBombPlus)
@@ -416,6 +427,8 @@ void NPCController::computeBonus(GameStage*gs,Character*character,float dt)
 				mInterestGrid->SetValue(child->GetBoundingBox().Col(),child->GetBoundingBox().Row(),-5);
 			}
 		}
+		}
+	}
 	}
 }
 
