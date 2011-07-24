@@ -54,6 +54,7 @@ void NPCController::initFSM()
 	flee->AddTransition(transToClearPath);
 	flee->AddTransition(transToSilly);
 
+	silly->AddTransition(transToFlee);
 	trigger->AddTransition(transToFlee);
 	trigger->AddTransition(transToTrigger);
 	//trigger->AddTransition(transToAttack);

@@ -42,28 +42,28 @@ void Character::doAction( int currentAction, float dt )
 		up(dt*mSpeed);
 		if(mLastAction == CharacterController::IDLE)
 			cast<Md2Object>(mModel)->setAnimation("RUN");
-		LogTrace(" UP  %d %d\n",GetBoundingBox().Col(),GetBoundingBox().Row());
+		//LogTrace(" UP  %d %d\n",GetBoundingBox().Col(),GetBoundingBox().Row());
 		break;
 	case CharacterController::MOVE_DOWN:
 		SetCol();
 		down(dt*mSpeed);
 		if(mLastAction == CharacterController::IDLE)
 			cast<Md2Object>(mModel)->setAnimation("RUN");
-		LogTrace(" DOWN  %d %d\n",GetBoundingBox().Col(),GetBoundingBox().Row());
+		//LogTrace(" DOWN  %d %d\n",GetBoundingBox().Col(),GetBoundingBox().Row());
 		break;
 	case CharacterController::MOVE_LEFT:
 		SetRow();
 		left(dt*mSpeed);
 		if(mLastAction == CharacterController::IDLE)
 			cast<Md2Object>(mModel)->setAnimation("RUN");
-		LogTrace(" LEFT  %d %d\n",GetBoundingBox().Col(),GetBoundingBox().Row());
+		//LogTrace(" LEFT  %d %d\n",GetBoundingBox().Col(),GetBoundingBox().Row());
 		break;
 	case CharacterController::MOVE_RIGHT:
 		SetRow();
 		right(dt*mSpeed);
 		if(mLastAction == CharacterController::IDLE)
 			cast<Md2Object>(mModel)->setAnimation("RUN");
-		LogTrace(" RIGHT  %d %d\n",GetBoundingBox().Col(),GetBoundingBox().Row());
+		//LogTrace(" RIGHT  %d %d\n",GetBoundingBox().Col(),GetBoundingBox().Row());
 		break;
 	case CharacterController::DROP_BOMB:
 		if(mBombCnt>0) 

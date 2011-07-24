@@ -65,6 +65,7 @@ void MenuStage::HandleClickEvent(int x, int y)
 	else if(x<735 && x>505 && y<593 && y>519)
 	{
 		App::Inst().AudioSys()->PlayEffectSound(1,"menubutton");
+		exit(0);
 	}
 }
 

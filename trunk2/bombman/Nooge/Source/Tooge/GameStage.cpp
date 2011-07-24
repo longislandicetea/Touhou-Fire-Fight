@@ -529,7 +529,7 @@ void GameStage::Update( float dt )
 		}
 
 		cast<Font>(mCountdownTimerFont)->SetContent(timeToString(mCountdownTimer));
-		if(isDead[0] && isDead[1] && isDead[2] && (!isDead[3]))
+		if(cast<Sprite>(mNpc)->NumOfChild() == 0 && (!isDead[3]))
 		{
 			App::Inst().AudioSys()->Stop(0);
 			App::Inst().ChangeStage(7);
@@ -575,20 +575,20 @@ std::string GameStage::timeToString( int restTime )
 
 void GameStage::CheckCharacterLife(int row,int col)
 {
-	int cnt = cast<Sprite>(mNpc)->NumOfChild();
+	//int cnt = cast<Sprite>(mNpc)->NumOfChild();
+	Sprite::ChildrenContainer npcs = cast<Sprite>(mNpc)->GetAllChildren();
+	int cnt = npcs.size();
 	for(int i = 0;i<cnt;++i)
 	{
-		if(!isDead[i])
-		{
-			Ref<GameObject> child = cast<Sprite>(mNpc)->GetChild(i);
-			if(!child.IsNull()) {
+		/*if(!isDead[i])
+		{*/
+			Ref<GameObject> child = npcs[i];
 			Grid bBox = child->GetBoundingBox();
 			if(bBox.Row() == row && bBox.Col() == col)
 			{
 				child->RemoveFromParent();
-				child->GetParent()->AddChildAt(Ref<GameObject>(NULL),i);
 				LogTrace("npc %d is dead!\n",i);
-				isDead[i] = true;
+				//isDead[i] = true;
 				cast<Sprite>(mHUD)->GetChild(i+3)->RemoveFromParent();
 				Ref<GameObject> newnpc;
 				switch(i)
@@ -609,8 +609,6 @@ void GameStage::CheckCharacterLife(int row,int col)
 				cast<Sprite>(mHUD)->AddChildAt(newnpc,i+3);
 				//play effect
 			}
-			}
-		}
 	}
 
 	if(!isDead[3])
