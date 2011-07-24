@@ -11,15 +11,17 @@ Ref<Stage> EndStage::LoadStage( const std::string& result )
 
 void EndStage::HandleClickEvent( int x,int y )
 {
-
+	if (x>569 && x<780 && y>516 && y<580)
+	{
+		App::Inst().AudioSys()->PlayEffectSound(1,"menubutton");
+		App::Inst().ChangeStage(0);
+		App::Inst().AudioSys()->Stop(0);
+	}
 }
 
 EndStage::EndStage(const std::string& type)
 {
 	mGuiObject = Ref<GameObject>(new Sprite);
-
-	Ref<GameObject> canvas (new Image(DataManager::GetDataPath("Image","end","resource\\data.ini"),800,600));
-	cast<Sprite>(mGuiObject)->AddChild(canvas);
 	
 	Ref<GameObject> bgImage ;
 	if(type == "win")
@@ -33,6 +35,10 @@ EndStage::EndStage(const std::string& type)
 		if(! App::Inst().AudioSys()->IsBgmMute()) App::Inst().AudioSys()->PlayStream(0,"lose");
 	}
 	cast<Sprite>(mGuiObject)->AddChild(bgImage);
+
+	Ref<GameObject> back(new Image(DataManager::GetDataPath("Image","back","resource\\data.ini"),211,64));
+	back->SetPos(569,516,0);
+	cast<Sprite>(mGuiObject)->AddChild(back);
 	
 	this->AddChild(mGuiObject);
 }
