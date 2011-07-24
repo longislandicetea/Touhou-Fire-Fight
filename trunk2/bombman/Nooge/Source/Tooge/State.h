@@ -20,10 +20,12 @@ public:
 	void AddTransition(Transition* transition);
 	State* Update(float dt);
 	virtual int GetAction() = 0;
+	void SetTimer(bool open);
+	double GetTimer();
 protected:
 	std::vector<Transition*> mTransitionList;
 	FSM* mOwner;
-
+	Ref<Timer> mTimer;
 	NPCController* mCtrl;
 	
 };
@@ -80,5 +82,13 @@ class TriggerState: public State
 public:
 	TriggerState(NPCController* ctrl);
 	virtual ~TriggerState(){}
+	virtual int GetAction();
+};
+
+class AttackState: public State
+{
+public:
+	AttackState(NPCController* ctrl);
+	virtual ~AttackState(){}
 	virtual int GetAction();
 };

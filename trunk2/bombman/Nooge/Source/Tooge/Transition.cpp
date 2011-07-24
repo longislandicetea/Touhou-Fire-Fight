@@ -24,7 +24,7 @@ bool ToSilly::IsTrue()
 	
 
 	//if(mCtrl->GetCharacter()->GetBombCnt()==0)
-	//LogTrace("Silly\n");
+	LogTrace("Silly\n");
 	return true;
 	//}
 	//return false;
@@ -41,9 +41,9 @@ bool ToFlee::IsTrue()
 	int row = mCtrl->GetCharacter()->GetBoundingBox().Row();
 	int col = mCtrl->GetCharacter()->GetBoundingBox().Col();
 	float speed = mCtrl->GetCharacter()->GetSpeed();
-	if(mCtrl->GetDangerGrid()->GetValue(col,row)<=3.0)//Grid::SideLen/2/speed
+	if(mCtrl->GetDangerGrid()->GetValue(col,row)<=Grid::SideLen/speed)
 	{
-		//LogTrace("Flee\n");
+		LogTrace("Flee");
 		return true;
 	}
 
@@ -118,7 +118,7 @@ bool ToClearPath::IsTrue()
 {
 	if(mCtrl->MostInterestPos() != Pos(-1,-1))
 	{
-		//LogTrace("ClearPath\n");
+		LogTrace("ClearPath");
 		return true;
 	}
 	return false;
@@ -133,6 +133,9 @@ bool ToTrigger::IsTrue()
 {
 	if(mCtrl->IsTrigChance() 
 		|| (mCtrl->GetCharacter()->HasTrigBonus() && mCtrl->GetCharacter()->TrigBonusTimer()->End() > 5.0))
+	{
+		LogTrace("Trigger\n");
 		return true;
+	}
 	return false;
 }

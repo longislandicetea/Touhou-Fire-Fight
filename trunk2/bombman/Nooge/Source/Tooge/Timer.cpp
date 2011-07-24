@@ -18,3 +18,13 @@ Timer::diff_type Timer::End()
 	return mElapsed;
 }
 
+bool Timer::IsOpen()
+{
+	return mIsOpen;
+}
+
+void Timer::SetOpen(bool open)
+{
+	mIsOpen = open;
+}
+
