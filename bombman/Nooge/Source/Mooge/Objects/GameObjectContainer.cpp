@@ -13,18 +13,22 @@ void GameObjectContainer::AddChild( Ref<GameObject> child )
 void GameObjectContainer::AddChildAt( Ref<GameObject> child, int idx )
 {
 	//pay attention to the order! remove->set->add
-	if(!child.IsNull())
+	/*if(!child.IsNull())
 	{
 		child->RemoveFromParent();
 		child->SetParent(this);
 	}
+	ChildrenContainer::const_iterator it = mChildren.begin();
+	mChildren.insert(it+idx,child);*/
+	child->RemoveFromParent();
+	child->SetParent(this);
 	ChildrenContainer::const_iterator it = mChildren.begin();
 	mChildren.insert(it+idx,child);
 }
 
 void GameObjectContainer::RemoveChild( Ref<GameObject> child )
 {
-	ChildrenContainer::const_iterator it;
+	/*ChildrenContainer::const_iterator it;
 	for(it = mChildren.begin();it != mChildren.end();)
 	{
 		if(*it == child)
@@ -35,12 +39,19 @@ void GameObjectContainer::RemoveChild( Ref<GameObject> child )
 		else
 			it++;
 	}
-	/*//it = std::find(mChildren.begin(),mChildren.end(),child);
+	//it = std::find(mChildren.begin(),mChildren.end(),child);
 	if(it != mChildren.end())
 	{
 		child->SetParent(NULL);
 		mChildren.erase(it);
 	}*/
+	ChildrenContainer::const_iterator it;
+	it = std::find(mChildren.begin(),mChildren.end(),child);
+	if(it != mChildren.end())
+	{
+		child->SetParent(NULL);
+		mChildren.erase(it);
+	}
 }
 
 
@@ -78,13 +89,9 @@ void GameObjectContainer::Draw(bool is3D)
 		if(childAlpha>0.0)
 		{
 			glPushMatrix();
-			//scale
 			glScalef(obj->GetScale(), obj->GetScale(), obj->GetScale());
-			
-			//pos
 			glTranslatef(obj->GetX(), obj->GetY(), obj->GetZ());
 
-			//rotate
 			glRotatef(obj->GetRotateX(), 1.0, 0.0, 0.0);
 			glRotatef(obj->GetRotateY(), 0.0, 1.0, 0.0);
 			glRotatef(obj->GetRotateZ(), 0.0, 0.0, 1.0);
@@ -103,10 +110,8 @@ void GameObjectContainer::Update(float dt)
 	ChildrenContainer children = mChildren;
 	for(int i = 0;i < children.size();++i)
 	{
-		if(!children[i].IsNull()) {
-			children[i]->Update(dt);}
+		children[i]->Update(dt);
 	}
-	//LogTrace("%f\n",dt);
 }
 
 GameObjectContainer::~GameObjectContainer()
