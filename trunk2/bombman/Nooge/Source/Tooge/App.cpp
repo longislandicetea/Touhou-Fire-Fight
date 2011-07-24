@@ -171,6 +171,8 @@ void App::OnRenderFormKeyDown( const WinMsgPackage& MsgPack )
 		case VK_SHIFT:
 			mInputSys->KeyDown(VK_SHIFT);
 			break;
+		case VK_ESCAPE:
+			mInputSys->KeyDown(VK_ESCAPE);
 		}
 	}
 }
@@ -198,6 +200,9 @@ void App::OnRenderFormKeyUp( const WinMsgPackage& MsgPack )
 			break;
 		case VK_SHIFT:
 			mInputSys->KeyUp(VK_SHIFT);
+			break;
+		case VK_ESCAPE:
+			mInputSys->KeyUp(VK_ESCAPE);
 			break;
 		}
 	}
