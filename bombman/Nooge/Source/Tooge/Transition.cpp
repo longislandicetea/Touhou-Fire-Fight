@@ -21,12 +21,13 @@ Transition(ctrl,next)
 
 bool ToSilly::IsTrue()
 {
+	
 
 	//if(mCtrl->GetCharacter()->GetBombCnt()==0)
-	//{LogTrace("Silly\n");
+	//LogTrace("Silly\n");
 	return true;
 	//}
-	return false;
+	//return false;
 }
 //////////////////////////////////////////////////ToFlee///////////////////////////////////////////////
 
@@ -91,11 +92,17 @@ Transition(ctrl,next)
 
 bool ToDropBomb::IsTrue()
 {
-	int row = mCtrl->GetCharacter()->GetBoundingBox().Row();
-	int col = mCtrl->GetCharacter()->GetBoundingBox().Col();
-	float value = mCtrl->GetInterestGrid()->GetValue(col,row);
-	if(value>0 && value <=3)
-		return true;
+	if(true )
+	{
+		int row = mCtrl->GetCharacter()->GetBoundingBox().Row();
+		int col = mCtrl->GetCharacter()->GetBoundingBox().Col();
+		float value = mCtrl->GetInterestGrid()->GetValue(col,row);
+		if(value>0 && value <=3)
+		{
+			return true;
+			LogTrace("DropBomb\n");
+		}
+	}
 	return false;
 }
 
@@ -107,6 +114,9 @@ Transition(ctrl,next)
 bool ToClearPath::IsTrue()
 {
 	if(mCtrl->MostInterestPos() != Pos(-1,-1))
+	{
+		LogTrace("ClearPath\n");
 		return true;
+	}
 	return false;
 }
