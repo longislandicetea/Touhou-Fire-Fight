@@ -24,7 +24,7 @@ class Map : public Sprite
 {
 public:
 	friend class RuntimeMap;
-	static Ref<GameObject> Load(const std::string& filename);
+	static Ref<GameObject> Load(const std::string& filename,int mLevel);
 	std::map< std::string,Ref<GameObject> >Parse();
 	std::map<std::string,int> GetBonusProb();
 
@@ -35,4 +35,5 @@ protected:
 
 private:
 	GridState trans(const char* gridState);
+	int mLevel;
 };

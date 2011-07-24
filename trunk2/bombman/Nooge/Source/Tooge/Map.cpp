@@ -18,7 +18,7 @@
 #include "DataManager.h"
 
 
-Ref<GameObject> Map::Load( const std::string& filename )
+Ref<GameObject> Map::Load( const std::string& filename,int level)
 {
 	Ref<GameObject> tmp (new Map);
 	Map* ret= cast<Map>(tmp);
@@ -46,6 +46,7 @@ Ref<GameObject> Map::Load( const std::string& filename )
 		ret->mBonus[tmp] = (float)(atoi(bonusElement->GetText()));
 		bonusElement = bonusElement->NextSiblingElement();
 	}
+	cast<Map>(tmp)->mLevel = level;
 	return tmp;
 }
 
@@ -70,9 +71,15 @@ Map::Map()
 
 std::map< std::string,Ref<GameObject> > Map::Parse()
 {
-	this->Load(DataManager::GetDataPath("Map","map","resource\\data.ini"));
-	//this->Load("resource\\test.xml");
-	//this->Load("c:\\test.xml");
+	switch (mLevel)
+	{
+	case 1:
+		this->Load(DataManager::GetDataPath("Map","level1","resource\\data.ini"),1);
+	case 2:
+		this->Load(DataManager::GetDataPath("Map","level2","resource\\data.ini"),2);
+	case 3:
+		this->Load(DataManager::GetDataPath("Map","level3","resource\\data.ini"),3);
+	}
 	Ref<GameObject> uwallContainer(new Sprite),dwallContainer(new Sprite),npcContainer(new Sprite),playerContainer(new Sprite);
 	Ref<GameObject> decContainer(new Sprite);
 	std::map< std::string,Ref<GameObject> > ret;
