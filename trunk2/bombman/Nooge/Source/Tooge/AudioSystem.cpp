@@ -50,6 +50,8 @@ AudioSystem::AudioSystem()
 
 	mChannels.push_back(channel1);
 	mChannels.push_back(channel2);
+
+	mBgmMute = mSndMute = false;
 }
 
 void AudioSystem::PlayStream( int channelId, const std::string& key )
@@ -81,4 +83,14 @@ void AudioSystem::Resume( int channelId, const std::string& key)
 {
 	//mResult = mChannels[channelId]->setMode(FMOD_LOOP_NORMAL);
 	mResult = mSounds[key]->setMode(FMOD_LOOP_NORMAL);
+}
+
+void AudioSystem::Mute( int channelId,bool isMute )
+{
+	mResult = mChannels[channelId]->setMute(isMute);
+
+	if(channelId == 0)
+		mBgmMute = isMute;
+	else
+		mSndMute = isMute;
 }

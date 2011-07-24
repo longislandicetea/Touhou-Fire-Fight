@@ -16,6 +16,9 @@ public:
 	void Pause(int channelId);
 	void Stop(int channelId);
 	void Resume(int channelId,const std::string& key);
+	void Mute(int channelId,bool isMute);
+	bool IsBgmMute() {return mBgmMute;}
+	bool  IsSndMute() {return mSndMute;}
 
 	void Update();
 
@@ -24,4 +27,6 @@ private:
 	std::map<std::string, FMOD::Sound*> mSounds;
 	std::vector<FMOD::Channel*> mChannels;
 	FMOD_RESULT mResult;
+
+	bool mBgmMute,mSndMute;
 };

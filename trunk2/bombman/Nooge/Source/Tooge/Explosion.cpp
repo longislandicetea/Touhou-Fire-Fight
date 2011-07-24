@@ -9,14 +9,14 @@
 
 #include "WinFrame.h"
 #include "DataManager.h"
+#include "App.h"
 
 Explosion::Explosion( float x,float y,float z )
 {
 	this->SetPos(x, y, z);
 	mParticleSize = 1;
 	mLife = 0.8;
-	mFlameTex = Texture::Load(DataManager::GetDataPath
-		("Texture","flameT","resource\\data.ini"));
+	mFlameTex = App::Inst().GetFlameTexture();
 }
 
 void Explosion::Draw(bool is3D)

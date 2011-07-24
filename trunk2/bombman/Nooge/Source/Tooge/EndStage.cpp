@@ -17,19 +17,23 @@ void EndStage::HandleClickEvent( int x,int y )
 EndStage::EndStage(const std::string& type)
 {
 	mGuiObject = Ref<GameObject>(new Sprite);
+
+	Ref<GameObject> canvas (new Image(DataManager::GetDataPath("Image","end","resource\\data.ini"),800,600));
+	cast<Sprite>(mGuiObject)->AddChild(canvas);
+	
 	Ref<GameObject> bgImage ;
 	if(type == "win")
 	{
-		bgImage = Ref<GameObject>(new Image(DataManager::GetDataPath("Image","endWin","resource\\data.ini"),800,600));
-		App::Inst().AudioSys()->PlayStream(1,"win");
+		bgImage = Ref<GameObject>(new Image(DataManager::GetDataPath("Image","win","resource\\data.ini"),800,600));
+		if(! App::Inst().AudioSys()->IsBgmMute()) App::Inst().AudioSys()->PlayStream(0,"win");
 	}
 	else
 	{
-		bgImage = Ref<GameObject>(new Image(DataManager::GetDataPath("Image","endLose","resource\\data.ini"),800,600));
-		App::Inst().AudioSys()->PlayStream(1,"lose");
+		bgImage = Ref<GameObject>(new Image(DataManager::GetDataPath("Image","lose","resource\\data.ini"),800,600));
+		if(! App::Inst().AudioSys()->IsBgmMute()) App::Inst().AudioSys()->PlayStream(0,"lose");
 	}
-	
 	cast<Sprite>(mGuiObject)->AddChild(bgImage);
+	
 	this->AddChild(mGuiObject);
 }
 

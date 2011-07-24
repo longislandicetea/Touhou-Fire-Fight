@@ -88,12 +88,14 @@
     <ClCompile Include="..\..\..\..\Source\Tooge\BPush.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\BSlower.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\BTrigger.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Tooge\ConfigStage.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\Decoration.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\EndStage.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\Explosion.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\FSM.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\Character.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\Dwall.cpp" />
+    <ClCompile Include="..\..\..\..\Source\Tooge\HelpStage.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\Main.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\Map.cpp" />
     <ClCompile Include="..\..\..\..\Source\Tooge\MenuStage.cpp" />
@@ -121,6 +123,7 @@
     <ClInclude Include="..\..\..\..\Source\Tooge\BPush.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\BSlower.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\BTrigger.h" />
+    <ClInclude Include="..\..\..\..\Source\Tooge\ConfigStage.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\Decoration.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\EndStage.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\Explosion.h" />
@@ -128,6 +131,7 @@
     <ClInclude Include="..\..\..\..\Source\Tooge\Character.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\Dwall.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\GameStage.h" />
+    <ClInclude Include="..\..\..\..\Source\Tooge\HelpStage.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\Map.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\MenuStage.h" />
     <ClInclude Include="..\..\..\..\Source\Tooge\NPCController.h" />

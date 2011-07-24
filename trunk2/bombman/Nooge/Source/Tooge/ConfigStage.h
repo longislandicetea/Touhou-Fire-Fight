@@ -5,14 +5,17 @@
 
 #include <vector>
 
-class SelectStage : public Stage
+class ConfigStage : public Stage
 {
 public:
 	static Ref<Stage> LoadStage();
 	void HandleClickEvent(int x,int y);
+	virtual ~ConfigStage() {}
+
 	virtual void Update(float dt);
-	virtual ~SelectStage() {}
 private:
-	SelectStage();
+	ConfigStage();
 	Ref<GameObject> mGuiObject;
+	bool isBgmOn,isSndOn;
+	int mouseX,mouseY;
 };

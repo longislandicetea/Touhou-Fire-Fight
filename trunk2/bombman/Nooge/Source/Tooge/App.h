@@ -7,6 +7,7 @@
 #include "Ref.h"
 #include "InputSystem.h"
 #include "AudioSystem.h"
+#include "Texture.h"
 
 using namespace MoogeType;
 
@@ -28,6 +29,9 @@ public:
 	Stage *CurrentStage();
 	void ChangeStage(int next);
 
+	//i don't want this f**king function! but how can i do!
+	Ref<Texture> GetFlameTexture();
+
 private:
 	App();
 	void OnRenderFormCreate(const WinMsgPackage& MsgPack);
@@ -42,12 +46,12 @@ private:
 	void Execute();
 
 	Ref<Stage> createStage(int stageId);
+	
 	CRenderForm* mRenderForm;
 	CMooge* mMooge;
 	CCamera* mMainCamera;
 	Ref<InputSystem> mInputSys;
 	Ref<AudioSystem> mAudioSys;
-
 	clock_t mLeastTime;
-
+	Ref<Texture> mFlameTexture;
 };

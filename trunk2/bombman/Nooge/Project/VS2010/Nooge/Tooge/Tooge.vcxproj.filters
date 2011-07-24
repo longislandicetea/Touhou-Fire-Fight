@@ -142,6 +142,12 @@
     <ClCompile Include="..\..\..\..\Source\Tooge\EndStage.cpp">
       <Filter>Stage</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\Tooge\HelpStage.cpp">
+      <Filter>Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Source\Tooge\ConfigStage.cpp">
+      <Filter>Stage</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Source\Tooge\App.h">
@@ -232,6 +238,12 @@
       <Filter>Stage</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Source\Tooge\EndStage.h">
+      <Filter>Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\Tooge\HelpStage.h">
+      <Filter>Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Source\Tooge\ConfigStage.h">
       <Filter>Stage</Filter>
     </ClInclude>
   </ItemGroup>

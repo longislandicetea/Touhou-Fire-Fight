@@ -39,7 +39,8 @@ MenuStage::MenuStage()
 
 	this->AddChild(mGuiObject);
 
-	App::Inst().AudioSys()->PlayStream(0,"menubackground");
+	if(!App::Inst().AudioSys()->IsBgmMute())
+		App::Inst().AudioSys()->PlayStream(0,"menubackground");
 }
 
 void MenuStage::HandleClickEvent(int x, int y)
@@ -49,16 +50,17 @@ void MenuStage::HandleClickEvent(int x, int y)
 	if(x<700 && x>475 && y>316 && y<390)
 	{
 		App::Inst().AudioSys()->PlayEffectSound(1,"menubutton");
-		App::Inst().AudioSys()->Stop(0);
-		App::Inst().ChangeStage(2);
+		App::Inst().ChangeStage(1);
 	}
 	else if (x<637 && x>407 && y<457 && y>383)
 	{
 		App::Inst().AudioSys()->PlayEffectSound(1,"menubutton");
+		App::Inst().ChangeStage(5);
 	}
 	else if (x<787 && x>557 && y<523 && y>449)
 	{
 		App::Inst().AudioSys()->PlayEffectSound(1,"menubutton");
+		App::Inst().ChangeStage(6);
 	}
 	else if(x<735 && x>505 && y<593 && y>519)
 	{
