@@ -22,7 +22,6 @@ Transition(ctrl,next)
 bool ToSilly::IsTrue()
 {
 	
-
 	//if(mCtrl->GetCharacter()->GetBombCnt()==0)
 	LogTrace("Silly\n");
 	return true;
@@ -41,7 +40,7 @@ bool ToFlee::IsTrue()
 	int row = mCtrl->GetCharacter()->GetBoundingBox().Row();
 	int col = mCtrl->GetCharacter()->GetBoundingBox().Col();
 	float speed = mCtrl->GetCharacter()->GetSpeed();
-	if(mCtrl->GetDangerGrid()->GetValue(col,row)<=Grid::SideLen/speed)
+	if(mCtrl->GetDangerGrid()->GetValue(col,row)<=3.0)//Grid::SideLen/speed
 	{
 		LogTrace("Flee");
 		return true;
@@ -102,8 +101,8 @@ bool ToDropBomb::IsTrue()
 			&& value>=mCtrl->GetInterestGrid()->GetValue(myPosition.col,myPosition.row+1)
 			&& value>=mCtrl->GetInterestGrid()->GetValue(myPosition.col,myPosition.row-1))
 		{
+			LogTrace("DropBomb");
 			return true;
-			//LogTrace("DropBomb\n");
 		}
 	}
 	return false;
@@ -116,10 +115,13 @@ Transition(ctrl,next)
 
 bool ToClearPath::IsTrue()
 {
+	if(true)
+	{
 	if(mCtrl->MostInterestPos() != Pos(-1,-1))
 	{
 		LogTrace("ClearPath");
 		return true;
+	}
 	}
 	return false;
 }
@@ -135,6 +137,21 @@ bool ToTrigger::IsTrue()
 		|| (mCtrl->GetCharacter()->HasTrigBonus() && mCtrl->GetCharacter()->TrigBonusTimer()->End() > 5.0))
 	{
 		LogTrace("Trigger\n");
+		return true;
+	}
+	return false;
+}
+
+/////////////////////////////////////////////////ToAttack/////////////////////////////////////
+ToAttack::ToAttack(NPCController* ctrl, State* next):
+Transition(ctrl,next)
+{}
+
+bool ToAttack::IsTrue()
+{
+	if(rand()%100<30&& mCtrl->NearestEnemyPos() != Pos(-1,-1))
+	{
+		LogTrace("Attack");
 		return true;
 	}
 	return false;
