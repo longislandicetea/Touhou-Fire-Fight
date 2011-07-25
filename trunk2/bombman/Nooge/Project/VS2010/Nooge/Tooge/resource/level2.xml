@@ -352,11 +352,6 @@
       <GridState>Uwall</GridState>
     </Grid>
     <Grid>
-      <Row>8</Row>
-      <Col>11</Col>
-      <GridState>Uwall</GridState>
-    </Grid>
-    <Grid>
       <Row>10</Row>
       <Col>11</Col>
       <GridState>Uwall</GridState>
@@ -389,11 +384,6 @@
     <Grid>
       <Row>9</Row>
       <Col>9</Col>
-      <GridState>Uwall</GridState>
-    </Grid>
-    <Grid>
-      <Row>11</Row>
-      <Col>5</Col>
       <GridState>Uwall</GridState>
     </Grid>
     <Grid>
@@ -434,11 +424,6 @@
     <Grid>
       <Row>2</Row>
       <Col>11</Col>
-      <GridState>Uwall</GridState>
-    </Grid>
-    <Grid>
-      <Row>2</Row>
-      <Col>12</Col>
       <GridState>Uwall</GridState>
     </Grid>
     <Grid>
@@ -594,11 +579,6 @@
     <Grid>
       <Row>9</Row>
       <Col>11</Col>
-      <GridState>Dwall</GridState>
-    </Grid>
-    <Grid>
-      <Row>9</Row>
-      <Col>12</Col>
       <GridState>Dwall</GridState>
     </Grid>
     <Grid>
@@ -765,6 +745,26 @@
       <Row>2</Row>
       <Col>13</Col>
       <GridState>NPC</GridState>
+    </Grid>
+    <Grid>
+      <Row>8</Row>
+      <Col>12</Col>
+      <GridState>NPC</GridState>
+    </Grid>
+    <Grid>
+      <Row>11</Row>
+      <Col>5</Col>
+      <GridState>NPC</GridState>
+    </Grid>
+  </grids>
+  <AddBombP>15</AddBombP>
+  <AddFlameP>15</AddFlameP>
+  <FasterP>15</FasterP>
+  <PushP>15</PushP>
+  <TriggerP>15</TriggerP>
+  <SlowerP>5</SlowerP>
+  <DropP>5</DropP>
+</Level>
     </Grid>
     <Grid>
       <Row>10</Row>
