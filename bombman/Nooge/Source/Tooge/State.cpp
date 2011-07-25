@@ -1,11 +1,9 @@
 #include"State.h"
 #include<algorithm>
 #include "WinFrame.h"
+#include"App.h"
 
 ///////////////////////////////State/////////////////////////////////
-
-
-
 State* State::Update(float dt)
 {
 	vector<Transition*>::iterator it = mTransitionList.begin();
@@ -157,14 +155,21 @@ int SearchBonusState::GetAction()
 	return IDLE;
 }
 
-//////////////////////////////OpenState////////////////////////////
-OpenState::OpenState(NPCController* ctrl):
+//////////////////////////////FreeState////////////////////////////
+FreeState::FreeState(NPCController* ctrl):
 State(ctrl)
 {}
 
-int OpenState::GetAction()
+int FreeState::GetAction()
 {
-return 0;}
+	GameStage* gs = (GameStage*)App::Inst().CurrentStage();
+	if(gs->CanPass(mCtrl->GetCharacter()))
+	{
+		return mCtrl->GetCharacter()->GetCurState();
+	}
+	else
+		return rand()%4;
+}
 
 ///////////////////////////////DropBombState////////////////////////
 DropBombState::DropBombState(NPCController* ctrl):
@@ -173,7 +178,7 @@ State(ctrl)
 
 int DropBombState::GetAction()
 {
-	if(rand()%50==0 && mCtrl->GetCharacter()->GetBombCnt()>0)
+	if(rand()%100==0 && mCtrl->GetCharacter()->GetBombCnt()>0)
 		return DROP_BOMB;
 	else 
 		return IDLE;
@@ -193,7 +198,7 @@ int ClearPathState::GetAction()
 
 	//choose action
 	float can= Grid::SideLen/mCtrl->GetCharacter()->GetSpeed();//若有危险 能否通过
-	if(path.empty() ) //
+	if(path.empty() ) 
 	{
 		return IDLE;
 	}

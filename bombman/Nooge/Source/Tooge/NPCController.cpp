@@ -37,6 +37,7 @@ void NPCController::initFSM()
 	clearPath = new ClearPathState(this);
 	trigger = new TriggerState(this);
 	attack = new AttackState(this);
+	free = new FreeState(this);
 
 	//transitions
 	transToFlee = new ToFlee(this,flee);
@@ -45,41 +46,47 @@ void NPCController::initFSM()
 	transToDropBomb = new ToDropBomb(this,dropBomb);
 	transToTrigger = new ToTrigger(this,trigger);
 	transToAttack = new ToAttack(this,attack);
+	transToFree = new ToFree(this,free);
 
 	//add transitions to states
 	flee->AddTransition(transToFlee);
 	flee->AddTransition(transToTrigger);
-	//flee->AddTransition(transToAttack);
+	flee->AddTransition(transToAttack);
 	flee->AddTransition(transToDropBomb);
+	//flee->AddTransition(transToFree);
 	flee->AddTransition(transToClearPath);
 	flee->AddTransition(transToSilly);
 
-	silly->AddTransition(transToFlee);
+	
 	trigger->AddTransition(transToFlee);
 	trigger->AddTransition(transToTrigger);
-	//trigger->AddTransition(transToAttack);
+	trigger->AddTransition(transToAttack);
 	trigger->AddTransition(transToDropBomb);
+	//trigger->AddTransition(transToFree);
 	trigger->AddTransition(transToClearPath);
 	trigger->AddTransition(transToSilly);
 	
 	silly->AddTransition(transToFlee);
 	silly->AddTransition(transToTrigger);
-	//silly->AddTransition(transToAttack);
+	silly->AddTransition(transToAttack);
 	silly->AddTransition(transToDropBomb);
+	//silly->AddTransition(transToFree);
 	silly->AddTransition(transToClearPath);
 	silly->AddTransition(transToSilly);
 
 	clearPath->AddTransition(transToFlee);
 	clearPath->AddTransition(transToTrigger);
-	//clearPath->AddTransition(transToAttack);
+	clearPath->AddTransition(transToAttack);
 	clearPath->AddTransition(transToDropBomb);
+	//clearPath->AddTransition(transToFree);
 	clearPath->AddTransition(transToClearPath);
 	clearPath->AddTransition(transToSilly);
 
 	dropBomb->AddTransition(transToFlee);
 	dropBomb->AddTransition(transToTrigger);
-	//dropBomb->AddTransition(transToAttack);
+	dropBomb->AddTransition(transToAttack);
 	dropBomb->AddTransition(transToDropBomb);
+	//dropBomb->AddTransition(transToFree);
 	dropBomb->AddTransition(transToClearPath);
 	dropBomb->AddTransition(transToSilly);
 
@@ -87,6 +94,7 @@ void NPCController::initFSM()
 	attack->AddTransition(transToTrigger);
 	attack->AddTransition(transToAttack);
 	attack->AddTransition(transToDropBomb);
+	//attack->AddTransition(transToFree);
 	attack->AddTransition(transToClearPath);
 	attack->AddTransition(transToSilly);
 
@@ -98,6 +106,7 @@ void NPCController::initFSM()
 	mFsm->AddState(dropBomb);
 	mFsm->AddState(clearPath);
 	mFsm->AddState(attack);
+	mFsm->AddState(free);
 
 }
 
@@ -477,6 +486,9 @@ NPCController::~NPCController()
 	//attack
 	delete attack;
 	delete transToAttack;
+	//free
+	delete free;
+	delete transToFree;
 }
 
 Pos NPCController::NearestBonusPos()

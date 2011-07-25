@@ -1,5 +1,6 @@
 #include"Transition.h"
 #include "WinFrame.h"
+#include"State.h"
 
 
 ///////////////////////////////////////////////////////transition///////////////////////////////////////////////////
@@ -21,7 +22,7 @@ Transition(ctrl,next)
 
 bool ToSilly::IsTrue()
 {
-	
+
 	//if(mCtrl->GetCharacter()->GetBombCnt()==0)
 	//LogTrace("Silly\n");
 	return true;
@@ -117,11 +118,11 @@ bool ToClearPath::IsTrue()
 {
 	if(mCtrl->GetCharacter()->GetBombCnt()!=0)
 	{
-	if(mCtrl->MostInterestPos() != Pos(-1,-1))
-	{
-		//LogTrace("ClearPath");
-		return true;
-	}
+		if(mCtrl->MostInterestPos() != Pos(-1,-1))
+		{
+			//LogTrace("ClearPath");
+			return true;
+		}
 	}
 	return false;
 }
@@ -149,38 +150,49 @@ Transition(ctrl,next)
 
 bool ToAttack::IsTrue()
 {
-	/*if(mCtrl->GetCharacter()->GetBombCnt() !=0 &&  mCtrl->NearestEnemyPos() != Pos(-1,-1))
+	if(rand()%10==0 && mCtrl->GetCharacter()->GetBombCnt() != 0)
 	{
-		//LogTrace("Attack");
-		return true;
-	}
-	return false;*/
-	if(mCtrl->GetCharacter()->GetBombCnt() != 0)
-	{
-	std::vector<Pos> enemyPos = mCtrl->GetEnemyPos();
-	int power = mCtrl->GetCharacter()->GetPower();
-	Pos myPosition = Pos(mCtrl->GetCharacter()->GetBoundingBox().Col(),mCtrl->GetCharacter()->GetBoundingBox().Row());
+		std::vector<Pos> enemyPos = mCtrl->GetEnemyPos();
+		int power = mCtrl->GetCharacter()->GetPower();
+		Pos myPosition = Pos(mCtrl->GetCharacter()->GetBoundingBox().Col(),mCtrl->GetCharacter()->GetBoundingBox().Row());
 
 		int dx[4] = {-1,0,1,0};
 		int dy[4] = {0,1,0,-1};
-		
-	int dValid[4] = {1,1,1,1};
-	for(int t = 0;t<enemyPos.size();++t)
-	{
-		for(int i = 0;i<power;++i)
-	{
-		
-		for(int j = 0;j<4;++j)
+
+		int dValid[4] = {1,1,1,1};
+		for(int t = 0;t<enemyPos.size();++t)
 		{
-				if(dValid[j])
+			for(int i = 0;i<power;++i)
+			{
+
+				for(int j = 0;j<4;++j)
 				{
-					if(Pos(myPosition.col+dx[j],myPosition.row+dy[j]) == enemyPos[t])
-						return true;
+					if(dValid[j])
+					{
+						if(Pos(myPosition.col+dx[j],myPosition.row+dy[j]) == enemyPos[t])
+							return true;
+					}
 				}
+			}
 		}
-	}
-	}
 	}
 	return false;
 
 }
+
+////////////////////////////////////ToFree//////////////////////////////////////
+ToFree::ToFree(NPCController* ctrl, State* next):
+Transition(ctrl,next)
+{}
+
+bool ToFree::IsTrue()
+{
+	if(mNextState->GetTimer() <=2.0)
+	{
+		//mCtrl->GetCharacter()->SetCurState(rand()%4);
+		LogTrace("Free\n");
+		return true;
+	}
+	return false;
+}
+
