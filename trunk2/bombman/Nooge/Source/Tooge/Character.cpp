@@ -35,11 +35,13 @@ void Character::Update(float dt)
 
 void Character::doAction( int currentAction, float dt )
 {
+	mCurrentAction = currentAction;
 	switch (currentAction)
 	{
 	case CharacterController::MOVE_UP:
 		SetCol();
 		up(dt*mSpeed);
+		
 		if(mLastAction == CharacterController::IDLE)
 			cast<Md2Object>(mModel)->setAnimation("RUN");
 		//LogTrace(" UP  %d %d\n",GetBoundingBox().Col(),GetBoundingBox().Row());
@@ -192,6 +194,11 @@ bool Character::HasPushBonus()
 int Character::GetCurState()
 {
 	return mCurrentAction;
+}
+
+void Character::SetCurState(int action)
+{
+	mCurrentAction = action;
 }
 
 void Character::SetTrigBonus( bool hasBonus )

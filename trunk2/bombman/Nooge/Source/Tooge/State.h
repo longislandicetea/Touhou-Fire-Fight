@@ -14,7 +14,7 @@ class FSM;
 class State
 {
 public:
-	enum Action { MOVE_UP, MOVE_DOWN, MOVE_RIGHT, MOVE_LEFT, DROP_BOMB, TRIGGER_BOMB,IDLE, ACTION_CNT};
+	enum Action { MOVE_LEFT, MOVE_DOWN, MOVE_RIGHT,  MOVE_UP,DROP_BOMB, TRIGGER_BOMB,IDLE, ACTION_CNT};
 	State(NPCController* ctrl);
 	virtual ~State(){}
 	void AddTransition(Transition* transition);
@@ -61,11 +61,11 @@ public:
 	virtual int GetAction();
 };
 
-class OpenState: public State
+class FreeState: public State
 {
 public:
-	OpenState(NPCController* ctrl);
-	virtual ~OpenState(){};
+	FreeState(NPCController* ctrl);
+	virtual ~FreeState(){};
 	virtual int GetAction();
 };
 

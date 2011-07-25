@@ -14,6 +14,7 @@ public:
 	virtual ~Transition(){};
 	State* GetNextState();
 	virtual bool IsTrue() = 0;
+	friend class ToFree;
 
 protected:
 	State* mNextState;
@@ -77,3 +78,13 @@ public:
 	ToAttack(NPCController* ctrl, State* next);
 	virtual bool IsTrue();
 };
+
+class ToFree:public Transition
+{
+public:
+	ToFree(NPCController* ctrl, State* next);
+	virtual ~ToFree(){};
+	virtual bool IsTrue();
+	friend class Transition;
+};
+

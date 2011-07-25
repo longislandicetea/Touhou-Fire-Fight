@@ -95,5 +95,8 @@ enum AIGridState
 
 	State* attack;
 	Transition* transToAttack;
+
+	State* free;
+	Transition* transToFree;
 };
 

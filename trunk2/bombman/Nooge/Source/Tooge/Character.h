@@ -16,7 +16,7 @@ class Character;
 class CharacterController
 {
 public:
-	enum Action { MOVE_UP, MOVE_DOWN, MOVE_RIGHT, MOVE_LEFT, DROP_BOMB, TRIGGER_BOMB,IDLE, ACTION_CNT};
+	enum Action { MOVE_LEFT, MOVE_DOWN, MOVE_RIGHT,  MOVE_UP,DROP_BOMB, TRIGGER_BOMB,IDLE, ACTION_CNT};
 
 	virtual int Update(Character* Character, float dt) = 0;
 	Character* GetCharacter(){return mOwner;}
@@ -43,6 +43,7 @@ public:
 	int GetPower();
 	int GetBombCnt();
 	int GetCurState();
+	void SetCurState(int action);
 	virtual Grid GetBoundingBox();
 	float GetSpeed();
 
@@ -51,7 +52,6 @@ public:
 
 	Ref<Timer> TrigBonusTimer();
 
-	//for AI
 	
 
 private:
